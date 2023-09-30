@@ -1,0 +1,3771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite id="" name="" >
+    <node_order><![CDATA[]]></node_order>
+    <details><![CDATA[]]></details>
+    <testsuite id="785654" name="Sistema de gestión de mantenimiento" >
+        <node_order><![CDATA[7]]></node_order>
+        <details><![CDATA[]]></details>
+        <testsuite id="784798" name="01 - Gestión de usuarios" >
+            <node_order><![CDATA[0]]></node_order>
+            <details><![CDATA[<p>Casos de prueba para el modulo 1 del sistema</p>
+]]></details>
+            <testsuite id="784816" name="Registro de usuarios" >
+                <node_order><![CDATA[1]]></node_order>
+                <details><![CDATA[]]></details>
+
+                <testcase internalid="784868" name="Registrar usuario con CI válida ">
+                    <node_order><![CDATA[0]]></node_order>
+                    <externalid><![CDATA[6]]></externalid>
+                    <version><![CDATA[1]]></version>
+                    <summary><![CDATA[<p>Registrar un nuevo usuario para que tenga acceso al sistema</p>
+]]></summary>
+                    <preconditions><![CDATA[<p>Tener la aplicacion en ejecuci&oacute;n&nbsp;</p>
+
+<p>Ingresar a registrar nuevo usuario</p>
+
+<p>No tener usuario ingresado en el sistema</p>
+]]></preconditions>
+                    <execution_type><![CDATA[1]]></execution_type>
+                    <importance><![CDATA[3]]></importance>
+                    <estimated_exec_duration></estimated_exec_duration>
+                    <status>1</status>
+                    <is_open>1</is_open>
+                    <active>1</active>
+                    <steps>
+                        <step>
+                            <step_number><![CDATA[1]]></step_number>
+                            <actions><![CDATA[<p>Llenar los campos nombre y apellido</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[2]]></step_number>
+                            <actions><![CDATA[<p>Introducir Cedula de Identidad en el campo c&eacute;dula&nbsp;</p>
+
+<p>con formato 11111111</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[3]]></step_number>
+                            <actions><![CDATA[<p>Presionar sobre el icono del calendario para el campo Fecha de nacimiento y seleccionar fecha.</p>
+]]></actions>
+                            <expectedresults><![CDATA[<p>Se despliega un calendario para seleccionar a&ntilde;o, mes y d&iacute;a</p>
+]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[4]]></step_number>
+                            <actions><![CDATA[<p>Ingresar telefono de contacto en el campo tel&eacute;fono&nbsp;</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[5]]></step_number>
+                            <actions><![CDATA[<p>En nombre de usuario coloca tu nombre un punto y apellido todo junto, como ejemplo: nombre.apellido&nbsp;</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[6]]></step_number>
+                            <actions><![CDATA[<p>Ingresar un e-mail en el camo e-mails</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[7]]></step_number>
+                            <actions><![CDATA[<p>en contrase&ntilde;a colocar una&nbsp;que contenga letras y n&uacute;meros, al menos 8 caracteres.</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[8]]></step_number>
+                            <actions><![CDATA[<p>Ingresar el tipo de usuario</p>
+]]></actions>
+                            <expectedresults><![CDATA[<p>Se abre una lista desplegable para seleccionar una opci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[9]]></step_number>
+                            <actions><![CDATA[<p>Presionar en el boton <strong>registrar</strong></p>
+]]></actions>
+                            <expectedresults><![CDATA[<p>El sistema advierte que la solicitud fue ingresada y sera revisada</p>
+]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+                    </steps>
+                </testcase>
+
+                <testcase internalid="784811" name="Registrar nuevo usuario en el sistema con CI inválida ">
+                    <node_order><![CDATA[1]]></node_order>
+                    <externalid><![CDATA[1]]></externalid>
+                    <version><![CDATA[1]]></version>
+                    <summary><![CDATA[<p>Registrar un nuevo usuario para que tenga acceso al sistema pero con una CI inv&aacute;lida&nbsp;</p>
+]]></summary>
+                    <preconditions><![CDATA[<p>Tener la aplicacion en ejecuci&oacute;n&nbsp;</p>
+
+<p>Ingresar a registrar nuevo usuario</p>
+
+<p>No tener usuario ingresado en el sistema</p>
+]]></preconditions>
+                    <execution_type><![CDATA[1]]></execution_type>
+                    <importance><![CDATA[3]]></importance>
+                    <estimated_exec_duration></estimated_exec_duration>
+                    <status>1</status>
+                    <is_open>1</is_open>
+                    <active>1</active>
+                    <steps>
+                        <step>
+                            <step_number><![CDATA[1]]></step_number>
+                            <actions><![CDATA[<p>Llenar los campos nombre y apellido</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[2]]></step_number>
+                            <actions><![CDATA[<p>Introducir Cedula de Identidad en el campo c&eacute;dula&nbsp;</p>
+
+<p>con formato 1.111.111-1</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[3]]></step_number>
+                            <actions><![CDATA[<p>Presionar sobre el icono del calendario para el campo Fecha de nacimiento y seleccionar fecha.</p>
+]]></actions>
+                            <expectedresults><![CDATA[<p>Se despliega un calendario para seleccionar a&ntilde;o, mes y d&iacute;a</p>
+]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[4]]></step_number>
+                            <actions><![CDATA[<p>Ingresar telefono de contacto en el campo tel&eacute;fono&nbsp;</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[5]]></step_number>
+                            <actions><![CDATA[<p>En nombre de usuario coloca tu nombre un punto y apellido todo junto, como ejemplo: nombre.apellido&nbsp;</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[6]]></step_number>
+                            <actions><![CDATA[<p>Ingresar un e-mail en el camo e-mails</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[7]]></step_number>
+                            <actions><![CDATA[<p>en contrase&ntilde;a colocar una&nbsp;que contenga letras y n&uacute;meros, al menos 8 caracteres.</p>
+]]></actions>
+                            <expectedresults><![CDATA[]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[8]]></step_number>
+                            <actions><![CDATA[<p>Ingresar el tipo de usuario</p>
+]]></actions>
+                            <expectedresults><![CDATA[<p>Se abre una lista desplegable para seleccionar una opci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+
+                        <step>
+                            <step_number><![CDATA[9]]></step_number>
+                            <actions><![CDATA[<p>Presionar en el boton <strong>registrar</strong></p>
+]]></actions>
+                            <expectedresults><![CDATA[<p>El sistema avisa que el campo CI no es v&aacute;lido</p>
+
+<p>No se agrega registro</p>
+]]></expectedresults>
+                            <execution_type><![CDATA[1]]></execution_type>
+                        </step>
+                    </steps>
+                </testcase>
+            </testsuite><testsuite id="784817" name="Listado de usuarios" >
+            <node_order><![CDATA[2]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="784814" name="Listar usuarios">
+                <node_order><![CDATA[0]]></node_order>
+                <externalid><![CDATA[2]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir el acceso a la lista de usuarios para visualizar sus fichas y estados</p>
+]]></summary>
+                <preconditions><![CDATA[<p>Estar con la aplicacion ejecutada</p>
+
+<p>Estar logueado en el sistema con un rol autorizado (Administrador / Auxiliar administrativo)</p>
+
+<p>Ingresar al modulo de listado de usuarios</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>El administrativo selecciona la opci&oacute;n &ldquo;Listado de Usuarios&rdquo;.</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema devuelve un listado con los usuarios registrados.</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>El administrativo selecciona la ficha a la que quiere acceder.</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema muestra los datos pertinentes a la ficha.</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785158" name="Filtrar lista de usuarios">
+                <node_order><![CDATA[1]]></node_order>
+                <externalid><![CDATA[19]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir el acceso a la lista de usuarios para visualizar sus fichas y estados</p>
+]]></summary>
+                <preconditions><![CDATA[<p>Estar con la aplicacion ejecutada</p>
+
+<p>Estar logueado en el sistema con un rol autorizado (Administrador / Auxiliar administrativo)</p>
+
+<p>Ingresar al modulo de listado de usuarios</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[1]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>El administrativo selecciona la opci&oacute;n &ldquo;Listado de Usuarios&rdquo;.</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema devuelve un listado con los usuarios registrados.</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Aplicar Filtro por nombre</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista a medida que se pone el nombre dando las coincidencias con el nombre introducido</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Aplicar Filtro por apellido</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista a medida que se pone el apellido dando las coincidencias con el nombre introducido</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Aplicar Filtro por nombre de usuario</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista a medida que se pone el nombre de usuario dando las coincidencias con el nombre introducido</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[5]]></step_number>
+                        <actions><![CDATA[<p>Aplicar Filtro por email</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista a medida que se pone el email dando las coincidencias con el nombre introducido</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[6]]></step_number>
+                        <actions><![CDATA[<p>Aplicar Filtro por tipo de usuario de la lista desplegable con datos precargados&nbsp;(Auxiliar Administrativo, Ingeniero biom&eacute;dico, Tecn&oacute;logo o T&eacute;cnico)</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista al seleccionar un tipo de usuario</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[7]]></step_number>
+                        <actions><![CDATA[<p>Aplicar Filtro por estado seleccionando una opcion de la lista desplegable&nbsp;(Sin Validar, Validados o Eliminados).</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista al seleccionar un tipo de estado</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="784818" name="Modificación de usuarios" >
+            <node_order><![CDATA[3]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="784887" name="Modificar usuarios">
+                <node_order><![CDATA[1000]]></node_order>
+                <externalid><![CDATA[9]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir la modificaci&oacute;n/actualizaci&oacute;n de los datos de usuario en el sistema.</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>Estar logueado en el sistema con un rol autorizado (Administrador).</p>
+
+<p>Haber accedido al listado de usuarios</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+
+            </testcase>
+
+            <testcase internalid="785151" name="Modificación de datos propios">
+                <node_order><![CDATA[1001]]></node_order>
+                <externalid><![CDATA[18]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir modificar los datos del Usuario logueado en el sistema</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>Estar logueado en el sistema con su propio usuario.</p>
+
+<p>El usuario debe estar Validado/Activo</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar <strong>Mi perfil&nbsp;</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre ventana con los datos del usuario logueado</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Modificar cualquier campo sin ser nombre de usuario</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Presionar en <strong>Guardar&nbsp;</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre cartel par aceptar los cambios o cancelar</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Presionar <strong>Aceptar </strong>en el cartel.</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se muestra mensaje de exito para el guardado de datos.</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[5]]></step_number>
+                        <actions><![CDATA[]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="784819" name="Eliminación de usuarios" >
+            <node_order><![CDATA[4]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="785028" name="Baja de usuario">
+                <node_order><![CDATA[1000]]></node_order>
+                <externalid><![CDATA[14]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir la baja l&oacute;gica de usuarios en el sistema.</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>Estar logueado en el sistema con un rol autorizado (Administrador).</p>
+
+<p>Haber accedido al listado de usuarios</p>
+
+<p>Haber usuarios registrados en el sistema para ser borrados</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar usuario a eliminar de la lista</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El usuario queda seleccionado visiblemente</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Presionar en borrar</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Alerta de confirmaci&oacute;n&nbsp; para aceptar o cancelar el borrado</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Presionar en cancelar para detener&nbsp;la baja</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece aviso de usuario no eliminado</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Confirmar que el usuario no fue borrado</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Verificar en lista el usuario</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785037" name="Cancelar baja de usuario">
+                <node_order><![CDATA[1001]]></node_order>
+                <externalid><![CDATA[15]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir la baja l&oacute;gica de usuarios en el sistema.</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>Estar logueado en el sistema con un rol autorizado (Administrador).</p>
+
+<p>Haber accedido al listado de usuarios</p>
+
+<p>Haber usuarios registrados en el sistema para ser borrados</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar usuario a eliminar de la lista</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El usuario queda seleccionado visiblemente</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Presionar en borrar</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Alerta de confirmaci&oacute;n&nbsp; para aceptar o cancelar el borrado</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Presionar en aceptar para confirmar la baja</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece aviso de usuario dado de baja satisfactoriamente</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Confirmar baja visual y que el usuario no aparece en la lista</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista y no aparecer el usuario recien dado de baja</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785043" name="Alta de usuario dado de baja">
+                <node_order><![CDATA[1002]]></node_order>
+                <externalid><![CDATA[16]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir el alta&nbsp;l&oacute;gica de usuarios en el sistema.</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>Estar logueado en el sistema con un rol autorizado (Administrador).</p>
+
+<p>Haber accedido al listado de usuarios</p>
+
+<p>Haber usuarios registrados en el sistema</p>
+
+<p>Haber usuarios borrados en el sistema</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar usuario a eliminar de la lista</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El usuario queda seleccionado visiblemente</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Presionar en borrar</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Alerta de confirmaci&oacute;n&nbsp; para aceptar o cancelar el borrado</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Presionar en aceptar para confirmar la baja</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece aviso de usuario dado de baja satisfactoriamente</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Confirmar baja visual y que el usuario no aparece en la lista</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se debe actualizar la lista y no aparecer el usuario recien dado de baja</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[5]]></step_number>
+                        <actions><![CDATA[<p>Filtrar por usuarios borrados</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>La lista se actualiza y aparecen solo usuarios borrados</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="785145" name="Login de usuario" >
+            <node_order><![CDATA[5]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="785146" name="Ingreso de usuario al sistema">
+                <node_order><![CDATA[1000]]></node_order>
+                <externalid><![CDATA[17]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir el acceso al sistema de acuerdo a su rol por tipo de usuario. Estableciendo un control para ingresar al sistema por medio de las entradas correspondientes de usuario y contrase&ntilde;a.</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar registrado en la base de datos del sistema.</p>
+
+<p>Su estado debe estar Validado y Activo.</p>
+
+<p>Situado en el portal del sistema.</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar Login en el sistema</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece una ventana con formulario</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Colocar el nombre de usuario en en el campo <strong>usuario&nbsp;</strong>y la contrase&ntilde;a en el campo <strong>contrase&ntilde;a.</strong></p>
+
+<p>Presionar en <strong>Ingresar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se ingresa al sistema pudiendo ver opciones que antes no estaban</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785174" name="Cancelar ingreso al sistema">
+                <node_order><![CDATA[1001]]></node_order>
+                <externalid><![CDATA[20]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir cancelar el acceso al sistema</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>Situado en el portal del sistema.</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar Login en el sistema</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece una ventana con formulario</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Colocar el nombre de usuario en en el campo <strong>usuario&nbsp;</strong>y la contrase&ntilde;a en el campo <strong>contrase&ntilde;a.</strong></p>
+
+<p>Presionar en <strong>Cancelar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se cancela ingreso volviendo al Inicio de la aplicacion</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785179" name="Ingreso de usuario no activo al sistema">
+                <node_order><![CDATA[1002]]></node_order>
+                <externalid><![CDATA[21]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Denegar el acceso al sistema de acuerdo a su estado de usuario. Estableciendo un control para ingresar al sistema por medio de las entradas correspondientes de usuario y contrase&ntilde;a.</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar registrado en la base de datos del sistema.</p>
+
+<p>Su estado debe estar Validado pero Inactivo.</p>
+
+<p>Situado en el portal del sistema.</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar Login en el sistema</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece una ventana con formulario</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Colocar el nombre de usuario en en el campo <strong>usuario&nbsp;</strong>y la contrase&ntilde;a en el campo <strong>contrase&ntilde;a.</strong></p>
+
+<p>Presionar en <strong>Ingresar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece cartel avisando que el usuario se encuentra inactivo, no permite el ingreso al sistema.</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite></testsuite><testsuite id="784799" name="02 - Gestión de Perfiles" >
+        <node_order><![CDATA[3]]></node_order>
+        <details><![CDATA[]]></details>
+        <testsuite id="784822" name="Crear perfil" >
+            <node_order><![CDATA[1]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="784842" name="Crear un nuevo perfil con éxito">
+                <node_order><![CDATA[1000]]></node_order>
+                <externalid><![CDATA[3]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>&nbsp; <span style="background-color:transparent; color:#000000">Se debe poder crear un perfil para que pueda acceder al sistema con un rol espec&iacute;fico.&nbsp;</span></p>
+]]></summary>
+                <preconditions><![CDATA[<p>El usuario debe estar logueado en el sistema con su usuario de administrador</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Ingreso de perfil&quot;</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema despliega una ventana con los campos a completar.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar el campo &quot;Nombre de Perfil&quot; con datos v&aacute;lidos</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el perfil.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>&nbsp;</p>
+
+<p><span style="color:#000000">El sistema valida los campos y registra la solicitud. </span><span style="color:#000000">Devuelve un mensaje de &ldquo;&eacute;xito&rdquo; y actualiza los datos en la base.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="784854" name="Crear nuevo perfil con datos incompletos">
+                <node_order><![CDATA[1001]]></node_order>
+                <externalid><![CDATA[4]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Se intenta crear un nuevo perfil sin ingresar el dato del nombre del perfil</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El&nbsp; usuario debe estar logueado en su perfil de administrador en el sistema.</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Ingresar en la opci&oacute;n &quot;Ingreso de Perfil&quot;</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema despliega una ventana con los campos a completar.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Dejar el campo nombre de perifl vac&iacute;o y mandar a confirmar</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema informa que el campo nombre debe ser completado y no permite ingresar el perfil</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="784862" name="Cancelar la confirmación de un nuevo perfil">
+                <node_order><![CDATA[1002]]></node_order>
+                <externalid><![CDATA[5]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Se debe poder cancelar el ingreso de un nuevo perfil</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El usuario debe estar logueado en el sistema con su usuario de administrador</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Ingreso de Perfil&quot;</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema despliega una ventana con los campos a completar.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar el campo &quot;Nombre de Perfil&quot;</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el perfil.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Cancelar la confirmaci&oacute;n de registro de perfil</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema despliega una ventana con los campos a completar nuevamente</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785660" name="Ingreso de un perfil duplicado">
+                <node_order><![CDATA[1003]]></node_order>
+                <externalid><![CDATA[39]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>No debe permitirse ingresar un nuevo perfil si este ya fue creado</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con el rol administrador. Se cuenta con un perfil creado previamente por ejemplo: tecnico</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Ingreso de Perfil&quot;</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema despliega una ventana con los campos a completar</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar en el campo &quot;nombre de perfil&quot; con un nombre ya existente</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema solicita confirmaci&oacute;n para registrar el perfil</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema muestra un mensaje de error indicando que el perfil ya existe y no registra el perfil duplicado</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="784823" name="Listar perfiles" >
+        <node_order><![CDATA[2]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="784879" name="Listar perfiles exitosamente">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[7]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe&nbsp;<span style="background-color:transparent; color:#000000">permitir el acceso a la lista de perfiles para visualizar sus caracter&iacute;sticas y estados</span></p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema y cuenta con el rol de administrador</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar opci&oacute;n &quot;Listar perfiles&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un listado con los perfiles registrados.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="784882" name="Acceder a un perfil de la lista de perfiles">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[8]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe&nbsp;<span style="background-color:transparent; color:#000000">permitir el acceso a la lista de perfiles para visualizar sus caracter&iacute;sticas y estados</span></p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador. Se encuentran perfiles registrados en la base previamente</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Listado de perfiles&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un listado con los perfiles registrados</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil al que se quiere acceder</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema muestra los datos pertinentes al perfil como &ldquo;Nombre&rdquo; y &ldquo;Estado Activo o Eliminado&rdquo;</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="784889" name="Aplicar filtro en listado de perfiles">
+            <node_order><![CDATA[1002]]></node_order>
+            <externalid><![CDATA[10]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe poder aplicar filtros a la lista de perfiles para que muestre los datos correspondientes al filtro.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con el rol de administrador. Se encuentran perfiles registrados previamente.</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar opci&oacute;n &quot;Listado de perfiles&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un listado con los perfiles registrados.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar en el filtro por NOMBRE por ejemplo: t&eacute;cnico</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se listan todos los registros con nombre de perfil : Tecnico</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar en el filtro por ESTADO ACTIVO</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se listan todos los registros con ESTADO ACTIVO</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar en el filtro por ESTADO ELIMINADO</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se listan todos los registros con ESTADO ELIMINADO</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784824" name="Modificar perfiles" >
+        <node_order><![CDATA[3]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="785003" name=" Cancelar la modificación de un perfil">
+            <node_order><![CDATA[0]]></node_order>
+            <externalid><![CDATA[13]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>El cancelar una modificaci&oacute;n debe volver a la pantalla de modificar los datos del perfil</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador. Existen perfiles creados en base de datos. El usuario se encuentra posicionado en la funcionalidad de &#39;Listado de Perfiles&#39;</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil a modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los datos del perfil requerido</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Modificar el campo Estado</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para actualizar&nbsp;</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Cancelar la modificaci&oacute;n de los datos</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema no guarda la modificaci&oacute;n y vuelve a mostrar la ventana con los datos del perfil que se hab&iacute;a seleccionado previamente</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="784898" name="Modificar un perfil exitosamente">
+            <node_order><![CDATA[1]]></node_order>
+            <externalid><![CDATA[11]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe permitir poder modificar un perfil creado previamente</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador. Existen perfiles creados en base de datos. El usuario se encuentra posicionado en la funcionalidad de &#39;Listado de Perfiles&#39;</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil a modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los datos del perfil requerido</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Modificar el campo Estado</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para actualizar&nbsp;</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Confirmar la modificaci&oacute;n de los datos</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un mensaje de &ldquo;&eacute;xito&rdquo; y muestra los datos del perfil actualizados en la lista.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="784994" name="Intentar modificar campo nombre de perfil">
+            <node_order><![CDATA[2]]></node_order>
+            <externalid><![CDATA[12]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que no se pueda modificar el campo nombre de perfil</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con un rol administrador. El usuario se encuentra localizado en la funcionalidad de &#39;listado de perfiles&#39;</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil a modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los datos del perfil requerido</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Modificar el campo nombre</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El campo no debe poder modificarse</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784825" name="Eliminar perfiles" >
+        <node_order><![CDATA[4]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="785627" name="Eliminar perfil con éxito">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[35]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>&nbsp; Se debe poder eliminar de manera l&oacute;gica un perfil</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El sistema funciona correctamente. El usuario est&aacute; logueado con su rol de administrador y ha accedido al listado de perfiles</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil de la lista</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema muestra una opci&oacute;n para eliminar</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar para eliminar el perfil</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema solicita confirmaci&oacute;n para eliminar el perfil</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Confirmar la eliminaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#374151">El sistema valida y registra la eliminaci&oacute;n del perfil, muestra un mensaje de &eacute;xito y actualiza la lista de perfiles sin mostrar el perfil eliminado.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785637" name="Cancelar eliminación del perfil">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[36]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe poder cancelar la eliminaci&oacute;n del perfil sin inconvenientes</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con su rol de administrador y ha accedido al listado de perfiles</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil de la lista</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema muestra opci&oacute;n de eliminar perfil</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar opci&oacute;n de eliminar perfil</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema solicita confirmaci&oacute;n para eliminar el perfil</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Recharzar la confirmaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema vuelve al listado de perfiles sin eliminar el perfil</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785644" name="Re-activar un perfil eliminado">
+            <node_order><![CDATA[1002]]></node_order>
+            <externalid><![CDATA[37]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe poder reactivar un perfil que fue previamente eliminado</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con su rol de administrador y ha accedido al listado perfiles. Se cuenta con al menos un perfil eliminado previamente</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Filtrar del listado de perfiles por el estado &quot;eliminado&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve la lista de resultados filtrada por estado eliminado</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil eliminado de la lista y marcar para reactivar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema solicita confirmaci&oacute;n para re-activar el perfil</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Confirmar la reactivaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema valida y registra la reactivaci&oacute;n del perfil, muestra un mensaje de &eacute;xito y actualiza la lista de perfiles, mostrando el perfil reactivado</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785655" name="Cancelar reactivación de perfil eliminado">
+            <node_order><![CDATA[1003]]></node_order>
+            <externalid><![CDATA[38]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe poder cancelar la reactivaci&oacute;n de un perfil eliminado sin que este cambie el estado</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con su rol de administrador y ha accedido al listado de perfiles. Se cuenta con al menos un perfil eliminado</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Filtrar el listado por el estado &quot;eliminado&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve la lista filtrada</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un perfil eliminado de la lista y marcar para reactivar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema solicita confirmaci&oacute;n para reactivar el perfil</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Rechazar la confirmacion</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema no reactiva el perfil y vuelve a mostrar la lista de perfiles</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite></testsuite><testsuite id="784800" name="05 - Gestión de intervenciones" >
+        <node_order><![CDATA[4]]></node_order>
+        <details><![CDATA[]]></details>
+        <testsuite id="784826" name="Registro intervención" >
+            <node_order><![CDATA[1]]></node_order>
+            <details><![CDATA[<p>Registrar todas las intervenciones que se realizan a cualquier equipamiento cl&iacute;nico-hospitalario</p>
+]]></details>
+
+            <testcase internalid="785260" name="Agregar intervención">
+                <node_order><![CDATA[1000]]></node_order>
+                <externalid><![CDATA[22]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Agregar una nueva intervencion en el registro del sistema</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[3]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Ingresar en <strong>Registro de intervencion</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece formulario para ingresar datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Ingresar una fecha en el campo fecha haciendo click en el datepicker</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre calendario para seleccionar una fecha</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar de la lista desplegable un tipo de intervencion (Prevenci&oacute;n, Falla, Resoluci&oacute;n)</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Queda guardada la seleccion</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Llenar el campo motivo</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[5]]></step_number>
+                        <actions><![CDATA[<p>Llenar el campo Identificacion del equipamiento</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[6]]></step_number>
+                        <actions><![CDATA[<p>Llenar el campo Observaciones</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[7]]></step_number>
+                        <actions><![CDATA[<p>Presionar en <strong>Registrar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece alerta de si desea realmente registrar o cancelar los datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[8]]></step_number>
+                        <actions><![CDATA[<p>Presionar en Registrar</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema alerta que los datos fueron guardados y se agrega registro</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785271" name="Cancelar intervención">
+                <node_order><![CDATA[1001]]></node_order>
+                <externalid><![CDATA[23]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Cancelar el registro de una nueva intervencion</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[1]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Ingresar en <strong>Registro de intervencion</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece formulario para ingresar datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Ingresar una fecha en el campo fecha haciendo click en el datepicker</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre calendario para seleccionar una fecha</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar de la lista desplegable un tipo de intervencion (Prevenci&oacute;n, Falla, Resoluci&oacute;n)</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Queda guardada la seleccion</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Llenar el campo motivo</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[5]]></step_number>
+                        <actions><![CDATA[<p>Llenar el campo Identificacion del equipamiento</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[6]]></step_number>
+                        <actions><![CDATA[<p>Llenar el campo Observaciones</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[7]]></step_number>
+                        <actions><![CDATA[<p>Presionar en <strong>Registrar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece alerta de si desea realmente registrar o cancelar los datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[8]]></step_number>
+                        <actions><![CDATA[<p>Presionar en <strong>Cancelar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema alerta que los datos no fueron guardados y no se agrega registro.</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="784827" name="Listado intervención" >
+        <node_order><![CDATA[2]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="785296" name="Listado de intervenciones por fecha">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[25]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir listar las intervenciones por rango de fechas. Permitiendo visualizar las intervenciones a los equipos cl&iacute;nico-hospitalarios para luego tomar acciones sobre ellas.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El Sistema debe estar funcionando correctamente y el Usuario debe estar autorizado para acceder a la funcionalidad.</p>
+
+<p>Haber accedido al listado de intervenciones.</p>
+
+<p>Tener registros en intervenciones</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Ingresar en&nbsp;<strong>Reporte de Intervenci&oacute;n por rango de fechas</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece ventana con un formulario</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Ingresar fecha de comienzo en el datepicker</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece calendario para seleccionar fecha de inicio</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Ingresar fecha final en el datepicker</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece calendario para seleccionar fecha de fin</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Completar identificaci&oacute;n del equipo</p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[5]]></step_number>
+                    <actions><![CDATA[<p>Presionar en <strong>Filtrar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>La lista se actualiza segun el filtrado escogido</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785304" name="Reporte de intervenciones por tipo">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[26]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir mostrar la cantidad de intervenciones realizadas para un tipo espec&iacute;fico de intervenci&oacute;n.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El Sistema debe estar funcionando correctamente y el Usuario debe estar autorizado para acceder a la funcionalidad.</p>
+
+<p>Haber accedido al listado de intervenciones.</p>
+
+<p>Tener registros en intervenciones</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Ingresar en&nbsp;<strong>Reporte de Intervenci&oacute;n por tipo de intervenci&oacute;n&nbsp;</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece ventana con un formulario</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Ingresar fecha de comienzo en el datepicker</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece calendario para seleccionar fecha de inicio</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Ingresar fecha final en el datepicker</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece calendario para seleccionar fecha de fin</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar tipo de intervencion de la lista desplegable</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se guarda la opcion</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[5]]></step_number>
+                    <actions><![CDATA[<p>Presionar en <strong>Buscar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve el reporte segun el filtrado escogido</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784828" name="Modificación de intervención" >
+        <node_order><![CDATA[3]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="785281" name="Trabajar intervención">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[24]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir registrar el seguimiento a las intervenciones realizadas a los equipos cl&iacute;nicos-hospitalarios</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El Sistema debe estar funcionando correctamente y el Usuario debe estar autorizado para acceder a la funcionalidad.</p>
+
+<p>Haber accedido al listado de intervenciones.</p>
+
+<p>Haber intervenciones registradas</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Ingresar en la opcion de <strong>Trabajar intervencion&nbsp;</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se muestra una lista con las intervenciones registradas</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Selecciona una intervencion</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se abre un formulario&nbsp;</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Selecciona una fecha y hora en el datePicker</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se abre calendario para seleccionar fecha y hora</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Selecciona el tipo de intervencion</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se despliega lista con los tipos de intervenciones y queda guardada la selecci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[5]]></step_number>
+                    <actions><![CDATA[<p>Llenar el campo motivo</p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[6]]></step_number>
+                    <actions><![CDATA[<p>Llenar el campo observaciones</p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[7]]></step_number>
+                    <actions><![CDATA[<p>Guardar la intervencion haciendo click en el boton <strong>Registrar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se abre ventana para aceptar o cancelar el registro</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[8]]></step_number>
+                    <actions><![CDATA[<p>Presionar <strong>Aceptar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se abre aviso de exito confirmando la actualizacion del registro</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784829" name="Eliminar intervención" >
+        <node_order><![CDATA[4]]></node_order>
+        <details><![CDATA[]]></details>
+    </testsuite></testsuite><testsuite id="784801" name="06 - Gestión de equipos" >
+        <node_order><![CDATA[5]]></node_order>
+        <details><![CDATA[]]></details>
+        <testsuite id="784830" name="Registrar equipo" >
+            <node_order><![CDATA[1]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="785464" name="Ingreso de equipo">
+                <node_order><![CDATA[1000]]></node_order>
+                <externalid><![CDATA[27]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir el ingreso de equipos con sus atributos principales para que puedan ser parte del inventario del Sistema</p>
+]]></summary>
+                <preconditions><![CDATA[<p>Sistema funcionando</p>
+
+<p>Usuario con permisos suficientes logueado</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[3]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Ingresar en la opcion <strong>Ingreso de equipo</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se despliega formulario</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Llenar el campo Nombre</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar un <strong>tipo de equipo</strong> de la lista desplegable</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre lista y permite seleccionar una opci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[4]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar <strong>Marca </strong>de la lista desplegable</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre lista y permite seleccionar una opci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[5]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar <strong>Modelo&nbsp;</strong>de la lista desplegable</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre lista y permite seleccionar una opci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[6]]></step_number>
+                        <actions><![CDATA[<p>Insertar <strong>numero de serie</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[7]]></step_number>
+                        <actions><![CDATA[<p>Introducir cantidad de <strong>garantia </strong>en a&ntilde;os</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[8]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar <strong>pais de origen</strong> de la lista desplegable</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre lista y permite seleccionar una opci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[9]]></step_number>
+                        <actions><![CDATA[<p>Insertar el <strong>proveedor</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[10]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar <strong>fecha de adquisici&oacute;n</strong>&nbsp; con el DatePicker</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre calendario para seleccionar una fecha</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[11]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar una <strong>ubicacion </strong>de la lista desplegable</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se abre lista y permite seleccionar una opci&oacute;n&nbsp;</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[12]]></step_number>
+                        <actions><![CDATA[<p>Colocar URL para <strong>imagen del equipo</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[13]]></step_number>
+                        <actions><![CDATA[<p>Presionar en <strong>Registrar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece ventana par aceptar o cancelar el registro</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[14]]></step_number>
+                        <actions><![CDATA[<p>Presionar <strong>aceptar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece advertencia indicando el registro exitoso, se agrega un registro</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785536" name="Ingreso de equipo con campos vacios">
+                <node_order><![CDATA[1001]]></node_order>
+                <externalid><![CDATA[28]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Permitir el ingreso de equipos con sus atributos principales para que puedan ser parte del inventario del Sistema</p>
+]]></summary>
+                <preconditions><![CDATA[<p>Sistema funcionando</p>
+
+<p>Usuario con permisos suficientes logueado</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[3]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Ingresar en la opcion <strong>Ingreso de equipo</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Se despliega formulario</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Dejar todos los campos vac&iacute;os&nbsp;</p>
+]]></actions>
+                        <expectedresults><![CDATA[]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Presionar en <strong>Registrar</strong></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>Aparece aviso indicando que requiere llenar todos los campos y no se agrega registro</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="784831" name="Listar equipos" >
+        <node_order><![CDATA[2]]></node_order>
+        <details><![CDATA[<p>Permitir listar los equipos que se encuentren en el inventario de la instituci&oacute;n. Puede aplicarse filtros de b&uacute;squeda para mejorar el reporte.</p>
+]]></details>
+
+        <testcase internalid="785606" name="Listar equipos">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[32]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir listar los equipos que se encuentren en el inventario de la instituci&oacute;n. Puede aplicarse filtros de b&uacute;squeda para mejorar el reporte.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+
+<p>El usuario debe haber accedido al listado de Equipos registrados en el inventario.</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>El usuario selecciona en el sistema la opci&oacute;n de<strong> Reporte de equipos</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve el listado de inventario con los equipos registrados en la instituci&oacute;n.</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>No aplicar ningun filtro</p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>El usuario presiona el bot&oacute;n para <strong>buscar </strong>los registros solicitados.</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve todo el listado de equipos registrados en el inventario</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785611" name="Listar equipos sin aplicar filtros">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[33]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir listar los equipos que se encuentren en el inventario de la instituci&oacute;n. Puede aplicarse filtros de b&uacute;squeda para mejorar el reporte.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+
+<p>El usuario debe haber accedido al listado de Equipos registrados en el inventario.</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>El usuario selecciona en el sistema la opci&oacute;n de<strong> Reporte de equipos</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve el listado de inventario con los equipos registrados en la instituci&oacute;n.</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>El usuario aplica el/los filtros que guste para especificar la b&uacute;squeda. Ej:</p>
+
+<ul>
+	<li>
+	<p>Nombre de equipo&nbsp;</p>
+	</li>
+	<li>
+	<p>Tipo de equipo&nbsp;</p>
+	</li>
+	<li>
+	<p>Marca&nbsp;</p>
+	</li>
+	<li>
+	<p>Modelo&nbsp;</p>
+	</li>
+	<li>
+	<p>N&uacute;mero de serie&nbsp;</p>
+	</li>
+	<li>
+	<p>Pa&iacute;s de origen&nbsp;</p>
+	</li>
+	<li>
+	<p>Proveedor&nbsp;</p>
+	</li>
+	<li>
+	<p>Fecha de adquisici&oacute;n&nbsp;</p>
+	</li>
+	<li>
+	<p>Identificaci&oacute;n interna&nbsp;</p>
+	</li>
+	<li>
+	<p>Ubicaci&oacute;n</p>
+	</li>
+</ul>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>El usuario presiona el bot&oacute;n para <strong>buscar </strong>los registros solicitados.</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve el listado de equipos registrados en el inventario seg&uacute;n el filtro de b&uacute;squeda aplicado para realizar el reporte.</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784832" name="Modificar equipo" >
+        <node_order><![CDATA[3]]></node_order>
+        <details><![CDATA[<p>Permitir la modificaci&oacute;n y actualizaci&oacute;n de los equipos registrados en la base de datos del sistema.</p>
+]]></details>
+
+        <testcase internalid="785574" name="Modifica un equipo">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[31]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir la modificaci&oacute;n y actualizaci&oacute;n de los equipos registrados en la base de datos del sistema.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+
+<p>El usuario debe haber accedido al listado de Equipos registrados.</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>El usuario selecciona la opci&oacute;n de <strong>Modificaci&oacute;n de equipo&nbsp;</strong>en el sistema.</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve la ficha del equipo seleccionado con los datos a modificar.</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Modificar los campos necesarios, no pueden quedar vacios</p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Presionar en <strong>registrar&nbsp;</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece ventana de advertencia apra acpetar o cancelar la actualizacion</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Presionar <strong>aceptar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>el registro es cambiado y da Ok al usuario</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785616" name="Cancelar modificación de un equipo">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[34]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir la modificaci&oacute;n y actualizaci&oacute;n de los equipos registrados en la base de datos del sistema.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+
+<p>El usuario debe haber accedido al listado de Equipos registrados.</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>El usuario selecciona la opci&oacute;n de <strong>Modificaci&oacute;n de equipo&nbsp;</strong>en el sistema.</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve la ficha del equipo seleccionado con los datos a modificar.</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Modificar los campos necesarios, no pueden quedar vacios</p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Presionar en <strong>registrar&nbsp;</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece ventana de advertencia apra acpetar o cancelar la actualizacion</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Presionar <strong>cancelar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece aviso de que la actualizacion no fue realizada</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784833" name="Eliminar equipo" >
+        <node_order><![CDATA[4]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="785552" name="Dar de baja un equipo">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[29]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Permitir la baja l&oacute;gica de equipos en el sistema. El registro del equipo permanecer&aacute; en el inventario, pero con una marca que indique su estado.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+
+<p>El usuario debe haber accedido al listado de Equipos registrados.</p>
+
+<p>Debe haber registros en el sistema</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>El usuario selecciona en el sistema la opci&oacute;n &ldquo;Baja de equipo&rdquo; en el equipo deseado dentro del listado.</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Devuelve una ventana con un formulario</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Llenar&nbsp;<strong>Nombre de equipo</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar una fecha para <strong>fecha de baja</strong> en el DatePicker</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se despliega calendario para seleccionar una fecha</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar <strong>Usuario</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se despleiga lista</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[5]]></step_number>
+                    <actions><![CDATA[<p>Llenar el campo <strong>Raz&oacute;n de la baja</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[6]]></step_number>
+                    <actions><![CDATA[<p>Llenar el campo&nbsp;<strong>comentarios</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[7]]></step_number>
+                    <actions><![CDATA[<p>Confirmar baja presionando <strong>Eliminar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece aviso de confirmacion para aceptar o cancelar la baja</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[8]]></step_number>
+                    <actions><![CDATA[<p>Presiona <strong>Aceptar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Avisa la eliminacion e informa que se ha quitado de la lista</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785562" name="Dar de baja un equipo dejando campos vacios">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[30]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>No permitir la baja l&oacute;gica de equipos en el sistema.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El sistema debe funcionar correctamente.</p>
+
+<p>El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad.</p>
+
+<p>El usuario debe haber accedido al listado de Equipos registrados.</p>
+
+<p>Debe haber registros en el sistema</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[1]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>El usuario selecciona en el sistema la opci&oacute;n &ldquo;Baja de equipo&rdquo; en el equipo deseado dentro del listado.</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Devuelve una ventana con un formulario</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Llenar&nbsp;<strong>Nombre de equipo</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar una fecha para <strong>fecha de baja</strong> en el DatePicker</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se despliega calendario para seleccionar una fecha</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar <strong>Usuario</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Se despleiga lista</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[5]]></step_number>
+                    <actions><![CDATA[<p><strong>No </strong>llenar el campo <strong>Raz&oacute;n de la baja</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[6]]></step_number>
+                    <actions><![CDATA[<p>Llenar el campo&nbsp;<strong>comentarios</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[7]]></step_number>
+                    <actions><![CDATA[<p>Confirmar baja presionando <strong>Eliminar</strong></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>Aparece aviso de que falta llenar todos los campos</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite></testsuite><testsuite id="784809" name="07 - Gestión de ubicaciones" >
+        <node_order><![CDATA[6]]></node_order>
+        <details><![CDATA[]]></details>
+        <testsuite id="784834" name="Registrar ubicación" >
+            <node_order><![CDATA[1]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="785673" name="Ingresar una Ubicación con éxito">
+                <node_order><![CDATA[1000]]></node_order>
+                <externalid><![CDATA[40]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>El sistema debe permitir el ingreso exitoso de una ubicaci&oacute;n</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador/auxiliar administrativo/ ingeniero biom&eacute;dico/ tecn&oacute;logo o t&eacute;cnico. No existe una ubicaci&oacute;n registrada previamente con la misma informaci&oacute;n</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Ingreso de Ubicaci&oacute;n&quot; en el sistema</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema muestra un formulario con campos para llenar (Instituci&oacute;n, Sector, Nombre, N&uacute;mero, Piso, Cama)</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar todos los campos con informaci&oacute;n valida y mandar el ingreso</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema solicita confirmaci&oacute;n para registrar los datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema valida los campos, registra la ubicaci&oacute;n y muestra un mensaje de &eacute;xito. El registro de la nueva ubicaci&oacute;n queda registrada en la base de datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785679" name="Cancelar el ingreso de una nueva ubicación">
+                <node_order><![CDATA[1001]]></node_order>
+                <externalid><![CDATA[41]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>El sistema debe permitir cancelar el nuevo registro de ubicaci&oacute;n</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador/auxiliar administrativo/ ingeniero biom&eacute;dico/ tecn&oacute;logo o t&eacute;cnico.</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Ingreso de Ubicaci&oacute;n&quot;</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema muestra el formulario de ingreso de ubicaci&oacute;n</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar todos los campos con informaci&oacute;n v&aacute;lida. Mandar el ingreso de la informaci&oacute;n</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema pide confirmaci&oacute;n para registrar los datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Rechazar la confirmaci&oacute;n</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema muestra nuevamente el formulario de ingreso de ubicaci&oacute;n manteniendo los datos previamente ingresados. No guarda la ubicaci&oacute;n en base</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="785709" name="Ingresar una Ubicación con campos en blanco">
+                <node_order><![CDATA[1002]]></node_order>
+                <externalid><![CDATA[42]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>No debe poder ingresarse una nueva ubicaci&oacute;n si faltan campos obligatorios del formulario por llenarse.</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador/auxiliar administrativo/ ingeniero biom&eacute;dico/ tecn&oacute;logo o t&eacute;cnico. No existe una ubicaci&oacute;n registrada previamente con la misma informaci&oacute;n</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Ingreso de Ubicaci&oacute;n&quot;</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema muestra el formulario de ingreso de ubicaci&oacute;n</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Llenar los campos y dejar al menos un campo vac&iacute;o que no sea el campo cama . Mandar el ingreso</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema pide confirmaci&oacute;n para registrar los datos</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p>El sistema muestra un mensaje de error indicando los campos inv&aacute;lidos y vuelve a mostrar el formulario para terminar de completarlo</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="784835" name="Listar ubicaciones" >
+        <node_order><![CDATA[2]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="788547" name="Listar movimiento de equipos con filtros aplicados">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[52]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que el sistema muestre el listado de movimientos de equipos seg&uacute;n los filtros v&aacute;lidos aplicados.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario est&aacute; logueado con un rol autorizado y ha accedido al listado de Equipos registrados.</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Listado de Movimientos de Equipos&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los filtros de b&uacute;squeda que se pueden aplicar.</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Identificador&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Sector </span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha desde&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha hasta</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar los campos con informaicon v&aacute;lida</p>
+]]></actions>
+                    <expectedresults><![CDATA[]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Presionar el&nbsp; bot&oacute;n para buscar los registros solicitados</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve el listado de movimientos de equipos seg&uacute;n el filtro de b&uacute;squeda aplicado para realizar el reporte.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="788575" name="Listar movimienetos de equipos sin filtros aplicados">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[53]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que el sistema muestre todo el listado de movimientos de equipos cuando no se aplican filtros.</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario est&aacute; logueado con un rol autorizado y ha accedido al listado de Equipos registrados</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Listado de Movimientos de Equipos&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los filtros de b&uacute;squeda que se pueden aplicar.</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Identificador&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Sector </span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha desde&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha hasta</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>No completar ninguno de los campos y presionar el boton para buscar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">&nbsp;El usuario no aplica ning&uacute;n filtro espec&iacute;fico. El sistema devuelve todo el listado de equipos con sus movimientos dentro de la instituci&oacute;n.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="788707" name="Aplicar filtros para listar movimientos en fechas que no hay resultados">
+            <node_order><![CDATA[1002]]></node_order>
+            <externalid><![CDATA[54]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Si al aplicar los filtros no hay resultados debe mostrarse que no hay resultados</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Listado de Movimiento de Equipos&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los filtros de b&uacute;squeda que se pueden aplicar. Ej:</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Identificador&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Sector </span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha desde&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha hasta</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar los campos para fechas donde se sabe que no hay resultados</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema muestra el listado de datos&nbsp; </span>vac&iacute;o</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784836" name="Modificar ubicación" >
+        <node_order><![CDATA[3]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="785790" name="Cancelar la modificación de una Ubicación">
+            <node_order><![CDATA[0]]></node_order>
+            <externalid><![CDATA[44]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe poder cancelar la modificaci&oacute;n&nbsp; de un registro de ubicaci&oacute;n</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador, auxiliar administrativo, ingeniero biom&eacute;dico, tecn&oacute;logo o t&eacute;cnico&nbsp;</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Modificaci&oacute;n de Ubicaciones&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema muestra el listado de ubicaciones registradas</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar una ubicaci&oacute;n para modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema muestra la ficha de la ubicaci&oacute;n con los campos a modificar</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Completar los campos con los datos modificados y dar ok</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema pide confirmaci&oacute;n para modificar el registro de ubicaci&oacute;n</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Rechazar la modificaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#374151">El sistema vuelve al listado de ubicaciones y la modificaci&oacute;n anterior no se guarda</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="785776" name="Realizar una modificación exitosa de una Ubicación">
+            <node_order><![CDATA[1]]></node_order>
+            <externalid><![CDATA[43]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Se debe poder realizar una modificaci&oacute;n exitosa de registro de ubicaci&oacute;n</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador, auxiliar administrativo, ingeniero biom&eacute;dico, tecn&oacute;logo o t&eacute;cnico&nbsp;</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Modificaci&oacute;n de Ubicaciones&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema muestra el listado de ubicaciones registradas</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar una ubicaci&oacute;n para modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema muestra la ficha de la ubicaci&oacute;n con los campos a modificar</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Completar los campos con los datos modificados y dar ok</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema pide confirmaci&oacute;n para modificar el registro de ubicaci&oacute;n</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Confirmar la modificaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#374151">El sistema registra los cambios en la base de datos y muestra un mensaje de &eacute;xito en pantalla. El listado de ubicaciones se actualiza correctamente con los nuevos datos.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="786265" name="Realizar una modificación dejando campos blancos">
+            <node_order><![CDATA[2]]></node_order>
+            <externalid><![CDATA[45]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>No debe permitirse modificar una ubicaci&oacute;n si se deja campos vac&iacute;os</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador, auxiliar administrativo, ingeniero biom&eacute;dico, tecn&oacute;logo o t&eacute;cnico&nbsp;</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar <span style="color:#374151">&quot;Modificaci&oacute;n de Ubicaciones&quot;</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#374151">El sistema muestra el listado de ubicaciones registradas.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar una ubicaci&oacute;n a modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#374151">El sistema muestra la ficha de la ubicaci&oacute;n con los campos a modificar.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Dejar algunos campos vac&iacute;os y mandar la modificaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#374151">El sistema pide confirmaci&oacute;n para modificar el registro de ubicaci&oacute;n</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[4]]></step_number>
+                    <actions><![CDATA[<p>Confirmar la modificaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#374151">El sistema muestra un mensaje de error indicando los campos inv&aacute;lidos y vuelve a mostrar la ficha de la ubicaci&oacute;n con los campos a modificar, permitiendo al usuario corregir los datos</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784837" name="Borrar ubicación" >
+        <node_order><![CDATA[4]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="786553" name="Realizar una eliminación de ubicación dejando campos vacíos">
+            <node_order><![CDATA[0]]></node_order>
+            <externalid><![CDATA[48]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Este caso de prueba verifica que un usuario pueda eliminar una ubicaci&oacute;n con &eacute;xito</p>
+
+<p>&nbsp;</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario debe estar logueado en el sistema.</p>
+
+<p><span style="background-color:transparent; color:#000000">El usuario debe haber accedido al listado de ubicaciones registrados.</span></p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la ubicaci&oacute;n a modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los siguientes campos obligatorios a completar:</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Nombre de Ubicaci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha de baja&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Raz&oacute;n de la baja&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Comentarios</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar todos los campos con informaci&oacute;n v&aacute;lida y mandar la solicitud</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para eliminar la ubicaci&oacute;n del sistema</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Confirmar la eliminaci&oacute;n de la ubicaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El usuario recibe un mensaje en pantalla aclarando el resultado de la transacci&oacute;n. El sistema elimina la ubicaci&oacute;n en la base de datos,&nbsp; y actualiza el listado de ubicaciones registrados en la instituci&oacute;n.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="786520" name="Cancelar eliminación de ubicación">
+            <node_order><![CDATA[1]]></node_order>
+            <externalid><![CDATA[47]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Este caso de prueba verifica que un usuario&nbsp; no pueda eliminar una ubicaci&oacute;n si deja campos vac&iacute;os</p>
+
+<p>&nbsp;</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario debe estar logueado en el sistema.</p>
+
+<p><span style="background-color:transparent; color:#000000">El usuario debe haber accedido al listado de ubicaciones registrados.</span></p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la ubicaci&oacute;n a modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los siguientes campos obligatorios a completar:</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Nombre de Ubicaci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha de baja&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Raz&oacute;n de la baja&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Comentarios</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar algunos campos con informaci&oacute;n v&aacute;lida y dejar algunos vac&iacute;os, mandar la solicitud</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para eliminar la ubicaci&oacute;n del sistema</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Confirmar la eliminaci&oacute;n de la ubicaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema muestra un mensaje de error debido a datos inv&aacute;lidos.El usuario vuelve a la ventana con los campos obligatorios a completar. No se produce ningun cambion en la lista de ubicaciones registradas</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="786478" name="Eliminación exitosa de una ubicación">
+            <node_order><![CDATA[2]]></node_order>
+            <externalid><![CDATA[46]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Este caso de prueba verifica que un usuario pueda comenzar el proceso de eliminar una ubicaci&oacute;n y cancelarla para que quede sin efecto</p>
+
+<p>&nbsp;</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario debe estar logueado en el sistema.</p>
+
+<p><span style="background-color:transparent; color:#000000">El usuario debe haber accedido al listado de ubicaciones registrados.</span></p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la ubicaci&oacute;n a modificar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con los siguientes campos obligatorios a completar:</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Nombre de Ubicaci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha de baja&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Raz&oacute;n de la baja&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Comentarios</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar todos los campos con informaci&oacute;n v&aacute;lida y mandar la solicitud</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para eliminar la ubicaci&oacute;n del sistema</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Rechazar la confirmaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema vuelve a la ventana con los campos a llenara para la eliminaci&oacute;n. No se produce ning&uacute;n cambio en la lista de ubicaciones registradas</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="787207" name="Movimiento de Equipos" >
+        <node_order><![CDATA[5]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="787227" name="Cancelar el registro de movimiento de equipo con éxito">
+            <node_order><![CDATA[0]]></node_order>
+            <externalid><![CDATA[50]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que un usuario autorizado puede registrar con &eacute;xito el movimiento de un equipo a una nueva ubicaci&oacute;n</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario debe estar logueado en el sistema</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar &quot;Movimiento de Equipo&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema despliega una ventana con el siguiente formulario a completar.</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Identificador de Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Sector (Policl&iacute;nico, Internaci&oacute;n, Emergencia, CTI, otro)&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Nombre&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">N&uacute;mero&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Piso&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Cama (no obligatorio)&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha de salida&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Observaciones</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar todos los campos con informaci&oacute;n v&aacute;lida</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el movimiento de un equipo</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un mensaje de &ldquo;&eacute;xito&rdquo; y guarda el registro en la base de datos. Actualizando la lista de ubicaciones de los equipos con los nuevos datos.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="787219" name="Realizar un registro de movimiento de equipo con éxito">
+            <node_order><![CDATA[1]]></node_order>
+            <externalid><![CDATA[49]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que un usuario autorizado puede registrar con &eacute;xito el movimiento de un equipo a una nueva ubicaci&oacute;n</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario debe estar logueado en el sistema</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar &quot;Movimiento de Equipo&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema despliega una ventana con el siguiente formulario a completar.</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Identificador de Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Sector (Policl&iacute;nico, Internaci&oacute;n, Emergencia, CTI, otro)&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Nombre&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">N&uacute;mero&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Piso&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Cama (no obligatorio)&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha de salida&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Observaciones</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar todos los campos con informaci&oacute;n v&aacute;lida</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el movimiento de un equipo</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Rechazar la confirmaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema vuelve a mostrar el formulario a completar y no se guarda la modificacion de ubicaci&oacute;n</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="787974" name="Realizar un registro de movimiento de equipo dejando campos en blanco">
+            <node_order><![CDATA[2]]></node_order>
+            <externalid><![CDATA[51]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>No se debe permitir registrar el movimiento de equipo si se dejan campos vac&iacute;os</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n &quot;Movimiento de Equipo&quot;</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema despliega una ventana con el siguiente formulario a completar.</span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Identificador de Equipo&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Instituci&oacute;n&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Sector (Policl&iacute;nico, Internaci&oacute;n, Emergencia, CTI, otro)&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Nombre&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">N&uacute;mero&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Piso&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Cama (no obligatorio)&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Fecha de salida&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Usuario&nbsp;</span></p>
+	</li>
+	<li>
+	<p><span style="color:#000000">Observaciones</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Completar todos los campos menos el campo Equipo, este dejarlo vac&iacute;o, y mandar el registro.</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el movimiento de un equipo.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve un mensaje de error indicando los datos inv&aacute;lidos</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite></testsuite><testsuite id="784810" name="14 - Gestión de tipo de intervención" >
+        <node_order><![CDATA[7]]></node_order>
+        <details><![CDATA[]]></details>
+        <testsuite id="784838" name="Registrar tipo intervención" >
+            <node_order><![CDATA[1]]></node_order>
+            <details><![CDATA[]]></details>
+
+            <testcase internalid="788782" name="Cancelar registro de un nuevo tipo de intervención">
+                <node_order><![CDATA[0]]></node_order>
+                <externalid><![CDATA[56]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Verificar que se pueda cancelar el registrar un nuevo tipo de intervenci&oacute;n.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+]]></summary>
+                <preconditions><![CDATA[<p><span style="background-color:transparent; color:#000000">&nbsp;El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad. El tipo de intervenci&oacute;n no puede estar registrado a&uacute;n.</span></p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p><span style="color:#000000">Seleccionar la opci&oacute;n &ldquo;Ingreso de Tipo de Intervenci&oacute;n&rdquo; en el sistema.</span></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con el campo obligatorio a completar: Tipo de Intervenci&oacute;n</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar el campo y mandar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el nuevo tipo de intervenci&oacute;n</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Cancelar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema no guarda el nuevo registre y vuelve a la pantalla de </span></p>
+
+<p><span style="color:#000000">&nbsp;&ldquo;Ingreso de Tipo de Intervenci&oacute;n&rdquo;</span></p>
+
+<p>&nbsp;</p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="788763" name="Registro exitoso de un nuevo tipo de intervención">
+                <node_order><![CDATA[1]]></node_order>
+                <externalid><![CDATA[55]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Verificar que se pueda registrar un nuevo tipo de intervenci&oacute;n exitosamente.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+]]></summary>
+                <preconditions><![CDATA[<p><span style="background-color:transparent; color:#000000">&nbsp;El usuario debe estar logueado en el sistema con un rol autorizado para acceder a la funcionalidad. El tipo de intervenci&oacute;n no puede estar registrado a&uacute;n.</span></p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p><span style="color:#000000">Seleccionar la opci&oacute;n &ldquo;Ingreso de Tipo de Intervenci&oacute;n&rdquo; en el sistema.</span></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con el campo obligatorio a completar: Tipo de Intervenci&oacute;n</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar el campo y mandar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el nuevo tipo de intervenci&oacute;n</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un mensaje de &ldquo;&eacute;xito&rdquo; y guarda el registro en la base de datos. Actualizando la lista de Tipos de Intervenciones en el sistema.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+
+            <testcase internalid="789158" name="Intentar registrar un tipo de intervención previamente registrada">
+                <node_order><![CDATA[2]]></node_order>
+                <externalid><![CDATA[57]]></externalid>
+                <version><![CDATA[1]]></version>
+                <summary><![CDATA[<p>Verificar que no se pueda registrar un tipo de intervenci&oacute;n si esta ya est&aacute; registrada</p>
+]]></summary>
+                <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador. Existe previamente registrado un tipo de intervenci&oacute;n</p>
+]]></preconditions>
+                <execution_type><![CDATA[1]]></execution_type>
+                <importance><![CDATA[2]]></importance>
+                <estimated_exec_duration></estimated_exec_duration>
+                <status>1</status>
+                <is_open>1</is_open>
+                <active>1</active>
+                <steps>
+                    <step>
+                        <step_number><![CDATA[1]]></step_number>
+                        <actions><![CDATA[<p><span style="color:#000000">Seleccionar la opci&oacute;n &ldquo;Ingreso de Tipo de Intervenci&oacute;n&rdquo;</span></p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con el campo obligatorio a completar. </span></p>
+
+<ul>
+	<li>
+	<p><span style="color:#000000">Tipo de Intervenci&oacute;n</span></p>
+	</li>
+</ul>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[2]]></step_number>
+                        <actions><![CDATA[<p>Completar el campo con el tipo de intervenci&oacute;n que ya se encuentra previamente registrado. Mandar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar el nuevo tipo de intervenci&oacute;n.</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+
+                    <step>
+                        <step_number><![CDATA[3]]></step_number>
+                        <actions><![CDATA[<p>Confirmar el registro</p>
+]]></actions>
+                        <expectedresults><![CDATA[<p><span style="color:#000000">El usuario recibe un mensaje en pantalla aclarando que el tipo de intervenci&oacute;n ya fue registrado previamente y le devuelve la pantalla para completar nuevamente este campo</span></p>
+]]></expectedresults>
+                        <execution_type><![CDATA[1]]></execution_type>
+                    </step>
+                </steps>
+            </testcase>
+        </testsuite><testsuite id="784839" name="Listar tipos de intervención" >
+        <node_order><![CDATA[2]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="789224" name="Listar todos los tipos de intervenciones sin aplicar un filtro">
+            <node_order><![CDATA[1000]]></node_order>
+            <externalid><![CDATA[58]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p><span style="background-color:transparent; color:#000000">Se debe permitir listar los Tipos de Intervenciones que se encuentren en el sistema.</span></p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Seleccionar la opci&oacute;n &ldquo;Listado de tipo de intervenci&oacute;n&rdquo;</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve el listado de los tipos de intervenciones registrado en el sistema.</span>&nbsp; Deben aparecer todo los registros existentes</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="789308" name="Listar tipos de intervenciones aplicando filtro">
+            <node_order><![CDATA[1001]]></node_order>
+            <externalid><![CDATA[59]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que al aplicar un filtro este cumpla su funci&oacute;n y limite los resultados</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado con rol administrador. Existen tipos de intervenciones registradas</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n <span style="color:#000000">&ldquo;Listado de tipo de intervenci&oacute;n&rdquo;</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve el listado de los tipos de intervenciones registrado en el sistema</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Aplicar el filtro: TIPO</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema debe mostrar solo los resultados que concuerden con el tipo seleccionado</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="789343" name="Acceder a la ficha de datos del tipo de intervención">
+            <node_order><![CDATA[1002]]></node_order>
+            <externalid><![CDATA[60]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que se pueda acceder a la ficha de datos de la interenci&oacute;n entrando desde la lista de resultados</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar la opci&oacute;n <span style="color:#000000">&nbsp;&ldquo;Listado de tipo de intervenci&oacute;n&rdquo;</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve el listado de los tipos de intervenciones registrado en el sistema</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar uno de los tipos de intervenciones que aparecen en la lista</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p>El sistema devuelve en pantalla la ficha de datos de esa intervenci&oacute;n seleccionada</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784840" name="Modificar tipos de intervención" >
+        <node_order><![CDATA[3]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="789679" name="Rechazar la modificación del registro de intervención">
+            <node_order><![CDATA[0]]></node_order>
+            <externalid><![CDATA[62]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que se puede cancelar la&nbsp; modificaci&oacute;n del registro de tipo de intervenci&oacute;n</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Seleccionar de la lista de &ldquo;Tipos de intervenci&oacute;n&rdquo; el registro de tipo de intervenci&oacute;n que desea modificar.</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con la ficha de datos registrados del Tipo de Intervenci&oacute;n requerida por el usuario.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Modificar los datos que desea actualizar del tipo de intervenci&oacute;n. Excepto el campo Tipo de la intervenci&oacute;n</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar dicha modificaci&oacute;n de los datos.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Rechazar la modificaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El usuario recibe un mensaje en pantalla aclarando que la transacci&oacute;n fue cancelada</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="789532" name="Modificar el tipo de intervención exitosamente">
+            <node_order><![CDATA[1]]></node_order>
+            <externalid><![CDATA[61]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que se pueda modificar el registro de tipo de intervenci&oacute;n de manera exitosa</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Seleccionar de la lista de &ldquo;Tipos de intervenci&oacute;n&rdquo; el registro de tipo de intervenci&oacute;n que desea modificar.</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve una ventana con la ficha de datos registrados del Tipo de Intervenci&oacute;n requerida por el usuario.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Modificar los datos que desea actualizar del tipo de intervenci&oacute;n. Excepto el campo Tipo de la intervenci&oacute;n</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar dicha modificaci&oacute;n de los datos.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[3]]></step_number>
+                    <actions><![CDATA[<p>Confirmar la modificaci&oacute;n</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un mensaje de &ldquo;&eacute;xito&rdquo; y guarda los cambios en el sistema, actualizando el lista de tipos de intervenci&oacute;n con los nuevos datos.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite><testsuite id="784841" name="Borrar tipo de intervención" >
+        <node_order><![CDATA[4]]></node_order>
+        <details><![CDATA[]]></details>
+
+        <testcase internalid="790091" name="Cancelar la baja de un tipo de intervención">
+            <node_order><![CDATA[0]]></node_order>
+            <externalid><![CDATA[65]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que se puede realizar la baja l&oacute;gica de un tipo de intervenci&oacute;n satisfactoriamente</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador.</p>
+
+<p><span style="background-color:transparent; color:#000000">El usuario debe haber accedido al listado de tipo de intervenciones.</span></p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Seleccionar en el sistema la opci&oacute;n &ldquo;Baja de tipo de Intervenci&oacute;n&rdquo; en la ficha deseada dentro del listado.</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar la baja</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Confirmar <span style="color:#000000">la baja del de tipo de intervenci&oacute;n</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un mensaje de &ldquo;&eacute;xito&rdquo; en pantalla y registra la baja del tipo de intervenci&oacute;n, marc&aacute;ndolo con estado de baja y quit&aacute;ndolo de la vista del listado de tipos de intervenci&oacute;n registrados</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="789964" name="Realizar la baja exitosa de un tipo de intervención">
+            <node_order><![CDATA[1]]></node_order>
+            <externalid><![CDATA[63]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que se puede cancelar la baja l&oacute;gica de un tipo de intervenci&oacute;n satisfactoriamente</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol de administrador.</p>
+
+<p><span style="background-color:transparent; color:#000000">El usuario debe haber accedido al listado de tipo de intervenciones.</span></p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Seleccionar en el sistema la opci&oacute;n &ldquo;Baja de tipo de Intervenci&oacute;n&rdquo; en la ficha deseada dentro del listado.</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema pide confirmaci&oacute;n para registrar la baja</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Rechazar <span style="color:#000000">la baja del de tipo de intervenci&oacute;n</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve un mensaje de que la transaccion fue cancelada</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+
+        <testcase internalid="789992" name="Reactivar un tipo de intervención eliminado">
+            <node_order><![CDATA[2]]></node_order>
+            <externalid><![CDATA[64]]></externalid>
+            <version><![CDATA[1]]></version>
+            <summary><![CDATA[<p>Verificar que se puede reactivar un tipo de intervenci&oacute;n si este fue eliminado previamente</p>
+]]></summary>
+            <preconditions><![CDATA[<p>El usuario se encuentra logueado en el sistema con rol administrador. Se cuenta con tipo de intervenciones eliminadas en el sistema.</p>
+]]></preconditions>
+            <execution_type><![CDATA[1]]></execution_type>
+            <importance><![CDATA[2]]></importance>
+            <estimated_exec_duration></estimated_exec_duration>
+            <status>1</status>
+            <is_open>1</is_open>
+            <active>1</active>
+            <steps>
+                <step>
+                    <step_number><![CDATA[1]]></step_number>
+                    <actions><![CDATA[<p><span style="color:#000000">Filtrar el listado de Tipo de intervenci&oacute;n por Estado Eliminado</span></p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema devuelve el listado</span> filtrado por Estado Eliminado</p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+
+                <step>
+                    <step_number><![CDATA[2]]></step_number>
+                    <actions><![CDATA[<p>Seleccionar un tipo de intervenci&oacute;n y seleccionar reactivar</p>
+]]></actions>
+                    <expectedresults><![CDATA[<p><span style="color:#000000">El sistema registra la reactivaci&oacute;n del tipo de intervenci&oacute;n en la base de datos, marc&aacute;ndolo con estado &ldquo;activo&rdquo; y lo agrega en la vista del listado de Tipos de intervenciones registrados.</span></p>
+]]></expectedresults>
+                    <execution_type><![CDATA[1]]></execution_type>
+                </step>
+            </steps>
+        </testcase>
+    </testsuite></testsuite></testsuite></testsuite>
