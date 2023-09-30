@@ -1,9 +1,0 @@
-@startuml
-left to right direction
-actor Usuario as u
-rectangle "Registro de Usuario" as register {
-  u -- (Ingresar información de registro)
-  u -- (Enviar información de registro)
-  (Recibir confirmación de registro exitoso) -- u
-}
-@enduml

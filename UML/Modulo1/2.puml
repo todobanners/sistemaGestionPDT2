@@ -1,9 +1,0 @@
-@startuml
-left to right direction
-actor Administrador
-actor AuxiliarAdministrativo
-rectangle "Gestión de Perfiles" {
-  Administrador -- (Ingreso de Perfiles)
-  AuxiliarAdministrativo -- (Ingreso de Perfiles)
-}
-@enduml
