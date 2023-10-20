@@ -21,5 +21,19 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.wildfly</groupId>
+      <artifactId>wildfly-ejb-client-bom</artifactId>
+      <type>pom</type>
+      <scope>compile</scope>
+      <version>28.0.0.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>codigocreativo.uy</groupId>
+      <artifactId>ServidorApp</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+
   </dependencies>
 </project>
