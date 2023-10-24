@@ -1,0 +1,98 @@
+package codigocreativo.uy.servidorapp.entidades;
+
+import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "INTERVENCIONES")
+public class Intervencion implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_INTERVENCION", nullable = false)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_USUARIO", nullable = false)
+    private Usuario idUsuario;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_TIPO", nullable = false)
+    private TiposIntervencione idTipo;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_EQUIPO", nullable = false)
+    private Equipo idEquipo;
+
+    @Column(name = "MOTIVO", nullable = false)
+    private String motivo;
+
+    @Column(name = "FECHA_HORA", nullable = false)
+    private LocalDate fechaHora;
+
+    @Column(name = "COMENTARIOS")
+    private String comentarios;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public TiposIntervencione getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(TiposIntervencione idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public Equipo getIdEquipo() {
+        return idEquipo;
+    }
+
+    public void setIdEquipo(Equipo idEquipo) {
+        this.idEquipo = idEquipo;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public LocalDate getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(LocalDate fechaHora) {
+        this.fechaHora = fechaHora;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+
+}

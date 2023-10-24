@@ -1,12 +1,18 @@
 package org.example;
 
 import codigocreativo.uy.servidorapp.entidades.DefaultEntidad;
+import codigocreativo.uy.servidorapp.entidades.Perfil;
+import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.DefaultRemote;
+import codigocreativo.uy.servidorapp.servicios.UsuarioBean;
+import org.apache.sshd.common.config.keys.loader.openssh.kdf.BCrypt;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Hello world!
@@ -23,22 +29,19 @@ public class App
         // Cambia la URL según tu configuración
         // Crea el contexto de JNDI
         Context context = new InitialContext(jndiProps);
-        DefaultRemote defaultBean = (DefaultRemote) context.lookup("ejb:/ServidorApp-1.0-SNAPSHOT/DefaultBean!codigocreativo.uy.servidorapp.servicios.DefaultRemote");
-        //MateriasRemote materiasBean = (MateriasRemote) context.lookup("EjemploJPA/MateriasBean!uy.edu.utec.servicios.MateriasRemote");
-        //CarrerasRemote carrerasBean = (CarrerasRemote) InitialContext.doLookup("EjemploJPA/CarrerasBean!uy.edu.utec.servicios.CarrerasRemote");
+        UsuarioBean usuarioBean = (UsuarioBean) context.lookup("ejb:/ServidorApp-1.0-SNAPSHOT/UsuarioBean!codigocreativo.uy.servidorapp.servicios.UsuarioRemote");
 
-        DefaultEntidad d = new DefaultEntidad();
-        d.setCampoDefaultString("PruebaString");
-        try {
-            defaultBean.create(d);
-            System.out.println("Se creó exitosamente el default");
+        // Crear un usuario
+        Usuario usuario = new Usuario();
+        usuario.setNombre("Juan");
+        usuario.setApellido("Perez");
+        usuario.setEmail("juanperez@gmail.com");
+        usuario.setCedula("12345678");
+        //LocalDate fechaNac = LocalDate.of(1990,3,13);
+        //usuario.setFechaNacimiento(fechaNac);
+        usuario.setContrasenia(BCrypt.hashpw("Test123",BCrypt.gensalt()));
+        usuario.setEstado("ACTIVO");
+        //usuario.setIdPerfil();
 
-            for (DefaultEntidad defaultEntidad : defaultBean.list()) {
-                System.out.println(defaultEntidad.getCampoDefaultString());
-            }
-
-        } catch (ServiciosException e) {
-            System.out.println(e.getMessage());
-        }
     }
 }
