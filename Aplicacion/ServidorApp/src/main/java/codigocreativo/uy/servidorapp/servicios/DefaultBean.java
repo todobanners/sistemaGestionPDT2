@@ -33,4 +33,15 @@ public class DefaultBean implements DefaultRemote {
         }
     }
 
+    @Override
+    public void borrar(Long id) throws ServiciosException {
+        try {
+            DefaultEntidad d = em.find(DefaultEntidad.class, id);
+            em.remove(d);
+            em.flush();
+        } catch (Exception e) {
+            throw new ServiciosException("No se pudo borrar el default");
+        }
+    }
+
 }

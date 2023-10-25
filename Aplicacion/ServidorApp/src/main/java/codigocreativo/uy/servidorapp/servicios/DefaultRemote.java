@@ -12,4 +12,6 @@ public interface DefaultRemote {
 
     //Listar los defaults
     List<DefaultEntidad> list() throws ServiciosException;
+
+    public void borrar(Long id) throws ServiciosException;
 }
