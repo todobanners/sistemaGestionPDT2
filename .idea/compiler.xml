@@ -10,5 +10,8 @@
         <module name="ServidorApp" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mantenimientoHospital" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
