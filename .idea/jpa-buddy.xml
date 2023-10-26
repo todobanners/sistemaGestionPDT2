@@ -3,5 +3,9 @@
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="2975744d-822f-4c3f-b5e3-093df165a039__PROYECTO" />
+    <option name="reLastEntityCreationPackage" value="Aplicacion/ServidorApp/src/main/java/codigocreativo/uy/servidorapp/entidades" />
+    <option name="newEntityIdType" value="Integer" />
+    <option name="newEntityIdStrategy" value="Identity" />
   </component>
 </project>
