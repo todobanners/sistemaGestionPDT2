@@ -7,12 +7,12 @@ import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.DefaultRemote;
 import codigocreativo.uy.servidorapp.servicios.UsuarioBean;
 import org.apache.sshd.common.config.keys.loader.openssh.kdf.BCrypt;
+import org.example.vista.Default;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.time.LocalDate;
-import java.util.Date;
+
 
 /**
  * Hello world!
@@ -20,8 +20,8 @@ import java.util.Date;
  */
 public class App
 {
-    public static void main(String[] args) throws NamingException {
-        // Configuración del contexto inicial
+    public static void main(String[] args) throws NamingException, ServiciosException {
+        /*// Configuración del contexto inicial
         // Configura las propiedades para el contexto de JNDI
         java.util.Properties jndiProps = new java.util.Properties();
         jndiProps.put(Context.INITIAL_CONTEXT_FACTORY,"org.wildfly.naming.client.WildFlyInitialContextFactory");
@@ -41,7 +41,14 @@ public class App
         //usuario.setFechaNacimiento(fechaNac);
         usuario.setContrasenia(BCrypt.hashpw("Test123",BCrypt.gensalt()));
         usuario.setEstado("ACTIVO");
-        //usuario.setIdPerfil();
+        //usuario.setIdPerfil();*/
 
+        /*DefaultEntidad d = new DefaultEntidad();
+        d.setCampoDefaultString("Hola");
+        Conexion.obtenerDefaultBean().create(d);
+        for (DefaultEntidad de : Conexion.obtenerDefaultBean().list()) {
+            System.out.println(de.getCampoDefaultString());
+        }*/
+        
     }
 }
