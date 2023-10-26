@@ -9,10 +9,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static javax.swing.UIManager.setLookAndFeel;
+
 public class AplicacionVentana extends JFrame {
 
-    public AplicacionVentana(String s) throws ServiciosException, NamingException {
+    public AplicacionVentana(String s) throws ServiciosException, NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);
+        //Agregar un LaF
+
+        setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -46,7 +52,16 @@ public class AplicacionVentana extends JFrame {
 
         //Menu de dashboard
         JMenuItem menuInicio = new JMenuItem("Inicio");
-        menuInicio.addActionListener(new ActionListener() {
+        menuInicio.addActionListener(e -> {
+            try {
+                changePanel(new HomeGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            } catch (ServiciosException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        /*menuInicio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -57,7 +72,7 @@ public class AplicacionVentana extends JFrame {
                     throw new RuntimeException(ex);
                 }
             }
-        });
+        });*/
 
         /*JMenuItem menuVerDatos = new JMenuItem("Visualizar datos");
         menuVerDatos.addActionListener(e -> changePanel(new verDatos().getVentanaDatos()));

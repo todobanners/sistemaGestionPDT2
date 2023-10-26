@@ -20,16 +20,16 @@ public class HomeGUI {
     return panel1;
 }
     public HomeGUI() throws NamingException, ServiciosException {
-        list1.setListData(Conexion.obtenerDefaultBean().list().toArray());
+        list1.setListData(Conexion.obtenerDefaultBean().list().toArray());//Actualizo la lista
         enviarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    DefaultEntidad defaulValor = new DefaultEntidad();
-                    defaulValor.setCampoDefaultString(textField1.getText());
+                    DefaultEntidad defaulValor = new DefaultEntidad();//Defino el objeto entidad para agregar el campo string
+                    defaulValor.setCampoDefaultString(textField1.getText());//Agrego el valor del campo string
+                    Conexion.obtenerDefaultBean().create(defaulValor);//Agrego el objeto a la base de datos
+                    list1.setListData(Conexion.obtenerDefaultBean().list().toArray());//Actualizo la lista
 
-                    Conexion.obtenerDefaultBean().create(defaulValor);
-                    list1.setListData(Conexion.obtenerDefaultBean().list().toArray());
                 } catch (ServiciosException | NamingException ex) {
                     ex.printStackTrace();
                 }
