@@ -1,11 +1,12 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Institucion;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
-
+@Stateless
 public class InstitucionBean implements InstitucionRemote{
 
     @PersistenceContext

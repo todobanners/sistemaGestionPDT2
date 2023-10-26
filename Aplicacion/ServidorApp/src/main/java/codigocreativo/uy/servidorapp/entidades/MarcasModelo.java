@@ -15,7 +15,7 @@ public class MarcasModelo implements Serializable {
     @Column(name = "NOMBRE", nullable = false, length = 30)
     private String nombre;
 
-    public Long getId() {
+    public static Long getId() {
         return id;
     }
 
