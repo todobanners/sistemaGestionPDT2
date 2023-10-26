@@ -10,7 +10,7 @@ public class MarcasModelo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_MARCA", nullable = false)
-    private Long id;
+    private static Long id;
 
     @Column(name = "NOMBRE", nullable = false, length = 30)
     private String nombre;

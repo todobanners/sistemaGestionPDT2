@@ -1,16 +1,9 @@
 package org.example;
 
-import codigocreativo.uy.servidorapp.entidades.DefaultEntidad;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import codigocreativo.uy.servidorapp.servicios.DefaultRemote;
-import codigocreativo.uy.servidorapp.servicios.UsuarioBean;
-import org.apache.sshd.common.config.keys.loader.openssh.kdf.BCrypt;
-import org.example.vista.Default;
+import org.example.controlador.AplicacionVentana;
+import org.example.controlador.ControllerVentanaBase;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 
@@ -49,6 +42,11 @@ public class App
         for (DefaultEntidad de : Conexion.obtenerDefaultBean().list()) {
             System.out.println(de.getCampoDefaultString());
         }*/
-        
+
+        //ControllerVentanaBase controlaBase = ControllerVentanaBase.getInstancia();
+        //controlaBase.mostrarVentana();
+
+        new AplicacionVentana("Tarea entregable");
+
     }
 }
