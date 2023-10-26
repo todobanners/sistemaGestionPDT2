@@ -1,7 +1,9 @@
 package org.example.controlador;
 
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.HomeGUI;
 
+import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class AplicacionVentana extends JFrame {
 
-    public AplicacionVentana(String s){
+    public AplicacionVentana(String s) throws ServiciosException, NamingException {
         super(s);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,7 +49,13 @@ public class AplicacionVentana extends JFrame {
         menuInicio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AplicacionVentana.this.changePanel(new HomeGUI().getPanel());
+                try {
+                    AplicacionVentana.this.changePanel(new HomeGUI().getPanel());
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ServiciosException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 

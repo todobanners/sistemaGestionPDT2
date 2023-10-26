@@ -1,15 +1,39 @@
 package org.example.vista;
 
+import codigocreativo.uy.servidorapp.entidades.DefaultEntidad;
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
+import org.example.Conexion;
+
+import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class HomeGUI {
     private JPanel panel1;
-    private JButton botonConAlgoButton;
+    private JButton enviarButton;
+    private JList list1;
+    private JTextField textField1;
 
     public JPanel getPanel(){
     return panel1;
 }
-    public HomeGUI() {
+    public HomeGUI() throws NamingException, ServiciosException {
+        list1.setListData(Conexion.obtenerDefaultBean().list().toArray());
+        enviarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    DefaultEntidad defaulValor = new DefaultEntidad();
+                    defaulValor.setCampoDefaultString(textField1.getText());
+
+                    Conexion.obtenerDefaultBean().create(defaulValor);
+                    list1.setListData(Conexion.obtenerDefaultBean().list().toArray());
+                } catch (ServiciosException | NamingException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 }
