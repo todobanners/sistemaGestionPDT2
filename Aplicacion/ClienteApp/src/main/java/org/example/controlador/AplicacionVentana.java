@@ -3,7 +3,8 @@ package org.example.controlador;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.HomeGUI;
 import org.example.vista.PruebaGUI;
-import org.example.vista.UsuarioGUI;
+import org.example.vista.Usuario.UsuarioGUI;
+import org.example.vista.Usuario.UsuarioRegistroGUI;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -44,6 +45,7 @@ public class AplicacionVentana extends JFrame {
         JMenu agregar = new JMenu("Ver y registrar");
         JMenu borrar = new JMenu("Borrar registros");
         JMenu Usuarios = new JMenu("Usuarios");
+        JMenu Equipos = new JMenu("Equipos");
 
         //Menu de dashboard
         JMenuItem menuInicio = new JMenuItem("Inicio");
@@ -64,6 +66,20 @@ public class AplicacionVentana extends JFrame {
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
+        });
+
+        JMenuItem menuUsuariosRegistrar = new JMenuItem("Registrar Usuarios");
+        menuUsuariosRegistrar.addActionListener(e -> {
+            try {
+                changePanel(new UsuarioRegistroGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        JMenuItem menuEquipos = new JMenuItem("Listar Equipos");
+        menuEquipos.addActionListener(e -> {
+            //accion
         });
         /*menuInicio.addActionListener(new ActionListener() {
             @Override
@@ -106,6 +122,7 @@ public class AplicacionVentana extends JFrame {
         menuInicioPrincipal.add(menuVerDatos);
 
         Usuarios.add(menuUsuarios);
+        Usuarios.add(menuUsuariosRegistrar);
 /*
 
         agregar.add(menuVerFormulario);

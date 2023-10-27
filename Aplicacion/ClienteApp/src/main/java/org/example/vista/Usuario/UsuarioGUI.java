@@ -1,4 +1,4 @@
-package org.example.vista;
+package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
@@ -12,6 +12,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 public class UsuarioGUI {
@@ -67,6 +69,9 @@ public class UsuarioGUI {
                     //LocalDate fecha;
                     //fecha = new LocalDate(2021,1,1);
                     //user.setFechaNacimiento(fecha);
+                    Date fechaElegida = (Date) fechaChooser.getDate();
+                    LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    user.setFechaNacimiento(localDate);
 
                     user.setEstado((String) ComboBoxEstado.getSelectedItem());
                     user.setNombre(nombre.getText());
