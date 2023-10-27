@@ -5,4 +5,3 @@ public class ServiciosException extends Exception{
         super(mensaje);
     }
 }
-
