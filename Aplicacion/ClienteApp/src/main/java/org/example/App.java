@@ -2,6 +2,7 @@ package org.example;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.controlador.AplicacionVentana;
+import org.example.vista.EquiposGUI;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -46,7 +47,12 @@ public class App
         //ControllerVentanaBase controlaBase = ControllerVentanaBase.getInstancia();
         //controlaBase.mostrarVentana();
 
-        new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
+        //new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
+        try {
+            new EquiposGUI();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
