@@ -3,13 +3,17 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import org.example.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+
 
 public class UsuarioGUI {
     private JList list1;
@@ -25,12 +29,15 @@ public class UsuarioGUI {
     private JTextField apellido;
     private JButton enviarButton;
     private JButton cancelarButton;
+    private JPanel panel;
+    private DatePicker datePicker;
 
     public JPanel getPanel(){
         return userGUI;
     }
 
     public UsuarioGUI() throws NamingException {
+
 
         list1.setListData(Conexion.obtenerUsuarioBean().obtenerUsuarios().toArray());
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
@@ -41,6 +48,17 @@ public class UsuarioGUI {
         }
         ComboBoxEstado.addItem("alta");
         ComboBoxEstado.addItem("baja");
+
+        // Create a date picker, and add it to the form.
+
+        datePicker = new DatePicker();
+
+        DatePickerSettings dateSettings = new DatePickerSettings();
+        dateSettings.setFormatForDatesCommonEra("yyyy-MM-dd");
+        datePicker.setSettings(dateSettings);
+
+        // Agregar el DatePicker al panel
+        panel.add(datePicker);
 
         enviarButton.addActionListener(new ActionListener() {
             @Override
