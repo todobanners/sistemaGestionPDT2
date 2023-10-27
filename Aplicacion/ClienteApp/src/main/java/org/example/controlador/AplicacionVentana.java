@@ -16,12 +16,8 @@ public class AplicacionVentana extends JFrame {
     public AplicacionVentana(String s) throws ServiciosException, NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);
         //Agregar un LaF
-
         setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         pack();
         //Font por defecto para Menues
         Font f = new Font("sans-serif", Font.PLAIN, 12);
@@ -36,10 +32,8 @@ public class AplicacionVentana extends JFrame {
         setBounds(10,10,800,800);
         //panel de ventana inicio
         changePanel(new HomeGUI().getPanel());
-
-
-
     }
+
 
     JMenuBar initMenuBar(){
 
@@ -49,7 +43,6 @@ public class AplicacionVentana extends JFrame {
         JMenu menuInicioPrincipal = new JMenu("Inicio");
         JMenu agregar = new JMenu("Ver y registrar");
         JMenu borrar = new JMenu("Borrar registros");
-
 
         //Menu de dashboard
         JMenuItem menuInicio = new JMenuItem("Inicio");
