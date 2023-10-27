@@ -43,6 +43,7 @@ public class AplicacionVentana extends JFrame {
         JMenu menuInicioPrincipal = new JMenu("Inicio");
         JMenu agregar = new JMenu("Ver y registrar");
         JMenu borrar = new JMenu("Borrar registros");
+        JMenu Usuarios = new JMenu("Usuarios");
 
         //Menu de dashboard
         JMenuItem menuInicio = new JMenuItem("Inicio");
@@ -56,7 +57,7 @@ public class AplicacionVentana extends JFrame {
             }
         });
 
-        JMenuItem menuUsuarios = new JMenuItem("Usuarios");
+        JMenuItem menuUsuarios = new JMenuItem("Listar Usuarios");
         menuUsuarios.addActionListener(e -> {
             try {
                 changePanel(new UsuarioGUI().getPanel());
@@ -101,9 +102,12 @@ public class AplicacionVentana extends JFrame {
         menuBorrarVehiculos.addActionListener(e -> changePanel(new borrarVehiculos().getPanel()));*/
 
         menuInicioPrincipal.add(menuInicio);
-        menuInicioPrincipal.add(menuUsuarios);
+        //menuInicioPrincipal.add(menuUsuarios);
         menuInicioPrincipal.add(menuVerDatos);
+
+        Usuarios.add(menuUsuarios);
 /*
+
         agregar.add(menuVerFormulario);
         agregar.add(menuFormVehiculos);
 
@@ -115,6 +119,7 @@ public class AplicacionVentana extends JFrame {
         miMenuBar.add(menuInicioPrincipal);
         miMenuBar.add(agregar);
         miMenuBar.add(borrar);
+        miMenuBar.add(Usuarios);
         return miMenuBar;
     }
 

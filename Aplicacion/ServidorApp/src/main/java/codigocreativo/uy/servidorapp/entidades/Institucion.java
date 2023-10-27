@@ -31,4 +31,8 @@ public class Institucion implements Serializable {
         this.nombre = nombre;
     }
 
+    @Override
+    public String toString() {
+        return id + " - " + nombre;
+    }
 }
