@@ -34,4 +34,9 @@ public class InstitucionBean implements InstitucionRemote{
     public List obtenerUbicaciones() {
         return em.createQuery("SELECT Ubicacion FROM Institucion i, Institucion.class").getResultList();
     }
+
+    @Override
+    public List<Institucion> obtenerInstituciones() {
+        return em.createQuery("SELECT i FROM Institucion i", Institucion.class).getResultList();
+    }
 }

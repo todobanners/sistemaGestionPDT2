@@ -5,7 +5,7 @@
              version="3.0">
   <persistence-unit name="default">
     <properties>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="true"/>
     </properties>
   </persistence-unit>

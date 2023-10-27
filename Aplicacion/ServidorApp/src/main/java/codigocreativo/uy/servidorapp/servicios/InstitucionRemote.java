@@ -13,4 +13,5 @@ public interface InstitucionRemote {
     public void eliminarInstitucion(Institucion i);
     public void modificarInstitucion(Institucion i);
     public List<Ubicacion> obtenerUbicaciones();
+    public List<Institucion> obtenerInstituciones();
 }

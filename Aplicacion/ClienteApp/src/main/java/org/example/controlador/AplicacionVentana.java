@@ -2,12 +2,12 @@ package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.HomeGUI;
+import org.example.vista.PruebaGUI;
+import org.example.vista.UsuarioGUI;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static javax.swing.UIManager.setLookAndFeel;
 
@@ -40,6 +40,7 @@ public class AplicacionVentana extends JFrame {
 
 
     }
+
     JMenuBar initMenuBar(){
 
         JMenuBar miMenuBar = new JMenuBar();
@@ -61,6 +62,15 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
+
+        JMenuItem menuUsuarios = new JMenuItem("Usuarios");
+        menuUsuarios.addActionListener(e -> {
+            try {
+                changePanel(new UsuarioGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         /*menuInicio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,9 +84,17 @@ public class AplicacionVentana extends JFrame {
             }
         });*/
 
-        /*JMenuItem menuVerDatos = new JMenuItem("Visualizar datos");
-        menuVerDatos.addActionListener(e -> changePanel(new verDatos().getVentanaDatos()));
-
+        JMenuItem menuVerDatos = new JMenuItem("Pantalla prueba");
+        menuVerDatos.addActionListener(e -> {
+            try {
+                changePanel(new PruebaGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            } catch (ServiciosException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+/*
         JMenuItem menuVerFormulario = new JMenuItem("Registrar y ver personas");
         menuVerFormulario.addActionListener(e -> changePanel(new registroPersonas().getPanel()));
 
@@ -90,8 +108,9 @@ public class AplicacionVentana extends JFrame {
         menuBorrarVehiculos.addActionListener(e -> changePanel(new borrarVehiculos().getPanel()));*/
 
         menuInicioPrincipal.add(menuInicio);
-        /*menuInicioPrincipal.add(menuVerDatos);
-
+        menuInicioPrincipal.add(menuUsuarios);
+        menuInicioPrincipal.add(menuVerDatos);
+/*
         agregar.add(menuVerFormulario);
         agregar.add(menuFormVehiculos);
 
