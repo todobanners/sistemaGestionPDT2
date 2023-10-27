@@ -3,8 +3,7 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
 
 import javax.naming.NamingException;
@@ -29,8 +28,9 @@ public class UsuarioGUI {
     private JTextField apellido;
     private JButton enviarButton;
     private JButton cancelarButton;
+    private JPanel selectorFecha;
     private JPanel panel;
-    private DatePicker datePicker;
+    JDateChooser fechaChooser = new JDateChooser();
 
     public JPanel getPanel(){
         return userGUI;
@@ -49,16 +49,7 @@ public class UsuarioGUI {
         ComboBoxEstado.addItem("alta");
         ComboBoxEstado.addItem("baja");
 
-        // Create a date picker, and add it to the form.
-
-        datePicker = new DatePicker();
-
-        DatePickerSettings dateSettings = new DatePickerSettings();
-        dateSettings.setFormatForDatesCommonEra("yyyy-MM-dd");
-        datePicker.setSettings(dateSettings);
-
-        // Agregar el DatePicker al panel
-        panel.add(datePicker);
+        selectorFecha.add(fechaChooser);
 
         enviarButton.addActionListener(new ActionListener() {
             @Override
@@ -76,6 +67,7 @@ public class UsuarioGUI {
                     //LocalDate fecha;
                     //fecha = new LocalDate(2021,1,1);
                     //user.setFechaNacimiento(fecha);
+
                     user.setEstado((String) ComboBoxEstado.getSelectedItem());
                     user.setNombre(nombre.getText());
                     user.setApellido(apellido.getText());
@@ -84,6 +76,7 @@ public class UsuarioGUI {
 
                 } catch (Exception ex){
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Se produjo un error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
