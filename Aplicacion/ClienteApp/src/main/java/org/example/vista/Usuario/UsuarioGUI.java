@@ -1,115 +1,62 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import java.util.List;
 
 
 public class UsuarioGUI {
-    private JList list1;
     private JPanel userGUI;
-    private JTextField cedula;
-    private JComboBox<Perfil> comboBoxPerfil;
-    private JComboBox<Institucion> comboBoxInstitucion;
-    private JPasswordField pass1;
-    private JPasswordField pass2;
-    private JTextField email;
-    private JComboBox ComboBoxEstado;
-    private JTextField nombre;
-    private JTextField apellido;
-    private JButton enviarButton;
-    private JButton cancelarButton;
-    private JPanel selectorFecha;
+    private JScrollPane scrollTabla;
+    private JTable tableUsuarios;
     private JPanel panel;
     JDateChooser fechaChooser = new JDateChooser();
 
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         return userGUI;
     }
 
     public UsuarioGUI() throws NamingException {
+        //Se muestra un listado con los usuarios registrados en la tabla
 
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("email");
+        model.addColumn("Fecha nacimiento");
+        model.addColumn("Estado");
+        model.addColumn("Institucion");
+        model.addColumn("Perfil");
+        tableUsuarios.setModel(model);
+        //le introducimos datos a la tabla
+        List listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
 
-        list1.setListData(Conexion.obtenerUsuarioBean().obtenerUsuarios().toArray());
-        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
-            comboBoxPerfil.addItem(p);
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            Usuario usuario = (Usuario) listaUsuarios.get(i);
+            Object[] data = new Object[9];
+            data[0] = usuario.getId();
+            data[1] = usuario.getCedula();
+            data[2] = usuario.getNombre();
+            data[3] = usuario.getApellido();
+            data[4] = usuario.getEmail();
+            data[5] = usuario.getFechaNacimiento();
+            data[6] = usuario.getEstado();
+            data[7] = usuario.getIdInstitucion().getNombre();
+            data[8] = usuario.getIdPerfil().getNombrePerfil();
+            model.addRow(data);
         }
-        for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
-            comboBoxInstitucion.addItem(i);
-        }
-        ComboBoxEstado.addItem("alta");
-        ComboBoxEstado.addItem("baja");
 
-        selectorFecha.add(fechaChooser);
 
-        enviarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                    Usuario user = new Usuario();
-                    user.setCedula(cedula.getText());
-                    Perfil perfil = (Perfil) comboBoxPerfil.getSelectedItem();
-                    user.setIdPerfil(perfil);
-                    Institucion institucion = (Institucion) comboBoxInstitucion.getSelectedItem();
-                    System.out.println(institucion.getId());
-                    user.setIdInstitucion(institucion);
-                    user.setEmail(email.getText());
-                    user.setContrasenia(pass1.getText());
-                    //LocalDate fecha;
-                    //fecha = new LocalDate(2021,1,1);
-                    //user.setFechaNacimiento(fecha);
-                    Date fechaElegida = (Date) fechaChooser.getDate();
-                    LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    user.setFechaNacimiento(localDate);
 
-                    user.setEstado((String) ComboBoxEstado.getSelectedItem());
-                    user.setNombre(nombre.getText());
-                    user.setApellido(apellido.getText());
-                    Conexion.obtenerUsuarioBean().crearUsuario(user);
-                    System.out.println("Usuario creado");
 
-                } catch (Exception ex){
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Se produjo un error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-        cancelarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //crearemos una institucion y un perfil
-//y luego lo agregaremos a la base de datos
-                try {
-                    Perfil perfil = new Perfil();
-                    perfil.setNombrePerfil("Administrador");
-                    perfil.setEstado("alta");
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil);
-                    Perfil perfil2 = new Perfil();
-                    perfil2.setNombrePerfil("Usuario");
-                    perfil2.setEstado("alta");
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil2);
-                    Institucion institucion = new Institucion();
-                    Institucion institucion2 = new Institucion();
-                    institucion2.setNombre("Hospital de Clínicas");
-                    institucion.setNombre("Hospital Alfredo Vidal y Fuentes");
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion2);
-                    System.out.println("DataSet de prueba creado");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
+
+
     }
 }
