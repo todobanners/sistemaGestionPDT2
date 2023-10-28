@@ -12,10 +12,6 @@ import java.util.List;
 public class IntervencionBean implements IntervencionRemote{
     @PersistenceContext
     private EntityManager em;
-    private JButton ELIMINARButton;
-    private JButton BUSCARButton;
-    private JButton EDITARButton;
-    private JList listaInterv;
 
     @Override
     public Intervencion crear(Intervencion intervencion) throws ServiciosException {
