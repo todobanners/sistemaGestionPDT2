@@ -3,8 +3,7 @@ package org.example.controlador;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.HomeGUI;
 import org.example.vista.PruebaGUI;
-import org.example.vista.Usuario.UsuarioGUI;
-import org.example.vista.Usuario.UsuarioRegistroGUI;
+import org.example.vista.UsuarioGUI;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -46,6 +45,8 @@ public class AplicacionVentana extends JFrame {
         JMenu borrar = new JMenu("Borrar registros");
         JMenu Usuarios = new JMenu("Usuarios");
         JMenu Equipos = new JMenu("Equipos");
+        JMenu equipos = new JMenu("Equipos");
+
 
         //Menu de dashboard
         JMenuItem menuInicio = new JMenuItem("Inicio");
@@ -104,6 +105,15 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
+
+        JMenuItem menuEquipos = new JMenuItem("Gestion de equipos");
+        menuEquipos.addActionListener(e -> {
+            try {
+                changePanel(new EquiposGUI().getPanel());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 /*
         JMenuItem menuVerFormulario = new JMenuItem("Registrar y ver personas");
         menuVerFormulario.addActionListener(e -> changePanel(new registroPersonas().getPanel()));
@@ -118,13 +128,13 @@ public class AplicacionVentana extends JFrame {
         menuBorrarVehiculos.addActionListener(e -> changePanel(new borrarVehiculos().getPanel()));*/
 
         menuInicioPrincipal.add(menuInicio);
-        //menuInicioPrincipal.add(menuUsuarios);
+        menuInicioPrincipal.add(menuUsuarios);
         menuInicioPrincipal.add(menuVerDatos);
 
         Usuarios.add(menuUsuarios);
         Usuarios.add(menuUsuariosRegistrar);
+        menuInicioPrincipal.add(menuEquipos);
 /*
-
         agregar.add(menuVerFormulario);
         agregar.add(menuFormVehiculos);
 
@@ -137,6 +147,7 @@ public class AplicacionVentana extends JFrame {
         miMenuBar.add(agregar);
         miMenuBar.add(borrar);
         miMenuBar.add(Usuarios);
+        miMenuBar.add(equipos);
         return miMenuBar;
     }
 
