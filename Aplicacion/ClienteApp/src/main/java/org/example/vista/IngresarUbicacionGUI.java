@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class IngresarUbicacionGUI extends JPanel {
-    private JLabel IngresoDeUbicaciónTitulo;
     private JTextField Institucion;
     private JComboBox Sector;
     private JTextField Nombre;

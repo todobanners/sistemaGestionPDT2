@@ -87,18 +87,7 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
-        /*menuInicio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    AplicacionVentana.this.changePanel(new HomeGUI().getPanel());
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                } catch (ServiciosException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });*/
+
 
         JMenuItem menuVerDatos = new JMenuItem("Pantalla prueba");
         menuVerDatos.addActionListener(e -> {
@@ -111,14 +100,22 @@ public class AplicacionVentana extends JFrame {
             }
         });
 
+        JMenuItem menuVerUbicaciones = new JMenuItem("Listado de ubicaciones");
+        menuVerUbicaciones.addActionListener(e -> {
+            changePanel(new ListadoDeUbicacionesGUI().getPanel());
+        });
 
+        JMenuItem menuIngresarUbicacion = new JMenuItem("Ingresar ubicación");
+        menuIngresarUbicacion.addActionListener(e -> {
+            changePanel(new IngresarUbicacionGUI().getPanel());
+        });
 
         // Agrega el formulario al panel principal (puedes ocultarlo inicialmente si lo deseas)
-        IngresarUbicacionGUI.setVisible(true);
+        /*IngresarUbicacionGUI.setVisible(true);
         getContentPane().add(IngresarUbicacionGUI);
 
         ListadoDeUbicacionesGUI.setVisible(true);
-        getContentPane().add(ListadoDeUbicacionesGUI);
+        getContentPane().add(ListadoDeUbicacionesGUI);*/
 
 /*
         JMenuItem menuVerFormulario = new JMenuItem("Registrar y ver personas");
@@ -137,10 +134,9 @@ public class AplicacionVentana extends JFrame {
         menuInicioPrincipal.add(menuUsuarios);
         menuInicioPrincipal.add(menuVerDatos);
 
-        gestionUbicaciones.add(ingresarUbicacion);
-        gestionUbicaciones.add(listadoUbicaciones);
-        gestionUbicaciones.add(IngresarUbicacionGUI);
-        gestionUbicaciones.add(ListadoDeUbicacionesGUI);
+
+        gestionUbicaciones.add(menuVerUbicaciones);
+        gestionUbicaciones.add(menuIngresarUbicacion);
 /*
 
         agregar.add(menuVerFormulario);
