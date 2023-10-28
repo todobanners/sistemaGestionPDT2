@@ -8,10 +8,8 @@
     <!-- Habilitar la generación de tablas automáticamente (solo para
     desarrollo) -->
     <properties>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="create"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.show_sql" value="true"/>
     </properties>
-
   </persistence-unit>
 </persistence>

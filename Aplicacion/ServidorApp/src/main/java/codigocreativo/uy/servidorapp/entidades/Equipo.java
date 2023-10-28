@@ -19,7 +19,7 @@ public class Equipo implements Serializable {
     private String idInterno;
 
     @Column(name = "ID_UBICACION", nullable = false)
-    private Long idUbicacion;
+    private Long idUbicacion; //Todo: Ver relación con tabla Ubicaciones
 
     @Column(name = "NRO_SERIE", nullable = false, length = 100)
     private String nroSerie;

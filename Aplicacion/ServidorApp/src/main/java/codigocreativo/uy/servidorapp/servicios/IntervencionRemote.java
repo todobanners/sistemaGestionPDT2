@@ -4,6 +4,7 @@ import codigocreativo.uy.servidorapp.entidades.Intervencion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Remote;
 
+import java.util.Collection;
 import java.util.List;
 @Remote
 public interface IntervencionRemote {
@@ -13,4 +14,5 @@ public interface IntervencionRemote {
     public void eliminar(Long id) throws ServiciosException;
     public Intervencion obtenerPorId(Long id) throws ServiciosException;
     public List<Intervencion> obtenerTodas() throws ServiciosException;
+
 }
