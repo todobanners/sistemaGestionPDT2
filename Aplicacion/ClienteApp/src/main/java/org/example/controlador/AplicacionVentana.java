@@ -1,6 +1,7 @@
 package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
+import org.example.vista.EquiposGUI;
 import org.example.vista.HomeGUI;
 import org.example.vista.PruebaGUI;
 import org.example.vista.UsuarioGUI;
@@ -49,6 +50,7 @@ public class AplicacionVentana extends JFrame {
         JMenu menuInicioPrincipal = new JMenu("Inicio");
         JMenu agregar = new JMenu("Ver y registrar");
         JMenu borrar = new JMenu("Borrar registros");
+        JMenu equipos = new JMenu("Equipos");
 
 
         //Menu de dashboard
@@ -94,6 +96,15 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
+
+        JMenuItem menuEquipos = new JMenuItem("Gestion de equipos");
+        menuEquipos.addActionListener(e -> {
+            try {
+                changePanel(new EquiposGUI().getPanel());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 /*
         JMenuItem menuVerFormulario = new JMenuItem("Registrar y ver personas");
         menuVerFormulario.addActionListener(e -> changePanel(new registroPersonas().getPanel()));
@@ -110,6 +121,7 @@ public class AplicacionVentana extends JFrame {
         menuInicioPrincipal.add(menuInicio);
         menuInicioPrincipal.add(menuUsuarios);
         menuInicioPrincipal.add(menuVerDatos);
+        menuInicioPrincipal.add(menuEquipos);
 /*
         agregar.add(menuVerFormulario);
         agregar.add(menuFormVehiculos);
@@ -122,6 +134,7 @@ public class AplicacionVentana extends JFrame {
         miMenuBar.add(menuInicioPrincipal);
         miMenuBar.add(agregar);
         miMenuBar.add(borrar);
+        miMenuBar.add(equipos);
         return miMenuBar;
     }
 

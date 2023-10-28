@@ -53,7 +53,5 @@ public class EquiposGUI {
 
         fechaAdqContainer.add(fechaCompraDate);
 
-        frame.pack();
-        frame.setVisible(true);
     }
 }

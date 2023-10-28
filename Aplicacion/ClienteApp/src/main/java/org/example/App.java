@@ -47,12 +47,12 @@ public class App
         //ControllerVentanaBase controlaBase = ControllerVentanaBase.getInstancia();
         //controlaBase.mostrarVentana();
 
-        //new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
-        try {
+        new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
+        /*try {
             new EquiposGUI();
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
     }
 }
