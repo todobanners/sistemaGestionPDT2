@@ -19,7 +19,7 @@ public class Equipo implements Serializable {
     private String idInterno;
 
     @Column(name = "ID_UBICACION", nullable = false)
-    private Long idUbicacion;
+    private Long idUbicacion; //Todo: Ver relación con tabla Ubicaciones
 
     @Column(name = "NRO_SERIE", nullable = false, length = 100)
     private String nroSerie;
@@ -53,6 +53,17 @@ public class Equipo implements Serializable {
 
     @Column(name = "FECHA_ADQUISICION")
     private LocalDate fechaAdquisicion;
+
+    @Column(name = "ESTADO", length = 20)
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public Long getId() {
         return id;
