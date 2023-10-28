@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class IngresarUbicacionGUI extends JPanel {
+public class IngresarUbicacionGUI{
     private JComboBox Sector;
     private JTextField Nombre;
     private JTextField Número;
@@ -114,7 +114,5 @@ public class IngresarUbicacionGUI extends JPanel {
                 }
             }
         });
-
-
     }
-        }
+}
