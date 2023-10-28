@@ -57,14 +57,22 @@ public class AplicacionVentana extends JFrame {
 
         JMenuItem ingresarUbicacion = new JMenuItem("Ingresar Ubicación");
         ingresarUbicacion.addActionListener(e -> {
-            changePanel(new IngresarUbicacionGUI().getPanel());
+            try {
+                changePanel(new IngresarUbicacionGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
 
         });
 
 
         JMenuItem listadoUbicaciones = new JMenuItem("Listado de Ubicaciones");
         listadoUbicaciones.addActionListener(e -> {
-            changePanel(new IngresarUbicacionGUI().getPanel());
+            try {
+                changePanel(new IngresarUbicacionGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         //Menu de dashboard
@@ -107,7 +115,11 @@ public class AplicacionVentana extends JFrame {
 
         JMenuItem menuIngresarUbicacion = new JMenuItem("Ingresar ubicación");
         menuIngresarUbicacion.addActionListener(e -> {
-            changePanel(new IngresarUbicacionGUI().getPanel());
+            try {
+                changePanel(new IngresarUbicacionGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
         // Agrega el formulario al panel principal (puedes ocultarlo inicialmente si lo deseas)
