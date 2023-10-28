@@ -42,8 +42,9 @@ public class UsuarioRegistroGUI {
         for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
             institucion.addItem(i);
         }
-        estado.addItem("alta");
-        estado.addItem("baja");
+        estado.addItem("sin validar");
+        estado.addItem("activo");
+        estado.addItem("eliminado");
 
         agregarUsuarioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
