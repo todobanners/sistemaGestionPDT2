@@ -33,4 +33,12 @@ public class DefaultEntidad implements Serializable {
     public void setCampoDefaultString(String campoDefaultString) {
         this.campoDefaultString = campoDefaultString;
     }
+
+    @Override
+    public String toString() {
+        return "DefaultEntidad{" +
+                "campoDefaultString='" + campoDefaultString + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

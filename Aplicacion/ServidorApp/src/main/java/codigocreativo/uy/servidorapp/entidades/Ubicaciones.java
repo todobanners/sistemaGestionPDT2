@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "UBICACIONES")
-public class Ubicacion implements Serializable {
+public class Ubicaciones implements java.io.Serializable{
+    private static final long serialVersionUID = 4L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_UBICACION", nullable = false)
@@ -29,7 +31,14 @@ public class Ubicacion implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_INSTITUCION")
-    private Institucion idInstitucion;
+    private codigocreativo.uy.servidorapp.entidades.Instituciones idInstitucion;
+
+    @OneToMany(mappedBy = "idUbicacion")
+    private Set<codigocreativo.uy.servidorapp.entidades.Equipos> equipos = new LinkedHashSet<>();
+
+    public Ubicaciones() {
+
+    }
 
     public Long getId() {
         return id;
@@ -71,12 +80,29 @@ public class Ubicacion implements Serializable {
         this.numero = numero;
     }
 
-    public Institucion getIdInstitucion() {
+    public codigocreativo.uy.servidorapp.entidades.Instituciones getIdInstitucion() {
         return idInstitucion;
     }
 
-    public void setIdInstitucion(Institucion idInstitucion) {
+    public void setIdInstitucion(codigocreativo.uy.servidorapp.entidades.Instituciones idInstitucion) {
         this.idInstitucion = idInstitucion;
     }
 
+    public Set<codigocreativo.uy.servidorapp.entidades.Equipos> getEquipos() {
+        return equipos;
+    }
+
+    public void setEquipos(Set<codigocreativo.uy.servidorapp.entidades.Equipos> equipos) {
+        this.equipos = equipos;
+    }
+
+    public Ubicaciones(Long id, String nombre, String sector, Long piso, Long numero, Instituciones idInstitucion, Set<Equipos> equipos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.sector = sector;
+        this.piso = piso;
+        this.numero = numero;
+        this.idInstitucion = idInstitucion;
+        this.equipos = equipos;
+    }
 }

@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "USUARIOS")
-public class Usuario {
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_USUARIO", nullable = false)
@@ -17,12 +18,12 @@ public class Usuario {
     @Column(name = "CEDULA", length = 8)
     private String cedula;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PERFIL")
     private Perfil idPerfil;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_INSTITUCION")
     private Institucion idInstitucion;
@@ -125,4 +126,8 @@ public class Usuario {
         this.apellido = apellido;
     }
 
+    @Override
+    public String toString() {
+        return id+" "+nombre + " " + apellido + " - " + email + " - " + idPerfil.getNombrePerfil() + " - " + idInstitucion.getNombre();
+    }
 }

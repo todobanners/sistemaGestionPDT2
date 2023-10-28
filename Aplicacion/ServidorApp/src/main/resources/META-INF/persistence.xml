@@ -4,6 +4,9 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
   <persistence-unit name="default">
+    <jta-data-source>java:/OracleDS</jta-data-source>
+    <!-- Habilitar la generación de tablas automáticamente (solo para
+    desarrollo) -->
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.show_sql" value="true"/>

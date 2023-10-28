@@ -1,17 +1,22 @@
 package codigocreativo.uy.servidorapp.servicios;
 
-import codigocreativo.uy.servidorapp.entidades.Equipo;
-import codigocreativo.uy.servidorapp.entidades.Pais;
-import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.entidades.Equipos;
+import codigocreativo.uy.servidorapp.entidades.Ubicaciones;
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Remote;
-
-import java.util.List;
 
 @Remote
 public interface UbicacionRemote {
-    public void crearUbicacion(Ubicacion ubicacion);
-    public void modificarUbicacion(Ubicacion ubicacion);
-    public void obtenerUbicacion(Long id);
-    public void eliminarUbicacion(Ubicacion ubicacion);
-    public List<Ubicacion> obtenerUbicacion();
+    //Se crea la primer implementacion Registro de ubicaciones
+    void crearUbicacion(Ubicaciones ubi) throws ServiciosException;
+
+    void modificarUbicacion(Ubicaciones ubi) throws ServiciosException;
+
+    void modificarUbicacionPorId(Long id) throws ServiciosException;
+
+    void modificarUbicacionPorNombre(String nombre) throws ServiciosException;
+
+    void borrarUbicacion(Long id) throws ServiciosException;
+
+    void moverEquipoDeUbicacion(Equipos equipo, Ubicaciones ubicacion) throws ServiciosException;
 }

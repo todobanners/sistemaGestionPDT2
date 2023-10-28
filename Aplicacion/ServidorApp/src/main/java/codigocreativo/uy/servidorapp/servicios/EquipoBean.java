@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import jakarta.ejb.Stateless;
@@ -26,10 +27,12 @@ public class EquipoBean implements EquipoRemote {
     }
 
     @Override
-    public void eliminarEquipo(Equipo equipo) {
-        em.createQuery("UPDATE Equipo equipo SET equipo.estado = 'baja' WHERE equipo.id = :id")
-                .setParameter("id", equipo.getId())
+    public void eliminarEquipo(BajaEquipo bajaEquipo) {
+        em.persist(bajaEquipo);
+        em.createQuery("UPDATE Equipo e SET e.estado = 'baja' WHERE e.id = :id")
+                .setParameter("id", bajaEquipo.getIdEquipo())
                 .executeUpdate();
+        em.flush();
     }
 
     @Override
@@ -40,6 +43,6 @@ public class EquipoBean implements EquipoRemote {
 
     @Override
     public List<Equipo> obtenerEquipos() {
-        return em.createQuery("SELECT equipo FROM Equipo equipo WHERE equipo.estado = 'alta'", Equipo.class).getResultList();
+        return em.createQuery("SELECT equipo FROM Equipo equipo WHERE equipo.estado = 'activo'", Equipo.class).getResultList();
     }
 }
