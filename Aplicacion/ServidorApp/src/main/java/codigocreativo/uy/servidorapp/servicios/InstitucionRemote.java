@@ -14,4 +14,5 @@ public interface InstitucionRemote {
     public void modificarInstitucion(Institucion i);
     public List<Ubicacion> obtenerUbicaciones();
     public List<Institucion> obtenerInstituciones();
+    public Institucion obtenerInstitucionPorNombre(String nombre);
 }

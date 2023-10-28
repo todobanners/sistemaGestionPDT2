@@ -46,7 +46,27 @@ public class AplicacionVentana extends JFrame {
         JMenu Usuarios = new JMenu("Usuarios");
         JMenu Equipos = new JMenu("Equipos");
         JMenu equipos = new JMenu("Equipos");
+        JMenu gestionUbicaciones = new JMenu ("Gestión de Ubicaciones");
 
+        JMenuItem ingresarUbicacion = new JMenuItem("Ingresar Ubicación");
+        ingresarUbicacion.addActionListener(e -> {
+            try {
+                changePanel(new IngresarUbicacionGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
+
+        });
+
+
+        JMenuItem listadoUbicaciones = new JMenuItem("Listado de Ubicaciones");
+        listadoUbicaciones.addActionListener(e -> {
+            try {
+                changePanel(new IngresarUbicacionGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         //Menu de dashboard
         JMenuItem menuInicio = new JMenuItem("Inicio");
@@ -69,31 +89,6 @@ public class AplicacionVentana extends JFrame {
             }
         });
 
-        JMenuItem menuUsuariosRegistrar = new JMenuItem("Registrar Usuarios");
-        menuUsuariosRegistrar.addActionListener(e -> {
-            try {
-                changePanel(new UsuarioRegistroGUI().getPanel());
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-
-        JMenuItem menuEquipos = new JMenuItem("Listar Equipos");
-        menuEquipos.addActionListener(e -> {
-            //accion
-        });
-        /*menuInicio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    AplicacionVentana.this.changePanel(new HomeGUI().getPanel());
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                } catch (ServiciosException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });*/
 
         JMenuItem menuVerDatos = new JMenuItem("Pantalla prueba");
         menuVerDatos.addActionListener(e -> {
@@ -105,6 +100,28 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
+
+        JMenuItem menuVerUbicaciones = new JMenuItem("Listado de ubicaciones");
+        menuVerUbicaciones.addActionListener(e -> {
+            changePanel(new ListadoDeUbicacionesGUI().getPanel());
+        });
+
+        JMenuItem menuIngresarUbicacion = new JMenuItem("Ingresar ubicación");
+        menuIngresarUbicacion.addActionListener(e -> {
+            try {
+                changePanel(new IngresarUbicacionGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        // Agrega el formulario al panel principal (puedes ocultarlo inicialmente si lo deseas)
+        /*IngresarUbicacionGUI.setVisible(true);
+        getContentPane().add(IngresarUbicacionGUI);
+
+        ListadoDeUbicacionesGUI.setVisible(true);
+        getContentPane().add(ListadoDeUbicacionesGUI);*/
+
 
         JMenuItem menuEquipos = new JMenuItem("Gestion de equipos");
         menuEquipos.addActionListener(e -> {
@@ -134,6 +151,10 @@ public class AplicacionVentana extends JFrame {
         Usuarios.add(menuUsuarios);
         Usuarios.add(menuUsuariosRegistrar);
         menuInicioPrincipal.add(menuEquipos);
+
+
+        gestionUbicaciones.add(menuVerUbicaciones);
+        gestionUbicaciones.add(menuIngresarUbicacion);
 /*
         agregar.add(menuVerFormulario);
         agregar.add(menuFormVehiculos);
@@ -146,6 +167,7 @@ public class AplicacionVentana extends JFrame {
         miMenuBar.add(menuInicioPrincipal);
         miMenuBar.add(agregar);
         miMenuBar.add(borrar);
+        miMenuBar.add(gestionUbicaciones);
         miMenuBar.add(Usuarios);
         miMenuBar.add(equipos);
         return miMenuBar;
