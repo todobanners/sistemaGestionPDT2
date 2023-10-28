@@ -1,9 +1,7 @@
 package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import org.example.vista.HomeGUI;
-import org.example.vista.PruebaGUI;
-import org.example.vista.UsuarioGUI;
+import org.example.vista.*;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -12,9 +10,15 @@ import java.awt.*;
 import static javax.swing.UIManager.setLookAndFeel;
 
 public class AplicacionVentana extends JFrame {
+    private final JPanel IngresarUbicacionGUI;
+    private final JPanel ListadoDeUbicacionesGUI;
 
     public AplicacionVentana(String s) throws ServiciosException, NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);
+
+
+        IngresarUbicacionGUI = new IngresarUbicacionGUI();
+        ListadoDeUbicacionesGUI = new ListadoDeUbicacionesGUI();
         //Agregar un LaF
 
         setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -49,7 +53,19 @@ public class AplicacionVentana extends JFrame {
         JMenu menuInicioPrincipal = new JMenu("Inicio");
         JMenu agregar = new JMenu("Ver y registrar");
         JMenu borrar = new JMenu("Borrar registros");
+        JMenu gestionUbicaciones = new JMenu ("Gestión de Ubicaciones");
 
+        JMenuItem ingresarUbicacion = new JMenuItem("Ingresar Ubicación");
+        ingresarUbicacion.addActionListener(e -> {
+            changePanel(new IngresarUbicacionGUI().getPanel());
+
+        });
+
+
+        JMenuItem listadoUbicaciones = new JMenuItem("Listado de Ubicaciones");
+        listadoUbicaciones.addActionListener(e -> {
+            changePanel(new IngresarUbicacionGUI().getPanel());
+        });
 
         //Menu de dashboard
         JMenuItem menuInicio = new JMenuItem("Inicio");
@@ -94,6 +110,16 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
+
+
+
+        // Agrega el formulario al panel principal (puedes ocultarlo inicialmente si lo deseas)
+        IngresarUbicacionGUI.setVisible(true);
+        getContentPane().add(IngresarUbicacionGUI);
+
+        ListadoDeUbicacionesGUI.setVisible(true);
+        getContentPane().add(ListadoDeUbicacionesGUI);
+
 /*
         JMenuItem menuVerFormulario = new JMenuItem("Registrar y ver personas");
         menuVerFormulario.addActionListener(e -> changePanel(new registroPersonas().getPanel()));
@@ -110,7 +136,13 @@ public class AplicacionVentana extends JFrame {
         menuInicioPrincipal.add(menuInicio);
         menuInicioPrincipal.add(menuUsuarios);
         menuInicioPrincipal.add(menuVerDatos);
+
+        gestionUbicaciones.add(ingresarUbicacion);
+        gestionUbicaciones.add(listadoUbicaciones);
+        gestionUbicaciones.add(IngresarUbicacionGUI);
+        gestionUbicaciones.add(ListadoDeUbicacionesGUI);
 /*
+
         agregar.add(menuVerFormulario);
         agregar.add(menuFormVehiculos);
 
@@ -122,6 +154,7 @@ public class AplicacionVentana extends JFrame {
         miMenuBar.add(menuInicioPrincipal);
         miMenuBar.add(agregar);
         miMenuBar.add(borrar);
+        miMenuBar.add(gestionUbicaciones);
         return miMenuBar;
     }
 

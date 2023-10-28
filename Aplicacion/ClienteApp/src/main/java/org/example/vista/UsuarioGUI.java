@@ -3,7 +3,6 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
-import org.example.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -24,19 +23,21 @@ public class UsuarioGUI {
     private JTextField apellido;
     private JButton enviarButton;
     private JButton cancelarButton;
+    private JButton modificarButton;
+    private JButton eliminarButton;
 
     public JPanel getPanel(){
         return userGUI;
     }
 
-    public UsuarioGUI() throws NamingException {
+    public UsuarioGUI() throws NamingException {/*
         list1.setListData(Conexion.obtenerUsuarioBean().obtenerUsuarios().toArray());
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
             comboBoxPerfil.addItem(p.getNombrePerfil());
         }
         for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
             comboBoxInstitucion.addItem(i.getNombre());
-        }
+        }*/
         enviarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +53,7 @@ public class UsuarioGUI {
                     user.setEstado(ComboBoxEstado.getSelectedItem().toString());
                     user.setNombre(nombre.getText());
                     user.setApellido(apellido.getText());
-                    Conexion.obtenerUsuarioBean().crearUsuario(user);
+                    //Conexion.obtenerUsuarioBean().crearUsuario(user);
 
 
 
@@ -70,17 +71,17 @@ public class UsuarioGUI {
                     Perfil perfil = new Perfil();
                     perfil.setNombrePerfil("Administrador");
                     perfil.setEstado("Activo");
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil);
+                   // Conexion.obtenerPerfilBean().crearPerfil(perfil);
                     Perfil perfil2 = new Perfil();
                     perfil2.setNombrePerfil("Usuario");
                     perfil2.setEstado("Activo");
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil2);
+                    //Conexion.obtenerPerfilBean().crearPerfil(perfil2);
                     Institucion institucion = new Institucion();
                     Institucion institucion2 = new Institucion();
                     institucion2.setNombre("Hospital de Clínicas");
                     institucion.setNombre("Hospital Alfredo Vidal y Fuentes");
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion2);
+                   // Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
+                    //Conexion.obtenerInstitucionBean().agregarInstitucion(institucion2);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
