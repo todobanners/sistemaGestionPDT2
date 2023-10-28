@@ -6,11 +6,16 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import javax.swing.*;
 import java.util.List;
 @Stateless
 public class IntervencionBean implements IntervencionRemote{
     @PersistenceContext
     private EntityManager em;
+    private JButton ELIMINARButton;
+    private JButton BUSCARButton;
+    private JButton EDITARButton;
+    private JList listaInterv;
 
     @Override
     public Intervencion crear(Intervencion intervencion) throws ServiciosException {
