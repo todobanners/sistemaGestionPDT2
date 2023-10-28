@@ -1,6 +1,7 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Institucion;
+import codigocreativo.uy.servidorapp.entidades.Instituciones;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -41,7 +42,7 @@ public class InstitucionBean implements InstitucionRemote{
     }
 
     @Override
-    public Institucion obtenerInstitucionPorNombre(String nombre) {
-        return em.createQuery("SELECT i FROM Institucion i WHERE i.nombre = :nombre", Institucion.class).setParameter("nombre", nombre).getSingleResult();
+    public Instituciones obtenerInstitucionPorNombre(String nombre) {
+        return em.createQuery("SELECT i FROM Institucion i WHERE i.nombre = :nombre", Instituciones.class).setParameter("nombre", nombre).getSingleResult();
     }
 }

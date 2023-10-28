@@ -3,6 +3,8 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.entidades.Ubicaciones;
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.Conexion;
 
 import javax.naming.NamingException;
@@ -51,12 +53,12 @@ public class IngresarUbicacionGUI extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Ubicacion ubicacion = new Ubicacion();
+                Ubicaciones ubicacion = new Ubicaciones();
                 ubicacion.setSector((String) Sector.getSelectedItem());
                 ubicacion.setNombre(Nombre.getText());
                 ubicacion.setNumero(Long.valueOf(Número.getText()));
                 ubicacion.setPiso(Long.valueOf(Piso.getText()));
-                Object institucionSeleccionada = institucion.getSelectedItem();
+                Object institucionSeleccionada = institucion.getSelectedItem().toString();
 
                 try {
                     ubicacion.setIdInstitucion(Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada.toString()));
@@ -68,7 +70,7 @@ public class IngresarUbicacionGUI extends JPanel {
                 try {
                     Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
                     JOptionPane.showMessageDialog(null, "Ubicación creada correctamente");
-                } catch (NamingException ex) {
+                } catch (NamingException | ServiciosException ex) {
                     JOptionPane.showMessageDialog(null, "Error al crear la ubicación");
                     throw new RuntimeException(ex);
 

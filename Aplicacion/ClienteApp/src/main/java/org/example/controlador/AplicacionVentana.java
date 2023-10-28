@@ -1,9 +1,8 @@
 package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import org.example.vista.HomeGUI;
-import org.example.vista.PruebaGUI;
-import org.example.vista.UsuarioGUI;
+import org.example.vista.*;
+import org.example.vista.Usuario.UsuarioGUI;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -149,7 +148,6 @@ public class AplicacionVentana extends JFrame {
         menuInicioPrincipal.add(menuVerDatos);
 
         Usuarios.add(menuUsuarios);
-        Usuarios.add(menuUsuariosRegistrar);
         menuInicioPrincipal.add(menuEquipos);
 
 
