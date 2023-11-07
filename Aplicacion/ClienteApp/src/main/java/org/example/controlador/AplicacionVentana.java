@@ -44,6 +44,7 @@ public class AplicacionVentana extends JFrame {
         JMenu gestionEquipos =          new JMenu("Gestión Equipos");
         JMenu gestionUbicaciones =      new JMenu("Gestión de Ubicaciones");
         JMenu gestionIntervenciones =   new JMenu("Gestión de Intervenciones");
+        JMenu gestionPerfiles =         new JMenu("Gestion de Perfiles");
         //Fin declaracion barra de menu
 
         //Declaro el submenu de Gestion de Usuarios
@@ -65,6 +66,9 @@ public class AplicacionVentana extends JFrame {
         JMenuItem listarIntervenciones =new JMenuItem("Listar Intervenciones");
         JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
         //Fin declaracion submenu de Gestion de Intervenciones
+
+        //Declaro el submenu de Gestion de Perfiles
+        JMenuItem listarPerfiles = new JMenuItem("Listar Perfiles");
 
         //Menu Inicio
         //Menu de dashboard
@@ -125,6 +129,11 @@ public class AplicacionVentana extends JFrame {
 
         //Registrar Intervencion
 
+        //Liestado de PErfiles
+        listarPerfiles.addActionListener(e -> {
+            changePanel(new PerfilesGUI().getPanel());
+        });
+
         //Fin establecimiento de funcionalidad de submenus
 
         //Agrego los submenus a los menus
@@ -139,6 +148,8 @@ public class AplicacionVentana extends JFrame {
 
         gestionIntervenciones.add(listarIntervenciones);
         gestionIntervenciones.add(registrarIntervencion);
+
+        gestionPerfiles.add(listarPerfiles);
         //Fin agregado de submenus a los menus
 
         //Agrego los menus a la barra de menu
@@ -147,6 +158,7 @@ public class AplicacionVentana extends JFrame {
         miMenuBar.add(gestionEquipos);
         miMenuBar.add(gestionUbicaciones);
         miMenuBar.add(gestionIntervenciones);
+        miMenuBar.add(gestionPerfiles);
         //Fin agregado de menus a la barra de menu
         return miMenuBar;
     }
