@@ -37,6 +37,6 @@ public class PerfilBean implements PerfilRemote {
 
     @Override
     public List<Perfil> obtenerPerfiles() {
-        return em.createQuery("SELECT p FROM Perfil p WHERE p.estado = 'alta'", Perfil.class).getResultList();
+        return em.createQuery("SELECT p FROM Perfil p ", Perfil.class).getResultList();
     }
 }

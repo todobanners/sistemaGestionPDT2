@@ -38,7 +38,7 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public List<Usuario> obtenerUsuarios() {
-        return em.createQuery("SELECT u FROM Usuario u WHERE u.estado = 'alta'", Usuario.class).getResultList();
+        return em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
     }
 
     @Override

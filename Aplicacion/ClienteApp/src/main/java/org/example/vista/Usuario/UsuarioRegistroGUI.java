@@ -3,6 +3,7 @@ package org.example.vista.Usuario;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
 
@@ -60,7 +61,7 @@ public class UsuarioRegistroGUI {
                 LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 user.setFechaNacimiento(localDate);
 
-                user.setEstado((String) estado.getSelectedItem());
+                user.setEstado(Estados.valueOf((String) estado.getSelectedItem()));
                 user.setNombre(nombre.getText());
                 user.setApellido(apellido.getText());
                 try {

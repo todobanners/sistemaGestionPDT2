@@ -103,7 +103,7 @@ public class UsuarioGUI {
         });
         Limpiar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // se crean unos datos de prueba para mostrar en la tabla
+                /*// se crean unos datos de prueba para mostrar en la tabla
                 Perfil perfil = new Perfil();
                 perfil.setNombrePerfil("Administrador");
                 perfil.setEstado("alta");
@@ -132,7 +132,7 @@ public class UsuarioGUI {
                     Conexion.obtenerInstitucionBean().agregarInstitucion(institucion3);
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
-                }
+                }*/
             }
         });
         comboEstado.addActionListener(new ActionListener() {

@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.entidades;
 
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,8 +16,9 @@ public class Perfil implements Serializable {
     @Column(name = "NOMBRE_PERFIL", nullable = false, length = 20)
     private String nombrePerfil;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", nullable = false, length = 20)
-    private String estado;
+    private Estados estado;
 
     public Long getId() {
         return id;
@@ -34,11 +36,11 @@ public class Perfil implements Serializable {
         this.nombrePerfil = nombrePerfil;
     }
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 
