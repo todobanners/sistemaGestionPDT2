@@ -43,9 +43,9 @@ public class UsuarioRegistroGUI {
         for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
             institucion.addItem(i);
         }
-        estado.addItem("sin validar");
-        estado.addItem("activo");
-        estado.addItem("eliminado");
+        for (Estados e : Estados.values()){
+            estado.addItem(e);
+        }
 
         agregarUsuarioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -61,7 +61,7 @@ public class UsuarioRegistroGUI {
                 LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 user.setFechaNacimiento(localDate);
 
-                user.setEstado(Estados.valueOf((String) estado.getSelectedItem()));
+                user.setEstado((Estados) estado.getSelectedItem());
                 user.setNombre(nombre.getText());
                 user.setApellido(apellido.getText());
                 try {
