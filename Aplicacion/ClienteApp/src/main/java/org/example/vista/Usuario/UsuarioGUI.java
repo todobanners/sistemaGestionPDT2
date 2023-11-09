@@ -1,8 +1,7 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
 
@@ -62,9 +61,9 @@ public class UsuarioGUI {
             model.addRow(data);
         }
 
-        comboEstado.addItem("sin validar");
-        comboEstado.addItem("activo");
-        comboEstado.addItem("eliminado");
+        for (Estados e : Estados.values()) {
+            comboEstado.addItem(e);
+        }
 
 
         comboFiltro.addItem("nombre");
