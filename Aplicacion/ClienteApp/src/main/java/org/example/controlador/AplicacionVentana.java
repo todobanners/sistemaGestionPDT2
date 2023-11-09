@@ -126,8 +126,14 @@ public class AplicacionVentana extends JFrame {
         });
 
         //Listado de Intervenciones
-
+        listarIntervenciones.addActionListener(e -> {
+            changePanel(new ListadoDeIntervencionesGUI().getPanel());
+        });
         //Registrar Intervencion
+        registrarIntervencion.addActionListener(e -> {
+            changePanel(new IntervencionGUI().getPanel());
+        });
+
 
         //Liestado de PErfiles
         listarPerfiles.addActionListener(e -> {
