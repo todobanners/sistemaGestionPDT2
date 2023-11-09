@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class PerfilBean implements PerfilRemote {
-@PersistenceContext
+@PersistenceContext (unitName = "default")
     private EntityManager em;
 
     @Override

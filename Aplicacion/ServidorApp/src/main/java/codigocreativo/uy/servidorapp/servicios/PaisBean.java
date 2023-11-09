@@ -9,7 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class PaisBean implements PaisRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 

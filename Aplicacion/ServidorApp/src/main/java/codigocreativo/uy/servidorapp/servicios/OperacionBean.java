@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 @Stateless
 
 public class OperacionBean implements OperacionRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
     @Override
     public void crearOperacion(Operacion o) {
