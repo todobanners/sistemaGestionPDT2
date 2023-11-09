@@ -1,8 +1,9 @@
-package org.example;
+package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.persistence.NoResultException;
+import org.example.Conexion;
 import org.example.controlador.AplicacionVentana;
 
 import javax.naming.NamingException;
