@@ -26,17 +26,17 @@ public class LoginForm extends JFrame {
         loginButton.addActionListener(e -> {
             try {
                 login();
-            } catch (NamingException | ServiciosException | UnsupportedLookAndFeelException | ClassNotFoundException |
-                     InstantiationException | IllegalAccessException ex) {
-                throw new RuntimeException(ex);
-            }
-            catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         });
         registroButton.addActionListener(e -> {
 
-            new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
+            try {
+                new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
             setVisible(false);
         });
     }
@@ -47,7 +47,20 @@ public class LoginForm extends JFrame {
 
         Usuario usuario = Conexion.obtenerUsuarioBean().login(username,password);
 
-        if (usuario != null) {
+        if (usuario == null) {
+            throw new Exception("Usuario o contraseña incorrectos");
+        } else if (usuario.getEstado().equals(Estados.SIN_VALIDAR)) {
+            throw new Exception("Usuario aun no validado, consulte a un administrador para conocer su estado");
+        } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
+            throw new Exception("Usuario eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Bienvenido");
+            setVisible(false);
+            new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
+        }
+    }
+
+        /*if (usuario != null) {
             JOptionPane.showMessageDialog(null, "Bienvenido");
             setVisible(false);
             new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
@@ -57,6 +70,5 @@ public class LoginForm extends JFrame {
             JOptionPane.showMessageDialog(null, "Usuario eliminado");
         } else {
             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-        }
-    }
+        }*/
 }

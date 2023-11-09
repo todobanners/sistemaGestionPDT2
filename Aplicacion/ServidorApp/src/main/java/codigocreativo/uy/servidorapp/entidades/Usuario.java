@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario implements Serializable {
+    private static final long serialVersionUID = 1829283312323331L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_USUARIO", nullable = false)
@@ -47,6 +48,17 @@ public class Usuario implements Serializable {
 
     @Column(name = "APELLIDO", nullable = false, length = 50)
     private String apellido;
+
+    @Column(name = "nombre_usuario", unique = true, length = 100)
+    private String nombreUsuario;
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
     public Long getId() {
         return id;
