@@ -1,6 +1,7 @@
 package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.persistence.NoResultException;
 import org.example.Conexion;
@@ -10,8 +11,6 @@ import javax.naming.NamingException;
 import javax.swing.*;
 
 public class LoginForm extends JFrame {
-    private JTextField usernameField = new JTextField(20);
-    private JPasswordField passwordField = new JPasswordField(20);
     private JButton loginButton;
     private JPanel panel1;
     private JTextField textField1;
@@ -35,6 +34,11 @@ public class LoginForm extends JFrame {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
         });
+        registroButton.addActionListener(e -> {
+
+            new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
+            setVisible(false);
+        });
     }
 
     private void login() throws Exception {
@@ -47,6 +51,10 @@ public class LoginForm extends JFrame {
             JOptionPane.showMessageDialog(null, "Bienvenido");
             setVisible(false);
             new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
+        } else if (usuario.getEstado().equals(Estados.SIN_VALIDAR.toString())) {
+            JOptionPane.showMessageDialog(null, "Usuario aun no validado, consulte a un administrador para conocer su estado");
+        } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
+            JOptionPane.showMessageDialog(null, "Usuario eliminado");
         } else {
             JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
         }
