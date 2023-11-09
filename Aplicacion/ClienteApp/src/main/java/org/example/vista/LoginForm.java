@@ -1,22 +1,22 @@
 package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
-import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import jakarta.persistence.NoResultException;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import org.example.Conexion;
 import org.example.controlador.AplicacionVentana;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginForm extends JFrame {
-    private JTextField usernameField = new JTextField(20);
-    private JPasswordField passwordField = new JPasswordField(20);
     private JButton loginButton;
     private JPanel panel1;
     private JTextField textField1;
     private JPasswordField passwordField1;
-    private JButton registroButton;
+    private JButton cancelarButton;
+    private JLabel crearCuenta;
 
     public LoginForm() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,12 +27,23 @@ public class LoginForm extends JFrame {
         loginButton.addActionListener(e -> {
             try {
                 login();
-            } catch (NamingException | ServiciosException | UnsupportedLookAndFeelException | ClassNotFoundException |
-                     InstantiationException | IllegalAccessException ex) {
-                throw new RuntimeException(ex);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-            catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+        });
+        cancelarButton.addActionListener(e -> {
+            System.exit(0);
+        });
+        crearCuenta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                try {
+                    new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+                setVisible(false);
             }
         });
     }
@@ -43,12 +54,28 @@ public class LoginForm extends JFrame {
 
         Usuario usuario = Conexion.obtenerUsuarioBean().login(username,password);
 
-        if (usuario != null) {
+        if (usuario == null) {
+            throw new Exception("Usuario o contraseña incorrectos");
+        } else if (usuario.getEstado().equals(Estados.SIN_VALIDAR)) {
+            throw new Exception("Usuario aun no validado, consulte a un administrador para conocer su estado");
+        } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
+            throw new Exception("Usuario eliminado");
+        } else {
             JOptionPane.showMessageDialog(null, "Bienvenido");
             setVisible(false);
             new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
         }
     }
+
+        /*if (usuario != null) {
+            JOptionPane.showMessageDialog(null, "Bienvenido");
+            setVisible(false);
+            new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
+        } else if (usuario.getEstado().equals(Estados.SIN_VALIDAR.toString())) {
+            JOptionPane.showMessageDialog(null, "Usuario aun no validado, consulte a un administrador para conocer su estado");
+        } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
+            JOptionPane.showMessageDialog(null, "Usuario eliminado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+        }*/
 }

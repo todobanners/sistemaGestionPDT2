@@ -50,7 +50,7 @@ public class UsuarioBean implements UsuarioRemote {
     @Override
     public Usuario login(String usuario, String password) {
         try {
-            Usuario user = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :usuario AND u.contrasenia = :password AND u.estado = 'ACTIVO'", Usuario.class)
+            Usuario user = em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :usuario AND u.contrasenia = :password", Usuario.class)
                     .setParameter("usuario", usuario)
                     .setParameter("password", password)
                     .getSingleResult();
@@ -63,6 +63,7 @@ public class UsuarioBean implements UsuarioRemote {
         } catch (NoResultException e) {
             // Aquí puedes manejar la excepción como prefieras.
             // Por ejemplo, podrías devolver null para indicar que el inicio de sesión falló.
+            System.out.println("No se encontro el usuario");
             return null;
         }
     }

@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.entidades.UsuariosTelefono;
 import jakarta.ejb.Remote;
 
