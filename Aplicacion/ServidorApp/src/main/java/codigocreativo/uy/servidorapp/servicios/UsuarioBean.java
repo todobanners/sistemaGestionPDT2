@@ -9,7 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class UsuarioBean implements UsuarioRemote {
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 
@@ -39,7 +39,7 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public List<Usuario> obtenerUsuarios() {
-        return em.createQuery("SELECT u FROM Usuario u WHERE u.estado = 'alta'", Usuario.class).getResultList();
+        return em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
     }
 
     @Override

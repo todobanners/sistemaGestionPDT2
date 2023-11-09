@@ -10,7 +10,7 @@ import java.util.List;
 
 @Stateless
 public class TiposEquipoBean implements TiposEquipoRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 

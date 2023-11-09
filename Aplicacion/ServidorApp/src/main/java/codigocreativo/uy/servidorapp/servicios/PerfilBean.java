@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class PerfilBean implements PerfilRemote {
-@PersistenceContext
+@PersistenceContext (unitName = "default")
     private EntityManager em;
 
     @Override
@@ -37,6 +37,6 @@ public class PerfilBean implements PerfilRemote {
 
     @Override
     public List<Perfil> obtenerPerfiles() {
-        return em.createQuery("SELECT p FROM Perfil p WHERE p.estado = 'alta'", Perfil.class).getResultList();
+        return em.createQuery("SELECT p FROM Perfil p ", Perfil.class).getResultList();
     }
 }

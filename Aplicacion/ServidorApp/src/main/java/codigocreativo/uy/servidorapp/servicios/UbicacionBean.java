@@ -9,7 +9,7 @@ import jakarta.persistence.PersistenceContext;
 
 @Stateless
 public class UbicacionBean implements UbicacionRemote {
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
     //Se crea la primer implementacion Registro de ubicaciones
     @Override

@@ -13,7 +13,7 @@ import java.util.List;
 @Stateless
 public class AuditoriaBean implements AuditoriaRemote{
 
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
     @Override
     public void crearRegistro(Auditoria a){

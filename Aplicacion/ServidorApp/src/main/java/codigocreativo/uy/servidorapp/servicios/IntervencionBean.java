@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.util.List;
 @Stateless
 public class IntervencionBean implements IntervencionRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
     @Override

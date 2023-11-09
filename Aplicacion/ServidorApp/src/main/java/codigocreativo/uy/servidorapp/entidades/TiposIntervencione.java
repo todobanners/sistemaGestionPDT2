@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.entidades;
 
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,8 +16,9 @@ public class TiposIntervencione implements Serializable {
     @Column(name = "NOMBRE_TIPO", nullable = false, length = 30)
     private String nombreTipo;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", length = 10)
-    private String estado;
+    private Estados estado;
 
     public Long getId() {
         return id;
@@ -34,11 +36,11 @@ public class TiposIntervencione implements Serializable {
         this.nombreTipo = nombreTipo;
     }
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 

@@ -10,7 +10,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class EquipoBean implements EquipoRemote {
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 

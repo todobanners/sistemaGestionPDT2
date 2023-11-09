@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.entidades;
 
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -30,8 +31,9 @@ public class BajaEquipo implements Serializable {
     @Column(name = "FECHA", nullable = false)
     private LocalDate fecha;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", nullable = false, length = 20)
-    private String estado;
+    private Estados estado;
 
     @Column(name = "COMENTARIOS", length = 100)
     private String comentarios;
@@ -76,11 +78,11 @@ public class BajaEquipo implements Serializable {
         this.fecha = fecha;
     }
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 

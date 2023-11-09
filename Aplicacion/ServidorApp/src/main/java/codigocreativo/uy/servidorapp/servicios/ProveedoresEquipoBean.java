@@ -10,7 +10,7 @@ import java.util.List;
 
 @Stateless
 public class ProveedoresEquipoBean implements ProveedoresEquipoRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
     @Override

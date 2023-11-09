@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class ModelosEquipoBean implements ModelosEquipoRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 

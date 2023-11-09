@@ -1,8 +1,7 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
 
@@ -62,9 +61,9 @@ public class UsuarioGUI {
             model.addRow(data);
         }
 
-        comboEstado.addItem("sin validar");
-        comboEstado.addItem("activo");
-        comboEstado.addItem("eliminado");
+        for (Estados e : Estados.values()) {
+            comboEstado.addItem(e);
+        }
 
 
         comboFiltro.addItem("nombre");
@@ -103,7 +102,7 @@ public class UsuarioGUI {
         });
         Limpiar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // se crean unos datos de prueba para mostrar en la tabla
+                /*// se crean unos datos de prueba para mostrar en la tabla
                 Perfil perfil = new Perfil();
                 perfil.setNombrePerfil("Administrador");
                 perfil.setEstado("alta");
@@ -132,7 +131,7 @@ public class UsuarioGUI {
                     Conexion.obtenerInstitucionBean().agregarInstitucion(institucion3);
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
-                }
+                }*/
             }
         });
         comboEstado.addActionListener(new ActionListener() {

@@ -83,7 +83,7 @@ public class IngresarUbicacionGUI{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Perfil perfil = new Perfil();
+                /*Perfil perfil = new Perfil();
                 perfil.setNombrePerfil("Administrador");
                 perfil.setEstado("alta");
                 Perfil perfil2 = new Perfil();
@@ -111,7 +111,7 @@ public class IngresarUbicacionGUI{
                     Conexion.obtenerInstitucionBean().agregarInstitucion(institucion3);
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
-                }
+                }*/
             }
         });
     }
