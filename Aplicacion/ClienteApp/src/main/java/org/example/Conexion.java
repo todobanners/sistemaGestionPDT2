@@ -15,6 +15,7 @@ public class Conexion {
     private static final String EJB_INSTITUCION = "ejb:/ServidorApp-1.0-SNAPSHOT/InstitucionBean!codigocreativo.uy.servidorapp.servicios.InstitucionRemote"; // Nombre del EJB de institucion
     private static final String EJB_EQUIPO = "ejb:/ServidorApp-1.0-SNAPSHOT/EquipoBean!codigocreativo.uy.servidorapp.servicios.EquipoRemote"; // Nombre del EJB de equipo
     private static final String EJB_UBICACION = "ejb:/ServidorApp-1.0-SNAPSHOT/UbicacionBean!codigocreativo.uy.servidorapp.servicios.UbicacionRemote"; // Nombre del EJB de ubicacion
+    private static final String EJB_USUARIO_TELEFONO = "ejb:/ServidorApp-1.0-SNAPSHOT/UsuariosTelefonoBean!codigocreativo.uy.servidorapp.servicios.UsuariosTelefonoRemote"; // Nombre del EJB de usuario telefono
 
     static { // Inicialización de las propiedades para el contexto de JNDI
         jndiProps = new Properties(); // Crea una instancia de las propiedades
@@ -41,5 +42,8 @@ public class Conexion {
     }
     public static UbicacionRemote obtenerUbicacionBean() throws NamingException { // Obtiene el EJB de ubicacion
         return (UbicacionRemote) ctx.lookup(EJB_UBICACION); // Devuelve el EJB de ubicacion
+    }
+    public static UsuariosTelefonoRemote obtenerUsuariosTelefonoBean() throws NamingException { // Obtiene el EJB de usuario telefono
+        return (UsuariosTelefonoRemote) ctx.lookup(EJB_USUARIO_TELEFONO); // Devuelve el EJB de usuario telefono
     }
 }

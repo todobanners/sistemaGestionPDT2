@@ -2,20 +2,21 @@ package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
-import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import jakarta.persistence.NoResultException;
 import org.example.Conexion;
 import org.example.controlador.AplicacionVentana;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginForm extends JFrame {
     private JButton loginButton;
     private JPanel panel1;
     private JTextField textField1;
     private JPasswordField passwordField1;
-    private JButton registroButton;
+    private JButton cancelarButton;
+    private JLabel crearCuenta;
 
     public LoginForm() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,14 +31,20 @@ public class LoginForm extends JFrame {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         });
-        registroButton.addActionListener(e -> {
-
-            try {
-                new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
+        cancelarButton.addActionListener(e -> {
+            System.exit(0);
+        });
+        crearCuenta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                try {
+                    new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+                setVisible(false);
             }
-            setVisible(false);
         });
     }
 
