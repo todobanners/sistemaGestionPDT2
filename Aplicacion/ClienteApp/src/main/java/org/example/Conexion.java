@@ -10,7 +10,6 @@ public class Conexion {
     private static Properties jndiProps; // Propiedades para el contexto de JNDI
     private static Context ctx; // Contexto de JNDI
     //
-    private static final String EJB_DEFAULT = "ejb:/ServidorApp-1.0-SNAPSHOT/DefaultBean!codigocreativo.uy.servidorapp.servicios.DefaultRemote"; // Nombre del EJB por defecto
     private static final String EJB_USUARIO = "ejb:/ServidorApp-1.0-SNAPSHOT/UsuarioBean!codigocreativo.uy.servidorapp.servicios.UsuarioRemote"; // Nombre del EJB de usuario
     private static final String EJB_PERFIL = "ejb:/ServidorApp-1.0-SNAPSHOT/PerfilBean!codigocreativo.uy.servidorapp.servicios.PerfilRemote"; // Nombre del EJB de perfil
     private static final String EJB_INSTITUCION = "ejb:/ServidorApp-1.0-SNAPSHOT/InstitucionBean!codigocreativo.uy.servidorapp.servicios.InstitucionRemote"; // Nombre del EJB de institucion
@@ -28,9 +27,6 @@ public class Conexion {
         }
     }
 
-    public static DefaultRemote obtenerDefaultBean() throws NamingException { // Obtiene el EJB por defecto
-        return (DefaultRemote) ctx.lookup(EJB_DEFAULT); // Devuelve el EJB por defecto
-    }
     public static UsuarioRemote obtenerUsuarioBean() throws NamingException { // Obtiene el EJB de usuario
         return (UsuarioRemote) ctx.lookup(EJB_USUARIO); // Devuelve el EJB de usuario
     }

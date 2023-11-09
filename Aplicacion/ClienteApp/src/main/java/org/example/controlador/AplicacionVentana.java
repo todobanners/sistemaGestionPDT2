@@ -13,7 +13,7 @@ import static javax.swing.UIManager.setLookAndFeel;
 
 public class AplicacionVentana extends JFrame {
 
-    public AplicacionVentana(String s) throws ServiciosException, NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public AplicacionVentana(String s) throws Exception {
         super(s);
         //Agregar un LaF
         setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -31,7 +31,7 @@ public class AplicacionVentana extends JFrame {
         setVisible(true);
         setBounds(10,10,800,800);
         //panel de ventana inicio
-        changePanel(new HomeGUI().getPanel());
+        changePanel(new EquiposGUI().getPanel());
     }
 
 
@@ -73,13 +73,7 @@ public class AplicacionVentana extends JFrame {
         //Menu Inicio
         //Menu de dashboard
         InicioPrincipal.addActionListener(e -> {
-            try {
-                changePanel(new HomeGUI().getPanel());
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
-            } catch (ServiciosException ex) {
-                throw new RuntimeException(ex);
-            }
+            JOptionPane.showMessageDialog(null, "Bienvenido al sistema de gestion de mantenimiento");
         });
         //Fin menu de dashboard
 

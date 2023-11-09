@@ -31,13 +31,13 @@ public class LoginForm extends JFrame {
                      InstantiationException | IllegalAccessException ex) {
                 throw new RuntimeException(ex);
             }
-            catch (NoResultException ex) {
+            catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
         });
     }
 
-    private void login() throws NamingException, ServiciosException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    private void login() throws Exception {
         String username = textField1.getText();
         String password = new String(passwordField1.getPassword());
 
