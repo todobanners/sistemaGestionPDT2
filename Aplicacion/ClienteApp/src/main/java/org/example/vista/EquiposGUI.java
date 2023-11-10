@@ -1,6 +1,16 @@
 package org.example.vista;
-
+/*
+* TODO: Agregar funcionalidad de los botones
+*  - Dar de baja seleccionado
+*  - Editar seleccionado
+*  - Registrar movimiento
+* TODO: Crear filtros para la tabla
+* TODO: Ver como hacer para que se muestre la imagen del equipo en la pantalla principal
+*
+*
+* */
 import codigocreativo.uy.servidorapp.entidades.*;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
@@ -36,6 +46,7 @@ public class EquiposGUI {
     private JButton darBajaSeleccionadoButton;
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
+    private JComboBox estadoCombo;
     JDateChooser fechaCompraDate = new JDateChooser();
 
     public JPanel getPanel() {
@@ -79,6 +90,10 @@ public class EquiposGUI {
             modeloCombo.addItem(modelo);
         }
 
+        for (Estados estado : Estados.values()) {
+            estadoCombo.addItem(estado);
+        }
+
 
 
         guardarButton.addActionListener(new ActionListener() {
@@ -86,8 +101,6 @@ public class EquiposGUI {
                 try {
                     Equipo equipo = new Equipo();
                     equipo.setIdInterno(idInternoText.getText());
-                    //Ubicacion ubi;
-                    // = (Ubicacion) ubicacionCombo.getSelectedItem();
                     equipo.setIdUbicacion(((Ubicacion) Objects.requireNonNull(ubicacionCombo.getSelectedItem())).getId());
                     equipo.setNroSerie(nroSerieText.getText());
                     equipo.setNombre(nombreText.getText());
@@ -98,6 +111,7 @@ public class EquiposGUI {
                     Date fechaElegida = (Date) fechaCompraDate.getDate();
                     LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     equipo.setFechaAdquisicion(localDate);
+                    equipo.setEstado((Estados) estadoCombo.getSelectedItem());
                     agregarEquipo(equipo);
                 } catch (Exception ex) {
                     ex.printStackTrace();
