@@ -9,6 +9,7 @@ import org.example.controlador.Sesion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -25,6 +26,10 @@ public class LoginForm extends JFrame {
     private JButton cancelarButton;
     private JLabel crearCuenta;
     private JButton soyUnBotonQueButton;
+    private JLabel logo;
+    private JPanel formularioLogo;
+    private JLabel userText;
+    private JLabel claveText;
 
     public LoginForm() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +37,22 @@ public class LoginForm extends JFrame {
         add(panel1);
         pack();
         setSize(500, 700);
+        setBackground(Color.WHITE);
+        ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");
+        Image img = imagen.getImage();
+        Image imgRedimensionada = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        ImageIcon imagenRedimensionada = new ImageIcon(imgRedimensionada);
+        logo.setIcon(imagenRedimensionada);
+        Font f = new Font("Roboto", Font.PLAIN, 16);
+        userText.setFont(f);
+        claveText.setFont(f);
+        textField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+        textField1.setFont(f);
+        passwordField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+        passwordField1.setFont(f);
+        loginButton.setFont(f);
 
+        cancelarButton.setFont(f);
         loginButton.addActionListener(e -> {
             try {
                 login();
