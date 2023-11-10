@@ -18,7 +18,7 @@ public class Instituciones implements java.io.Serializable{
     private String nombre;
 
     @OneToMany(mappedBy = "idInstitucion")
-    private Set<codigocreativo.uy.servidorapp.entidades.Ubicaciones> ubicaciones = new LinkedHashSet<>();
+    private Set<codigocreativo.uy.servidorapp.entidades.Ubicacion> ubicaciones = new LinkedHashSet<>();
 
     public Long getId() {
         return id;
@@ -36,11 +36,11 @@ public class Instituciones implements java.io.Serializable{
         this.nombre = nombre;
     }
 
-    public Set<codigocreativo.uy.servidorapp.entidades.Ubicaciones> getUbicaciones() {
+    public Set<codigocreativo.uy.servidorapp.entidades.Ubicacion> getUbicaciones() {
         return ubicaciones;
     }
 
-    public void setUbicaciones(Set<codigocreativo.uy.servidorapp.entidades.Ubicaciones> ubicaciones) {
+    public void setUbicaciones(Set<codigocreativo.uy.servidorapp.entidades.Ubicacion> ubicaciones) {
         this.ubicaciones = ubicaciones;
     }
 

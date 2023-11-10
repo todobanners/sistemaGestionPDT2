@@ -1,14 +1,18 @@
 package org.example.vista;
 
-import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.Conexion;
 import org.example.controlador.AplicacionVentana;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 
 public class LoginForm extends JFrame {
     private JButton loginButton;
@@ -17,6 +21,7 @@ public class LoginForm extends JFrame {
     private JPasswordField passwordField1;
     private JButton cancelarButton;
     private JLabel crearCuenta;
+    private JButton soyUnBotonQueButton;
 
     public LoginForm() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +51,69 @@ public class LoginForm extends JFrame {
                 setVisible(false);
             }
         });
+        soyUnBotonQueButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Cree algunos datos para funcionar, admin admin");
+
+                try {
+                    Institucion institucion = new Institucion();
+                    institucion.setNombre("CodigoCreativo");
+                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
+                    ///////////////////////
+                    Perfil perfil = new Perfil();
+                    perfil.setNombrePerfil("Administrador");
+                    perfil.setEstado(Estados.ACTIVO);
+                    Conexion.obtenerPerfilBean().crearPerfil(perfil);
+                    //////////////////////////
+                    Usuario usuario = new Usuario();
+                    usuario.setFechaNacimiento(LocalDate.now());
+                    usuario.setNombre("Administrador");
+                    usuario.setApellido("Administrador");
+                    usuario.setCedula("12345678");
+                    usuario.setEmail("algo@algo.com");
+                    usuario.setContrasenia("admin");
+                    usuario.setEstado(Estados.ACTIVO);
+                    usuario.setNombreUsuario("admin");
+                    institucion.setId(1L);
+                    usuario.setIdInstitucion(institucion);
+                    perfil.setId(1L);
+                    usuario.setIdPerfil(perfil);
+                    Conexion.obtenerUsuarioBean().crearUsuario(usuario);
+                    //////////////////////////
+                    Ubicacion ubicacion = new Ubicacion();
+                    institucion.setId(1L);
+                    ubicacion.setIdInstitucion(institucion);
+                    ubicacion.setNumero(2L);
+                    ubicacion.setPiso(1L);
+                    ubicacion.setNombre("CTI");
+                    ubicacion.setSector("Sector");
+                    Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
+                    //////////////////////////
+                    ProveedoresEquipo proveedoresEquipo = new ProveedoresEquipo();
+                    proveedoresEquipo.setNombre("Proveedor");
+                    Conexion.obtenerProveedoresEquipoBean().CrearProveedoresEquipo(proveedoresEquipo);
+                    //////////////////////////////
+Pais pais = new Pais();
+pais.setNombre("Uruguay");
+Conexion.obtenerPaisBean().crearPais(pais);
+/////////////////////////////////////////////////////
+                    MarcasModelo marcasModelos = new MarcasModelo();
+                    marcasModelos.setNombre("Marca");
+                    Conexion.obtenerMarcaBean().crearMarcasModelo(marcasModelos);
+               ////////////////////////////////////////
+ModelosEquipo modelosEquipo = new ModelosEquipo();
+modelosEquipo.setNombre("Modelo");
+marcasModelos.setId(1L);
+modelosEquipo.setIdMarca(marcasModelos);
+Conexion.obtenerModeloBean().crearModelosEquipo(modelosEquipo);
+///////////////////////////////////////////////////////////////
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ServiciosException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     private void login() throws Exception {
@@ -60,6 +128,10 @@ public class LoginForm extends JFrame {
             throw new Exception("Usuario aun no validado, consulte a un administrador para conocer su estado");
         } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
             throw new Exception("Usuario eliminado");
+        } else if (username.equals("admin") || password.equals("admin")) { // ESTA LINEA ES SOLO PARA PROBAR LA APLICACION
+            JOptionPane.showMessageDialog(null, "Bienvenido");
+            setVisible(false);
+            new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
         } else {
             JOptionPane.showMessageDialog(null, "Bienvenido");
             setVisible(false);
