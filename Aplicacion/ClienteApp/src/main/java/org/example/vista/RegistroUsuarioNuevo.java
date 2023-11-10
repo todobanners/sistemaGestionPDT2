@@ -13,6 +13,8 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import static javax.swing.UIManager.setLookAndFeel;
+
 public class RegistroUsuarioNuevo extends JFrame {
     private JPanel registroUsuario;
     private JTextField nombreTextField;
@@ -29,9 +31,10 @@ public class RegistroUsuarioNuevo extends JFrame {
     private JPanel fechaNacimiento;
     JDateChooser selectorFecha = new JDateChooser();
 
-    public RegistroUsuarioNuevo(String s) throws NamingException {
+    public RegistroUsuarioNuevo(String s) throws NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         add(registroUsuario);
         setVisible(true);
         pack();
@@ -108,7 +111,18 @@ public class RegistroUsuarioNuevo extends JFrame {
 
         cancelarButton.addActionListener(e -> {
             setVisible(false);
-            LoginForm loginForm = new LoginForm();
+            LoginForm loginForm = null;
+            try {
+                loginForm = new LoginForm();
+            } catch (UnsupportedLookAndFeelException ex) {
+                throw new RuntimeException(ex);
+            } catch (ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            } catch (InstantiationException ex) {
+                throw new RuntimeException(ex);
+            } catch (IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
             loginForm.setVisible(true);
         });
 

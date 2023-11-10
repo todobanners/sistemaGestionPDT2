@@ -2,6 +2,7 @@ package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.*;
+import org.example.vista.Usuario.ModificarDatosPropiosGUI;
 import org.example.vista.Usuario.UsuarioGUI;
 import org.example.vista.Usuario.UsuarioRegistroGUI;
 
@@ -47,6 +48,10 @@ public class AplicacionVentana extends JFrame {
         JMenu gestionPerfiles =         new JMenu("Gestion de Perfiles");
         //Fin declaracion barra de menu
 
+        //Declaro los submenus de Inicio
+        JMenuItem modificarDatosPropios = new JMenuItem("Modificar mis datos");
+        JMenuItem cerrarSesion =          new JMenuItem("Cerrar Sesion");
+
         //Declaro el submenu de Gestion de Usuarios
         JMenuItem listarUsuarios =      new JMenuItem("Listar Usuarios");
         JMenuItem registrarUsuario =    new JMenuItem("Registrar Usuario");
@@ -72,8 +77,22 @@ public class AplicacionVentana extends JFrame {
 
         //Menu Inicio
         //Menu de dashboard
-        InicioPrincipal.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Bienvenido al sistema de gestion de mantenimiento");
+        modificarDatosPropios.addActionListener(e -> {
+            changePanel(new ModificarDatosPropiosGUI().getPanel());
+        });
+        cerrarSesion.addActionListener(e -> {
+            Sesion.getInstancia(null);
+            //cerar ventana y abrir login
+            LoginForm loginForm = null;
+            try {
+                loginForm = new LoginForm();
+            } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException |
+                     IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
+            loginForm.setVisible(true);
+            setVisible(false);
+
         });
         //Fin menu de dashboard
 
@@ -137,18 +156,28 @@ public class AplicacionVentana extends JFrame {
         //Fin establecimiento de funcionalidad de submenus
 
         //Agrego los submenus a los menus
+
+        //Inicio
+        InicioPrincipal.add(modificarDatosPropios);
+        InicioPrincipal.add(cerrarSesion);
+
+        //Gestion de Usuarios
         gestionUsuarios.add(listarUsuarios);
         gestionUsuarios.add(registrarUsuario);
 
+        //Gestion de Equipos
         gestionEquipos.add(listarEquipos);
         gestionEquipos.add(registrarEquipo);
 
+        //Gestion de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
         gestionUbicaciones.add(registrarUbicacion);
 
+        //Gestion de Intervenciones
         gestionIntervenciones.add(listarIntervenciones);
         gestionIntervenciones.add(registrarIntervencion);
 
+        //Gestion de Perfiles
         gestionPerfiles.add(listarPerfiles);
         //Fin agregado de submenus a los menus
 
