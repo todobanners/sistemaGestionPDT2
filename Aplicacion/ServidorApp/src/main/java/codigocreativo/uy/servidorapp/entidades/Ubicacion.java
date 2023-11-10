@@ -26,7 +26,7 @@ public class Ubicacion implements Serializable {
     @Column(name = "NUMERO")
     private Long numero;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_INSTITUCION")
     private Institucion idInstitucion;
@@ -79,4 +79,9 @@ public class Ubicacion implements Serializable {
         this.idInstitucion = idInstitucion;
     }
 
+    //Metodo para mostrar la ubicacion como objeto pero que se lea como string en un combo box
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

@@ -8,6 +8,8 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import java.util.List;
+
 @Stateless
 public class UbicacionBean implements UbicacionRemote {
     @PersistenceContext (unitName = "default")
@@ -75,6 +77,16 @@ public class UbicacionBean implements UbicacionRemote {
         } catch (Exception e) {
             throw new ServiciosException("No se pudo mover el equipo");
         }
+    }
+
+    @Override
+    public List<Ubicacion> listarUbicaciones() throws ServiciosException {
+        return em.createQuery("SELECT u FROM Ubicacion u", Ubicacion.class).getResultList();
+    }
+
+    @Override
+    public String obtenerUbicacionPorId(Long id) throws ServiciosException {
+        return em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult().getNombre();
     }
 
 }

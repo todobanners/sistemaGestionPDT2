@@ -5,6 +5,8 @@ import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Remote;
 
+import java.util.List;
+
 @Remote
 public interface UbicacionRemote {
     //Se crea la primer implementacion Registro de ubicaciones
@@ -19,4 +21,8 @@ public interface UbicacionRemote {
     void borrarUbicacion(Long id) throws ServiciosException;
 
     void moverEquipoDeUbicacion(Equipo equipo, Long ubicacion) throws ServiciosException;
+
+    public List<Ubicacion> listarUbicaciones() throws ServiciosException;
+
+    public String obtenerUbicacionPorId(Long id) throws ServiciosException;
 }

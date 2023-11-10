@@ -13,6 +13,6 @@ public interface EquipoRemote {
     public void modificarEquipo(Equipo equipo);
     public void eliminarEquipo(BajaEquipo bajaEquipo);
     public void obtenerEquipo(Long id);
-    public List<Equipo> obtenerEquipos();
+    public List<Equipo> listarEquipos();
 
 }

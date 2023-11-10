@@ -1,9 +1,11 @@
 package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.*;
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
 
+import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -57,17 +59,40 @@ public class EquiposGUI {
 
         fechaAdqContainer.add(fechaCompraDate);
 
+        for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
+            ubicacionCombo.addItem(ubicacion);
+        }
+
+        for (TiposEquipo tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
+            tipoCombo.addItem(tipo);
+        }
+
+        for (ProveedoresEquipo proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
+            proveedorCombo.addItem(proveedor);
+        }
+
+        for (Pais pais : Conexion.obtenerPaisBean().obtenerpais()) {
+            paisCombo.addItem(pais);
+        }
+
+        for (ModelosEquipo modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
+            modeloCombo.addItem(modelo);
+        }
+
 
 
         guardarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Equipo equipo = new Equipo();
-                    equipo.setIdUbicacion((Long) ubicacionCombo.getSelectedItem());
+                    equipo.setIdInterno(idInternoText.getText());
+                    //Ubicacion ubi;
+                    // = (Ubicacion) ubicacionCombo.getSelectedItem();
+                    equipo.setIdUbicacion(((Ubicacion) Objects.requireNonNull(ubicacionCombo.getSelectedItem())).getId());
                     equipo.setNroSerie(nroSerieText.getText());
                     equipo.setNombre(nombreText.getText());
                     equipo.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
-                    equipo.setIdProveedor((ProveedoresEquipo) proveedorCombo.getSelectedItem());
+                    equipo.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
                     equipo.setIdPais((Pais) paisCombo.getSelectedItem());
                     equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
                     Date fechaElegida = (Date) fechaCompraDate.getDate();
@@ -83,24 +108,34 @@ public class EquiposGUI {
     public void actualizarTabla() throws Exception {
         DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
         model.setRowCount(0);
-        Conexion.obtenerEquipoBean().obtenerEquipos().forEach(equipo -> {
-            model.addRow(new Object[]{
-                    equipo.getIdInterno(),
-                    equipo.getIdUbicacion(),
-                    equipo.getNroSerie(),
-                    equipo.getNombre(),
-                    equipo.getIdTipo(),
-                    equipo.getIdProveedor(),
-                    equipo.getIdPais(),
-                    equipo.getIdModelo(),
-                    equipo.getFechaAdquisicion()
-            });
+        Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
+            try {
+                model.addRow(new Object[]{
+                        equipo.getIdInterno(),
+                        Conexion.obtenerUbicacionBean().obtenerUbicacionPorId(equipo.getIdUbicacion()),
+                        equipo.getNroSerie(),
+                        equipo.getNombre(),
+                        equipo.getIdTipo(),
+                        equipo.getIdProveedor(),
+                        equipo.getIdPais(),
+                        equipo.getIdModelo(),
+                        equipo.getFechaAdquisicion()
+                });
+            } catch (NamingException e) {
+                throw new RuntimeException(e);
+            } catch (ServiciosException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
     public void agregarEquipo(Equipo equipo) throws Exception {
-        Conexion.obtenerEquipoBean().crearEquipo(equipo);
-        JOptionPane.showMessageDialog(null, "Equipo registrado con exito");
-        actualizarTabla();
+        try {
+            Conexion.obtenerEquipoBean().crearEquipo(equipo);
+            JOptionPane.showMessageDialog(null, "Equipo registrado con exito");
+            actualizarTabla();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo");
+        }
     }
 }

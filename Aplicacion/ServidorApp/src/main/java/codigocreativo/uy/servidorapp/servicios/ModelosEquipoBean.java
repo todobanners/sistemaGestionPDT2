@@ -31,7 +31,7 @@ public class ModelosEquipoBean implements ModelosEquipoRemote{
 
 
     @Override
-    public List<ModelosEquipo> obtenerModelosEquipo() {
+    public List<ModelosEquipo> listarModelosEquipo() {
         return em.createQuery("SELECT ModelosEquipo FROM ModelosEquipo modelosEquipo", ModelosEquipo.class).getResultList();
     }
 }

@@ -1,9 +1,7 @@
 package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
-import codigocreativo.uy.servidorapp.entidades.Ubicaciones;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.Conexion;
 
@@ -53,7 +51,7 @@ public class IngresarUbicacionGUI{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Ubicaciones ubicacion = new Ubicaciones();
+                Ubicacion ubicacion = new Ubicacion();
                 ubicacion.setSector((String) Sector.getSelectedItem());
                 ubicacion.setNombre(Nombre.getText());
                 ubicacion.setNumero(Long.valueOf(Número.getText()));

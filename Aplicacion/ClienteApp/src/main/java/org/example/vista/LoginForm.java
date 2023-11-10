@@ -27,7 +27,7 @@ public class LoginForm extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panel1);
         pack();
-        setSize(300, 500);
+        setSize(500, 700);
 
         loginButton.addActionListener(e -> {
             try {
@@ -93,20 +93,22 @@ public class LoginForm extends JFrame {
                     proveedoresEquipo.setNombre("Proveedor");
                     Conexion.obtenerProveedoresEquipoBean().CrearProveedoresEquipo(proveedoresEquipo);
                     //////////////////////////////
-Pais pais = new Pais();
-pais.setNombre("Uruguay");
-Conexion.obtenerPaisBean().crearPais(pais);
-/////////////////////////////////////////////////////
+                    Pais pais = new Pais();
+                    pais.setNombre("Uruguay");
+                    Conexion.obtenerPaisBean().crearPais(pais);
+                    /////////////////////////////////////////////////////
                     MarcasModelo marcasModelos = new MarcasModelo();
                     marcasModelos.setNombre("Marca");
                     Conexion.obtenerMarcaBean().crearMarcasModelo(marcasModelos);
-               ////////////////////////////////////////
-ModelosEquipo modelosEquipo = new ModelosEquipo();
-modelosEquipo.setNombre("Modelo");
-marcasModelos.setId(1L);
-modelosEquipo.setIdMarca(marcasModelos);
-Conexion.obtenerModeloBean().crearModelosEquipo(modelosEquipo);
-///////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////
+                    ModelosEquipo modelosEquipo = new ModelosEquipo();
+                    modelosEquipo.setNombre("Modelo");
+                    marcasModelos.setId(1L);
+                    modelosEquipo.setIdMarca(marcasModelos);
+                    Conexion.obtenerModeloBean().crearModelosEquipo(modelosEquipo);
+                    ///////////////////////////////////////////////////////////////
+
+
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 } catch (ServiciosException ex) {
@@ -139,15 +141,4 @@ Conexion.obtenerModeloBean().crearModelosEquipo(modelosEquipo);
         }
     }
 
-        /*if (usuario != null) {
-            JOptionPane.showMessageDialog(null, "Bienvenido");
-            setVisible(false);
-            new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
-        } else if (usuario.getEstado().equals(Estados.SIN_VALIDAR.toString())) {
-            JOptionPane.showMessageDialog(null, "Usuario aun no validado, consulte a un administrador para conocer su estado");
-        } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
-            JOptionPane.showMessageDialog(null, "Usuario eliminado");
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-        }*/
 }
