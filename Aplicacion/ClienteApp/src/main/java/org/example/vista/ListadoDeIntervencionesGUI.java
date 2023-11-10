@@ -7,9 +7,12 @@ import javax.swing.*;
 public class ListadoDeIntervencionesGUI {
     private JPanel panelListadoDeIntervenciones;
     private JPanel panelAcciones;
-    private JTable table1;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTable tableListadoIntervenciones;
+    private JTextField textFechaDesde;
+    private JTextField textFechaHasta;
+    private JTextField textIdEquipo;
+    private JButton generarReporteButton;
+    private JComboBox comboTipoDeIntervencion;
 
     private IntervencionRemote intervencionRemoteBean;
 

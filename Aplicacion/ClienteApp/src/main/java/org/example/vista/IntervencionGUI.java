@@ -21,8 +21,6 @@ public class IntervencionGUI {
     private JTextField textComentarios;
     private JPanel panelAcciones;
     private JButton registrarIntervencionButton;
-    private JButton generarReportePorFechaButton;
-    private JButton generarReportePorTipoButton;
     private JTable tablaIntervenciones;
 
     private IntervencionRemote intervencionRemoteBean;
@@ -61,7 +59,63 @@ public class IntervencionGUI {
                 //intervencion.setIdEquipo(textIdEquipo.getText());
                 //intervencion.setComentarios(textComentarios.getText());
                 //intervencionRemoteBean.crear(intervencion));
+        registrarIntervencionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                mostrarPopUpConfirmacion();
             }
+        });
+
+
+    }
+
+    private void mostrarPopUpConfirmacion() {
+        JFrame popUpFrame = new JFrame ("Confirmación");
+        popUpFrame.setSize(450,100);
+
+        // Crear un JLabel con el mensaje de confirmación
+        JLabel mensajeLabel = new JLabel("¿Deseas confirmar el registro de Intervención?");
+        mensajeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // Crear botones de confirmar y cancelar en el panel emergente
+        JButton confirmarButton = new JButton("Confirmar");
+        JButton cancelarButton = new JButton("Cancelar");
+
+        // Agregar ActionListener al botón de confirmar
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(popUpFrame, "Registro realizado con éxito");
+                popUpFrame.dispose(); // Cerrar el panel emergente después de confirmar
+            }
+        });
+
+        // Agregar ActionListener al botón de cancelar
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(popUpFrame, "Registro cancelado");
+                popUpFrame.dispose(); // Cerrar el panel emergente después de cancelar
+            }
+        });
+
+        // Crear un panel para organizar los botones en el panel emergente
+        JPanel panelEmergente = new JPanel();
+        panelEmergente.add(confirmarButton);
+        panelEmergente.add(cancelarButton);
+
+        // Agregar componentes al panel emergente
+        popUpFrame.add(mensajeLabel);
+        popUpFrame.add(panelEmergente);
+
+        // Establecer el diseño del panel emergente
+        popUpFrame.setLayout(new BoxLayout(popUpFrame.getContentPane(), BoxLayout.Y_AXIS));
+
+        // Hacer visible el panel emergente
+        popUpFrame.setVisible(true);
+    }
+
 
 };
 
