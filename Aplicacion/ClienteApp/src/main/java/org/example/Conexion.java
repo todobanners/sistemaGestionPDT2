@@ -1,5 +1,6 @@
 package org.example;
 
+import codigocreativo.uy.servidorapp.entidades.MarcasModelo;
 import codigocreativo.uy.servidorapp.servicios.*;
 
 import javax.naming.Context;
@@ -18,6 +19,12 @@ public class Conexion {
     private static final String EJB_INTERVENCION = "ejb:/ServidorApp-1.0-SNAPSHOT/IntervencionBean!codigocreativo.uy.servidorapp.servicios.IntervencionRemote"; // Nombre del EJB de Intervención
 
     private static final String EJB_USUARIO_TELEFONO = "ejb:/ServidorApp-1.0-SNAPSHOT/UsuariosTelefonoBean!codigocreativo.uy.servidorapp.servicios.UsuariosTelefonoRemote"; // Nombre del EJB de usuario telefono
+    private static final String EJB_PROVEEDORES_EQUIPO = "ejb:/ServidorApp-1.0-SNAPSHOT/ProveedoresEquipoBean!codigocreativo.uy.servidorapp.servicios.ProveedoresEquipoRemote"; // Nombre del EJB de proveedores equipo
+    private static final String EJB_PAIS =   "ejb:/ServidorApp-1.0-SNAPSHOT/PaisBean!codigocreativo.uy.servidorapp.servicios.PaisRemote"; // Nombre del EJB de pais
+    private static final String EJB_MODELO = "ejb:/ServidorApp-1.0-SNAPSHOT/ModelosEquipoBean!codigocreativo.uy.servidorapp.servicios.ModelosEquipoRemote"; // Nombre del EJB de modelo
+    private static final String EJB_MARCAS = "ejb:/ServidorApp-1.0-SNAPSHOT/MarcasModeloBean!codigocreativo.uy.servidorapp.servicios.MarcasModeloRemote"; // Nombre del EJB de modelo
+    private static final String EJB_TIPOS_EQUIPO = "ejb:/ServidorApp-1.0-SNAPSHOT/TiposEquipoBean!codigocreativo.uy.servidorapp.servicios.TiposEquipoRemote"; // Nombre del EJB de modelo
+
 
     static { // Inicialización de las propiedades para el contexto de JNDI
         jndiProps = new Properties(); // Crea una instancia de las propiedades
@@ -51,4 +58,20 @@ public class Conexion {
     public static UsuariosTelefonoRemote obtenerUsuariosTelefonoBean() throws NamingException { // Obtiene el EJB de usuario telefono
         return (UsuariosTelefonoRemote) ctx.lookup(EJB_USUARIO_TELEFONO); // Devuelve el EJB de usuario telefono
     }
+    public static ProveedoresEquipoRemote obtenerProveedoresEquipoBean() throws NamingException { // Obtiene el EJB de proveedores equipo
+        return (ProveedoresEquipoRemote) ctx.lookup(EJB_PROVEEDORES_EQUIPO); // Devuelve el EJB de proveedores equipo
+    }
+    public static PaisRemote obtenerPaisBean() throws NamingException { // Obtiene el EJB de pais
+        return (PaisRemote) ctx.lookup(EJB_PAIS); // Devuelve el EJB de pais
+    }
+    public static ModelosEquipoRemote obtenerModeloBean() throws NamingException { // Obtiene el EJB de modelo
+        return (ModelosEquipoRemote) ctx.lookup(EJB_MODELO); // Devuelve el EJB de modelo
+    }
+    public static MarcasModeloRemote obtenerMarcaBean() throws NamingException { // Obtiene el EJB de modelo
+        return (MarcasModeloRemote) ctx.lookup(EJB_MARCAS); // Devuelve el EJB de modelo
+    }
+    public static TiposEquipoRemote obtenerTipoBean() throws NamingException { // Obtiene el EJB de modelo
+        return (TiposEquipoRemote) ctx.lookup(EJB_TIPOS_EQUIPO); // Devuelve el EJB de modelo
+    }
+
 }

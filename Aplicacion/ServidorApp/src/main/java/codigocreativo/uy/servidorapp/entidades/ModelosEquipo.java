@@ -14,7 +14,7 @@ public class ModelosEquipo implements Serializable {
     @Column(name = "ID_MODELO", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_MARCA", nullable = false)
     private MarcasModelo idMarca;
@@ -46,4 +46,8 @@ public class ModelosEquipo implements Serializable {
         this.nombre = nombre;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

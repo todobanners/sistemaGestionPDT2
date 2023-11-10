@@ -31,4 +31,9 @@ public class ProveedoresEquipo implements Serializable {
         this.nombre = nombre;
     }
 
+    @Override
+    public String toString() {
+    	return nombre;
+    }
+
 }

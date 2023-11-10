@@ -31,4 +31,8 @@ public class TiposEquipo implements Serializable {
         this.nombreTipo = nombreTipo;
     }
 
+    @Override
+    public String toString() {
+        return nombreTipo;
+    }
 }
