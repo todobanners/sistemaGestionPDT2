@@ -1,6 +1,8 @@
 package org.example.vista;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,4 +34,5 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             }
         });
     }
+
 }

@@ -11,8 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class IngresarUbicacionGUI{
-    private JComboBox Sector;
+public class IngresarUbicacionGUI {
+    private JComboBox<String> Sector;
     private JTextField Nombre;
     private JTextField Número;
     private JTextField Piso;
@@ -25,13 +25,11 @@ public class IngresarUbicacionGUI{
     private JPanel IngresoUbicacionNueva;
     private JButton enviarButton;
     private JButton cancelarButton;
-    private JComboBox institucion;
+    private JComboBox<String> institucion;
 
-
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         return IngresoUbicacionNueva;
     }
-
 
     public IngresarUbicacionGUI() throws NamingException {
 
@@ -41,75 +39,57 @@ public class IngresarUbicacionGUI{
         Sector.addItem("CTI");
         Sector.addItem("otro");
 
-        //List<Institucion> instituciones = Conexion.obtenerInstitucionBean().obtenerInstituciones();
-
         for (Institucion institucion : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
-            this.institucion.addItem(institucion);
+            this.institucion.addItem(institucion.getNombre());
         }
 
-        enviarButton.addActionListener(new ActionListener(){
+        enviarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Obtener los valores de la interfaz de usuario
+                String sector = (String) Sector.getSelectedItem();
+                String nombre = Nombre.getText();
+                long numero = Long.valueOf(Número.getText());
+                long piso = Long.valueOf(Piso.getText());
+                String institucionSeleccionada = (String) institucion.getSelectedItem();
 
+                // Crear una instancia de Ubicacion
                 Ubicacion ubicacion = new Ubicacion();
-                ubicacion.setSector((String) Sector.getSelectedItem());
-                ubicacion.setNombre(Nombre.getText());
-                ubicacion.setNumero(Long.valueOf(Número.getText()));
-                ubicacion.setPiso(Long.valueOf(Piso.getText()));
-                Object institucionSeleccionada = institucion.getSelectedItem().toString();
+                ubicacion.setSector(sector);
+                ubicacion.setNombre(nombre);
+                ubicacion.setNumero(numero);
+                ubicacion.setPiso(piso);
 
                 try {
-                    ubicacion.setIdInstitucion(Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada.toString()));
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }
+                    // Obtener la institución
+                    Institucion institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada);
 
+                    if (institucion != null) {
+                        // Asignar la institución a la ubicación
+                        ubicacion.setIdInstitucion(institucion);
 
-                try {
-                    Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
-                    JOptionPane.showMessageDialog(null, "Ubicación creada correctamente");
+                        // Persistir la ubicación
+                        Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
+
+                        // Mostrar mensaje de éxito
+                        JOptionPane.showMessageDialog(null, "Ubicación creada correctamente");
+                    } else {
+                        // Mostrar mensaje de error
+                        JOptionPane.showMessageDialog(null, "No se encontró ninguna institución con ese nombre");
+                    }
+
                 } catch (NamingException | ServiciosException ex) {
+                    // Mostrar mensaje de error
                     JOptionPane.showMessageDialog(null, "Error al crear la ubicación");
                     throw new RuntimeException(ex);
-
                 }
-
             }
         });
 
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                /*Perfil perfil = new Perfil();
-                perfil.setNombrePerfil("Administrador");
-                perfil.setEstado("alta");
-                Perfil perfil2 = new Perfil();
-                perfil2.setNombrePerfil("Usuario");
-                perfil2.setEstado("alta");
-                Perfil perfil3 = new Perfil();
-                perfil3.setEstado("alta");
-                perfil3.setNombrePerfil("Invitado");
-                try {
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil);
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil2);
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil3);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }
-                Institucion institucion = new Institucion();
-                institucion.setNombre("UTEC");
-                Institucion institucion2 = new Institucion();
-                institucion2.setNombre("UDELAR");
-                Institucion institucion3 = new Institucion();
-                institucion3.setNombre("ORT");
-                try {
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion2);
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion3);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }*/
+                // Puedes implementar acciones específicas al hacer clic en el botón cancelar
             }
         });
     }
