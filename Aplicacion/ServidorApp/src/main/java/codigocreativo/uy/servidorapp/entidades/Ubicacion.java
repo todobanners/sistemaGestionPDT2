@@ -26,6 +26,9 @@ public class Ubicacion implements Serializable {
     @Column(name = "NUMERO")
     private Long numero;
 
+    @Column(name = "CAMA")
+    private Long cama;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_INSTITUCION")
@@ -83,5 +86,13 @@ public class Ubicacion implements Serializable {
     @Override
     public String toString() {
         return nombre;
+    }
+
+    public void setCama(Long cama) {
+        this.cama = cama;
+    }
+
+    public Long getCama() {
+        return cama;
     }
 }
