@@ -4,7 +4,7 @@ import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Permiso;
 import codigocreativo.uy.servidorapp.servicios.PerfilRemote;
 import codigocreativo.uy.servidorapp.servicios.PermisoRemote;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;

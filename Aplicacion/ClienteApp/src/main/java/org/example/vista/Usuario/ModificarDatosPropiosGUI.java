@@ -1,7 +1,7 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 import org.example.controlador.Sesion;
 
 import javax.naming.NamingException;

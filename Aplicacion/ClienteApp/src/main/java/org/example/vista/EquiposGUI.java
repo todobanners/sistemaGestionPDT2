@@ -13,7 +13,7 @@ import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import com.toedter.calendar.JDateChooser;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;

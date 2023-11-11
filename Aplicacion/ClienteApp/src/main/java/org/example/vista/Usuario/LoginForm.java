@@ -1,9 +1,9 @@
-package org.example.vista;
+package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 import org.example.controlador.AplicacionVentana;
 import org.example.controlador.Sesion;
 
@@ -15,8 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
-
-import static javax.swing.UIManager.setLookAndFeel;
 
 public class LoginForm extends JFrame {
     private JButton loginButton;
@@ -31,9 +29,8 @@ public class LoginForm extends JFrame {
     private JLabel userText;
     private JLabel claveText;
 
-    public LoginForm() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         add(panel1);
         pack();
         setSize(500, 700);
@@ -43,7 +40,7 @@ public class LoginForm extends JFrame {
         Image imgRedimensionada = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
         ImageIcon imagenRedimensionada = new ImageIcon(imgRedimensionada);
         logo.setIcon(imagenRedimensionada);
-        Font f = new Font("Roboto", Font.PLAIN, 16);
+        Font f = new Font("Roboto", Font.PLAIN, 14);
         userText.setFont(f);
         claveText.setFont(f);
         textField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
@@ -51,8 +48,9 @@ public class LoginForm extends JFrame {
         passwordField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
         passwordField1.setFont(f);
         loginButton.setFont(f);
-
+        loginButton.setBackground(Color.decode("#2F9C95"));
         cancelarButton.setFont(f);
+        cancelarButton.setBackground(Color.decode("#e06666"));
         loginButton.addActionListener(e -> {
             try {
                 login();
@@ -76,6 +74,10 @@ public class LoginForm extends JFrame {
                 setVisible(false);
             }
         });
+
+        //soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
+                //Este boton sirve para generar datos de prueba, descomentar para usar
+
         soyUnBotonQueButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Cree algunos datos para funcionar, admin admin");

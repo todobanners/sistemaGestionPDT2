@@ -1,12 +1,14 @@
-package org.example.vista;
+package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
+import org.example.vista.Usuario.LoginForm;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -28,15 +30,24 @@ public class RegistroUsuarioNuevo extends JFrame {
     private JPasswordField claveRepetir;
     private JPasswordField clave;
     private JPanel fechaNacimiento;
+    private JLabel logo;
+    private JPanel internoRegistro;
     JDateChooser selectorFecha = new JDateChooser();
 
     public RegistroUsuarioNuevo(String s) throws NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         add(registroUsuario);
-        setVisible(true);
         pack();
+        setSize(500, 900);
+        setVisible(true);
+        ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");
+        Image img = imagen.getImage();
+        Image imgRedimensionada = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        ImageIcon imagenRedimensionada = new ImageIcon(imgRedimensionada);
+        logo.setIcon(imagenRedimensionada);
+        logo.setText("");
+
         fechaNacimiento.add(selectorFecha);
 
         //Obtencion de valores del combobox
@@ -121,8 +132,6 @@ public class RegistroUsuarioNuevo extends JFrame {
             LoginForm loginForm = null;
             try {
                 loginForm = new LoginForm();
-            } catch (UnsupportedLookAndFeelException ex) {
-                throw new RuntimeException(ex);
             } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             } catch (InstantiationException ex) {

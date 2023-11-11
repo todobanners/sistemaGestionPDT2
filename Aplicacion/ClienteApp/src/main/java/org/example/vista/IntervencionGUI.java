@@ -1,11 +1,9 @@
 package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.*;
-import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
-import codigocreativo.uy.servidorapp.servicios.TipoIntervencioneRemote;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -13,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.List;
 
 public class IntervencionGUI {
     private JPanel panelIntervencion;
