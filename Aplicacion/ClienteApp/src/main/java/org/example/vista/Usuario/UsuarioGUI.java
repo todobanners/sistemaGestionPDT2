@@ -1,5 +1,6 @@
 package org.example.vista.Usuario;
 
+import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
@@ -14,7 +15,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.Objects;
+/*
+    TODO:
+        * En filtrado queda formatear la consulta para que en la
+          seleccion de filtro coincida con los campos de la tabla
+        * Se puede hacer un switch case para cada tipo de filtro
+        * Falta que cuando se elija email se valide que sea un email
+        * En el listado queda detalle estetico de que campo ID sea
+          mas pequeño
+        * En Acciones falta la funcionalidad del boton Editar y Borrar
+        * Falta que se muestre el calendario
+        * Falta que se muestre el combo de institucion                      //Realizado
+        * Falta las validaciones y mensajes de error
+        * Falta el telefono, tanto en registro como en visualizacion
 
+        Estas tareas estan asignadas a Eduardo
+*/
 
 public class UsuarioGUI {
     private JPanel userGUI;
@@ -99,8 +116,29 @@ public class UsuarioGUI {
                     accCampoCedula.setText(usuario.getCedula());
                     accCampoEmail.setText(usuario.getEmail());
                     //accCampoTelefono.setText(usuario.getTelefono());
-                    accComboPerfil.setSelectedItem(usuario.getIdPerfil());
-                    accComboInstitucion.setSelectedItem(usuario.getIdInstitucion());
+
+                    Perfil perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
+                    // Obtener el ID del perfil que quieres seleccionar en el JComboBox
+                    Long perfilId = perfil.getId();
+                    // Recorrer el JComboBox para encontrar el objeto Perfil con el ID correspondiente
+                    for (int i = 0; i < accComboPerfil.getItemCount(); i++) {
+                        Perfil item = (Perfil) accComboPerfil.getItemAt(i);
+                        if (Objects.equals(item.getId(), perfilId)) {
+                            accComboPerfil.setSelectedItem(item);
+                            break; // Una vez encontrado, se sale del bucle
+                        }
+                    }
+
+                    Institucion institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(usuario.getIdInstitucion().getId());
+                    Long institucionId = institucion.getId();
+                    // Recorrer el JComboBox para encontrar el objeto Institucion con el ID correspondiente
+                    for (int i = 0; i < accComboInstitucion.getItemCount(); i++) {
+                        Institucion item = (Institucion) accComboInstitucion.getItemAt(i);
+                        if (item.getId() == institucionId) {
+                            accComboInstitucion.setSelectedItem(item);
+                            break; // Una vez encontrado, se sale del bucle
+                        }
+                    }
                     accComboEstado.setSelectedItem(usuario.getEstado());
                     accCampoUsername.setText(usuario.getNombreUsuario());
                     //fechaChooser.setDate(usuario.getFechaNacimiento());
@@ -175,6 +213,10 @@ public class UsuarioGUI {
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
             filtroTipoCombo.addItem(p);
             accComboPerfil.addItem(p);
+        }
+        //Se cargan los combos de institucion
+        for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
+            accComboInstitucion.addItem(i);
         }
         //Se cargan los combos de buscar por
         filtroBuscarCombo.addItem("Nombre");
