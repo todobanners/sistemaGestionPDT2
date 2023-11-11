@@ -3,6 +3,7 @@ package codigocreativo.uy.servidorapp.servicios;
 import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -10,7 +11,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class EquipoBean implements EquipoRemote {
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 
@@ -42,7 +43,7 @@ public class EquipoBean implements EquipoRemote {
 
 
     @Override
-    public List<Equipo> obtenerEquipos() {
-        return em.createQuery("SELECT equipo FROM Equipo equipo WHERE equipo.estado = 'activo'", Equipo.class).getResultList();
+    public List<Equipo> listarEquipos() {
+        return em.createQuery("SELECT equipo FROM Equipo equipo WHERE equipo.estado = 'ACTIVO'", Equipo.class).getResultList();
     }
 }

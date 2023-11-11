@@ -2,6 +2,7 @@ package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.*;
+import org.example.vista.Usuario.ModificarDatosPropiosGUI;
 import org.example.vista.Usuario.UsuarioGUI;
 import org.example.vista.Usuario.UsuarioRegistroGUI;
 
@@ -13,7 +14,7 @@ import static javax.swing.UIManager.setLookAndFeel;
 
 public class AplicacionVentana extends JFrame {
 
-    public AplicacionVentana(String s) throws ServiciosException, NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public AplicacionVentana(String s) throws Exception {
         super(s);
         //Agregar un LaF
         setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -31,7 +32,7 @@ public class AplicacionVentana extends JFrame {
         setVisible(true);
         setBounds(10,10,800,800);
         //panel de ventana inicio
-        changePanel(new HomeGUI().getPanel());
+        changePanel(new EquiposGUI().getPanel());
     }
 
 
@@ -44,7 +45,12 @@ public class AplicacionVentana extends JFrame {
         JMenu gestionEquipos =          new JMenu("Gestión Equipos");
         JMenu gestionUbicaciones =      new JMenu("Gestión de Ubicaciones");
         JMenu gestionIntervenciones =   new JMenu("Gestión de Intervenciones");
+        JMenu gestionPerfiles =         new JMenu("Gestion de Perfiles");
         //Fin declaracion barra de menu
+
+        //Declaro los submenus de Inicio
+        JMenuItem modificarDatosPropios = new JMenuItem("Modificar mis datos");
+        JMenuItem cerrarSesion =          new JMenuItem("Cerrar Sesion");
 
         //Declaro el submenu de Gestion de Usuarios
         JMenuItem listarUsuarios =      new JMenuItem("Listar Usuarios");
@@ -66,16 +72,27 @@ public class AplicacionVentana extends JFrame {
         JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
         //Fin declaracion submenu de Gestion de Intervenciones
 
+        //Declaro el submenu de Gestion de Perfiles
+        JMenuItem listarPerfiles = new JMenuItem("Listar Perfiles");
+
         //Menu Inicio
         //Menu de dashboard
-        InicioPrincipal.addActionListener(e -> {
+        modificarDatosPropios.addActionListener(e -> {
+            changePanel(new ModificarDatosPropiosGUI().getPanel());
+        });
+        cerrarSesion.addActionListener(e -> {
+            Sesion.getInstancia(null);
+            //cerar ventana y abrir login
+            LoginForm loginForm = null;
             try {
-                changePanel(new HomeGUI().getPanel());
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
-            } catch (ServiciosException ex) {
+                loginForm = new LoginForm();
+            } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException |
+                     IllegalAccessException ex) {
                 throw new RuntimeException(ex);
             }
+            loginForm.setVisible(true);
+            setVisible(false);
+
         });
         //Fin menu de dashboard
 
@@ -122,23 +139,50 @@ public class AplicacionVentana extends JFrame {
         });
 
         //Listado de Intervenciones
-
+        listarIntervenciones.addActionListener(e -> {
+            changePanel(new ListadoDeIntervencionesGUI().getPanel());
+        });
         //Registrar Intervencion
+        registrarIntervencion.addActionListener(e -> {
+            try {
+                changePanel(new IntervencionGUI().getPanel());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+
+        //Liestado de PErfiles
+        listarPerfiles.addActionListener(e -> {
+            changePanel(new PerfilesGUI().getPanel());
+        });
 
         //Fin establecimiento de funcionalidad de submenus
 
         //Agrego los submenus a los menus
+
+        //Inicio
+        InicioPrincipal.add(modificarDatosPropios);
+        InicioPrincipal.add(cerrarSesion);
+
+        //Gestion de Usuarios
         gestionUsuarios.add(listarUsuarios);
         gestionUsuarios.add(registrarUsuario);
 
+        //Gestion de Equipos
         gestionEquipos.add(listarEquipos);
         gestionEquipos.add(registrarEquipo);
 
+        //Gestion de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
         gestionUbicaciones.add(registrarUbicacion);
 
+        //Gestion de Intervenciones
         gestionIntervenciones.add(listarIntervenciones);
         gestionIntervenciones.add(registrarIntervencion);
+
+        //Gestion de Perfiles
+        gestionPerfiles.add(listarPerfiles);
         //Fin agregado de submenus a los menus
 
         //Agrego los menus a la barra de menu
@@ -147,6 +191,7 @@ public class AplicacionVentana extends JFrame {
         miMenuBar.add(gestionEquipos);
         miMenuBar.add(gestionUbicaciones);
         miMenuBar.add(gestionIntervenciones);
+        miMenuBar.add(gestionPerfiles);
         //Fin agregado de menus a la barra de menu
         return miMenuBar;
     }

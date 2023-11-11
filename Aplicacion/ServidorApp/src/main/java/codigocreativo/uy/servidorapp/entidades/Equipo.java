@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.entidades;
 
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -27,22 +28,22 @@ public class Equipo implements Serializable {
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_TIPO", nullable = false)
     private TiposEquipo idTipo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PROVEEDOR")
     private ProveedoresEquipo idProveedor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PAIS")
     private codigocreativo.uy.servidorapp.entidades.Pais idPais;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_MODELO")
     private ModelosEquipo idModelo;
@@ -54,14 +55,15 @@ public class Equipo implements Serializable {
     @Column(name = "FECHA_ADQUISICION")
     private LocalDate fechaAdquisicion;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", length = 20)
-    private String estado;
+    private Estados estado;
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 

@@ -3,12 +3,13 @@ package codigocreativo.uy.servidorapp.servicios;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 @Stateless
 public class UsuarioBean implements UsuarioRemote {
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 
@@ -38,11 +39,32 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public List<Usuario> obtenerUsuarios() {
-        return em.createQuery("SELECT u FROM Usuario u WHERE u.estado = 'alta'", Usuario.class).getResultList();
+        return em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
     }
 
     @Override
     public List<Usuario> obtenerUsuariosFiltrado(String filtro, String valor) {
         return em.createQuery("SELECT u FROM Usuario u WHERE u." + filtro + " LIKE '%" + valor + "%'", Usuario.class).getResultList();
+    }
+
+    @Override
+    public Usuario login(String usuario, String password) {
+        try {
+            Usuario user = em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :usuario AND u.contrasenia = :password", Usuario.class)
+                    .setParameter("usuario", usuario)
+                    .setParameter("password", password)
+                    .getSingleResult();
+
+            if (user != null && user.getContrasenia().equals(password)) {
+                return user;
+            } else {
+                return null;
+            }
+        } catch (NoResultException e) {
+            // Aquí puedes manejar la excepción como prefieras.
+            // Por ejemplo, podrías devolver null para indicar que el inicio de sesión falló.
+            System.out.println("No se encontro el usuario");
+            return null;
+        }
     }
 }

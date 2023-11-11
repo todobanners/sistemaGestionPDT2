@@ -8,5 +8,5 @@ public interface ModelosEquipoRemote {
     public void crearModelosEquipo(ModelosEquipo modelosEquipo);
     public void modificarModelosEquipo(ModelosEquipo modelosEquipo);
     public void obtenerModelosEquipo(Long id);
-    public List<ModelosEquipo> obtenerModelosEquipo();
+    public List<ModelosEquipo> listarModelosEquipo();
 }

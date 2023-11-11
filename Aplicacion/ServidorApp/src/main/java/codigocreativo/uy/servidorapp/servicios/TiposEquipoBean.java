@@ -10,7 +10,7 @@ import java.util.List;
 
 @Stateless
 public class TiposEquipoBean implements TiposEquipoRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 
@@ -33,7 +33,7 @@ public class TiposEquipoBean implements TiposEquipoRemote{
 
 
     @Override
-    public List<TiposEquipo> obtenerTiposEquipo() {
+    public List<TiposEquipo> listarTiposEquipo() {
         return em.createQuery("SELECT TiposEquipo FROM TiposEquipo tiposEquipo", TiposEquipo.class).getResultList();
     }
 }

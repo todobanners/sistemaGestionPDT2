@@ -1,19 +1,22 @@
 package codigocreativo.uy.servidorapp.servicios;
 
-import codigocreativo.uy.servidorapp.entidades.Equipos;
-import codigocreativo.uy.servidorapp.entidades.Ubicaciones;
+import codigocreativo.uy.servidorapp.entidades.Equipo;
+import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import java.util.List;
+
 @Stateless
 public class UbicacionBean implements UbicacionRemote {
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
     //Se crea la primer implementacion Registro de ubicaciones
     @Override
-    public void crearUbicacion(Ubicaciones ubi) throws ServiciosException {
+    public void crearUbicacion(Ubicacion ubi) throws ServiciosException {
         try {
             em.persist(ubi);
             em.flush();
@@ -23,7 +26,7 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
-    public void modificarUbicacion(Ubicaciones ubi) throws ServiciosException {
+    public void modificarUbicacion(Ubicacion ubi) throws ServiciosException {
         try {
             em.merge(ubi);
             em.flush();
@@ -35,7 +38,7 @@ public class UbicacionBean implements UbicacionRemote {
     @Override
     public void modificarUbicacionPorId(Long id) throws ServiciosException {
         try {
-            Ubicaciones ubi = em.find(Ubicaciones.class, id);
+            Ubicacion ubi = em.find(Ubicacion.class, id);
             em.merge(ubi);
             em.flush();
         } catch (Exception e) {
@@ -46,7 +49,7 @@ public class UbicacionBean implements UbicacionRemote {
     @Override
     public void modificarUbicacionPorNombre(String nombre) throws ServiciosException {
         try {
-            Ubicaciones ubi = em.find(Ubicaciones.class, nombre);
+            Ubicacion ubi = em.find(Ubicacion.class, nombre);
             em.merge(ubi);
             em.flush();
         } catch (Exception e) {
@@ -57,7 +60,7 @@ public class UbicacionBean implements UbicacionRemote {
     @Override
     public void borrarUbicacion(Long id) throws ServiciosException {
         try {
-            Ubicaciones ubi = em.find(Ubicaciones.class, id);
+            Ubicacion ubi = em.find(Ubicacion.class, id);
             em.remove(ubi);
             em.flush();
         } catch (Exception e) {
@@ -66,7 +69,7 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
-    public void moverEquipoDeUbicacion(Equipos equipo, Ubicaciones ubicacion) throws ServiciosException {
+    public void moverEquipoDeUbicacion(Equipo equipo, Long ubicacion) throws ServiciosException {
         try {
             equipo.setIdUbicacion(ubicacion);
             em.merge(equipo);
@@ -74,6 +77,16 @@ public class UbicacionBean implements UbicacionRemote {
         } catch (Exception e) {
             throw new ServiciosException("No se pudo mover el equipo");
         }
+    }
+
+    @Override
+    public List<Ubicacion> listarUbicaciones() throws ServiciosException {
+        return em.createQuery("SELECT u FROM Ubicacion u", Ubicacion.class).getResultList();
+    }
+
+    @Override
+    public String obtenerUbicacionPorId(Long id) throws ServiciosException {
+        return em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult().getNombre();
     }
 
 }

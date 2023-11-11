@@ -1,7 +1,6 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Instituciones;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -10,7 +9,7 @@ import java.util.List;
 @Stateless
 public class InstitucionBean implements InstitucionRemote{
 
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
     @Override
@@ -42,7 +41,12 @@ public class InstitucionBean implements InstitucionRemote{
     }
 
     @Override
-    public Instituciones obtenerInstitucionPorNombre(String nombre) {
-        return em.createQuery("SELECT i FROM Institucion i WHERE i.nombre = :nombre", Instituciones.class).setParameter("nombre", nombre).getSingleResult();
+    public Institucion obtenerInstitucionPorNombre(String nombre) {
+        return em.createQuery("SELECT i FROM Institucion i WHERE i.nombre = :nombre", Institucion.class).setParameter("nombre", nombre).getSingleResult();
+    }
+
+    @Override
+    public Institucion obtenerInstitucionPorId(Long id) {
+        return em.createQuery("SELECT i FROM Institucion i WHERE i.id = :id", Institucion.class).setParameter("id", id).getSingleResult();
     }
 }

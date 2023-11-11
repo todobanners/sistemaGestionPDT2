@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.entidades;
 
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario implements Serializable {
+    private static final long serialVersionUID = 1829283312323331L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_USUARIO", nullable = false)
@@ -37,14 +39,26 @@ public class Usuario implements Serializable {
     @Column(name = "FECHA_NACIMIENTO")
     private LocalDate fechaNacimiento;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", nullable = false, length = 20)
-    private String estado;
+    private Estados estado;
 
     @Column(name = "NOMBRE", nullable = false, length = 50)
     private String nombre;
 
     @Column(name = "APELLIDO", nullable = false, length = 50)
     private String apellido;
+
+    @Column(name = "nombre_usuario", unique = true, length = 100)
+    private String nombreUsuario;
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
     public Long getId() {
         return id;
@@ -102,11 +116,11 @@ public class Usuario implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
 

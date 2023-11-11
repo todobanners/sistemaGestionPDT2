@@ -13,7 +13,7 @@ public class UsuariosTelefono implements Serializable {
     private UsuariosTelefonoId id;
 
     @MapsId("idUsuario")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_USUARIO", nullable = false)
     private Usuario idUsuario;

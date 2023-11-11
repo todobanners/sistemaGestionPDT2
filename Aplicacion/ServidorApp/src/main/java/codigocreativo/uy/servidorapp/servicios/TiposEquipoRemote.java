@@ -10,5 +10,5 @@ public interface TiposEquipoRemote {
     public void crearTiposEquipo(TiposEquipo tiposEquipo);
     public void modificarTiposEquipo(TiposEquipo tiposEquipo);
     public void obtenerTiposEquipo(Long id);
-    public List<TiposEquipo> obtenerTiposEquipo();
+    public List<TiposEquipo> listarTiposEquipo();
 }

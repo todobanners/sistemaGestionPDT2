@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 @Stateless
 public class ModelosEquipoBean implements ModelosEquipoRemote{
-    @PersistenceContext
+    @PersistenceContext (unitName = "default")
     private EntityManager em;
 
 
@@ -31,7 +31,7 @@ public class ModelosEquipoBean implements ModelosEquipoRemote{
 
 
     @Override
-    public List<ModelosEquipo> obtenerModelosEquipo() {
+    public List<ModelosEquipo> listarModelosEquipo() {
         return em.createQuery("SELECT ModelosEquipo FROM ModelosEquipo modelosEquipo", ModelosEquipo.class).getResultList();
     }
 }

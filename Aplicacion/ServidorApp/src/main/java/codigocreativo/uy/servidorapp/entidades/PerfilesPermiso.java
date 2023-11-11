@@ -9,6 +9,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "PERFILES_PERMISOS")
 public class PerfilesPermiso implements Serializable {
+    private static final long serialVersionUID = -1586501627504876783L;
+
+
     @EmbeddedId
     private PerfilesPermisoId id;
 
