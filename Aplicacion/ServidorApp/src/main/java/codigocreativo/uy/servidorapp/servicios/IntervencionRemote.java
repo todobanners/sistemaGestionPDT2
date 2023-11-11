@@ -4,7 +4,6 @@ import codigocreativo.uy.servidorapp.entidades.Intervencion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Remote;
 
-import java.util.Collection;
 import java.util.List;
 @Remote
 public interface IntervencionRemote {

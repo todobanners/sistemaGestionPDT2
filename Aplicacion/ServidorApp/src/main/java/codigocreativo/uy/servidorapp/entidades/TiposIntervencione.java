@@ -44,4 +44,8 @@ public class TiposIntervencione implements Serializable {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return nombreTipo;
+    }
 }

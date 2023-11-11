@@ -1,16 +1,18 @@
 package org.example.vista;
 
-import codigocreativo.uy.servidorapp.entidades.Intervencion;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
-import codigocreativo.uy.servidorapp.entidades.TiposIntervencione;
+import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
 import org.example.Conexion;
 
+import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.List;
 
 public class IntervencionGUI {
     private JPanel panelIntervencion;
@@ -29,7 +31,7 @@ public class IntervencionGUI {
         return panelIntervencion;
     }
 
-    public IntervencionGUI() {
+    public IntervencionGUI() throws Exception {
         JFrame frame = new JFrame("Intervenciones");
 
         //Crear modelo de la tabla
@@ -47,81 +49,60 @@ public class IntervencionGUI {
             JOptionPane.showMessageDialog(null, "No se pudo conectar con el servidor");
         }
 
-        //Cargar datos de la tabla
-        //actualizarTabla();
+        TiposIntervencione inter1 = new TiposIntervencione();
+        TiposIntervencione inter2 = new TiposIntervencione();
+        TiposIntervencione inter3 = new TiposIntervencione();
+        inter1.setNombreTipo("Prevencion");
+        inter1.setId(1L);
+        inter2.setNombreTipo("Falla");
+        inter2.setId(2L);
+        inter3.setNombreTipo("Resolucion");
+        inter3.setId(3L);
+        comboTipodeIntervencion.addItem(inter1);
+        comboTipodeIntervencion.addItem(inter2);
+        comboTipodeIntervencion.addItem(inter3);
 
-        //registrarIntervencionButton.addActionListener(new ActionListener() {
-          //  @Override
-            //public void actionPerformed(ActionEvent e) {
-              //  Intervencion intervencion = new Intervencion();
-               // intervencion.setFechaHora(textFechaHora.getText());
-                //intervencion.setMotivo(textMotivo.getText());
-                //intervencion.setIdEquipo(textIdEquipo.getText());
-                //intervencion.setComentarios(textComentarios.getText());
-                //intervencionRemoteBean.crear(intervencion));
+
         registrarIntervencionButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
+                Intervencion intervencion = new Intervencion();
+                Usuario user = new Usuario();//creo obj usuario
+                user.setId(1L);//le asigno un id hardcodeado
+                intervencion.setIdUsuario(user); //agrego el obj usuario con solo el id
+                                                                  intervencion.setFechaHora(LocalDate.parse(textFechaHora.getText()));
+                                                                  intervencion.setMotivo(textMotivo.getText());
+                                                                  Equipo equipo = new Equipo();
+                                                                  equipo.setId(Long.valueOf(textIdEquipo.getText()));
+                                                                  intervencion.setIdEquipo(equipo);
+                                                                  intervencion.setComentarios(textComentarios.getText());
+                                                                  intervencion.setIdTipo((TiposIntervencione) comboTipodeIntervencion.getSelectedItem());
+                                                                  try {
 
-                mostrarPopUpConfirmacion();
-            }
-        });
-
+                                                                      Conexion.obtenerIntervencionBean().crear(intervencion);
+                                                                      actualizarTabla();
+                                                                  } catch (ServiciosException ex) {
+                                                                      throw new RuntimeException(ex);
+                                                                  } catch (NamingException ex) {
+                                                                      throw new RuntimeException(ex);
+                                                                  }
+                                                              }
+                                                          }
+            );
 
     }
-
-    private void mostrarPopUpConfirmacion() {
-        JFrame popUpFrame = new JFrame ("Confirmación");
-        popUpFrame.setSize(450,100);
-
-        // Crear un JLabel con el mensaje de confirmación
-        JLabel mensajeLabel = new JLabel("¿Deseas confirmar el registro de Intervención?");
-        mensajeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        // Crear botones de confirmar y cancelar en el panel emergente
-        JButton confirmarButton = new JButton("Confirmar");
-        JButton cancelarButton = new JButton("Cancelar");
-
-        // Agregar ActionListener al botón de confirmar
-        confirmarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(popUpFrame, "Registro realizado con éxito");
-                popUpFrame.dispose(); // Cerrar el panel emergente después de confirmar
-            }
+    public void actualizarTabla() throws NamingException, ServiciosException {
+        DefaultTableModel model = (DefaultTableModel) tablaIntervenciones.getModel();
+        model.setRowCount(0);
+        Conexion.obtenerIntervencionBean().obtenerTodas().forEach(intervencion -> {
+            model.addRow(new Object[]{
+                    intervencion.getFechaHora(),
+                    intervencion.getIdTipo(),
+                    intervencion.getMotivo(),
+                    intervencion.getIdEquipo(),
+                    intervencion.getComentarios()
+            });
         });
-
-        // Agregar ActionListener al botón de cancelar
-        cancelarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(popUpFrame, "Registro cancelado");
-                popUpFrame.dispose(); // Cerrar el panel emergente después de cancelar
-            }
-        });
-
-        // Crear un panel para organizar los botones en el panel emergente
-        JPanel panelEmergente = new JPanel();
-        panelEmergente.add(confirmarButton);
-        panelEmergente.add(cancelarButton);
-
-        // Agregar componentes al panel emergente
-        popUpFrame.add(mensajeLabel);
-        popUpFrame.add(panelEmergente);
-
-        // Establecer el diseño del panel emergente
-        popUpFrame.setLayout(new BoxLayout(popUpFrame.getContentPane(), BoxLayout.Y_AXIS));
-
-        // Hacer visible el panel emergente
-        popUpFrame.setVisible(true);
     }
-
-
-};
-
-
-
-
-
-
-
+}
