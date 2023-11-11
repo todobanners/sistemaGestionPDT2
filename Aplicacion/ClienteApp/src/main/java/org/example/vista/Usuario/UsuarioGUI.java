@@ -3,7 +3,7 @@ package org.example.vista.Usuario;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -15,16 +15,17 @@ import java.util.List;
 
 public class UsuarioGUI {
     private JPanel userGUI;
-    private JScrollPane scrollTabla;
+    private JComboBox filtroEstadoCombo;
+    private JComboBox filtroTipoCombo;
+    private JTextField filtroNombre;
+    private JTextField filtroApellido;
+    private JTextField filtroUsername;
+    private JTextField filtroEmail;
+    private JButton filtroLimpiarBoton;
+    private JButton filtroFiltrarBoton;
     private JTable tableUsuarios;
-    private JComboBox comboEstado;
-    private JComboBox comboFiltro;
-    private JTextField textFieldValorFiltro;
-    private JButton aplicarButton;
-    private JButton Limpiar;
-    private JPanel panel;
-    JDateChooser fechaChooser = new JDateChooser();
 
+    JDateChooser fechaChooser = new JDateChooser();
     public JPanel getPanel() {
         return userGUI;
     }
@@ -62,27 +63,17 @@ public class UsuarioGUI {
         }
 
         for (Estados e : Estados.values()) {
-            comboEstado.addItem(e);
+            filtroEstadoCombo.addItem(e);
         }
 
-
-        comboFiltro.addItem("nombre");
-        comboFiltro.addItem("apellido");
-        comboFiltro.addItem("email");
-
-
-        aplicarButton.addActionListener(new ActionListener() {
+        filtroFiltrarBoton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 model.setRowCount(0);//limpia la tabla
                 //Se muestra un listado con los usuarios registrados en la tabla
                 tableUsuarios.setModel(model);
                 //le introducimos datos a la tabla
                 List listaUsuarios = null;
-                try {
-                    listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado((String) comboFiltro.getSelectedItem(), textFieldValorFiltro.getText());
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }
+                //listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado((String) comboFiltro.getSelectedItem(), textFieldValorFiltro.getText());
 
                 for (int i = 0; i < listaUsuarios.size(); i++) {
                     Usuario usuario = (Usuario) listaUsuarios.get(i);
@@ -100,12 +91,12 @@ public class UsuarioGUI {
                 }
             }
         });
-        Limpiar.addActionListener(new ActionListener() {
+        filtroLimpiarBoton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                //TODO: Colocar funcion de limpiar
             }
         });
-        comboEstado.addActionListener(new ActionListener() {
+        /*comboEstado.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 model.setRowCount(0);//limpia la tabla
                 //Se muestra un listado con los usuarios registrados en la tabla
@@ -133,6 +124,6 @@ public class UsuarioGUI {
                     model.addRow(data);
                 }
             }
-        });
+        });*/
     }
 }
