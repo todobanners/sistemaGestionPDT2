@@ -1,7 +1,7 @@
 package org.example.controlador;
 
-import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.*;
+import org.example.vista.Usuario.LoginForm;
 import org.example.vista.Usuario.ModificarDatosPropiosGUI;
 import org.example.vista.Usuario.UsuarioGUI;
 import org.example.vista.Usuario.UsuarioRegistroGUI;
@@ -86,7 +86,7 @@ public class AplicacionVentana extends JFrame {
             LoginForm loginForm = null;
             try {
                 loginForm = new LoginForm();
-            } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException |
+            } catch (ClassNotFoundException | InstantiationException |
                      IllegalAccessException ex) {
                 throw new RuntimeException(ex);
             }

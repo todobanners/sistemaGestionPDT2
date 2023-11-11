@@ -2,19 +2,12 @@ package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.Permiso;
 import codigocreativo.uy.servidorapp.servicios.PermisoRemote;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 import org.jdesktop.swingx.JXTable;
-import org.jdesktop.swingx.hyperlink.AbstractHyperlinkAction;
-import org.jdesktop.swingx.renderer.DefaultTableRenderer;
-import org.jdesktop.swingx.renderer.HyperlinkProvider;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PermisosGUI {
     private JPanel panelPermisos;

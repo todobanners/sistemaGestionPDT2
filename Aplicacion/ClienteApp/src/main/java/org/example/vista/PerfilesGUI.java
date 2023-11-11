@@ -3,7 +3,7 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.servicios.PerfilRemote;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.hyperlink.AbstractHyperlinkAction;
 import org.jdesktop.swingx.renderer.DefaultTableRenderer;

@@ -3,13 +3,12 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import org.example.Conexion;
+import org.example.modelo.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class IngresarUbicacionGUI {
     private JComboBox<String> Sector;
