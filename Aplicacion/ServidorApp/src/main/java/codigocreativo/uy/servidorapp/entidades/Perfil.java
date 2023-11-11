@@ -25,6 +25,7 @@ public class Perfil implements Serializable {
     @Column(name = "ESTADO", nullable = false, length = 20)
     private Estados estado;
 
+    @Transient
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PERFILES_PERMISOS",
             joinColumns = @JoinColumn(name = "ID_PERFIL"),
