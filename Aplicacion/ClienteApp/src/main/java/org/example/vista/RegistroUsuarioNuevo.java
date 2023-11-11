@@ -2,6 +2,8 @@ package org.example.vista;
 
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.entidades.UsuariosTelefono;
+import codigocreativo.uy.servidorapp.entidades.UsuariosTelefonoId;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
@@ -55,7 +57,13 @@ public class RegistroUsuarioNuevo extends JFrame {
 
     aceptarButton.addActionListener(e -> {
             Usuario usuario = new Usuario();
-            usuario.setNombre(nombreTextField.getText());
+
+        try {
+            usuario.setIdInstitucion(Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(1L));
+        } catch (NamingException ex) {
+            throw new RuntimeException(ex);
+        }
+        usuario.setNombre(nombreTextField.getText());
             usuario.setApellido(apellidoTextField.getText());
             usuario.setCedula(cedulaTextField.getText());
             //El nombre de usuario esta formado por el nombre.apellido en minuscula
@@ -88,6 +96,9 @@ public class RegistroUsuarioNuevo extends JFrame {
             Perfil perfil = (Perfil) comboBoxTipo.getSelectedItem();
             usuario.setIdPerfil(perfil);
             usuario.setEstado(Estados.SIN_VALIDAR);
+        UsuariosTelefonoId usuariosTelefonoId = new UsuariosTelefonoId();
+        usuariosTelefonoId.setNumero(telefonoTextField.getText());
+        usuariosTelefonoId.setIdUsuario(usuario.getId());
 
             //Verificar contraseña que sean iguales y contengan almenos 8 caracteres letras y numeros
             String clave1 = new String(clave.getPassword());

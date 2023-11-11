@@ -44,4 +44,9 @@ public class InstitucionBean implements InstitucionRemote{
     public Institucion obtenerInstitucionPorNombre(String nombre) {
         return em.createQuery("SELECT i FROM Institucion i WHERE i.nombre = :nombre", Institucion.class).setParameter("nombre", nombre).getSingleResult();
     }
+
+    @Override
+    public Institucion obtenerInstitucionPorId(Long id) {
+        return em.createQuery("SELECT i FROM Institucion i WHERE i.id = :id", Institucion.class).setParameter("id", id).getSingleResult();
+    }
 }
