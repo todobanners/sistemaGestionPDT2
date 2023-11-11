@@ -13,6 +13,7 @@ public class Conexion {
     //
     private static final String EJB_USUARIO = "ejb:/ServidorApp-1.0-SNAPSHOT/UsuarioBean!codigocreativo.uy.servidorapp.servicios.UsuarioRemote"; // Nombre del EJB de usuario
     private static final String EJB_PERFIL = "ejb:/ServidorApp-1.0-SNAPSHOT/PerfilBean!codigocreativo.uy.servidorapp.servicios.PerfilRemote"; // Nombre del EJB de perfil
+    private static final String EJB_PERMISO = "ejb:/ServidorApp-1.0-SNAPSHOT/PermisoBean!codigocreativo.uy.servidorapp.servicios.PermisoRemote"; // Nombre del EJB de perfil
     private static final String EJB_INSTITUCION = "ejb:/ServidorApp-1.0-SNAPSHOT/InstitucionBean!codigocreativo.uy.servidorapp.servicios.InstitucionRemote"; // Nombre del EJB de institucion
     private static final String EJB_EQUIPO = "ejb:/ServidorApp-1.0-SNAPSHOT/EquipoBean!codigocreativo.uy.servidorapp.servicios.EquipoRemote"; // Nombre del EJB de equipo
     private static final String EJB_UBICACION = "ejb:/ServidorApp-1.0-SNAPSHOT/UbicacionBean!codigocreativo.uy.servidorapp.servicios.UbicacionRemote"; // Nombre del EJB de ubicacion
@@ -51,6 +52,9 @@ public class Conexion {
     }
     public static UbicacionRemote obtenerUbicacionBean() throws NamingException { // Obtiene el EJB de ubicacion
         return (UbicacionRemote) ctx.lookup(EJB_UBICACION); // Devuelve el EJB de ubicacion
+    }
+    public static PermisoRemote obtenerPermisoBean() throws NamingException { // Obtiene el EJB de permiso
+        return (PermisoRemote) ctx.lookup(EJB_PERMISO); // Devuelve el EJB de permiso
     }
     public static IntervencionRemote obtenerIntervencionBean() throws NamingException { // Obtiene el EJB de Intervencion
         return (IntervencionRemote) ctx.lookup(EJB_INTERVENCION); //Devuelve el EJB de intervención
