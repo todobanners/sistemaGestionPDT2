@@ -56,7 +56,7 @@ public class UsuarioGUI {
             data[4] = usuario.getEmail();
             data[5] = usuario.getFechaNacimiento();
             data[6] = usuario.getEstado();
-            data[7] = usuario.getIdInstitucion().getNombre();
+            data[7] = usuario.getIdInstitucion();
             data[8] = usuario.getIdPerfil().getNombrePerfil();
             model.addRow(data);
         }

@@ -1,9 +1,6 @@
 package org.example.vista;
 
-import codigocreativo.uy.servidorapp.entidades.Perfil;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
-import codigocreativo.uy.servidorapp.entidades.UsuariosTelefono;
-import codigocreativo.uy.servidorapp.entidades.UsuariosTelefonoId;
+import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
 import org.example.Conexion;
@@ -58,14 +55,13 @@ public class RegistroUsuarioNuevo extends JFrame {
     aceptarButton.addActionListener(e -> {
             Usuario usuario = new Usuario();
 
-        try {
-            usuario.setIdInstitucion(Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(1L));
-        } catch (NamingException ex) {
-            throw new RuntimeException(ex);
-        }
+        Institucion institucion = new Institucion();
+        institucion.setId(1L);
+            usuario.setIdInstitucion(institucion);
+
         usuario.setNombre(nombreTextField.getText());
             usuario.setApellido(apellidoTextField.getText());
-            usuario.setCedula(cedulaTextField.getText());
+            usuario.setCedula(cedulaTextField.getText());//TODO: Validar que la cedula sea valida
             //El nombre de usuario esta formado por el nombre.apellido en minuscula
             usuario.setNombreUsuario(userTextField.getText());
 
