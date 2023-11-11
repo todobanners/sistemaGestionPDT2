@@ -19,9 +19,10 @@ import java.util.Objects;
 /*
     TODO:
         * En filtrado queda formatear la consulta para que en la
-          seleccion de filtro coincida con los campos de la tabla
-        * Se puede hacer un switch case para cada tipo de filtro
+          seleccion de filtro coincida con los campos de la tabla   //Realizado
+        * Se puede hacer un switch case para cada tipo de filtro    //Realizado
         * Falta que cuando se elija email se valide que sea un email
+        *falta filtrar por ID
         * En el listado queda detalle estetico de que campo ID sea
           mas pequeño
         * En Acciones falta la funcionalidad del boton Editar y Borrar
@@ -72,7 +73,7 @@ public class UsuarioGUI {
         filtroFiltrarBoton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado((String) filtroBuscarCombo.getSelectedItem(), filtroValor.getText());
+                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
                     generarTabla(listaUsuarios);
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
@@ -223,5 +224,28 @@ public class UsuarioGUI {
         filtroBuscarCombo.addItem("Apellido");
         filtroBuscarCombo.addItem("Nombre de usuario");
         filtroBuscarCombo.addItem("email");
+    }
+
+    public String filtroBuscador(int campo){
+        String eleccion = "";
+        switch (campo){
+            case 0:
+                //Filtro por nombre
+                eleccion = "nombre";
+                break;
+            case 1:
+                //Filtro por apellido
+                eleccion = "apellido";
+                break;
+            case 2:
+                //Filtro por nombre de usuario
+                eleccion = "nombreUsuario";
+                break;
+            case 3:
+                //Filtro por email
+                eleccion = "email";
+                break;
+        }
+        return eleccion;
     }
 }
