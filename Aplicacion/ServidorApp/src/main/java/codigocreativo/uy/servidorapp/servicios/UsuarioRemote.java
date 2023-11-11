@@ -10,7 +10,7 @@ public interface UsuarioRemote {
     public void crearUsuario(Usuario u);
     public void modificarUsuario(Usuario u);
     public void eliminarUsuario(Usuario u);
-    public void obtenerUsuario(Long id);
+    public Usuario obtenerUsuario(Long id);
     public List<Usuario> obtenerUsuarios();
     public List<Usuario> obtenerUsuariosFiltrado(String filtro, String valor);
     public Usuario login(String usuario, String password);

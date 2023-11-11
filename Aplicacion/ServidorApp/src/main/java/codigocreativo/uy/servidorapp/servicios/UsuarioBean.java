@@ -27,14 +27,14 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public void eliminarUsuario(Usuario u) {
-        em.createQuery("UPDATE Usuario u SET u.estado = 'baja' WHERE u.id = :id")
+        em.createQuery("UPDATE Usuario u SET u.estado = 'ELIMINADO' WHERE u.id = :id")
                 .setParameter("id", u.getId())
                 .executeUpdate();
     }
 
     @Override
-    public void obtenerUsuario(Long id) {
-        em.find(Usuario.class, id);
+    public Usuario obtenerUsuario(Long id) {
+        return em.find(Usuario.class, id);
     }
 
     @Override
