@@ -46,20 +46,37 @@ public class ModificarDatosPropiosGUI {
 
         confirmarButton.addActionListener(e -> {
            //Guardo los datos en la tabla
-            Usuario userModificado = new Usuario();
-            userModificado.setId(Long.parseLong(id.getText()));
-            userModificado.setNombreUsuario(usernameTextField.getText());
-            userModificado.setContrasenia(passwordField1.getText());
-            userModificado.setEmail(email.getText());
-            userModificado.setCedula(cedula.getText());
-            userModificado.setApellido(apellido1.getText());
-            userModificado.setNombre(nombre1.getText());
 
-            try {
-                Conexion.obtenerUsuarioBean().modificarUsuario(userModificado);
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
+            usuario.setId(Long.parseLong(id.getText()));
+            usuario.setNombreUsuario(usernameTextField.getText());
+            usuario.setContrasenia(passwordField1.getText());
+            usuario.setEmail(email.getText());
+            usuario.setCedula(cedula.getText());
+            usuario.setApellido(apellido1.getText());
+            usuario.setNombre(nombre1.getText());
+
+            //desplegar mensaje de confirmación para aceptar o cancelar
+            //si acepta, guardar los datos en la base de datos
+            //si cancela, no hacer nada
+
+            JOptionPane.showMessageDialog(null, "¿Está seguro que desea modificar los datos?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (JOptionPane.YES_OPTION == 0) {
+                //guardar los datos en la base de datos
+                //desplegar mensaje de confirmación de que se guardaron los datos
+                try {
+                    Conexion.obtenerUsuarioBean().modificarUsuario(usuario);
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                JOptionPane.showMessageDialog(null, "Los datos se han modificado correctamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
             }
+            else {
+                //no hacer nada
+            }
+
+
 
 
         });
