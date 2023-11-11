@@ -4,6 +4,7 @@ import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
+import codigocreativo.uy.servidorapp.servicios.TipoIntervencioneRemote;
 import org.example.Conexion;
 
 import javax.naming.NamingException;
@@ -36,7 +37,7 @@ public class IntervencionGUI {
 
         //Crear modelo de la tabla
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Fecha / Hora");
+        model.addColumn("Fecha");
         model.addColumn("Tipo de Intervención");
         model.addColumn("Motivo");
         model.addColumn("Id del Equipo");
@@ -49,47 +50,33 @@ public class IntervencionGUI {
             JOptionPane.showMessageDialog(null, "No se pudo conectar con el servidor");
         }
 
-        TiposIntervencione inter1 = new TiposIntervencione();
-        TiposIntervencione inter2 = new TiposIntervencione();
-        TiposIntervencione inter3 = new TiposIntervencione();
-        inter1.setNombreTipo("Prevencion");
-        inter1.setId(1L);
-        inter2.setNombreTipo("Falla");
-        inter2.setId(2L);
-        inter3.setNombreTipo("Resolucion");
-        inter3.setId(3L);
-        comboTipodeIntervencion.addItem(inter1);
-        comboTipodeIntervencion.addItem(inter2);
-        comboTipodeIntervencion.addItem(inter3);
-
+        //obtener los tipos de intervencines
+        for (TiposIntervencione tipoIntervencione : Conexion.obtenerTiposIntervencionBean().obtenerTiposIntervenciones()) {
+            comboTipodeIntervencion.addItem(tipoIntervencione);
+        }
 
         registrarIntervencionButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 Intervencion intervencion = new Intervencion();
                 Usuario user = new Usuario();//creo obj usuario
                 user.setId(1L);//le asigno un id hardcodeado
                 intervencion.setIdUsuario(user); //agrego el obj usuario con solo el id
-                                                                  intervencion.setFechaHora(LocalDate.parse(textFechaHora.getText()));
-                                                                  intervencion.setMotivo(textMotivo.getText());
-                                                                  Equipo equipo = new Equipo();
-                                                                  equipo.setId(Long.valueOf(textIdEquipo.getText()));
-                                                                  intervencion.setIdEquipo(equipo);
-                                                                  intervencion.setComentarios(textComentarios.getText());
-                                                                  intervencion.setIdTipo((TiposIntervencione) comboTipodeIntervencion.getSelectedItem());
-                                                                  try {
-
-                                                                      Conexion.obtenerIntervencionBean().crear(intervencion);
-                                                                      actualizarTabla();
-                                                                  } catch (ServiciosException ex) {
-                                                                      throw new RuntimeException(ex);
-                                                                  } catch (NamingException ex) {
-                                                                      throw new RuntimeException(ex);
-                                                                  }
-                                                              }
-                                                          }
-            );
+                intervencion.setFechaHora(LocalDate.parse(textFechaHora.getText()));
+                intervencion.setMotivo(textMotivo.getText());
+                Equipo equipo = new Equipo();
+                equipo.setId(Long.valueOf(textIdEquipo.getText()));
+                intervencion.setIdEquipo(equipo);
+                intervencion.setComentarios(textComentarios.getText());
+                intervencion.setIdTipo((TiposIntervencione) comboTipodeIntervencion.getSelectedItem());
+                    try {
+                        Conexion.obtenerIntervencionBean().crear(intervencion);
+                        actualizarTabla();
+                    } catch (ServiciosException | NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+            }
+        });
 
     }
     public void actualizarTabla() throws NamingException, ServiciosException {
