@@ -5,14 +5,18 @@ import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.Conexion;
 import org.example.controlador.AplicacionVentana;
+import org.example.controlador.Sesion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+
+import static javax.swing.UIManager.setLookAndFeel;
 
 public class LoginForm extends JFrame {
     private JButton loginButton;
@@ -22,13 +26,33 @@ public class LoginForm extends JFrame {
     private JButton cancelarButton;
     private JLabel crearCuenta;
     private JButton soyUnBotonQueButton;
+    private JLabel logo;
+    private JPanel formularioLogo;
+    private JLabel userText;
+    private JLabel claveText;
 
-    public LoginForm() {
+    public LoginForm() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         add(panel1);
         pack();
         setSize(500, 700);
+        setBackground(Color.WHITE);
+        ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");
+        Image img = imagen.getImage();
+        Image imgRedimensionada = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        ImageIcon imagenRedimensionada = new ImageIcon(imgRedimensionada);
+        logo.setIcon(imagenRedimensionada);
+        Font f = new Font("Roboto", Font.PLAIN, 16);
+        userText.setFont(f);
+        claveText.setFont(f);
+        textField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+        textField1.setFont(f);
+        passwordField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+        passwordField1.setFont(f);
+        loginButton.setFont(f);
 
+        cancelarButton.setFont(f);
         loginButton.addActionListener(e -> {
             try {
                 login();
@@ -45,7 +69,8 @@ public class LoginForm extends JFrame {
                 super.mousePressed(e);
                 try {
                     new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
-                } catch (NamingException ex) {
+                } catch (NamingException | UnsupportedLookAndFeelException | ClassNotFoundException |
+                         InstantiationException | IllegalAccessException ex) {
                     throw new RuntimeException(ex);
                 }
                 setVisible(false);
@@ -109,9 +134,7 @@ public class LoginForm extends JFrame {
                     ///////////////////////////////////////////////////////////////
 
 
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                } catch (ServiciosException ex) {
+                } catch (NamingException | ServiciosException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -130,11 +153,8 @@ public class LoginForm extends JFrame {
             throw new Exception("Usuario aun no validado, consulte a un administrador para conocer su estado");
         } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
             throw new Exception("Usuario eliminado");
-        } else if (username.equals("admin") || password.equals("admin")) { // ESTA LINEA ES SOLO PARA PROBAR LA APLICACION
-            JOptionPane.showMessageDialog(null, "Bienvenido");
-            setVisible(false);
-            new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
         } else {
+            Sesion sesion = Sesion.getInstancia(usuario);
             JOptionPane.showMessageDialog(null, "Bienvenido");
             setVisible(false);
             new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
