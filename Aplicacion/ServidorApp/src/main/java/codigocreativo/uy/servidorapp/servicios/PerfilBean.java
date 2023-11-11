@@ -4,8 +4,11 @@ import codigocreativo.uy.servidorapp.entidades.Perfil;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Set;
+
 @Stateless
 public class PerfilBean implements PerfilRemote {
 @PersistenceContext (unitName = "default")
@@ -25,19 +28,20 @@ public class PerfilBean implements PerfilRemote {
 
     @Override
     public void eliminarPerfil(Perfil p) {
-        em.createQuery("UPDATE Perfil p SET p.estado = 'baja' WHERE p.id = :id")
-                .setParameter("id", p.getId())
-                .executeUpdate();
+        //use the enum to set the state
+        em.createQuery("UPDATE Perfil p SET p.estado = 'ELIMINADO' WHERE p.id = :id").setParameter("id", p.getId()).executeUpdate();
     }
 
     @Override
-    public void obtenerPerfil(Long id) {
-        em.find(Perfil.class, id);
+    public Perfil obtenerPerfil(Long id) {
+        return em.find(Perfil.class, id);
     }
 
     @Override
     public List<Perfil> obtenerPerfiles() {
         //retornar perfiles activos
-        return em.createQuery("SELECT p FROM Perfil p WHERE p.estado = 'ACTIVO'", Perfil.class).getResultList();
+        return em.createQuery("SELECT p FROM Perfil p", Perfil.class).getResultList();
     }
+
+
 }

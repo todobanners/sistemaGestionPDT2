@@ -7,6 +7,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "PERMISOS")
 public class Permiso implements Serializable {
+    private static final long serialVersionUID = -1586501627504876783L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_PERMISO", nullable = false)

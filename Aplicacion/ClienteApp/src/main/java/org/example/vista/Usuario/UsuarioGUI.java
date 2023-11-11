@@ -102,36 +102,7 @@ public class UsuarioGUI {
         });
         Limpiar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                /*// se crean unos datos de prueba para mostrar en la tabla
-                Perfil perfil = new Perfil();
-                perfil.setNombrePerfil("Administrador");
-                perfil.setEstado("alta");
-                Perfil perfil2 = new Perfil();
-                perfil2.setNombrePerfil("Usuario");
-                perfil2.setEstado("alta");
-                Perfil perfil3 = new Perfil();
-                perfil3.setEstado("alta");
-                perfil3.setNombrePerfil("Invitado");
-                try {
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil);
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil2);
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil3);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }
-                Institucion institucion = new Institucion();
-                institucion.setNombre("UTEC");
-                Institucion institucion2 = new Institucion();
-                institucion2.setNombre("UDELAR");
-                Institucion institucion3 = new Institucion();
-                institucion3.setNombre("ORT");
-                try {
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion2);
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion3);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }*/
+               //TODO: Colocar funcion de limpiar
             }
         });
         comboEstado.addActionListener(new ActionListener() {
