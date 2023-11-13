@@ -10,6 +10,7 @@ import org.example.modelo.Conexion;
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,15 +20,16 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /*
     TODO:
         * En filtrado queda formatear la consulta para que en la
           seleccion de filtro coincida con los campos de la tabla           //Realizado
         * Se puede hacer un switch case para cada tipo de filtro            //Realizado
-        * Falta que cuando se elija email se valide que sea un email
-        *falta filtrar por ID
+        * Falta que cuando se elija email se valide que sea un email        //Realizado
         * En el listado queda detalle estetico de que campo ID sea
-          mas pequeño
+          mas pequeño                                                       //Realizado
         * En Acciones falta la funcionalidad del boton Editar y Borrar
         * Falta que se muestre el calendario                                //Realizado
         * Falta que se muestre el combo de institucion                      //Realizado
@@ -75,6 +77,11 @@ public class UsuarioGUI {
         filtroFiltrarBoton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
+                    //Verificar si se selecciono el campo email y validar que sea un email
+                    if (filtroBuscarCombo.getSelectedIndex() == 3 && !validarEmail(filtroValor.getText())) {
+                            JOptionPane.showMessageDialog(null, "El campo email debe ser un email valido");
+                            return;
+                    }
                     List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
                     generarTabla(listaUsuarios);
                 } catch (NamingException ex) {
@@ -181,6 +188,8 @@ public class UsuarioGUI {
 
     public void generarTabla(List tabla) throws NamingException {
         DefaultTableModel model = new DefaultTableModel();
+
+        //Se le asignan los nombres a las columnas
         model.addColumn("ID");
         model.addColumn("Cedula");
         model.addColumn("Nombre");
@@ -191,6 +200,8 @@ public class UsuarioGUI {
         model.addColumn("Institucion");
         model.addColumn("Tipo de user");
         tableUsuarios.setModel(model);
+        TableColumn columna = tableUsuarios.getColumnModel().getColumn(0);
+        columna.setPreferredWidth(30);
         //le introducimos datos a la tabla
         model.setRowCount(0);
         for (int i = 0; i < tabla.size(); i++) {
@@ -252,5 +263,12 @@ public class UsuarioGUI {
                 break;
         }
         return eleccion;
+    }
+
+    public boolean validarEmail(String email){
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 }
