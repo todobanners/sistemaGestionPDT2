@@ -14,19 +14,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 /*
     TODO:
         * En filtrado queda formatear la consulta para que en la
-          seleccion de filtro coincida con los campos de la tabla   //Realizado
-        * Se puede hacer un switch case para cada tipo de filtro    //Realizado
+          seleccion de filtro coincida con los campos de la tabla           //Realizado
+        * Se puede hacer un switch case para cada tipo de filtro            //Realizado
         * Falta que cuando se elija email se valide que sea un email
         *falta filtrar por ID
         * En el listado queda detalle estetico de que campo ID sea
           mas pequeño
         * En Acciones falta la funcionalidad del boton Editar y Borrar
-        * Falta que se muestre el calendario
+        * Falta que se muestre el calendario                                //Realizado
         * Falta que se muestre el combo de institucion                      //Realizado
         * Falta las validaciones y mensajes de error
         * Falta el telefono, tanto en registro como en visualizacion
@@ -67,8 +70,7 @@ public class UsuarioGUI {
         List<Usuario> tabla = Conexion.obtenerUsuarioBean().obtenerUsuarios();
         generarTabla(tabla);
         cargarCombos();
-
-
+        accContenedorFecha.add(fechaChooser);//agrego el calendario al panel
 
         filtroFiltrarBoton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -142,7 +144,10 @@ public class UsuarioGUI {
                     }
                     accComboEstado.setSelectedItem(usuario.getEstado());
                     accCampoUsername.setText(usuario.getNombreUsuario());
-                    //fechaChooser.setDate(usuario.getFechaNacimiento());
+                    //convertir LocalDate a Date
+                    Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    fechaChooser.setDate(fecha);
+
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
