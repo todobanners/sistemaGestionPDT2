@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -61,6 +60,7 @@ public class UsuarioGUI {
     private JComboBox accComboEstado;
     private JTextField accCampoUsername;
     private JButton limpiarCamposButton;
+    private JTextField accCampoID;
 
     JDateChooser fechaChooser = new JDateChooser();
     public JPanel getPanel() {
@@ -151,6 +151,7 @@ public class UsuarioGUI {
                     }
                     accComboEstado.setSelectedItem(usuario.getEstado());
                     accCampoUsername.setText(usuario.getNombreUsuario());
+                    accCampoID.setText(usuario.getId().toString());
                     //convertir LocalDate a Date
                     Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
                     fechaChooser.setDate(fecha);
@@ -174,7 +175,53 @@ public class UsuarioGUI {
                 accComboInstitucion.setSelectedIndex(0);
                 accComboEstado.setSelectedIndex(0);
                 accCampoUsername.setText("");
+                accCampoID.setText("");
                 fechaChooser.setDate(null);
+            }
+        });
+        editarSeleccionadoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Long id = Long.valueOf(accCampoID.getText());
+                Usuario usuario = null;
+                try {
+                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+                    usuario.setNombre(accCampoNombre.getText());
+                    usuario.setApellido(accCampoApellido.getText());
+                    usuario.setCedula(accCampoCedula.getText());
+                    usuario.setEmail(accCampoEmail.getText());
+                    //usuario.setTelefono(accCampoTelefono.getText());
+                    usuario.setIdPerfil((Perfil) accComboPerfil.getSelectedItem());
+                    usuario.setIdInstitucion((Institucion) accComboInstitucion.getSelectedItem());
+                    usuario.setEstado((Estados) accComboEstado.getSelectedItem());
+                    usuario.setNombreUsuario(accCampoUsername.getText());
+                    //convertir LocalDate a Date
+                    Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    fechaChooser.setDate(fecha);
+                    Conexion.obtenerUsuarioBean().modificarUsuario(usuario);
+                    JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                    generarTabla(listaUsuarios);
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        borrarSeleccionadoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Long id = Long.valueOf(accCampoID.getText());
+                Usuario usuario = null;
+                try {
+                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+                    Conexion.obtenerUsuarioBean().eliminarUsuario(usuario);
+                    JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
+                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                    generarTabla(listaUsuarios);
+                    limpiarCamposButton.doClick();
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
