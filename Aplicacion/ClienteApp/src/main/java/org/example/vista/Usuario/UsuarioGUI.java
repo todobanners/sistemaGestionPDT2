@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
         * Falta que cuando se elija email se valide que sea un email        //Realizado
         * En el listado queda detalle estetico de que campo ID sea
           mas pequeño                                                       //Realizado
-        * En Acciones falta la funcionalidad del boton Editar y Borrar
+        * En Acciones falta la funcionalidad del boton Editar y Borrar      //Realizado
         * Falta que se muestre el calendario                                //Realizado
         * Falta que se muestre el combo de institucion                      //Realizado
         * Falta las validaciones y mensajes de error
@@ -40,6 +40,8 @@ import java.util.regex.Pattern;
 
 public class UsuarioGUI {
     private JPanel userGUI;
+    private JPanel accContenedorFecha;
+
     private JComboBox filtroEstadoCombo;
     private JComboBox filtroTipoCombo;
     private JTextField filtroValor;
@@ -54,7 +56,7 @@ public class UsuarioGUI {
     private JTextField accCampoCedula;
     private JTextField accCampoEmail;
     private JTextField accCampoTelefono;
-    private JPanel accContenedorFecha;
+
     private JComboBox accComboPerfil;
     private JComboBox accComboInstitucion;
     private JComboBox accComboEstado;
@@ -212,13 +214,34 @@ public class UsuarioGUI {
             public void actionPerformed(ActionEvent e) {
                 Long id = Long.valueOf(accCampoID.getText());
                 Usuario usuario = null;
+                //consultar al usuario si realmente desea borrar el usuario
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog (null, "¿Esta seguro que desea eliminar el usuario?","Warning",dialogButton);
+                if(dialogResult == JOptionPane.NO_OPTION){
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada");
+                }else if(dialogResult == JOptionPane.YES_OPTION){
+                    try {
+                        usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+                        Conexion.obtenerUsuarioBean().eliminarUsuario(usuario);
+                        JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
+                        List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                        generarTabla(listaUsuarios);
+                        limpiarCamposButton.doClick();
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        });
+        filtroTipoCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 try {
-                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
-                    Conexion.obtenerUsuarioBean().eliminarUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                    //obtenemos el id de la seleccion del combo
+                    String idPerfil = ((Perfil) filtroTipoCombo.getSelectedItem()).getId().toString();
+
+                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
                     generarTabla(listaUsuarios);
-                    limpiarCamposButton.doClick();
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -311,6 +334,15 @@ public class UsuarioGUI {
         }
         return eleccion;
     }
+
+    /*public String filtroPerfil() throws NamingException {
+        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
+            if (filtroTipoCombo.getSelectedItem().equals(p)) {
+                return p.getId().toString();
+            }
+        }
+        return "No se encontro el perfil";
+    }*/
 
     public boolean validarEmail(String email){
         String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
