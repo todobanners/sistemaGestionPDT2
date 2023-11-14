@@ -62,8 +62,6 @@ public class UsuarioBean implements UsuarioRemote {
                 return null;
             }
         } catch (NoResultException e) {
-            // Aquí puedes manejar la excepción como prefieras.
-            // Por ejemplo, podrías devolver null para indicar que el inicio de sesión falló.
             System.out.println("No se encontro el usuario");
             return null;
         }
