@@ -2,6 +2,7 @@ package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Permiso;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.ejb.Remote;
 import jakarta.transaction.Transactional;
 
@@ -15,5 +16,7 @@ public interface PerfilRemote {
     public void eliminarPerfil(Perfil p);
     public Perfil obtenerPerfil(Long id);
     public List<Perfil> obtenerPerfiles();
+    public List<Perfil> listarPerfilesPorNombre(String nombre);
+    public List<Perfil> listarPerfilesPorEstado(Estados estado);
 
 }
