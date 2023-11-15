@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 public class Validator {
     // Método para validar que una cadena no esté vacía y tenga al menos una longitud mínima
     public static boolean validarMinimoCaracteres(String texto, int longitudMinima) {
-        return texto != null && texto.length() > longitudMinima;
+        return texto != null && texto.length() >= longitudMinima;
     }
 
     // Método para validar que una cadena no exceda una longitud máxima
     public static boolean validarMaximoCaracteres(String texto, int longitudMaxima) {
-        return texto != null && texto.length() < longitudMaxima;
+        return texto != null && texto.length() <= longitudMaxima;
     }
 
     // Método para validar una dirección de correo electrónico
@@ -24,6 +24,10 @@ public class Validator {
         return matcher.matches();
     }
 
+    /**
+     * @param texto Cadena de texto a validar
+     * @return true si la cadena contiene solo letras, false en caso contrario
+     */
     // Método para validar que una cadena contenga solo letras
     public static boolean validarSoloLetras(String texto) {
         return texto != null && texto.matches("^[a-zA-Z]+$");
