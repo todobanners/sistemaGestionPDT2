@@ -6,11 +6,14 @@ import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
+import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -76,42 +79,38 @@ public class UsuarioGUI {
         cargarCombos();
         accContenedorFecha.add(fechaChooser);//agrego el calendario al panel
 
-        filtroFiltrarBoton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    //Verificar si se selecciono el campo email y validar que sea un email
-                    if (filtroBuscarCombo.getSelectedIndex() == 3 && !validarEmail(filtroValor.getText())) {
-                            JOptionPane.showMessageDialog(null, "El campo email debe ser un email valido");
-                            return;
-                    }
+        filtroFiltrarBoton.addActionListener(e -> {
+            try {
+                //Verificar si se selecciono el campo email y validar que sea un email
+                if (filtroBuscarCombo.getSelectedIndex() == 3 && !validarEmail(filtroValor.getText())) {
+                    JOptionPane.showMessageDialog(null, "El campo debe ser un email valido");
+                } else if (!Validator.validarSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0 || filtroBuscarCombo.getSelectedIndex() == 1) {
+                    JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
+                } else {
                     List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
                     generarTabla(listaUsuarios);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
                 }
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
             }
         });
-        filtroLimpiarBoton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                limpiarFiltros();
-                try {
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
-                    generarTabla(listaUsuarios);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }
+        filtroLimpiarBoton.addActionListener(e -> {
+            limpiarFiltros();
+            try {
+                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                generarTabla(listaUsuarios);
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
             }
         });
-        filtroEstadoCombo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Estados estado = (Estados) filtroEstadoCombo.getSelectedItem();
+        filtroEstadoCombo.addActionListener(e -> {
+            try {
+                Estados estado = (Estados) filtroEstadoCombo.getSelectedItem();
 
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("estado", estado.toString());
-                    generarTabla(listaUsuarios);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
-                }
+                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("estado", estado.toString());
+                generarTabla(listaUsuarios);
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
             }
         });
         tableUsuarios.addMouseListener(new MouseAdapter() {
@@ -123,15 +122,19 @@ public class UsuarioGUI {
                 Usuario usuario = null;
                 try {
                     usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+                    Perfil perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
+                    // Obtener el ID del perfil que quieres seleccionar en el JComboBox
+                    Long perfilId = perfil.getId();
+                    Institucion institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(usuario.getIdInstitucion().getId());
+                    Long institucionId = institucion.getId();
+                    Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
                     accCampoNombre.setText(usuario.getNombre());
                     accCampoApellido.setText(usuario.getApellido());
                     accCampoCedula.setText(usuario.getCedula());
                     accCampoEmail.setText(usuario.getEmail());
                     //accCampoTelefono.setText(usuario.getTelefono());
 
-                    Perfil perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
-                    // Obtener el ID del perfil que quieres seleccionar en el JComboBox
-                    Long perfilId = perfil.getId();
                     // Recorrer el JComboBox para encontrar el objeto Perfil con el ID correspondiente
                     for (int i = 0; i < accComboPerfil.getItemCount(); i++) {
                         Perfil item = (Perfil) accComboPerfil.getItemAt(i);
@@ -141,8 +144,6 @@ public class UsuarioGUI {
                         }
                     }
 
-                    Institucion institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(usuario.getIdInstitucion().getId());
-                    Long institucionId = institucion.getId();
                     // Recorrer el JComboBox para encontrar el objeto Institucion con el ID correspondiente
                     for (int i = 0; i < accComboInstitucion.getItemCount(); i++) {
                         Institucion item = (Institucion) accComboInstitucion.getItemAt(i);
@@ -154,40 +155,44 @@ public class UsuarioGUI {
                     accComboEstado.setSelectedItem(usuario.getEstado());
                     accCampoUsername.setText(usuario.getNombreUsuario());
                     accCampoID.setText(usuario.getId().toString());
-                    //convertir LocalDate a Date
-                    Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
                     fechaChooser.setDate(fecha);
-
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
-
-
             }
         });
-        limpiarCamposButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                accCampoNombre.setText("");
-                accCampoApellido.setText("");
-                accCampoCedula.setText("");
-                accCampoEmail.setText("");
-                accCampoTelefono.setText("");
-                accComboPerfil.setSelectedIndex(0);
-                accComboInstitucion.setSelectedIndex(0);
-                accComboEstado.setSelectedIndex(0);
-                accCampoUsername.setText("");
-                accCampoID.setText("");
-                fechaChooser.setDate(null);
-            }
+        limpiarCamposButton.addActionListener(e -> {
+            accCampoNombre.setText("");
+            accCampoApellido.setText("");
+            accCampoCedula.setText("");
+            accCampoEmail.setText("");
+            accCampoTelefono.setText("");
+            accComboPerfil.setSelectedIndex(0);
+            accComboInstitucion.setSelectedIndex(0);
+            accComboEstado.setSelectedIndex(0);
+            accCampoUsername.setText("");
+            accCampoID.setText("");
+            fechaChooser.setDate(null);
         });
-        editarSeleccionadoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Long id = Long.valueOf(accCampoID.getText());
-                Usuario usuario = null;
-                try {
-                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+        editarSeleccionadoButton.addActionListener(e -> {
+            Long id = Long.valueOf(accCampoID.getText());
+            Usuario usuario = null;
+            try {
+                usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+                //Validar campos que requieren solo letras
+                if (!Validator.validarSoloLetras(accCampoNombre.getText())) {
+                    JOptionPane.showMessageDialog(null, "El campo nombre no puede contener numeros");
+                } else if (!Validator.validarSoloLetras(accCampoApellido.getText())) {
+                    JOptionPane.showMessageDialog(null, "El campo apellido no puede contener numeros");
+                } else if (!Validator.validarEmail(accCampoEmail.getText())) {
+                    JOptionPane.showMessageDialog(null, "El campo email no es valido");
+                } else if (fechaChooser.getDate() == null) {
+                    JOptionPane.showMessageDialog(null, "El campo fecha de nacimiento no puede estar vacio");
+                } else if (!Validator.validarSoloNumeros(accCampoCedula.getText())) {
+                    JOptionPane.showMessageDialog(null, "El campo cedula no puede contener letras u otros caracteres solo numeros");
+                }else if(!Validator.validarMinimoCaracteres(accCampoCedula.getText(),8)){
+                    JOptionPane.showMessageDialog(null, "El campo cedula debe tener almenos 8 caracteres");
+                } else {
                     usuario.setNombre(accCampoNombre.getText());
                     usuario.setApellido(accCampoApellido.getText());
                     usuario.setCedula(accCampoCedula.getText());
@@ -202,49 +207,44 @@ public class UsuarioGUI {
                     fechaChooser.setDate(fecha);
                     Conexion.obtenerUsuarioBean().modificarUsuario(usuario);
                     JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+                    limpiarCamposButton.doClick();
                     List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
                     generarTabla(listaUsuarios);
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
                 }
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
             }
         });
-        borrarSeleccionadoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Long id = Long.valueOf(accCampoID.getText());
-                Usuario usuario = null;
-                //consultar al usuario si realmente desea borrar el usuario
-                int dialogButton = JOptionPane.YES_NO_OPTION;
-                int dialogResult = JOptionPane.showConfirmDialog (null, "¿Esta seguro que desea eliminar el usuario?","Warning",dialogButton);
-                if(dialogResult == JOptionPane.NO_OPTION){
-                    JOptionPane.showMessageDialog(null, "Operacion cancelada");
-                }else if(dialogResult == JOptionPane.YES_OPTION){
-                    try {
-                        usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
-                        Conexion.obtenerUsuarioBean().eliminarUsuario(usuario);
-                        JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
-                        List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
-                        generarTabla(listaUsuarios);
-                        limpiarCamposButton.doClick();
-                    } catch (NamingException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-            }
-        });
-        filtroTipoCombo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        borrarSeleccionadoButton.addActionListener(e -> {
+            Long id = Long.valueOf(accCampoID.getText());
+            Usuario usuario = null;
+            //consultar al usuario si realmente desea borrar el usuario
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "¿Esta seguro que desea eliminar el usuario?","Warning",dialogButton);
+            if(dialogResult == JOptionPane.NO_OPTION){
+                JOptionPane.showMessageDialog(null, "Operacion cancelada");
+            }else if(dialogResult == JOptionPane.YES_OPTION){
                 try {
-                    //obtenemos el id de la seleccion del combo
-                    String idPerfil = ((Perfil) filtroTipoCombo.getSelectedItem()).getId().toString();
-
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
+                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+                    Conexion.obtenerUsuarioBean().eliminarUsuario(usuario);
+                    JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
+                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
                     generarTabla(listaUsuarios);
+                    limpiarCamposButton.doClick();
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+        });
+        filtroTipoCombo.addActionListener(e -> {
+            try {
+                //obtenemos el id de la seleccion del combo
+                String idPerfil = ((Perfil) filtroTipoCombo.getSelectedItem()).getId().toString();
+
+                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
+                generarTabla(listaUsuarios);
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
             }
         });
     }
