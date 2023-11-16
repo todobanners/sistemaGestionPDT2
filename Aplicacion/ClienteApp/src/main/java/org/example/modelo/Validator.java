@@ -16,10 +16,9 @@ public class Validator {
 
     // Método para validar una dirección de correo electrónico
     public static boolean validarEmail(String email) {
-        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
         //Expresion regular para validar email obenida de https://www.freeformatter.com/java-regex-tester.html
-        String reges = "^[-a-z0-9~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*(\\.aero|\\.arpa|\\.biz|\\.com|\\.coop|\\.edu|\\.gov|\\.info|\\.int|\\.mil|\\.museum|\\.name|\\.net|\\.org|\\.pro|\\.travel|\\.mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(\\:[0-9]{1,5})?$";
-        Pattern pattern = Pattern.compile(reges);
+        String regex = "^[-a-z0-9~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*(\\.aero|\\.arpa|\\.biz|\\.com|\\.coop|\\.edu|\\.gov|\\.info|\\.int|\\.mil|\\.museum|\\.name|\\.net|\\.org|\\.pro|\\.travel|\\.mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(\\:[0-9]{1,5})?$";
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
@@ -29,13 +28,13 @@ public class Validator {
      * @return true si la cadena contiene solo letras, false en caso contrario
      */
     // Método para validar que una cadena contenga solo letras
-    public static boolean validarSoloLetras(String texto) {
-        return texto != null && texto.matches("^[a-zA-Z]+$");
+    public static boolean contieneSoloLetras(String texto) {
+        return texto == null || !texto.matches("^[a-zA-Z]+$");
     }
 
     // Método para validar que una cadena contenga solo números
-    public static boolean validarSoloNumeros(String numero) {
-        return numero != null && numero.matches("^[0-9]+$");
+    public static boolean contieneSoloNumeros(String numero) {
+        return numero == null || !numero.matches("^[0-9]+$");
     }
 
     // Método para validar una contraseña (requiere al menos 8 caracteres, una letra y un número)

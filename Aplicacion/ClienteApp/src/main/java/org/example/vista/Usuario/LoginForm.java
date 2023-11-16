@@ -160,7 +160,7 @@ public class LoginForm extends JFrame {
             throw new Exception("Usuario eliminado");
         } else {
             Sesion sesion = Sesion.getInstancia(usuario);
-            JOptionPane.showMessageDialog(null, "Bienvenido");
+            JOptionPane.showMessageDialog(null, "Bienvenido "+usuario.getNombre()+"!");
             setVisible(false);
             new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
         }

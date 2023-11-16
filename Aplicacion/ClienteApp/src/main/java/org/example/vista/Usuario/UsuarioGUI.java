@@ -10,12 +10,8 @@ import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.ZoneId;
@@ -84,7 +80,7 @@ public class UsuarioGUI {
                 //Verificar si se selecciono el campo email y validar que sea un email
                 if (filtroBuscarCombo.getSelectedIndex() == 3 && !validarEmail(filtroValor.getText())) {
                     JOptionPane.showMessageDialog(null, "El campo debe ser un email valido");
-                } else if (!Validator.validarSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0 || filtroBuscarCombo.getSelectedIndex() == 1) {
+                } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0 || filtroBuscarCombo.getSelectedIndex() == 1) {
                     JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
                 } else {
                     List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
@@ -180,15 +176,15 @@ public class UsuarioGUI {
             try {
                 usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
                 //Validar campos que requieren solo letras
-                if (!Validator.validarSoloLetras(accCampoNombre.getText())) {
+                if (Validator.contieneSoloLetras(accCampoNombre.getText())) {
                     JOptionPane.showMessageDialog(null, "El campo nombre no puede contener numeros");
-                } else if (!Validator.validarSoloLetras(accCampoApellido.getText())) {
+                } else if (Validator.contieneSoloLetras(accCampoApellido.getText())) {
                     JOptionPane.showMessageDialog(null, "El campo apellido no puede contener numeros");
                 } else if (!Validator.validarEmail(accCampoEmail.getText())) {
                     JOptionPane.showMessageDialog(null, "El campo email no es valido");
                 } else if (fechaChooser.getDate() == null) {
                     JOptionPane.showMessageDialog(null, "El campo fecha de nacimiento no puede estar vacio");
-                } else if (!Validator.validarSoloNumeros(accCampoCedula.getText())) {
+                } else if (Validator.contieneSoloNumeros(accCampoCedula.getText())) {
                     JOptionPane.showMessageDialog(null, "El campo cedula no puede contener letras u otros caracteres solo numeros");
                 }else if(!Validator.validarMinimoCaracteres(accCampoCedula.getText(),8)){
                     JOptionPane.showMessageDialog(null, "El campo cedula debe tener almenos 8 caracteres");
