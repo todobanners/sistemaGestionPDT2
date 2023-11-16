@@ -36,7 +36,9 @@ public class UsuarioRegistroGUI {
     }
 
     public UsuarioRegistroGUI() throws NamingException {
+
         calendarioContenedor.add(fechaChooser);//agrego el calendario al panel
+
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
             perfil.addItem(p);
         }
@@ -57,7 +59,7 @@ public class UsuarioRegistroGUI {
                 user.setIdInstitucion(institucionAgregar);
                 user.setEmail(email.getText());
                 user.setContrasenia(passwordField1.getText());
-                Date fechaElegida = (Date) fechaChooser.getDate();
+                Date fechaElegida = fechaChooser.getDate();
                 LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 user.setFechaNacimiento(localDate);
 

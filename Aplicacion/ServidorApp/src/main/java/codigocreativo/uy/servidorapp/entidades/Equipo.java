@@ -48,7 +48,6 @@ public class Equipo implements Serializable {
     @JoinColumn(name = "ID_MODELO")
     private ModelosEquipo idModelo;
 
-    @Lob
     @Column(name = "IMAGEN")
     private String imagen;
 
