@@ -16,6 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 
+import static javax.swing.UIManager.setLookAndFeel;
+
 public class LoginForm extends JFrame {
     private JButton loginButton;
     private JPanel panel1;
@@ -29,8 +31,9 @@ public class LoginForm extends JFrame {
     private JLabel userText;
     private JLabel claveText;
 
-    public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         add(panel1);
         pack();
         setSize(500, 700);

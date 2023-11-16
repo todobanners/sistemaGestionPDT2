@@ -1,7 +1,8 @@
-package org.example.vista;
+package org.example.vista.Ubicacion;
 
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.enumerados.Sectores;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.modelo.Conexion;
 
@@ -32,11 +33,9 @@ public class IngresarUbicacionGUI {
 
     public IngresarUbicacionGUI() throws NamingException {
 
-        Sector.addItem("Policlínico");
-        Sector.addItem("Internación");
-        Sector.addItem("Emergencia");
-        Sector.addItem("CTI");
-        Sector.addItem("otro");
+        for (Sectores sector : Sectores.values()) {
+            this.Sector.addItem(sector.getValor());
+        }
 
         for (Institucion institucion : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
             this.institucion.addItem(institucion.getNombre());

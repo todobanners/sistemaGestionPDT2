@@ -101,7 +101,7 @@ public class EquiposGUI {
                 try {
                     Equipo equipo = new Equipo();
                     equipo.setIdInterno(idInternoText.getText());
-                    equipo.setIdUbicacion(((Ubicacion) Objects.requireNonNull(ubicacionCombo.getSelectedItem())).getId());
+                    equipo.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()).getId());
                     equipo.setNroSerie(nroSerieText.getText());
                     equipo.setNombre(nombreText.getText());
                     equipo.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
