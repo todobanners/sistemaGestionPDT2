@@ -20,10 +20,7 @@ public class Usuario implements Serializable {
     @Column(name = "CEDULA", length = 8)
     private String cedula;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_PERFIL")
-    private Perfil idPerfil;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
@@ -51,6 +48,12 @@ public class Usuario implements Serializable {
 
     @Column(name = "nombre_usuario", unique = true, length = 100)
     private String nombreUsuario;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_PERFIL")
+    private Perfil idPerfil;
+
 
     public String getNombreUsuario() {
         return nombreUsuario;

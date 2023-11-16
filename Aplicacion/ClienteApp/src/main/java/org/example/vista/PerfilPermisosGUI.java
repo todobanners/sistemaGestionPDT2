@@ -59,7 +59,6 @@ public class PerfilPermisosGUI {
                 }
                 perfil.setPermisos(permisos);
                 perfilesBean.modificarPerfil(perfil);
-                //TODO: validar que no haya errores
                 JOptionPane.showMessageDialog(null, "Permisos modificados correctamente");
                 frame.dispose();
             }
@@ -92,7 +91,6 @@ public class PerfilPermisosGUI {
         for (int i = 0; i < permisosDisponibles.size(); i++) {
             permisosDisponiblesArray[i] = permisosDisponibles.get(i).getTipoPermiso();
         }
-        //Set the lists
         dual.addSourceElements(permisosDisponiblesArray);
         dual.addDestinationElements(permisosAsignadosArray);
 
