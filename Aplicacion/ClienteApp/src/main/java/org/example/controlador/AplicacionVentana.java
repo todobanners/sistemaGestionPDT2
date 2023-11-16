@@ -1,6 +1,9 @@
 package org.example.controlador;
 
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.*;
+import org.example.vista.Ubicacion.IngresarUbicacionGUI;
+import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
 import org.example.vista.Usuario.LoginForm;
 import org.example.vista.Usuario.ModificarDatosPropiosGUI;
 import org.example.vista.Usuario.UsuarioGUI;
@@ -19,6 +22,7 @@ public class AplicacionVentana extends JFrame {
         //Agregar un LaF
         setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         pack();
         //Font por defecto para Menues
         Font f = new Font("sans-serif", Font.PLAIN, 12);
@@ -86,8 +90,8 @@ public class AplicacionVentana extends JFrame {
             LoginForm loginForm = null;
             try {
                 loginForm = new LoginForm();
-            } catch (ClassNotFoundException | InstantiationException |
-                     IllegalAccessException ex) {
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                     UnsupportedLookAndFeelException ex) {
                 throw new RuntimeException(ex);
             }
             loginForm.setVisible(true);
@@ -127,7 +131,11 @@ public class AplicacionVentana extends JFrame {
 
         //Listado de Ubicaciones
         listarUbicaciones.addActionListener(e -> {
-            changePanel(new ListadoDeUbicacionesGUI().getPanel());
+            try {
+                changePanel(new ListadoDeUbicacionesGUI().getPanel());
+            } catch (NamingException | ServiciosException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         //Registrar Ubicacion
         registrarUbicacion.addActionListener(e -> {

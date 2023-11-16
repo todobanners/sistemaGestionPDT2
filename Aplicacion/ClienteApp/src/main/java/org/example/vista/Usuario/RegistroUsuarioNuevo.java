@@ -132,11 +132,8 @@ public class RegistroUsuarioNuevo extends JFrame {
             LoginForm loginForm = null;
             try {
                 loginForm = new LoginForm();
-            } catch (ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            } catch (InstantiationException ex) {
-                throw new RuntimeException(ex);
-            } catch (IllegalAccessException ex) {
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                     UnsupportedLookAndFeelException ex) {
                 throw new RuntimeException(ex);
             }
             loginForm.setVisible(true);
