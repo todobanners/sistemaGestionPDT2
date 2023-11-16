@@ -91,7 +91,7 @@ public class PerfilesGUI {
                     JOptionPane.showMessageDialog(null, "El nombre no debe tener mas de 20 caracteres");
                 }else if (!Validator.validarMinimoCaracteres(textNombre.getText(), 3)) {
                     JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 3 caracteres");
-                } else if (!Validator.validarSoloLetras(textNombre.getText())) {
+                } else if (Validator.contieneSoloLetras(textNombre.getText())) {
                     JOptionPane.showMessageDialog(null, "El nombre solo debe contener letras");
                 } else {
                     perfil.setNombrePerfil(textNombre.getText());
@@ -109,7 +109,7 @@ public class PerfilesGUI {
                     JOptionPane.showMessageDialog(null, "El nombre no debe tener mas de 20 caracteres");
                 }else if (Validator.validarMinimoCaracteres(textNombre.getText(), 2)) {
                     JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 3 caracteres");
-                } else if (!Validator.validarSoloLetras(textNombre.getText())) {
+                } else if (Validator.contieneSoloLetras(textNombre.getText())) {
                     JOptionPane.showMessageDialog(null, "El nombre solo debe contener letras");
                 } else{
                     perfil.setNombrePerfil(textNombre.getText());
