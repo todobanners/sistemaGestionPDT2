@@ -140,7 +140,11 @@ public class AplicacionVentana extends JFrame {
 
         //Listado de Intervenciones
         listarIntervenciones.addActionListener(e -> {
-            changePanel(new ListadoDeIntervencionesGUI().getPanel());
+            try {
+                changePanel(new ListadoDeIntervencionesGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
         });
         //Registrar Intervencion
         registrarIntervencion.addActionListener(e -> {
