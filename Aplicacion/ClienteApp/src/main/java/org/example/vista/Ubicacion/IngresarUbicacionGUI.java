@@ -47,16 +47,28 @@ public class IngresarUbicacionGUI {
                 // Obtener los valores de la interfaz de usuario
                 String sector = (String) Sector.getSelectedItem();
                 String nombre = Nombre.getText();
-                long numero = Long.valueOf(Número.getText());
-                long piso = Long.valueOf(Piso.getText());
+                String numeroText = Número.getText();
+                String pisoText = Piso.getText();
+                String camaText = Cama.getText();
                 String institucionSeleccionada = (String) institucion.getSelectedItem();
+
+                // Validar campos obligatorios
+                if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty() || institucionSeleccionada.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 // Crear una instancia de Ubicacion
                 Ubicacion ubicacion = new Ubicacion();
                 ubicacion.setSector(sector);
                 ubicacion.setNombre(nombre);
-                ubicacion.setNumero(numero);
-                ubicacion.setPiso(piso);
+                ubicacion.setNumero(Long.parseLong(numeroText));
+                ubicacion.setPiso(Long.parseLong(pisoText));
+
+                // Validar si el campo cama no está vacío
+                if (!camaText.isEmpty()) {
+                    ubicacion.setCama(Long.parseLong(camaText));
+                }
 
                 try {
                     // Obtener la institución
@@ -71,6 +83,9 @@ public class IngresarUbicacionGUI {
 
                         // Mostrar mensaje de éxito
                         JOptionPane.showMessageDialog(null, "Ubicación creada correctamente");
+
+                        // Limpiar los campos del formulario
+                        limpiarCampos();
                     } else {
                         // Mostrar mensaje de error
                         JOptionPane.showMessageDialog(null, "No se encontró ninguna institución con ese nombre");
@@ -87,8 +102,19 @@ public class IngresarUbicacionGUI {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Puedes implementar acciones específicas al hacer clic en el botón cancelar
+                // Limpiar los campos del formulario al cancelar
+                limpiarCampos();
             }
         });
+    }
+
+    // Método para limpiar los campos del formulario
+    private void limpiarCampos() {
+        Sector.setSelectedIndex(0); // Puedes ajustar esto según tus necesidades
+        Nombre.setText("");
+        Número.setText("");
+        Piso.setText("");
+        Cama.setText("");
+        institucion.setSelectedIndex(0); // Puedes ajustar esto según tus necesidades
     }
 }
