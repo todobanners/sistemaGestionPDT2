@@ -1,12 +1,16 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
 import org.example.controlador.Sesion;
 import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class ModificarDatosPropiosGUI {
     private JPanel modificarDatosPropios;
@@ -22,6 +26,7 @@ public class ModificarDatosPropiosGUI {
     private JTextField telefono;
     private JButton confirmarButton;
     private JButton cancelarButton;
+    JDateChooser selectorFecha = new JDateChooser();
 
     public JPanel getPanel() {
         return modificarDatosPropios;
@@ -31,6 +36,8 @@ public class ModificarDatosPropiosGUI {
         Sesion sesion = Sesion.getInstancia();
         Usuario usuario = sesion.getUsuario();
 
+        contenedorFechaNacimiento.add(selectorFecha);
+
         usernameTextField.setText(usuario.getNombreUsuario());
         passwordField1.setText(usuario.getContrasenia());
         passwordField2.setText(usuario.getContrasenia());
@@ -39,6 +46,9 @@ public class ModificarDatosPropiosGUI {
         apellido1.setText(usuario.getApellido());
         nombre1.setText(usuario.getNombre());
         id.setText(usuario.getId().toString());
+        Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        selectorFecha.setDate(fecha);
+        //TODO: Falta verificacion de fecha
 
         confirmarButton.addActionListener(e -> {
            //Guardo los datos en la tabla
@@ -66,6 +76,11 @@ public class ModificarDatosPropiosGUI {
                 usuario.setCedula(cedula.getText());
                 usuario.setApellido(apellido1.getText());
                 usuario.setNombre(nombre1.getText());
+
+                Date fechaElegida = selectorFecha.getDate();
+                LocalDate localdate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+                usuario.setFechaNacimiento(localdate);
 
                 //desplegar mensaje de confirmación para aceptar o cancelar
                 //si acepta, guardar los datos en la base de datos
@@ -99,6 +114,7 @@ public class ModificarDatosPropiosGUI {
         cedula.setText("");
         apellido1.setText("");
         nombre1.setText("");
+        selectorFecha.setDate(null);
     }
 }
 
