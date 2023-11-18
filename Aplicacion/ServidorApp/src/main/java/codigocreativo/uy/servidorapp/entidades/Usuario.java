@@ -55,7 +55,8 @@ public class Usuario implements Serializable {
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PERFIL")
     private Perfil idPerfil;
-
+    //TODO: Quitar transient cuando se implemente DTO o DAO
+    @Transient
     @OneToMany(mappedBy = "idUsuario")
     private Set<UsuariosTelefono> usuariosTelefonos = new LinkedHashSet<>();
 

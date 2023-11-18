@@ -1,6 +1,7 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
 import org.example.controlador.Sesion;
@@ -26,7 +27,10 @@ public class ModificarDatosPropiosGUI {
     private JTextField telefono;
     private JButton confirmarButton;
     private JButton cancelarButton;
-    JDateChooser selectorFecha = new JDateChooser();
+
+
+// JDateChooser selectorFecha = new JDateChooser();
+DatePicker selectorFecha = new DatePicker();
 
     public JPanel getPanel() {
         return modificarDatosPropios;
@@ -47,7 +51,8 @@ public class ModificarDatosPropiosGUI {
         nombre1.setText(usuario.getNombre());
         id.setText(usuario.getId().toString());
         Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        selectorFecha.setDate(fecha);
+        selectorFecha.setDate(usuario.getFechaNacimiento());
+
         //TODO: Falta verificacion de fecha
 
         confirmarButton.addActionListener(e -> {
@@ -77,10 +82,10 @@ public class ModificarDatosPropiosGUI {
                 usuario.setApellido(apellido1.getText());
                 usuario.setNombre(nombre1.getText());
 
-                Date fechaElegida = selectorFecha.getDate();
-                LocalDate localdate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                //Date fechaElegida = selectorFecha.getDate();
+                //LocalDate localdate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-                usuario.setFechaNacimiento(localdate);
+                usuario.setFechaNacimiento(selectorFecha.getDate());
 
                 //desplegar mensaje de confirmación para aceptar o cancelar
                 //si acepta, guardar los datos en la base de datos
