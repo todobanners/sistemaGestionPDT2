@@ -27,7 +27,7 @@ public class ModificarDatosPropiosGUI {
     private JTextField telefono;
     private JButton confirmarButton;
     private JButton cancelarButton;
-
+//TODO: Falta telefono
 
 // JDateChooser selectorFecha = new JDateChooser();
 DatePicker selectorFecha = new DatePicker();
