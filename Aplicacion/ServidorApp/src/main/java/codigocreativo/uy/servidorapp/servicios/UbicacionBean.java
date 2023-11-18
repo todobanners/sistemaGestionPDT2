@@ -69,8 +69,9 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
-    public void moverEquipoDeUbicacion(Equipo equipo, Long ubicacion) throws ServiciosException {
+    public void moverEquipoDeUbicacion(Equipo equipo, Long ubicacionId) throws ServiciosException {
         try {
+            Ubicacion ubicacion = em.find(Ubicacion.class, ubicacionId);
             equipo.setIdUbicacion(ubicacion);
             em.merge(equipo);
             em.flush();

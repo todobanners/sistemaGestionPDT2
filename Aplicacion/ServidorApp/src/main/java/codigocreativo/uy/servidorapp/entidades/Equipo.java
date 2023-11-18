@@ -7,6 +7,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "EQUIPOS")
@@ -19,8 +21,7 @@ public class Equipo implements Serializable {
     @Column(name = "ID_INTERNO", nullable = false, length = 50)
     private String idInterno;
 
-    @Column(name = "ID_UBICACION", nullable = false)
-    private Long idUbicacion; //Todo: Ver relación con tabla Ubicaciones
+
 
     @Column(name = "NRO_SERIE", nullable = false, length = 100)
     private String nroSerie;
@@ -58,6 +59,41 @@ public class Equipo implements Serializable {
     @Column(name = "ESTADO", length = 20)
     private Estados estado;
 
+    @OneToMany(mappedBy = "idEquipo")
+    private Set<EquiposUbicacione> equiposUbicaciones = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idEquipo")
+    private Set<Intervencion> intervenciones = new LinkedHashSet<>();
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_UBICACION", nullable = false)
+    private Ubicacion idUbicacion;
+
+    public Ubicacion getIdUbicacion() {
+        return idUbicacion;
+    }
+
+    public void setIdUbicacion(Ubicacion idUbicacion) {
+        this.idUbicacion = idUbicacion;
+    }
+
+    public Set<Intervencion> getIntervenciones() {
+        return intervenciones;
+    }
+
+    public void setIntervenciones(Set<Intervencion> intervenciones) {
+        this.intervenciones = intervenciones;
+    }
+
+    public Set<EquiposUbicacione> getEquiposUbicaciones() {
+        return equiposUbicaciones;
+    }
+
+    public void setEquiposUbicaciones(Set<EquiposUbicacione> equiposUbicaciones) {
+        this.equiposUbicaciones = equiposUbicaciones;
+    }
+
     public Estados getEstado() {
         return estado;
     }
@@ -82,13 +118,6 @@ public class Equipo implements Serializable {
         this.idInterno = idInterno;
     }
 
-    public Long getIdUbicacion() {
-        return idUbicacion;
-    }
-
-    public void setIdUbicacion(Long idUbicacion) {
-        this.idUbicacion = idUbicacion;
-    }
 
     public String getNroSerie() {
         return nroSerie;

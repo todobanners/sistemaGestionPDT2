@@ -13,14 +13,23 @@ public class EquiposUbicacione implements Serializable {
     @Column(name = "ID_MOVIMIENTO", nullable = false)
     private Long id;
 
-    @Column(name = "ID_EQUIPO")
-    private Long idEquipo;
-
     @Column(name = "ID_UBICACION")
     private Long idUbicacion;
 
     @Column(name = "FECHA")
     private LocalDate fecha;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_EQUIPO")
+    private Equipo idEquipo;
+
+    public Equipo getIdEquipo() {
+        return idEquipo;
+    }
+
+    public void setIdEquipo(Equipo idEquipo) {
+        this.idEquipo = idEquipo;
+    }
 
     public Long getId() {
         return id;
@@ -28,14 +37,6 @@ public class EquiposUbicacione implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdEquipo() {
-        return idEquipo;
-    }
-
-    public void setIdEquipo(Long idEquipo) {
-        this.idEquipo = idEquipo;
     }
 
     public Long getIdUbicacion() {

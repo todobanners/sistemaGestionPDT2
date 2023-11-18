@@ -101,7 +101,7 @@ public class EquiposGUI {
                 try {
                     Equipo equipo = new Equipo();
                     equipo.setIdInterno(idInternoText.getText());
-                    equipo.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()).getId());
+                    equipo.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()));
                     equipo.setNroSerie(nroSerieText.getText());
                     equipo.setNombre(nombreText.getText());
                     equipo.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
@@ -123,23 +123,17 @@ public class EquiposGUI {
         DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
         model.setRowCount(0);
         Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
-            try {
-                model.addRow(new Object[]{
-                        equipo.getIdInterno(),
-                        Conexion.obtenerUbicacionBean().obtenerUbicacionPorId(equipo.getIdUbicacion()),
-                        equipo.getNroSerie(),
-                        equipo.getNombre(),
-                        equipo.getIdTipo(),
-                        equipo.getIdProveedor(),
-                        equipo.getIdPais(),
-                        equipo.getIdModelo(),
-                        equipo.getFechaAdquisicion()
-                });
-            } catch (NamingException e) {
-                throw new RuntimeException(e);
-            } catch (ServiciosException e) {
-                throw new RuntimeException(e);
-            }
+            model.addRow(new Object[]{
+                    equipo.getIdInterno(),
+                    equipo.getIdUbicacion().getNombre(),
+                    equipo.getNroSerie(),
+                    equipo.getNombre(),
+                    equipo.getIdTipo(),
+                    equipo.getIdProveedor(),
+                    equipo.getIdPais(),
+                    equipo.getIdModelo(),
+                    equipo.getFechaAdquisicion()
+            });
         });
     }
 
@@ -149,6 +143,7 @@ public class EquiposGUI {
             JOptionPane.showMessageDialog(null, "Equipo registrado con exito");
             actualizarTabla();
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo");
         }
     }
