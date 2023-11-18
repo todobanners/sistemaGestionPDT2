@@ -58,6 +58,12 @@ public class IngresarUbicacionGUI {
                     return;
                 }
 
+                // Validar que los campos numericos solo contengan numeros
+                if (!esNumero(numeroText) || !esNumero(pisoText) || (!camaText.isEmpty() && !esNumero(camaText))) {
+                    JOptionPane.showMessageDialog(null, "Los campos numéricos solo aceptan números", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 // Crear una instancia de Ubicacion
                 Ubicacion ubicacion = new Ubicacion();
                 ubicacion.setSector(sector);
@@ -117,4 +123,15 @@ public class IngresarUbicacionGUI {
         Cama.setText("");
         institucion.setSelectedIndex(0); // Puedes ajustar esto según tus necesidades
     }
+
+    // Método para verificar si una cadena es un número
+    private boolean esNumero(String cadena) {
+        try {
+            Long.parseLong(cadena);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
+

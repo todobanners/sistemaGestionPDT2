@@ -132,8 +132,14 @@ public class ModificarUbicacionGUI {
             String institucionSeleccionada = (String) institucion.getSelectedItem();
 
             // Validar campos obligatorios
-            if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty() || camaText.isEmpty() || institucionSeleccionada.isEmpty()) {
+            if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty() || institucionSeleccionada.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validar que los campos numericos solo contengan números
+            if (!esNumero(numeroText) || !esNumero(pisoText) || (!camaText.isEmpty() && !esNumero(camaText))) {
+                JOptionPane.showMessageDialog(null, "Los campos numéricos solo aceptan números", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -142,7 +148,11 @@ public class ModificarUbicacionGUI {
             ubicacionSeleccionada.setNombre(nombre);
             ubicacionSeleccionada.setNumero(Long.parseLong(numeroText));
             ubicacionSeleccionada.setPiso(Long.parseLong(pisoText));
-            ubicacionSeleccionada.setCama(Long.parseLong(camaText));
+
+            // Validar si el campo Cama no está vacío
+            if (!camaText.isEmpty()) {
+                ubicacionSeleccionada.setCama(Long.parseLong(camaText));
+            }
 
             try {
                 // Obtener la institución
@@ -191,6 +201,16 @@ public class ModificarUbicacionGUI {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    // Método para verificar si una cadena es un número
+    private boolean esNumero(String cadena) {
+        try {
+            Long.parseLong(cadena);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
 
