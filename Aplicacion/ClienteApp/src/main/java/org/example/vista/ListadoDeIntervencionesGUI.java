@@ -13,13 +13,12 @@ public class ListadoDeIntervencionesGUI {
     private JPanel panelListadoDeIntervenciones;
     private JPanel panelAcciones;
     private JTextField textIdEquipo;
-    private JButton generarReportePorFechaButton;
     private JComboBox comboTipoDeIntervencion;
     private JButton filtroBoton;
     private JButton limpiarButton;
     private JScrollPane panelTabla;
     private JXTable tablaPerfiles;
-    private JButton generarReportePorTipoButton;
+    private JButton trabajarIntervenciónButton;
 
     JDateChooser textFechaDesde = new JDateChooser();
     JDateChooser textFechaHasta = new JDateChooser();
