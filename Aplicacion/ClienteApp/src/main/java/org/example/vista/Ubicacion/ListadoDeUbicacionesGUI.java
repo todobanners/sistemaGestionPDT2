@@ -52,26 +52,18 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 Ubicacion ubicacionSeleccionada = list1.getSelectedValue();
 
                 if (ubicacionSeleccionada != null) {
-                    // Confirmar con el usuario antes de eliminar
-                    int confirmacion = JOptionPane.showConfirmDialog(null, "¿Seguro que deseas eliminar esta ubicación?",
-                            "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+                    // Puedes abrir una nueva ventana para modificar la ubicación,
+                    // o realizar las acciones necesarias según tus requisitos.
+                    // Por ejemplo, podrías crear un nuevo formulario de modificación.
 
-                    if (confirmacion == JOptionPane.YES_OPTION) {
-                        // Llamar al servicio para eliminar la ubicación
-                        try {
-                            Conexion.obtenerUbicacionBean().borrarUbicacion(ubicacionSeleccionada.getId());
-                            // Actualizar la lista después de la eliminación
-                            List<Ubicacion> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
-                            generarTabla(listaUbicaciones);
-                        } catch (ServiciosException | NamingException ex) {
-                            JOptionPane.showMessageDialog(null, "Error al intentar eliminar la ubicación");
-                            ex.printStackTrace(); // Opcional: Imprimir la pila de excepciones para depuración
-                        }
-                    }
+                    // Ejemplo de cómo abrir un nuevo formulario para modificar la ubicación
+                    BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(ubicacionSeleccionada);
+                    bajaUbicacionGUI.mostrarVentana();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Selecciona una ubicación para eliminar");
+                    JOptionPane.showMessageDialog(null, "Selecciona una ubicación para modificar");
                 }
             }
+
         });
     }
 

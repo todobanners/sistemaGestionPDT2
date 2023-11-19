@@ -2,11 +2,11 @@ package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
-import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -31,6 +31,7 @@ public class UbicacionBean implements UbicacionRemote {
             em.merge(ubi);
             em.flush();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServiciosException("No se pudo modificar la ubicacion");
         }
     }
@@ -58,12 +59,14 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
+    @Transactional
     public void borrarUbicacion(Long id) throws ServiciosException {
         try {
             Ubicacion ubi = em.find(Ubicacion.class, id);
             em.remove(ubi);
             em.flush();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServiciosException("No se pudo borrar la ubicacion");
         }
     }
@@ -86,8 +89,8 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
-    public String obtenerUbicacionPorId(Long id) throws ServiciosException {
-        return em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult().getNombre();
+    public Ubicacion obtenerUbicacionPorId(Long id) throws ServiciosException {
+        return em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult();
     }
 
 }

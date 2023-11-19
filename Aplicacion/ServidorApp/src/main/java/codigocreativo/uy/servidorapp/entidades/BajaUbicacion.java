@@ -10,33 +10,33 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "BAJA_UBICACIONES")
 public class BajaUbicacion implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_BAJA", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_USUARIO", nullable = false)
-    private Usuario idUsuario;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_INSTITUCIONES", nullable = false)
-    private Institucion idInstituciones;
+    @Column(name = "ID_USUARIO")
+    private long idUsuario;
 
-    @Column(name = "RAZON", nullable = false, length = 30)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @Column(name = "ID_INSTITUCION")
+    private long idInstitucion;
+
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @Column(name = "ID_UBICACIONES")
+    private long idUbicacion;
+
+    @Column(name = "RAZON")
     private String razon;
+
+    @Column(name = "COMENTARIO")
+    private String comentario;
 
     @Column(name = "FECHA", nullable = false)
     private LocalDate fecha;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_UBICACIONES", nullable = false)
-    private Institucion idUbicaciones;;
-
-    @Column(name = "COMENTARIOS", nullable = false, length = 100)
-    private String comentarios;
 
     public Long getId() {
         return id;
@@ -46,20 +46,28 @@ public class BajaUbicacion implements Serializable {
         this.id = id;
     }
 
-    public Usuario getIdUsuario() {
+    public long getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
+    public void setIdUsuario(long idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Institucion getIdInstituciones() {
-        return idInstituciones;
+    public long getIdInstitucion() {
+        return idInstitucion;
     }
 
-    public void setIdInstituciones(Institucion idInstituciones) {
-        this.idInstituciones = idInstituciones;
+    public void setIdInstitucion(long idInstitucion) {
+        this.idInstitucion = idInstitucion;
+    }
+
+    public long getIdUbicacion() {
+        return idUbicacion;
+    }
+
+    public void setIdUbicacion(long idUbicacion) {
+        this.idUbicacion = idUbicacion;
     }
 
     public String getRazon() {
@@ -70,27 +78,19 @@ public class BajaUbicacion implements Serializable {
         this.razon = razon;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
     public LocalDate getFecha() {
         return fecha;
     }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-    }
-
-    public Institucion getIdUbicaciones() {
-        return idUbicaciones;
-    }
-
-    public void setIdUbicaciones(Institucion idUbicaciones) {
-        this.idUbicaciones = idUbicaciones;
-    }
-
-    public String getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
     }
 }
