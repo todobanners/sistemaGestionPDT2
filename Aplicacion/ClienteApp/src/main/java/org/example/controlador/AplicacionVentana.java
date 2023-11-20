@@ -2,6 +2,7 @@ package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.*;
+import org.example.vista.Equipo.EquiposGUI;
 import org.example.vista.Ubicacion.IngresarUbicacionGUI;
 import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
 import org.example.vista.Usuario.LoginForm;

@@ -13,6 +13,8 @@ import java.util.Set;
 @Entity
 @Table(name = "EQUIPOS")
 public class Equipo implements Serializable {
+
+    private static final long serialVersionUID = 2L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_EQUIPO", nullable = false)

@@ -1,4 +1,4 @@
-package org.example.vista;
+package org.example.vista.Equipo;
 /*
 * TODO: Agregar funcionalidad de los botones
 *  - Dar de baja seleccionado
@@ -56,6 +56,7 @@ public class EquiposGUI {
     public EquiposGUI() throws Exception{
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Equipo");
         model.addColumn("ID Interno");
         model.addColumn("Ubicación");
         model.addColumn("Nro. Serie");
@@ -95,6 +96,63 @@ public class EquiposGUI {
         }
 
 
+        editarSeleccionadoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    Equipo equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    ModificarEquipo modificarEquipo = null;
+                    try {
+                        modificarEquipo = new ModificarEquipo(equipoSeleccionado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    modificarEquipo.mostrarVentana();
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
+                }
+            }
+        });
+
+        darBajaSeleccionadoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    Equipo equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    // Asegúrate de crear la instancia correcta de BajaEquipoGUI
+                    BajaEquipoGUI bajaEquipoPanel = null;
+                    try {
+                        bajaEquipoPanel = new BajaEquipoGUI(equipoSeleccionado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    // Asegúrate de llamar al método correcto
+                    bajaEquipoPanel.mostrarVentana();
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
+                }
+            }
+        });
+
 
         guardarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -119,11 +177,14 @@ public class EquiposGUI {
             }
         });
     }
+
+
     public void actualizarTabla() throws Exception {
         DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
         model.setRowCount(0);
         Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
             model.addRow(new Object[]{
+                    equipo.getId(),
                     equipo.getIdInterno(),
                     equipo.getIdUbicacion().getNombre(),
                     equipo.getNroSerie(),
@@ -136,6 +197,8 @@ public class EquiposGUI {
             });
         });
     }
+
+
 
     public void agregarEquipo(Equipo equipo) throws Exception {
         try {
