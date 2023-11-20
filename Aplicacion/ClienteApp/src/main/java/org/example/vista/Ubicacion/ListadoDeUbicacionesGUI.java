@@ -222,6 +222,5 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 ex.printStackTrace();
             }
         }
-        list1.setModel(modeloTabla);
     }
 }
