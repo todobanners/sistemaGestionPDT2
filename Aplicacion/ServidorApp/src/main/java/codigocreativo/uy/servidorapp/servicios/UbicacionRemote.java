@@ -24,5 +24,5 @@ public interface UbicacionRemote {
 
     public List<Ubicacion> listarUbicaciones() throws ServiciosException;
 
-    public String obtenerUbicacionPorId(Long id) throws ServiciosException;
+    public Ubicacion obtenerUbicacionPorId(Long id) throws ServiciosException;
 }

@@ -86,8 +86,10 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
-    public String obtenerUbicacionPorId(Long id) throws ServiciosException {
-        return em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult().getNombre();
+    public Ubicacion obtenerUbicacionPorId(Long id) throws ServiciosException {
+        return em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult();
+
+        //return em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult().getNombre();
     }
 
 }
