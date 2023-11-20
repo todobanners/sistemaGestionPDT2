@@ -3,7 +3,9 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
+import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
+import org.jdesktop.swingx.JXTable;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -11,19 +13,22 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class IntervencionGUI {
     private JPanel panelIntervencion;
-    private JTextField textFechaHora;
     private JComboBox comboTipodeIntervencion;
     private JTextField textMotivo;
     private JTextField textIdEquipo;
     private JTextField textComentarios;
-    private JPanel panelAcciones;
+  //  private JPanel panelAcciones;
     private JButton registrarIntervencionButton;
     private JTable tablaIntervenciones;
-
     private IntervencionRemote intervencionRemoteBean;
+
+    JDateChooser textFechaHora = new JDateChooser();
+    private JScrollPane panelTabla;
 
     public JPanel getPanel(){
         return panelIntervencion;
@@ -59,7 +64,9 @@ public class IntervencionGUI {
                 Usuario user = new Usuario();//creo obj usuario
                 user.setId(1L);//le asigno un id hardcodeado
                 intervencion.setIdUsuario(user); //agrego el obj usuario con solo el id
-                intervencion.setFechaHora(LocalDate.parse(textFechaHora.getText()));
+               // intervencion.setFechaHora(LocalDate.parse(textFechaHora.getText()));
+                Date fecha = Date.from(intervencion.getFechaHora().atStartOfDay(ZoneId.systemDefault()).toInstant());
+                textFechaHora.setDate(fecha);
                 intervencion.setMotivo(textMotivo.getText());
                 Equipo equipo = new Equipo();
                 equipo.setId(Long.valueOf(textIdEquipo.getText()));

@@ -5,10 +5,7 @@ import org.example.vista.*;
 import org.example.vista.Equipo.EquiposGUI;
 import org.example.vista.Ubicacion.IngresarUbicacionGUI;
 import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
-import org.example.vista.Usuario.LoginForm;
-import org.example.vista.Usuario.ModificarDatosPropiosGUI;
-import org.example.vista.Usuario.UsuarioGUI;
-import org.example.vista.Usuario.UsuarioRegistroGUI;
+import org.example.vista.Usuario.*;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -26,9 +23,9 @@ public class AplicacionVentana extends JFrame {
         setLocationRelativeTo(null);
         pack();
         //Font por defecto para Menues
-        Font f = new Font("sans-serif", Font.PLAIN, 12);
-        UIManager.put("Menu.font", f);
-        UIManager.put("MenuItem.font", f);
+        //Font f = new Font("sans-serif", Font.PLAIN, 12);
+        //UIManager.put("Menu.font", f);
+        //UIManager.put("MenuItem.font", f);
 
         //iniciar menu
         JMenuBar menuBar=initMenuBar();
@@ -75,6 +72,7 @@ public class AplicacionVentana extends JFrame {
         //Declaro el submenu de Gestion de Intervenciones
         JMenuItem listarIntervenciones =new JMenuItem("Listar Intervenciones");
         JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
+        JMenuItem listarTiposDeIntervenciones =new JMenuItem("Tipos de Intervenciones");
         //Fin declaracion submenu de Gestion de Intervenciones
 
         //Declaro el submenu de Gestion de Perfiles
@@ -146,6 +144,15 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
+        // Tipos de Intervenciones
+
+        listarTiposDeIntervenciones.addActionListener(e -> {
+            try {
+                 changePanel(new TiposDeIntervencionesGUI().getPanel());
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
+                });
 
         //Listado de Intervenciones
         listarIntervenciones.addActionListener(e -> {
@@ -193,6 +200,7 @@ public class AplicacionVentana extends JFrame {
         //Gestion de Intervenciones
         gestionIntervenciones.add(listarIntervenciones);
         gestionIntervenciones.add(registrarIntervencion);
+        gestionIntervenciones.add(listarTiposDeIntervenciones);
 
         //Gestion de Perfiles
         gestionPerfiles.add(listarPerfiles);

@@ -22,15 +22,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /*
     TODO:
-        * En filtrado queda formatear la consulta para que en la
-          seleccion de filtro coincida con los campos de la tabla           //Realizado
-        * Se puede hacer un switch case para cada tipo de filtro            //Realizado
-        * Falta que cuando se elija email se valide que sea un email        //Realizado
-        * En el listado queda detalle estetico de que campo ID sea
-          mas pequeño                                                       //Realizado
-        * En Acciones falta la funcionalidad del boton Editar y Borrar      //Realizado
-        * Falta que se muestre el calendario                                //Realizado
-        * Falta que se muestre el combo de institucion                      //Realizado
         * Falta las validaciones y mensajes de error
         * Falta el telefono, tanto en registro como en visualizacion
 
