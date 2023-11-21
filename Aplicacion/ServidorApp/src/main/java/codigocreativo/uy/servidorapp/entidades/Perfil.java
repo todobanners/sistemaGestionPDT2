@@ -26,7 +26,6 @@ public class Perfil implements Serializable {
     private Estados estado;
 
     @Transient
-    //TODO: Quitar transient cuando se implemente DTO o DAO
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PERFILES_PERMISOS",
             joinColumns = @JoinColumn(name = "ID_PERFIL"),

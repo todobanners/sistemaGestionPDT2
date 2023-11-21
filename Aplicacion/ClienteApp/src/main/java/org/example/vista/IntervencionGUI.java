@@ -36,7 +36,6 @@ public class IntervencionGUI {
 
     public IntervencionGUI() throws Exception {
         JFrame frame = new JFrame("Intervenciones");
-
         //Crear modelo de la tabla
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Fecha");
@@ -64,22 +63,48 @@ public class IntervencionGUI {
                 Usuario user = new Usuario();//creo obj usuario
                 user.setId(1L);//le asigno un id hardcodeado
                 intervencion.setIdUsuario(user); //agrego el obj usuario con solo el id
-               // intervencion.setFechaHora(LocalDate.parse(textFechaHora.getText()));
-                Date fecha = Date.from(intervencion.getFechaHora().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                textFechaHora.setDate(fecha);
-                intervencion.setMotivo(textMotivo.getText());
+
+                // Obtener la fecha y manejar el caso cuando sea null
+                Date fechaHora = textFechaHora.getDate();
                 Equipo equipo = new Equipo();
                 equipo.setId(Long.valueOf(textIdEquipo.getText()));
                 intervencion.setIdEquipo(equipo);
                 intervencion.setComentarios(textComentarios.getText());
                 intervencion.setIdTipo((TiposIntervencione) comboTipodeIntervencion.getSelectedItem());
-                    try {
+                intervencion.setMotivo(textMotivo.getText());
+                intervencion.setFechaHora(fechaHora != null ? fechaHora.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null);
+
+
+                try {
+                    // Antes de crear la intervención, mostrar el cuadro de diálogo de confirmación
+                    int opcion = JOptionPane.showConfirmDialog(
+                            panelIntervencion, // Componente padre (puedes cambiarlo según tu contexto)
+                            "¿Estás seguro de que quieres registrar?", // Mensaje
+                            "Confirmación", // Título del cuadro de diálogo
+                            JOptionPane.OK_CANCEL_OPTION // Tipo de opciones
+                    );
+
+                    // Verificar la opción seleccionada por el usuario
+                    if (opcion == JOptionPane.OK_OPTION) {
+                        // Si el usuario hizo clic en "Aceptar", proceder con el registro
+                        Conexion.obtenerIntervencionBean().crear(intervencion);
+                        actualizarTabla();
+                    } else {
+                        // Si el usuario hizo clic en "Cancelar" o cerró el cuadro de diálogo, no hacer nada
+                    }
+                } catch (ServiciosException | NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+
+                  /*  try {
                         Conexion.obtenerIntervencionBean().crear(intervencion);
                         actualizarTabla();
                     } catch (ServiciosException | NamingException ex) {
                         throw new RuntimeException(ex);
-                    }
-            }
+                    }*/
+
         });
 
     }
@@ -96,4 +121,5 @@ public class IntervencionGUI {
             });
         });
     }
+
 }

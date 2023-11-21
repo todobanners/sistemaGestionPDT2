@@ -22,6 +22,8 @@ public interface UbicacionRemote {
 
     void moverEquipoDeUbicacion(Equipo equipo, Long ubicacion) throws ServiciosException;
 
+    void moverEquipoDeUbicacion(Equipo equipo, Ubicacion ubicacion) throws ServiciosException;
+
     public List<Ubicacion> listarUbicaciones() throws ServiciosException;
 
     public String obtenerUbicacionPorId(Long id) throws ServiciosException;

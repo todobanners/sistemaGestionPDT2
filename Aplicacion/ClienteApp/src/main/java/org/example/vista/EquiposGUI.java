@@ -125,7 +125,7 @@ public class EquiposGUI {
         Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
             model.addRow(new Object[]{
                     equipo.getIdInterno(),
-                    equipo.getIdUbicacion().getNombre(),
+                    equipo.getIdUbicacion(),
                     equipo.getNroSerie(),
                     equipo.getNombre(),
                     equipo.getIdTipo(),

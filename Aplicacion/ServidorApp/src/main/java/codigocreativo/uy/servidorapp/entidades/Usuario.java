@@ -7,8 +7,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "USUARIOS")
@@ -55,18 +53,6 @@ public class Usuario implements Serializable {
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_PERFIL")
     private Perfil idPerfil;
-    //TODO: Quitar transient cuando se implemente DTO o DAO
-    @Transient
-    @OneToMany(mappedBy = "idUsuario")
-    private Set<UsuariosTelefono> usuariosTelefonos = new LinkedHashSet<>();
-
-    public Set<UsuariosTelefono> getUsuariosTelefonos() {
-        return usuariosTelefonos;
-    }
-
-    public void setUsuariosTelefonos(Set<UsuariosTelefono> usuariosTelefonos) {
-        this.usuariosTelefonos = usuariosTelefonos;
-    }
 
 
     public String getNombreUsuario() {

@@ -2,7 +2,6 @@ package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
-import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
@@ -69,9 +68,13 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
-    public void moverEquipoDeUbicacion(Equipo equipo, Long ubicacionId) throws ServiciosException {
+    public void moverEquipoDeUbicacion(Equipo equipo, Long ubicacion) throws ServiciosException {
+
+    }
+
+    @Override
+    public void moverEquipoDeUbicacion(Equipo equipo, Ubicacion ubicacion) throws ServiciosException {
         try {
-            Ubicacion ubicacion = em.find(Ubicacion.class, ubicacionId);
             equipo.setIdUbicacion(ubicacion);
             em.merge(equipo);
             em.flush();
