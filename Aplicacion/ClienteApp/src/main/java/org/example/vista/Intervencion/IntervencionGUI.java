@@ -53,6 +53,7 @@ public class IntervencionGUI {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo conectar con el servidor");
         }
+        actualizarTabla();
 
         //obtener los tipos de intervencines
         for (TiposIntervencione tipoIntervencione : Conexion.obtenerTiposIntervencionBean().obtenerTiposIntervenciones()) {
@@ -118,7 +119,7 @@ public class IntervencionGUI {
                     intervencion.getFechaHora(),
                     intervencion.getIdTipo(),
                     intervencion.getMotivo(),
-                    intervencion.getIdEquipo(),
+                    intervencion.getIdEquipo().getId(),
                     intervencion.getComentarios()
             });
         });
