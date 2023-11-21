@@ -4,8 +4,10 @@ import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
+import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
+import org.example.modelo.DatePickerUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +30,7 @@ public class BajaEquipoGUI {
     private JComboBox equipoCombo;
     private JComboBox estadoCombo;
     private JPanel fechaAdqContainer;
-    private JDateChooser fechaCompraDate = new JDateChooser();
+    private DatePicker fechaCompraDate = DatePickerUtil.createCustomDatePicker();
     private JButton guardarButton;
     private JButton cancelarButton;
 
@@ -95,10 +97,9 @@ public class BajaEquipoGUI {
             usuarioCombo.setSelectedItem(equipoSeleccionado);
             equipoCombo.setSelectedItem(equipoSeleccionado.getNombre());
             estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
-
-
             // Asegúrate de cargar la fecha correctamente
-            fechaCompraDate.setDate(new Date());
+            fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+
         } else {
             JOptionPane.showMessageDialog(null, "Error: No se ha seleccionado ningún equipo");
         }
@@ -111,9 +112,9 @@ public class BajaEquipoGUI {
         bajaEquipo.setIdEquipo(equipoSeleccionado);
         bajaEquipo.setComentarios(comentarioText.getText());
         bajaEquipo.setRazon(razonText.getText());
-        Date fechaElegida = fechaCompraDate.getDate();
-        LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        bajaEquipo.setFecha(localDate);
+        /*Date fechaElegida = fechaCompraDate.getDate();
+        LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();*/
+        bajaEquipo.setFecha(fechaCompraDate.getDate());
         bajaEquipo.setEstado((Estados) estadoCombo.getSelectedItem());
         return bajaEquipo;
     }

@@ -3,8 +3,10 @@ package org.example.vista.Equipo;
         import codigocreativo.uy.servidorapp.entidades.*;
         import codigocreativo.uy.servidorapp.enumerados.Estados;
         import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
+        import com.github.lgooddatepicker.components.DatePicker;
         import com.toedter.calendar.JDateChooser;
         import org.example.modelo.Conexion;
+        import org.example.modelo.DatePickerUtil;
 
         import javax.naming.NamingException;
         import javax.swing.*;
@@ -34,7 +36,7 @@ public class ModificarEquipo {
     private JButton guardarButton;
     private JButton cancelarButton;
     private JComboBox estadoCombo;
-    private JDateChooser fechaCompraDate = new JDateChooser();
+    private DatePicker fechaCompraDate = DatePickerUtil.createCustomDatePicker();
 
     private Equipo equipoSeleccionado;
 
@@ -115,9 +117,8 @@ public class ModificarEquipo {
             paisCombo.setSelectedItem(equipoSeleccionado.getIdPais());
             modeloCombo.setSelectedItem(equipoSeleccionado.getIdModelo());
             estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
+            fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
 
-            // Asegúrate de cargar la fecha correctamente
-            fechaCompraDate.setDate(Date.from(equipoSeleccionado.getFechaAdquisicion().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         } else {
             JOptionPane.showMessageDialog(null, "Error: No se ha seleccionado ningún equipo");
         }
@@ -134,9 +135,7 @@ public class ModificarEquipo {
         equipoModificado.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
         equipoModificado.setIdPais((Pais) paisCombo.getSelectedItem());
         equipoModificado.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
-        Date fechaElegida = (Date) fechaCompraDate.getDate();
-        LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        equipoModificado.setFechaAdquisicion(localDate);
+        equipoModificado.setFechaAdquisicion(fechaCompraDate.getDate());
         equipoModificado.setEstado((Estados) estadoCombo.getSelectedItem());
         return equipoModificado;
     }

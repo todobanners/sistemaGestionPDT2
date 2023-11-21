@@ -12,8 +12,10 @@ package org.example.vista.Equipo;
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
+import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
+import org.example.modelo.DatePickerUtil;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -47,7 +49,7 @@ public class EquiposGUI {
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
     private JComboBox estadoCombo;
-    JDateChooser fechaCompraDate = new JDateChooser();
+    DatePicker fechaCompraDate = DatePickerUtil.createCustomDatePicker();
 
     public JPanel getPanel() {
         return equipoPanel;
@@ -166,9 +168,9 @@ public class EquiposGUI {
                     equipo.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
                     equipo.setIdPais((Pais) paisCombo.getSelectedItem());
                     equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
-                    Date fechaElegida = (Date) fechaCompraDate.getDate();
-                    LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    equipo.setFechaAdquisicion(localDate);
+                    /*Date fechaElegida = (Date) fechaCompraDate.getDate();
+                    LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();*/
+                    equipo.setFechaAdquisicion(fechaCompraDate.getDate());
                     equipo.setEstado((Estados) estadoCombo.getSelectedItem());
                     agregarEquipo(equipo);
                 } catch (Exception ex) {

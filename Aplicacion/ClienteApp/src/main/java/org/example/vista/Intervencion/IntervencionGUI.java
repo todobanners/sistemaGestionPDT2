@@ -3,16 +3,16 @@ package org.example.vista.Intervencion;
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
-import com.toedter.calendar.JDateChooser;
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DateTimePicker;
 import org.example.modelo.Conexion;
-import org.jdesktop.swingx.JXTable;
+import org.example.modelo.DatePickerUtil;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -27,15 +27,17 @@ public class IntervencionGUI {
     private JTable tablaIntervenciones;
     private IntervencionRemote intervencionRemoteBean;
 
-    JDateChooser textFechaHora = new JDateChooser();
-    private JScrollPane panelTabla;
 
+    private JScrollPane panelTabla;
+    private JPanel fecha;
+    DateTimePicker selectorFecha = DatePickerUtil.createCustomDateTimePicker();
     public JPanel getPanel(){
         return panelIntervencion;
     }
 
     public IntervencionGUI() throws Exception {
         JFrame frame = new JFrame("Intervenciones");
+        fecha.add(selectorFecha);
 
         //Crear modelo de la tabla
         DefaultTableModel model = new DefaultTableModel();
@@ -64,9 +66,7 @@ public class IntervencionGUI {
                 Usuario user = new Usuario();//creo obj usuario
                 user.setId(1L);//le asigno un id hardcodeado
                 intervencion.setIdUsuario(user); //agrego el obj usuario con solo el id
-               // intervencion.setFechaHora(LocalDate.parse(textFechaHora.getText()));
-                Date fecha = Date.from(intervencion.getFechaHora().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                textFechaHora.setDate(fecha);
+                intervencion.setFechaHora(selectorFecha.getDateTimePermissive().toLocalDate());
                 intervencion.setMotivo(textMotivo.getText());
                 Equipo equipo = new Equipo();
                 equipo.setId(Long.valueOf(textIdEquipo.getText()));
