@@ -5,6 +5,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
 import org.example.controlador.Sesion;
+import org.example.modelo.DatePickerUtil;
 import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
@@ -30,7 +31,8 @@ public class ModificarDatosPropiosGUI {
 //TODO: Falta telefono
 
 // JDateChooser selectorFecha = new JDateChooser();
-DatePicker selectorFecha = new DatePicker();
+//DatePicker selectorFecha = new DatePicker();
+    DatePicker selectorFecha = DatePickerUtil.createCustomDatePicker();
 
     public JPanel getPanel() {
         return modificarDatosPropios;
@@ -50,7 +52,7 @@ DatePicker selectorFecha = new DatePicker();
         apellido1.setText(usuario.getApellido());
         nombre1.setText(usuario.getNombre());
         id.setText(usuario.getId().toString());
-        Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        //Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
         selectorFecha.setDate(usuario.getFechaNacimiento());
 
         //TODO: Falta verificacion de fecha

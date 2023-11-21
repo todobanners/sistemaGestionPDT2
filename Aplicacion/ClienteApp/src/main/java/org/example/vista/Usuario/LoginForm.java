@@ -33,7 +33,6 @@ public class LoginForm extends JFrame {
 
     public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         add(panel1);
         pack();
         setSize(500, 700);

@@ -25,9 +25,9 @@ public class AplicacionVentana extends JFrame {
         setLocationRelativeTo(null);
         pack();
         //Font por defecto para Menues
-        //Font f = new Font("sans-serif", Font.PLAIN, 12);
-        //UIManager.put("Menu.font", f);
-        //UIManager.put("MenuItem.font", f);
+        Font f = new Font("sans-serif", Font.PLAIN, 12);
+        UIManager.put("Menu.font", f);
+        UIManager.put("MenuItem.font", f);
 
         //iniciar menu
         JMenuBar menuBar=initMenuBar();

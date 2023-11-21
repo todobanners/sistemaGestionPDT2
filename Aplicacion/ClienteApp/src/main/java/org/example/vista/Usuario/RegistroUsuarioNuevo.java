@@ -2,6 +2,7 @@ package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
+import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
 import org.example.vista.Usuario.LoginForm;
@@ -32,7 +33,11 @@ public class RegistroUsuarioNuevo extends JFrame {
     private JPanel fechaNacimiento;
     private JLabel logo;
     private JPanel internoRegistro;
-    JDateChooser selectorFecha = new JDateChooser();
+
+
+
+    DatePicker selectorFecha = new DatePicker();
+
 
     public RegistroUsuarioNuevo(String s) throws NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);
@@ -88,16 +93,17 @@ public class RegistroUsuarioNuevo extends JFrame {
             }
             //usuario.setTelefono(telefonoTextField.getText());
 
-
-            Date fechaElegida = (Date) selectorFecha.getDate();
-            LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            fechaNacimiento.add(selectorFecha);
+            selectorFecha.setDate(usuario.getFechaNacimiento());
+            /*Date fechaElegida = (Date) selectorFecha.getDate();
+            LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();*/
             //la fecha de nacimiento debe ser menor a la fecha actual
 
-            if (localDate.isAfter(LocalDate.now())){
+            if (selectorFecha.getDate().isAfter(LocalDate.now())){
                 JOptionPane.showMessageDialog(null, "La fecha de nacimiento debe ser menor a la fecha actual");
                 usuario = null;
             }else {
-                usuario.setFechaNacimiento(localDate);
+                usuario.setFechaNacimiento(selectorFecha.getDate());
             }
 
             Perfil perfil = (Perfil) comboBoxTipo.getSelectedItem();
