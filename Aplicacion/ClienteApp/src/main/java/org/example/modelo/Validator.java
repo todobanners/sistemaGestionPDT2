@@ -29,7 +29,7 @@ public class Validator {
      */
     // Método para validar que una cadena contenga solo letras
     public static boolean contieneSoloLetras(String texto) {
-        return texto == null || !texto.matches("^[a-zA-Z]+$");
+        return texto == null || !texto.matches("^[a-zA-Z ]+$");
     }
 
     // Método para validar que una cadena contenga solo números
