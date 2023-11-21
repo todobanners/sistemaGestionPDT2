@@ -1,4 +1,4 @@
-package org.example.vista;
+package org.example.vista.Intervencion;
 
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;

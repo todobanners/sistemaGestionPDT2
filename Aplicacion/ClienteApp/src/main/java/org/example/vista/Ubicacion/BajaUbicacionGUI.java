@@ -53,7 +53,7 @@ public class BajaUbicacionGUI {
 
     private void initComponents() {
 
-        bajaUbicacion = new JPanel();
+        /*bajaUbicacion = new JPanel();
         institucion = new JTextField();
         usuario = new JTextField();
         ubicacion = new JTextField();
@@ -67,14 +67,14 @@ public class BajaUbicacionGUI {
         labelUbicacion = new JLabel("ubicacion");
         labelRazon = new JLabel("razon");
         labelInstitucion = new JLabel("institucion");
-        labelUsuario = new JLabel("usuario");
+        labelUsuario = new JLabel("usuario");*/
 
         // Configurar el diseño del panel
-        bajaUbicacion.setLayout(new GridLayout(8, 3));
+        //bajaUbicacion.setLayout(new GridLayout(8, 3));
 
-        fecha.add(selectorFecha);
+        //fecha.add(selectorFecha);
 
-        bajaUbicacion.add(labelInstitucion);
+        /*bajaUbicacion.add(labelInstitucion);
         bajaUbicacion.add(institucion);
         bajaUbicacion.add(labelUsuario);
         bajaUbicacion.add(usuario);
@@ -86,7 +86,7 @@ public class BajaUbicacionGUI {
         bajaUbicacion.add(comentario);
         bajaUbicacion.add(labelFecha);
         bajaUbicacion.add(fecha);
-        bajaUbicacion.add(confirmar);
+        bajaUbicacion.add(confirmar);*/
         //bajaUbicacion.add(cancelar);
 
         // Configurar eventos de botones
@@ -141,7 +141,7 @@ public class BajaUbicacionGUI {
 
         } catch (NamingException | ServiciosException ex) {
             // Mostrar mensaje de error
-            JOptionPane.showMessageDialog(null, "Error al modificar la ubicación");
+            JOptionPane.showMessageDialog(null, "Error al borrar la ubicación");
             ex.printStackTrace();
         }
     }

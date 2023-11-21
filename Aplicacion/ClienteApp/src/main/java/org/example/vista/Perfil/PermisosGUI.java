@@ -1,4 +1,4 @@
-package org.example.vista;
+package org.example.vista.Perfil;
 
 import codigocreativo.uy.servidorapp.entidades.Permiso;
 import codigocreativo.uy.servidorapp.servicios.PermisoRemote;

@@ -1,4 +1,4 @@
-package org.example.vista;
+package org.example.vista.Perfil;
 
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
