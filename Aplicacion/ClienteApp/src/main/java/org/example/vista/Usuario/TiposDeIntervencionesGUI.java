@@ -1,22 +1,13 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.Perfil;
-import codigocreativo.uy.servidorapp.entidades.TiposIntervencione;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
-import codigocreativo.uy.servidorapp.servicios.TipoIntervencioneBean;
 import codigocreativo.uy.servidorapp.servicios.TipoIntervencioneRemote;
 import org.example.modelo.Conexion;
-import org.example.vista.PerfilPermisosGUI;
 import org.jdesktop.swingx.JXTable;
-import org.jdesktop.swingx.hyperlink.AbstractHyperlinkAction;
-import org.jdesktop.swingx.renderer.DefaultTableRenderer;
-import org.jdesktop.swingx.renderer.HyperlinkProvider;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import java.awt.event.ActionEvent;
 
 public class TiposDeIntervencionesGUI {
     private JPanel panelTipoDeIntervenciones;

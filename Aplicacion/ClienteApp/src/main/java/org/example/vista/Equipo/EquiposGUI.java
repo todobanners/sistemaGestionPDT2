@@ -12,8 +12,10 @@ package org.example.vista;
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
+import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
+import org.example.modelo.DatePickerUtil;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -47,7 +49,7 @@ public class EquiposGUI {
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
     private JComboBox estadoCombo;
-    JDateChooser fechaCompraDate = new JDateChooser();
+    DatePicker fechaCompraDate = DatePickerUtil.createCustomDatePicker();
 
     public JPanel getPanel() {
         return equipoPanel;
@@ -56,6 +58,7 @@ public class EquiposGUI {
     public EquiposGUI() throws Exception{
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Equipo");
         model.addColumn("ID Interno");
         model.addColumn("Ubicación");
         model.addColumn("Nro. Serie");
@@ -67,9 +70,123 @@ public class EquiposGUI {
         model.addColumn("Fecha Adquisición");
         equiposTable.setModel(model);
         actualizarTabla();
-
         fechaAdqContainer.add(fechaCompraDate);
+        cargarCombos();
 
+
+        editarSeleccionadoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    Equipo equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    ModificarEquipo modificarEquipo = null;
+                    try {
+                        modificarEquipo = new ModificarEquipo(equipoSeleccionado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    modificarEquipo.mostrarVentana();
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
+                }
+            }
+        });
+
+        darBajaSeleccionadoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    Equipo equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    // Asegúrate de crear la instancia correcta de BajaEquipoGUI
+                    BajaEquipoGUI bajaEquipoPanel = null;
+                    try {
+                        bajaEquipoPanel = new BajaEquipoGUI(equipoSeleccionado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    // Asegúrate de llamar al método correcto
+                    bajaEquipoPanel.mostrarVentana();
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
+                }
+            }
+        });
+
+
+        guardarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Equipo equipo = new Equipo();
+                    equipo.setIdInterno(idInternoText.getText());
+                    equipo.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()));
+                    equipo.setNroSerie(nroSerieText.getText());
+                    equipo.setNombre(nombreText.getText());
+                    equipo.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
+                    equipo.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
+                    equipo.setIdPais((Pais) paisCombo.getSelectedItem());
+                    equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
+                    equipo.setFechaAdquisicion(fechaCompraDate.getDate());
+                    equipo.setEstado((Estados) estadoCombo.getSelectedItem());
+                    agregarEquipo(equipo);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo "+ex.getMessage());
+                }
+            }
+        });
+    }
+
+
+    public void actualizarTabla() throws Exception {
+        DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
+        model.setRowCount(0);
+        Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
+            model.addRow(new Object[]{
+                    equipo.getId(),
+                    equipo.getIdInterno(),
+                    equipo.getIdUbicacion().getNombre(),
+                    equipo.getNroSerie(),
+                    equipo.getNombre(),
+                    equipo.getIdTipo(),
+                    equipo.getIdProveedor(),
+                    equipo.getIdPais(),
+                    equipo.getIdModelo(),
+                    equipo.getFechaAdquisicion()
+            });
+        });
+    }
+
+    public void agregarEquipo(Equipo equipo) throws Exception {
+        try {
+            Conexion.obtenerEquipoBean().crearEquipo(equipo);
+            JOptionPane.showMessageDialog(null, "Equipo registrado con exito");
+            actualizarTabla();
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo"+e.getMessage());
+        }
+    }
+
+    public void cargarCombos() throws Exception {
         for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
         }
@@ -92,59 +209,6 @@ public class EquiposGUI {
 
         for (Estados estado : Estados.values()) {
             estadoCombo.addItem(estado);
-        }
-
-
-
-        guardarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Equipo equipo = new Equipo();
-                    equipo.setIdInterno(idInternoText.getText());
-                    equipo.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()));
-                    equipo.setNroSerie(nroSerieText.getText());
-                    equipo.setNombre(nombreText.getText());
-                    equipo.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
-                    equipo.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
-                    equipo.setIdPais((Pais) paisCombo.getSelectedItem());
-                    equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
-                    Date fechaElegida = (Date) fechaCompraDate.getDate();
-                    LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    equipo.setFechaAdquisicion(localDate);
-                    equipo.setEstado((Estados) estadoCombo.getSelectedItem());
-                    agregarEquipo(equipo);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-    }
-    public void actualizarTabla() throws Exception {
-        DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
-        model.setRowCount(0);
-        Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
-            model.addRow(new Object[]{
-                    equipo.getIdInterno(),
-                    equipo.getIdUbicacion(),
-                    equipo.getNroSerie(),
-                    equipo.getNombre(),
-                    equipo.getIdTipo(),
-                    equipo.getIdProveedor(),
-                    equipo.getIdPais(),
-                    equipo.getIdModelo(),
-                    equipo.getFechaAdquisicion()
-            });
-        });
-    }
-
-    public void agregarEquipo(Equipo equipo) throws Exception {
-        try {
-            Conexion.obtenerEquipoBean().crearEquipo(equipo);
-            JOptionPane.showMessageDialog(null, "Equipo registrado con exito");
-            actualizarTabla();
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo");
         }
     }
 }

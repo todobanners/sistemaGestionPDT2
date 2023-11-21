@@ -2,8 +2,6 @@ package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
-import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -37,9 +35,10 @@ public class EquipoBean implements EquipoRemote {
     }
 
     @Override
-    public void obtenerEquipo(Long id) {
-        em.find(Equipo.class, id);
+    public Equipo obtenerEquipo(Long id) {
+        return em.find(Equipo.class, id);
     }
+
 
 
     @Override

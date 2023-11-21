@@ -1,10 +1,11 @@
-package org.example.vista;
+package org.example.vista.Perfil;
 
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Permiso;
 import codigocreativo.uy.servidorapp.servicios.PerfilRemote;
 import codigocreativo.uy.servidorapp.servicios.PermisoRemote;
 import org.example.modelo.Conexion;
+import org.example.vista.DualListBox;
 
 import javax.naming.NamingException;
 import javax.swing.*;
