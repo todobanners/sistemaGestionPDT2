@@ -105,20 +105,18 @@ public class PerfilesGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
-                if (Validator.validarMaximoCaracteres(textNombre.getText(), 20)) {
+                /*if (Validator.validarMaximoCaracteres(textNombre.getText(), 20)) {
                     JOptionPane.showMessageDialog(null, "El nombre no debe tener mas de 20 caracteres");
                 }else if (Validator.validarMinimoCaracteres(textNombre.getText(), 2)) {
                     JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 3 caracteres");
                 } else if (Validator.contieneSoloLetras(textNombre.getText())) {
                     JOptionPane.showMessageDialog(null, "El nombre solo debe contener letras");
-                } else{
-                    perfil.setNombrePerfil(textNombre.getText());
+                } else{}*/
+                //perfil.setNombrePerfil(textNombre.getText());
                     perfil.setEstado(Estados.valueOf(comboEstado.getSelectedItem().toString()));
                     perfilesPermisoBean.modificarPerfil(perfil);
                     JOptionPane.showMessageDialog(null, "Perfil modificado");
                     actualizarTabla();
-                }
-
             }
         });
         borrarPerfilSeleccionadoButton.addActionListener(new ActionListener() {

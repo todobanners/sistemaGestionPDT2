@@ -81,8 +81,6 @@ public class ListadoDeUbicacionesGUI extends JPanel {
 
                     if (confirmacion == JOptionPane.YES_OPTION) {
                         // Llamar al servicio para eliminar la ubicación
-                        //TODO eliminar ubicacion en la ventana siguiente
-                        // preguntar razon para borrar
                         BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada));
                         bajaUbicacionGUI.mostrarVentana();
 
