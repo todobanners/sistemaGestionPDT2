@@ -16,6 +16,8 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
 import org.example.modelo.DatePickerUtil;
+import org.example.vista.Equipo.BajaEquipoGUI;
+import org.example.vista.Equipo.ModificarEquipo;
 
 import javax.naming.NamingException;
 import javax.swing.*;

@@ -8,6 +8,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
 import org.example.modelo.DatePickerUtil;
+import org.example.vista.EquiposGUI;
 
 import javax.swing.*;
 import java.awt.*;

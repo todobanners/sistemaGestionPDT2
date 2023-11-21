@@ -74,7 +74,7 @@ public class IntervencionGUI {
                 intervencion.setComentarios(textComentarios.getText());
                 intervencion.setIdTipo((TiposIntervencione) comboTipodeIntervencion.getSelectedItem());
                 intervencion.setMotivo(textMotivo.getText());
-                intervencion.setFechaHora(fechaHora != null ? fechaHora.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null);
+                intervencion.setFechaHora(selectorFecha.getDateTimePermissive().toLocalDate());
 
 
                 try {
