@@ -70,32 +70,8 @@ public class EquiposGUI {
         model.addColumn("Fecha Adquisición");
         equiposTable.setModel(model);
         actualizarTabla();
-
         fechaAdqContainer.add(fechaCompraDate);
-
-        for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
-            ubicacionCombo.addItem(ubicacion);
-        }
-
-        for (TiposEquipo tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
-            tipoCombo.addItem(tipo);
-        }
-
-        for (ProveedoresEquipo proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
-            proveedorCombo.addItem(proveedor);
-        }
-
-        for (Pais pais : Conexion.obtenerPaisBean().obtenerpais()) {
-            paisCombo.addItem(pais);
-        }
-
-        for (ModelosEquipo modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
-            modeloCombo.addItem(modelo);
-        }
-
-        for (Estados estado : Estados.values()) {
-            estadoCombo.addItem(estado);
-        }
+        cargarCombos();
 
 
         editarSeleccionadoButton.addActionListener(new ActionListener() {
@@ -168,13 +144,12 @@ public class EquiposGUI {
                     equipo.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
                     equipo.setIdPais((Pais) paisCombo.getSelectedItem());
                     equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
-                    /*Date fechaElegida = (Date) fechaCompraDate.getDate();
-                    LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();*/
                     equipo.setFechaAdquisicion(fechaCompraDate.getDate());
                     equipo.setEstado((Estados) estadoCombo.getSelectedItem());
                     agregarEquipo(equipo);
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo "+ex.getMessage());
                 }
             }
         });
@@ -200,8 +175,6 @@ public class EquiposGUI {
         });
     }
 
-
-
     public void agregarEquipo(Equipo equipo) throws Exception {
         try {
             Conexion.obtenerEquipoBean().crearEquipo(equipo);
@@ -209,7 +182,33 @@ public class EquiposGUI {
             actualizarTabla();
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo");
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo"+e.getMessage());
+        }
+    }
+
+    public void cargarCombos() throws Exception {
+        for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
+            ubicacionCombo.addItem(ubicacion);
+        }
+
+        for (TiposEquipo tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
+            tipoCombo.addItem(tipo);
+        }
+
+        for (ProveedoresEquipo proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
+            proveedorCombo.addItem(proveedor);
+        }
+
+        for (Pais pais : Conexion.obtenerPaisBean().obtenerpais()) {
+            paisCombo.addItem(pais);
+        }
+
+        for (ModelosEquipo modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
+            modeloCombo.addItem(modelo);
+        }
+
+        for (Estados estado : Estados.values()) {
+            estadoCombo.addItem(estado);
         }
     }
 }
