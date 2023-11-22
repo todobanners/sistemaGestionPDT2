@@ -163,6 +163,8 @@ public class AplicacionVentana extends JFrame {
                 changePanel(new ListadoDeIntervencionesGUI().getPanel());
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
+            } catch (ServiciosException ex) {
+                throw new RuntimeException(ex);
             }
         });
         //Registrar Intervencion
