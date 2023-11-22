@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -63,14 +64,6 @@ public class RegistroUsuarioNuevo extends JFrame {
             comboBoxTipo.addItem(p);
         }
 
-        //Validamos los campos
-
-        //El campo nombre solo debe permitir letras
-        if (!Validator.contieneSoloLetras(nombreTextField.getText())){
-            JOptionPane.showMessageDialog(null, "El nombre ingresado no es valido");
-        }
-
-
         apellidoTextField.addCaretListener(e ->{
             String nombre = nombreTextField.getText().toLowerCase();
             String apellido = apellidoTextField.getText().toLowerCase();
@@ -80,37 +73,36 @@ public class RegistroUsuarioNuevo extends JFrame {
 
         aceptarButton.addActionListener(e -> {
             Usuario usuario = new Usuario();
-
-            //Verifico que los campos esten todos completos
-            if (nombreTextField.getText().isEmpty() || apellidoTextField.getText().isEmpty() || cedulaTextField.getText().isEmpty() || userTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || telefonoTextField.getText().isEmpty() || clave.getPassword().length == 0 || claveRepetir.getPassword().length == 0){
-                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-            } else if (Validator.contieneSoloLetras(nombreTextField.getText()) || Validator.contieneSoloLetras(apellidoTextField.getText())) {// verifico que los campos de texto solo tengan texto
-                JOptionPane.showMessageDialog(null, "El nombre o apellido ingresado no es valido");
-            } else if (!Validator.validarMinimoCaracteres(nombreTextField.getText(), 3) || !Validator.validarMinimoCaracteres(apellidoTextField.getText(), 3)) {// verifico que los campos de texto tengan almenos 3 caracteres
-                JOptionPane.showMessageDialog(null, "El nombre o apellido ingresado debe tener almenos 3 caracteres");
-            } else if (!Validator.validarMaximoCaracteres(nombreTextField.getText(), 50) || !Validator.validarMaximoCaracteres(apellidoTextField.getText(), 50)) {// verifico que los campos de texto tengan menos de 50 caracteres
-                JOptionPane.showMessageDialog(null, "El nombre o apellido ingresado debe tener menos de 50 caracteres");
-            } else if (!Validator.contieneSoloNumeros(cedulaTextField.getText()) || !Validator.validarMinimoCaracteres(cedulaTextField.getText(), 8) || !Validator.validarMaximoCaracteres(cedulaTextField.getText(), 8)) {// verifico que la cedula solo tenga numeros y tenga 8 caracteres
-                JOptionPane.showMessageDialog(null, "La cedula ingresada no es valida");
-            } else if (!Validator.validarMinimoCaracteres(userTextField.getText(), 3)) {// verifico que el nombre de usuario tenga almenos 3 caracteres
-                JOptionPane.showMessageDialog(null, "El nombre de usuario ingresado debe tener almenos 3 caracteres");
-            } else if (!Validator.validarMaximoCaracteres(userTextField.getText(), 50)) {// verifico que el nombre de usuario tenga menos de 50 caracteres
-                JOptionPane.showMessageDialog(null, "El nombre de usuario ingresado debe tener menos de 50 caracteres");
-            } else if (!Validator.validarMinimoCaracteres(clave.getPassword().toString(), 8)) {// verifico que la contraseña tenga almenos 8 caracteres
-                JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener almenos 8 caracteres");
-            } else if (!Validator.validarMaximoCaracteres(clave.getPassword().toString(), 50)) {// verifico que la contraseña tenga menos de 50 caracteres
-                JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener menos de 50 caracteres");
-            } else if (!Validator.validarContrasena(clave.getPassword().toString())) {// verifico que la contraseña tenga almenos una letra y un numero
-                JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener almenos una letra y un numero");
-            } else if (!Validator.validarEmail(emailTextField.getText())) {// verifico que el email sea valido
-                JOptionPane.showMessageDialog(null, "El email ingresado no es valido");
-            } else if (selectorFecha.getDate().isAfter(LocalDate.now())) {// verifico que la fecha de nacimiento sea menor a la fecha actual
-                JOptionPane.showMessageDialog(null, "La fecha de nacimiento debe ser menor a la fecha actual");
-            } else if (selectorFecha.getDate().isBefore(LocalDate.of(1900, 1, 1))) {// verifico que la fecha de nacimiento sea mayor a 1900
-                JOptionPane.showMessageDialog(null, "La fecha de nacimiento debe ser mayor a 1900");
-            } else if (selectorFecha.getDate().isAfter(LocalDate.now())) {// verifico que la fecha de nacimiento sea menor a la fecha actual
-                JOptionPane.showMessageDialog(null, "La fecha de nacimiento debe ser menor a la fecha actual");
-            } else {
+            //Validamos los campos
+            // Verifico que los campos esten todos completos
+    if (nombreTextField.getText().isEmpty() || apellidoTextField.getText().isEmpty() || cedulaTextField.getText().isEmpty() || userTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || telefonoTextField.getText().isEmpty() || clave.getPassword().length == 0 || claveRepetir.getPassword().length == 0 || selectorFecha.getDate() == null){
+        JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+    }
+    // Verifico que el nombre y apellido contengan solo letras
+    else if (Validator.contieneSoloLetras(nombreTextField.getText()) || Validator.contieneSoloLetras(apellidoTextField.getText())){
+        JOptionPane.showMessageDialog(null, "Los campos nombre y apellido solo pueden contener letras");
+    }
+    // Verifico que la cedula sea valida
+    else if (!Validator.validarCedula(cedulaTextField.getText())){
+        JOptionPane.showMessageDialog(null, "La cédula ingresada no es válida");
+    }
+    // Verifico que el email sea valido
+    else if (!Validator.validarEmail(emailTextField.getText())){
+        JOptionPane.showMessageDialog(null, "El email ingresado no es valido");
+    }
+    // Verifico que el telefono contenga solo numeros
+    else if (Validator.contieneSoloNumeros(telefonoTextField.getText())){
+        JOptionPane.showMessageDialog(null, "El campo telefono solo puede contener numeros");
+    }
+    // Verifico que las claves coinciden
+    else if (!Arrays.equals(clave.getPassword(), claveRepetir.getPassword())){
+        JOptionPane.showMessageDialog(null, "Las claves ingresadas no coinciden");
+    }
+    // Verifico que la contraseña tenga almenos una letra y un numero
+    else if (!Validator.validarContrasena(new String(clave.getPassword()))){
+        JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener almenos una letra y un numero y contener almenos 8 caracteres");
+    }
+    else {
                 //Guardo los datos en la tabla
                 //Genero objeto usuario
                 Institucion institucion = new Institucion();
@@ -121,15 +113,15 @@ public class RegistroUsuarioNuevo extends JFrame {
                 usuario.setCedula(cedulaTextField.getText());
                 usuario.setNombreUsuario(userTextField.getText()); //El nombre de usuario esta formado por el nombre.apellido en minuscula
                 usuario.setEmail(emailTextField.getText());
-                fechaNacimiento.add(selectorFecha);
-                selectorFecha.setDate(usuario.getFechaNacimiento());
+                usuario.setContrasenia(clave.getPassword().toString());
+                usuario.setFechaNacimiento(selectorFecha.getDate());
                 Perfil perfil = (Perfil) comboBoxTipo.getSelectedItem();
                 usuario.setIdPerfil(perfil);
                 usuario.setEstado(Estados.SIN_VALIDAR);
                 UsuariosTelefonoId usuariosTelefonoId = new UsuariosTelefonoId();
                 usuariosTelefonoId.setNumero(telefonoTextField.getText());
                 usuariosTelefonoId.setIdUsuario(usuario.getId());
-            }
+
             //usuario.setTelefono(telefonoTextField.getText());
             try {
                 Conexion.obtenerUsuarioBean().crearUsuario(usuario);
@@ -137,6 +129,7 @@ public class RegistroUsuarioNuevo extends JFrame {
             } catch (Exception exception) {
                 exception.printStackTrace();
                 JOptionPane.showMessageDialog(null, "No se pudo crear el usuario Error:"+exception.getMessage());
+            }
             }
             //setVisible(false);
             //new LoginForm();

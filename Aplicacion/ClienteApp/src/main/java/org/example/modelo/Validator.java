@@ -39,9 +39,32 @@ public class Validator {
 
     // Método para validar una contraseña (requiere al menos 8 caracteres, una letra y un número)
     public static boolean validarContrasena(String contrasena) {
-        String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+        String regex = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(contrasena);
         return matcher.matches();
+    }
+
+    public static boolean validarCedula(String cedula) {
+        if (cedula.length() != 8 || !cedula.matches("\\d{8}")) {
+            return false;
+        }
+
+        int[] coeficientes = {2, 9, 8, 7, 6, 3, 4};
+        int suma = 0;
+
+        for (int i = 0; i < coeficientes.length; i++) {
+            suma += coeficientes[i] * Character.getNumericValue(cedula.charAt(i));
+        }
+
+        int verificadorCalculado = 10 - (suma % 10);
+
+        if (verificadorCalculado == 10) {
+            verificadorCalculado = 0;
+        }
+
+        int verificadorIngresado = Character.getNumericValue(cedula.charAt(7));
+
+        return verificadorCalculado == verificadorIngresado;
     }
 }

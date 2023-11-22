@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
+import java.sql.SQLException;
 import java.util.List;
 @Stateless
 public class UsuarioBean implements UsuarioRemote {
