@@ -7,7 +7,7 @@ package org.example.vista.Equipo;
         import com.toedter.calendar.JDateChooser;
         import org.example.modelo.Conexion;
         import org.example.modelo.DatePickerUtil;
-        import org.example.vista.EquiposGUI;
+
 
         import javax.naming.NamingException;
         import javax.swing.*;

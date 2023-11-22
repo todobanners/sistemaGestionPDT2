@@ -1,4 +1,4 @@
-package org.example.vista;
+package org.example.vista.Equipo;
 /*
 * TODO: Agregar funcionalidad de los botones
 *  - Dar de baja seleccionado
@@ -6,7 +6,7 @@ package org.example.vista;
 *  - Registrar movimiento
 * TODO: Crear filtros para la tabla
 * TODO: Ver como hacer para que se muestre la imagen del equipo en la pantalla principal
-*
+*  todo: arreglar tamano de botones
 *
 * */
 import codigocreativo.uy.servidorapp.entidades.*;
@@ -60,7 +60,6 @@ public class EquiposGUI {
     public EquiposGUI() throws Exception{
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID Equipo");
         model.addColumn("ID Interno");
         model.addColumn("Ubicación");
         model.addColumn("Nro. Serie");
@@ -163,7 +162,6 @@ public class EquiposGUI {
         model.setRowCount(0);
         Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
             model.addRow(new Object[]{
-                    equipo.getId(),
                     equipo.getIdInterno(),
                     equipo.getIdUbicacion().getNombre(),
                     equipo.getNroSerie(),

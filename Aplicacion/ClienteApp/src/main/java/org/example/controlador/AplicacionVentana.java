@@ -1,7 +1,8 @@
 package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import org.example.vista.EquiposGUI;
+
+import org.example.vista.Equipo.EquiposGUI;
 import org.example.vista.Intervencion.IntervencionGUI;
 import org.example.vista.Intervencion.ListadoDeIntervencionesGUI;
 import org.example.vista.Perfil.PerfilesGUI;
