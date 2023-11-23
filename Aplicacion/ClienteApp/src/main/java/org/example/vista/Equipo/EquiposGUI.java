@@ -50,6 +50,7 @@ public class EquiposGUI {
     private JButton registrarMovimientoButton;
     private JComboBox estadoCombo;
     private JLabel filePathField;
+    private File imagenSubida;
     DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
     public JPanel getPanel() {
@@ -72,28 +73,18 @@ public class EquiposGUI {
         actualizarTabla();
         fechaAdqContainer.add(fechaCompraDate);
         cargarCombos();
-        File imagenSubida = null;
 
         imagenBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File imagenSubida = fileChooser.getSelectedFile();
-                    filePathField.setText(imagenSubida.getAbsolutePath());
-                    // Aquí puedes manejar el archivo seleccionado
-                    // Por ejemplo, puedes subirlo a un servidor
-                    try {
-                        String URLimagen = Utilidades.subirImagen(imagenSubida);
-                        filePathField.setText(URLimagen);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-                }
-            }
-        });
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            imagenSubida = fileChooser.getSelectedFile();
+            filePathField.setText(imagenSubida.getAbsolutePath());
+        }
+    }
+});
 
 
         editarSeleccionadoButton.addActionListener(new ActionListener() {
@@ -168,8 +159,7 @@ public class EquiposGUI {
                     equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
                     equipo.setFechaAdquisicion(fechaCompraDate.getDate());
                     equipo.setEstado((Estados) estadoCombo.getSelectedItem());
-                    equipo.setImagen(filePathField.getText());
-                    //Utilidades.subirImagen(imagenSubida);
+                    equipo.setImagen(Utilidades.subirImagen(imagenSubida));
                     agregarEquipo(equipo);
                 } catch (Exception ex) {
                     ex.printStackTrace();

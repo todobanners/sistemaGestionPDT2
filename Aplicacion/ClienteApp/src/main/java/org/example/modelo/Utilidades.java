@@ -101,36 +101,28 @@ public class Utilidades {
     private static final String URL_UPLOAD = "https://api.imgbb.com/1/upload?key=" + API_KEY;
 
     public static String subirImagen(File imageFile) throws IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        try {
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost uploadFile = new HttpPost(URL_UPLOAD);
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.addPart("image", new FileBody(imageFile));
             HttpEntity multipart = builder.build();
             uploadFile.setEntity(multipart);
-            CloseableHttpResponse response = httpClient.execute(uploadFile);
-            try {
+            try (CloseableHttpResponse response = httpClient.execute(uploadFile)) {
                 HttpEntity responseEntity = response.getEntity();
                 String responseContent = EntityUtils.toString(responseEntity);
-                System.out.println("Response status: " + response.getStatusLine());
-                System.out.println("Response content: " + responseContent);
 
                 // Parsear la respuesta JSON
-            JSONParser parser = new JSONParser();
-            JSONObject jsonResponse = (JSONObject) parser.parse(responseContent);
-            // Obtener la URL de la imagen
-            JSONObject data = (JSONObject) jsonResponse.get("data");
-            String imageUrl = (String) data.get("url");
+                JSONParser parser = new JSONParser();
+                JSONObject jsonResponse = (JSONObject) parser.parse(responseContent);
+                // Obtener la URL de la imagen
+                JSONObject data = (JSONObject) jsonResponse.get("data");
+                JSONObject medium = (JSONObject) data.get("medium");
+                String imageUrl = (String) medium.get("url");
 
-            System.out.println("Image URL: " + imageUrl);
-            return imageUrl;
+                return imageUrl;
             } catch (ParseException e) {
                 throw new RuntimeException(e);
-            } finally {
-                response.close();
             }
-        } finally {
-            httpClient.close();
         }
     }
 }
