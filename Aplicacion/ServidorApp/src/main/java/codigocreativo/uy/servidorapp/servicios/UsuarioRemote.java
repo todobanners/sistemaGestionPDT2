@@ -1,6 +1,7 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.ejb.Remote;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface UsuarioRemote {
     public List<Usuario> obtenerUsuarios();
     public List<Usuario> obtenerUsuariosFiltrado(String filtro, String valor);
     public Usuario login(String usuario, String password);
+    public List<Usuario> obtenerUsuariosPorEstado(Estados estado);
 }

@@ -1,18 +1,16 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.*;
+import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
-import org.example.modelo.Conexion;
 import org.example.controlador.AplicacionVentana;
 import org.example.controlador.Sesion;
+import org.example.modelo.Conexion;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import static javax.swing.UIManager.setLookAndFeel;
 
 public class LoginForm extends JFrame {
     private JButton loginButton;

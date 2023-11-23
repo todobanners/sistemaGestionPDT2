@@ -1,9 +1,7 @@
 package org.example.vista.Ubicacion;
 
 import codigocreativo.uy.servidorapp.entidades.BajaUbicacion;
-import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import com.toedter.calendar.JDateChooser;
 import org.example.controlador.Sesion;

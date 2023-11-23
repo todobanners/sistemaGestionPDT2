@@ -1,12 +1,12 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
-import java.sql.SQLException;
 import java.util.List;
 @Stateless
 public class UsuarioBean implements UsuarioRemote {
@@ -48,6 +48,13 @@ public class UsuarioBean implements UsuarioRemote {
     public List<Usuario> obtenerUsuariosFiltrado(String filtro, String valor) {
         return em.createQuery("SELECT u FROM Usuario u WHERE u." + filtro + " LIKE '%" + valor + "%'", Usuario.class).getResultList();
     }
+
+    @Override
+    public List<Usuario> obtenerUsuariosPorEstado(Estados estado) {
+        return em.createQuery("SELECT u FROM Usuario u WHERE u.estado = :estado", Usuario.class)
+                .setParameter("estado", estado)
+                .getResultList();
+        }
 
     @Override
     public Usuario login(String usuario, String password) {

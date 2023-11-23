@@ -1,25 +1,19 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.*;
+import codigocreativo.uy.servidorapp.entidades.Institucion;
+import codigocreativo.uy.servidorapp.entidades.Perfil;
+import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.entidades.UsuariosTelefonoId;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Utilidades;
 import org.example.modelo.Validator;
-import org.example.vista.Usuario.LoginForm;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
-import java.util.regex.Pattern;
-
-import static javax.swing.UIManager.setLookAndFeel;
 //todo: Validar nombre usuario existente, cedula existente, email existente
 //todo: Usar hasheo para password
 //todo: Quitar el generador de cedula
@@ -42,7 +36,7 @@ public class RegistroUsuarioNuevo extends JFrame {
     private JLabel logo;
     private JPanel internoRegistro;
 
-    DatePicker selectorFecha = DatePickerUtil.createCustomDatePicker();
+    DatePicker selectorFecha = Utilidades.createCustomDatePicker();
 
     public RegistroUsuarioNuevo(String s) throws NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);

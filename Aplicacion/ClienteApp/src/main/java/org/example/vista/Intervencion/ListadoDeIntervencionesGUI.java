@@ -5,14 +5,13 @@ import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
 import com.github.lgooddatepicker.components.DateTimePicker;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Utilidades;
 import org.jdesktop.swingx.JXTable;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class ListadoDeIntervencionesGUI {
     private JPanel panelListadoDeIntervenciones;
@@ -28,7 +27,7 @@ public class ListadoDeIntervencionesGUI {
     private JPanel fechaDesde;
     private JPanel fechaHasta;
 
-    DateTimePicker selectorFecha = DatePickerUtil.createCustomDateTimePicker();
+    DateTimePicker selectorFecha = Utilidades.createCustomDateTimePicker();
     private IntervencionRemote intervencionRemoteBean;
 
     private DefaultTableModel model;

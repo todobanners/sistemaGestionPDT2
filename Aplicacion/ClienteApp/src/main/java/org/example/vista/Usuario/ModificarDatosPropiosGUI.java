@@ -2,19 +2,15 @@ package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.toedter.calendar.JDateChooser;
-import org.example.modelo.Conexion;
 import org.example.controlador.Sesion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Conexion;
+import org.example.modelo.Utilidades;
 import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class ModificarDatosPropiosGUI {
     private JPanel modificarDatosPropios;
@@ -34,7 +30,7 @@ public class ModificarDatosPropiosGUI {
 
     // JDateChooser selectorFecha = new JDateChooser();
 //DatePicker selectorFecha = new DatePicker();
-    DatePicker selectorFecha = DatePickerUtil.createCustomDatePicker();
+    DatePicker selectorFecha = Utilidades.createCustomDatePicker();
 
     public JPanel getPanel() {
         return modificarDatosPropios;

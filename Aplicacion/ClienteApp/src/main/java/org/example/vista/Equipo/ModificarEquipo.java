@@ -1,22 +1,15 @@
 package org.example.vista.Equipo;
 
-        import codigocreativo.uy.servidorapp.entidades.*;
-        import codigocreativo.uy.servidorapp.enumerados.Estados;
-        import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-        import com.github.lgooddatepicker.components.DatePicker;
-        import com.toedter.calendar.JDateChooser;
-        import org.example.modelo.Conexion;
-        import org.example.modelo.DatePickerUtil;
+import codigocreativo.uy.servidorapp.entidades.*;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
+import com.github.lgooddatepicker.components.DatePicker;
+import org.example.modelo.Conexion;
+import org.example.modelo.Utilidades;
 
-
-        import javax.naming.NamingException;
-        import javax.swing.*;
-        import java.awt.event.ActionEvent;
-        import java.awt.event.ActionListener;
-        import java.time.LocalDate;
-        import java.time.ZoneId;
-        import java.util.Date;
-        import java.util.Objects;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class ModificarEquipo {
 
@@ -37,7 +30,7 @@ public class ModificarEquipo {
     private JButton guardarButton;
     private JButton cancelarButton;
     private JComboBox estadoCombo;
-    private DatePicker fechaCompraDate = DatePickerUtil.createCustomDatePicker();
+    private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
     private Equipo equipoSeleccionado;
 

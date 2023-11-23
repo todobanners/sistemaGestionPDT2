@@ -1,20 +1,20 @@
 package org.example.vista.Intervencion;
 
-import codigocreativo.uy.servidorapp.entidades.*;
+import codigocreativo.uy.servidorapp.entidades.Equipo;
+import codigocreativo.uy.servidorapp.entidades.Intervencion;
+import codigocreativo.uy.servidorapp.entidades.TiposIntervencione;
+import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
-import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DateTimePicker;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Utilidades;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class IntervencionGUI {
     private JPanel panelIntervencion;
@@ -30,7 +30,7 @@ public class IntervencionGUI {
 
     private JScrollPane panelTabla;
     private JPanel fecha;
-    DateTimePicker selectorFecha = DatePickerUtil.createCustomDateTimePicker();
+    DateTimePicker selectorFecha = Utilidades.createCustomDateTimePicker();
     public JPanel getPanel(){
         return panelIntervencion;
     }

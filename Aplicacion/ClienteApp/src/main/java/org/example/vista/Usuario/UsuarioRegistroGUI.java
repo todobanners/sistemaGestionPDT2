@@ -24,17 +24,13 @@ import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Utilidades;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class UsuarioRegistroGUI {
     private JPanel registrarUsuario;
@@ -50,7 +46,7 @@ public class UsuarioRegistroGUI {
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
     private JPanel calendarioContenedor;
-    DatePicker fechaChooser = DatePickerUtil.createCustomDatePicker();
+    DatePicker fechaChooser = Utilidades.createCustomDatePicker();
 
     public JPanel getPanel(){
         return registrarUsuario;

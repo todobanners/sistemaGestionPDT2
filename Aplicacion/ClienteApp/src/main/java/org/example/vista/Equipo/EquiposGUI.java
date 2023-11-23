@@ -9,24 +9,18 @@ package org.example.vista.Equipo;
 *  todo: arreglar tamano de botones
 *
 * */
+
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
-import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
-import org.example.vista.Equipo.BajaEquipoGUI;
-import org.example.vista.Equipo.ModificarEquipo;
+import org.example.modelo.Utilidades;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Objects;
 
 public class EquiposGUI {
@@ -51,7 +45,7 @@ public class EquiposGUI {
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
     private JComboBox estadoCombo;
-    DatePicker fechaCompraDate = DatePickerUtil.createCustomDatePicker();
+    DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
     public JPanel getPanel() {
         return equipoPanel;

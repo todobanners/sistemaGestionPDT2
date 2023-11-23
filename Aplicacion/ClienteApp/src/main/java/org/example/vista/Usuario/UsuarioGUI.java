@@ -5,9 +5,8 @@ import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Utilidades;
 import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
@@ -17,12 +16,9 @@ import javax.swing.table.TableColumn;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.ZoneId;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 /*
     TODO:
         * Falta las validaciones y mensajes de error
@@ -57,7 +53,7 @@ public class UsuarioGUI {
     private JButton limpiarCamposButton;
     private JTextField accCampoID;
 
-    DatePicker fechaChooser = DatePickerUtil.createCustomDatePicker();
+    DatePicker fechaChooser = Utilidades.createCustomDatePicker();
     public JPanel getPanel() {
         return userGUI;
     }
@@ -95,9 +91,9 @@ public class UsuarioGUI {
         });
         filtroEstadoCombo.addActionListener(e -> {
             try {
-                Estados estado = (Estados) filtroEstadoCombo.getSelectedItem();
+                //Estados estado = Estados.valueOf((String) filtroEstadoCombo.getSelectedItem());
 
-                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("estado", estado.toString());
+                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosPorEstado((Estados) filtroEstadoCombo.getSelectedItem());
                 generarTabla(listaUsuarios);
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
@@ -117,8 +113,7 @@ public class UsuarioGUI {
                     Long perfilId = perfil.getId();
                     Institucion institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(usuario.getIdInstitucion().getId());
                     Long institucionId = institucion.getId();
-                    Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+                    fechaChooser.setDate(usuario.getFechaNacimiento());
                     accCampoNombre.setText(usuario.getNombre());
                     accCampoApellido.setText(usuario.getApellido());
                     accCampoCedula.setText(usuario.getCedula());
@@ -197,7 +192,8 @@ public class UsuarioGUI {
                     //usuario.setTelefono(accCampoTelefono.getText());
                     usuario.setIdPerfil((Perfil) accComboPerfil.getSelectedItem());
                     usuario.setIdInstitucion((Institucion) accComboInstitucion.getSelectedItem());
-                    usuario.setEstado((Estados) filtroEstadoCombo.getSelectedItem());
+                    Estados estado = (Estados) accComboEstado.getSelectedItem();
+                    usuario.setEstado(estado);
                     usuario.setNombreUsuario(accCampoUsername.getText());
                     usuario.setFechaNacimiento(fechaChooser.getDate());
 

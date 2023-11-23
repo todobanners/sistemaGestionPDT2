@@ -5,18 +5,12 @@ import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Utilidades;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.Objects;
 
 public class BajaEquipoGUI {
 
@@ -30,7 +24,7 @@ public class BajaEquipoGUI {
     private JComboBox equipoCombo;
     private JComboBox estadoCombo;
     private JPanel fechaAdqContainer;
-    private DatePicker fechaCompraDate = DatePickerUtil.createCustomDatePicker();
+    private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
     private JButton guardarButton;
     private JButton cancelarButton;
 
