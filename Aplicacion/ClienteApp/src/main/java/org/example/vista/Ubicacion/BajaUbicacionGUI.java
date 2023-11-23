@@ -116,9 +116,8 @@ public class BajaUbicacionGUI {
         BajaUbicacion baja = new BajaUbicacion();
         baja.setRazon(razon.getText());
         baja.setComentario(comentario.getText());
-        baja.setIdInstitucion(ubicacionSeleccionada.getIdInstitucion().getId());
-        baja.setIdUbicacion(ubicacionSeleccionada.getId());
-        baja.setIdUsuario(Sesion.getInstancia().getUsuario().getId());
+        baja.setIdUbicacion(ubicacionSeleccionada);
+        baja.setIdUsuario(Sesion.getInstancia().getUsuario());
 
         Date fechaElegida = (Date) selectorFecha.getDate();
         LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

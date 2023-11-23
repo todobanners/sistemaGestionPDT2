@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class Validator {
     // Método para validar que una cadena no esté vacía y tenga al menos una longitud mínima
     public static boolean validarMinimoCaracteres(String texto, int longitudMinima) {
-        return texto != null && texto.length() >= longitudMinima;
+        return !texto.isEmpty() && texto.length() >= longitudMinima;
     }
 
     // Método para validar que una cadena no exceda una longitud máxima

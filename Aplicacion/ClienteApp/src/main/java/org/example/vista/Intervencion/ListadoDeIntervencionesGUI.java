@@ -1,5 +1,6 @@
 package org.example.vista.Intervencion;
 
+import codigocreativo.uy.servidorapp.DTO.TiposIntervencioneDto;
 import codigocreativo.uy.servidorapp.entidades.TiposIntervencione;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
@@ -60,14 +61,13 @@ public class ListadoDeIntervencionesGUI {
         }
         actualizarTabla();
 
-        //obtener los tipos de intervencines
-        for (TiposIntervencione tipoIntervencione : Conexion.obtenerTiposIntervencionBean().obtenerTiposIntervenciones()) {
+        //obtener los tipos de intervenciones
+        for (TiposIntervencioneDto tipoIntervencione : Conexion.obtenerTiposIntervencionBean().obtenerTiposIntervenciones()) {
             comboTipoDeIntervencion.addItem(tipoIntervencione);
         }
     }
 
     public void actualizarTabla() throws NamingException, ServiciosException {
-        DefaultTableModel model = (DefaultTableModel) tablaInterverncionesFiltradas.getModel();
         model.setRowCount(0);
         Conexion.obtenerIntervencionBean().obtenerTodas().forEach(intervencion -> {
             model.addRow(new Object[]{

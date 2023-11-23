@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.ejb.Remote;

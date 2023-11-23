@@ -14,10 +14,20 @@ public class UsuarioBean implements UsuarioRemote {
     @PersistenceContext (unitName = "default")
     private EntityManager em;
 
-
     @Override
     public void crearUsuario(Usuario u) {
-        em.persist(u);
+        Usuario usuario = new Usuario();
+        usuario.setCedula(u.getCedula());
+        usuario.setEmail(u.getEmail());
+        usuario.setContrasenia(u.getContrasenia());
+        usuario.setFechaNacimiento(u.getFechaNacimiento());
+        usuario.setEstado(u.getEstado());
+        usuario.setNombre(u.getNombre());
+        usuario.setApellido(u.getApellido());
+        usuario.setNombreUsuario(u.getNombreUsuario());
+        usuario.setIdInstitucion(u.getIdInstitucion());
+        usuario.setIdPerfil(u.getIdPerfil());
+        em.persist(usuario);
         em.flush();
     }
 

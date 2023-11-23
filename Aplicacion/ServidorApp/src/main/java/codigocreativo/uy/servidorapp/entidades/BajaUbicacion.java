@@ -4,30 +4,25 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "BAJA_UBICACIONES")
-public class BajaUbicacion implements Serializable {
-
+public class BajaUbicacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_BAJA", nullable = false)
     private Long id;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @Column(name = "ID_USUARIO")
-    private long idUsuario;
+    @JoinColumn(name = "ID_USUARIO")
+    private Usuario idUsuario;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.RESTRICT)
-    @Column(name = "ID_INSTITUCION")
-    private long idInstitucion;
-
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @Column(name = "ID_UBICACIONES")
-    private long idUbicacion;
+    @JoinColumn(name = "ID_UBICACION")
+    private Ubicacion idUbicacion;
 
     @Column(name = "RAZON")
     private String razon;
@@ -46,27 +41,19 @@ public class BajaUbicacion implements Serializable {
         this.id = id;
     }
 
-    public long getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(long idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public long getIdInstitucion() {
-        return idInstitucion;
-    }
-
-    public void setIdInstitucion(long idInstitucion) {
-        this.idInstitucion = idInstitucion;
-    }
-
-    public long getIdUbicacion() {
+    public Ubicacion getIdUbicacion() {
         return idUbicacion;
     }
 
-    public void setIdUbicacion(long idUbicacion) {
+    public void setIdUbicacion(Ubicacion idUbicacion) {
         this.idUbicacion = idUbicacion;
     }
 
@@ -93,4 +80,5 @@ public class BajaUbicacion implements Serializable {
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
+
 }
