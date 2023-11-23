@@ -294,10 +294,10 @@ public class UsuarioGUI {
 
     public void cargarCombos() throws NamingException {
         //Se cargan los combos de estado
-        /*for (Estados e : Estados.values()) {
+        for (Estados e : Estados.values()) {
             filtroEstadoCombo.addItem(e.getValor());
             accComboEstado.addItem(e.getValor());
-        }*/
+        }
         //Se cargan los combos de tipo de usuario
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
             filtroTipoCombo.addItem(p);
@@ -336,13 +336,4 @@ public class UsuarioGUI {
         }
         return eleccion;
     }
-
-    /*public String filtroPerfil() throws NamingException {
-        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
-            if (filtroTipoCombo.getSelectedItem().equals(p)) {
-                return p.getId().toString();
-            }
-        }
-        return "No se encontro el perfil";
-    }*/
 }

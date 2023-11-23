@@ -10,6 +10,8 @@ import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -30,7 +32,7 @@ public class ModificarDatosPropiosGUI {
     private JButton cancelarButton;
 //TODO: Falta telefono
 
-// JDateChooser selectorFecha = new JDateChooser();
+    // JDateChooser selectorFecha = new JDateChooser();
 //DatePicker selectorFecha = new DatePicker();
     DatePicker selectorFecha = DatePickerUtil.createCustomDatePicker();
 
@@ -58,7 +60,7 @@ public class ModificarDatosPropiosGUI {
         //TODO: Falta verificacion de fecha
 
         confirmarButton.addActionListener(e -> {
-           //Guardo los datos en la tabla
+            //Guardo los datos en la tabla
             //Valido los campos
             if (passwordField1.getText().isEmpty() || passwordField2.getText().isEmpty() || email.getText().isEmpty() || cedula.getText().isEmpty() || apellido1.getText().isEmpty() || nombre1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -109,6 +111,22 @@ public class ModificarDatosPropiosGUI {
                 else {
                     JOptionPane.showMessageDialog(null, "Operacion cancelada, los datos no se han modificado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 }
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //mostrar cartel de opcion si desea o no cancelar registro
+                //si acepta, limpiar los campos
+                //si cancela, no hacer nada
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la modificación de los datos?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    //todo: Debe llevar a la pantalla de Home
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Operacion cancelada, los datos no se han modificado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                }
+                limpiarCampos();
             }
         });
     }
