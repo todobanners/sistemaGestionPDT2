@@ -123,7 +123,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 usuario.setCedula(cedulaTextField.getText());
                 usuario.setNombreUsuario(userTextField.getText()); //El nombre de usuario esta formado por el nombre.apellido en minuscula
                 usuario.setEmail(emailTextField.getText());
-                usuario.setContrasenia(clave.getPassword().toString());
+                usuario.setContrasenia(clave.getText());
                 usuario.setFechaNacimiento(selectorFecha.getDate());
                 Perfil perfil = (Perfil) comboBoxTipo.getSelectedItem();
                 usuario.setIdPerfil(perfil);
@@ -141,24 +141,40 @@ public class RegistroUsuarioNuevo extends JFrame {
                     JOptionPane.showMessageDialog(null, "No se pudo crear el usuario Error:"+exception.getMessage());
                 }
             }
-            //setVisible(false);
-            //new LoginForm();
         });
 
         cancelarButton.addActionListener(e -> {
-            setVisible(false);
-            LoginForm loginForm = null;
-            try {
-                loginForm = new LoginForm();
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                     UnsupportedLookAndFeelException ex) {
-                throw new RuntimeException(ex);
+            //Muestra cartel de confirmacion de cancelacion
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Esta accion borrará todo y volverás al Login","¿Deseas cancelar?",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                //Genera un nuevo formulario de login
+                limpiarCampos();
+                setVisible(false);
+                LoginForm loginForm = null;
+                try {
+                    loginForm = new LoginForm();
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                         UnsupportedLookAndFeelException ex) {
+                    throw new RuntimeException(ex);
+                }
+                loginForm.setVisible(true);
             }
-            loginForm.setVisible(true);
         });
 
 
 
+    }
+    private void limpiarCampos() {
+        nombreTextField.setText("");
+        apellidoTextField.setText("");
+        cedulaTextField.setText("");
+        userTextField.setText("");
+        emailTextField.setText("");
+        telefonoTextField.setText("");
+        clave.setText("");
+        claveRepetir.setText("");
+        selectorFecha.setDate(null);
     }
 
 }

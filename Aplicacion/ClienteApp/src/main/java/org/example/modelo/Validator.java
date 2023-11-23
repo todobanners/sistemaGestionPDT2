@@ -18,7 +18,7 @@ public class Validator {
     // Método para validar una dirección de correo electrónico
     public static boolean validarEmail(String email) {
         //Expresion regular para validar email obenida de https://www.freeformatter.com/java-regex-tester.html
-        String regex = "^[-a-z0-9~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*(\\.aero|\\.arpa|\\.biz|\\.com|\\.coop|\\.edu|\\.gov|\\.info|\\.int|\\.mil|\\.museum|\\.name|\\.net|\\.org|\\.pro|\\.travel|\\.mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(\\:[0-9]{1,5})?$";
+        String regex = "^[-a-z0-9~!$%^&*_=+}{'?]+(\\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)+(\\.aero|\\.arpa|\\.biz|\\.com|\\.coop|\\.edu|\\.gov|\\.info|\\.int|\\.mil|\\.museum|\\.name|\\.net|\\.org|\\.pro|\\.travel|\\.mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(\\:[0-9]{1,5})?$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();

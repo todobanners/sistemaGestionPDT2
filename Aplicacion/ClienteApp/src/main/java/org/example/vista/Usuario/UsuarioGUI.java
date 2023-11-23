@@ -197,7 +197,7 @@ public class UsuarioGUI {
                     //usuario.setTelefono(accCampoTelefono.getText());
                     usuario.setIdPerfil((Perfil) accComboPerfil.getSelectedItem());
                     usuario.setIdInstitucion((Institucion) accComboInstitucion.getSelectedItem());
-                    usuario.setEstado((Estados) accComboEstado.getSelectedItem());
+                    usuario.setEstado((Estados) filtroEstadoCombo.getSelectedItem());
                     usuario.setNombreUsuario(accCampoUsername.getText());
                     usuario.setFechaNacimiento(fechaChooser.getDate());
 
@@ -295,8 +295,8 @@ public class UsuarioGUI {
     public void cargarCombos() throws NamingException {
         //Se cargan los combos de estado
         for (Estados e : Estados.values()) {
-            filtroEstadoCombo.addItem(e.getValor());
-            accComboEstado.addItem(e.getValor());
+            filtroEstadoCombo.addItem(e);
+            accComboEstado.addItem(e);
         }
         //Se cargan los combos de tipo de usuario
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {

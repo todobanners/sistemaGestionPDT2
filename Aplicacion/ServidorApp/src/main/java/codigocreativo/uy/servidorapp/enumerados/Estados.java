@@ -16,4 +16,9 @@ public enum Estados implements Serializable {
     public String getValor() {
         return valor;
     }
+
+    @Override
+    public String toString() {
+        return valor;
+    }
 }
