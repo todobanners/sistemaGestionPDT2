@@ -70,7 +70,9 @@ public class UsuarioGUI {
                 //Verificar si se selecciono el campo email y validar que sea un email
                 if (filtroBuscarCombo.getSelectedIndex() == 3 && !Validator.validarEmail(filtroValor.getText())) {
                     JOptionPane.showMessageDialog(null, "El campo debe ser un email valido");
-                } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0 || filtroBuscarCombo.getSelectedIndex() == 1) {
+                } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
+                } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 1) {
                     JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
                 } else {
                     List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
