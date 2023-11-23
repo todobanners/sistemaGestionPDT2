@@ -4,6 +4,6 @@ import java.io.Serializable;
 
 public enum Estados implements Serializable {
     ACTIVO,
-    ELIMINADO,
+    INACTIVO,
     SIN_VALIDAR
 }

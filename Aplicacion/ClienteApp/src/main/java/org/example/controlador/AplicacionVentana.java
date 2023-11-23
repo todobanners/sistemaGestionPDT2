@@ -5,6 +5,7 @@ import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.Equipo.EquiposGUI;
 import org.example.vista.Intervencion.IntervencionGUI;
 import org.example.vista.Intervencion.ListadoDeIntervencionesGUI;
+import org.example.vista.Intervencion.TiposDeIntervencionesGUI;
 import org.example.vista.Perfil.PerfilesGUI;
 import org.example.vista.Ubicacion.IngresarUbicacionGUI;
 import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
@@ -59,7 +60,7 @@ public class AplicacionVentana extends JFrame {
 
         //Declaro el submenu de Gestion de Usuarios
         JMenuItem listarUsuarios =      new JMenuItem("Listar Usuarios");
-        JMenuItem registrarUsuario =    new JMenuItem("Registrar Usuario");
+        //JMenuItem registrarUsuario =    new JMenuItem("Registrar Usuario"); TODO: borrar del menu
         //Fin declaracion submenu de Gestion de Usuarios
 
         //Declaro el submenu de Gestion de Equipos
@@ -114,13 +115,13 @@ public class AplicacionVentana extends JFrame {
             }
         });
         //Registrar Usuario
-        registrarUsuario.addActionListener(e -> {
+        /*registrarUsuario.addActionListener(e -> {
             try {
                 changePanel(new UsuarioRegistroGUI().getPanel());
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
-        });
+        });*/
 
         //Listado de Equipos
         listarEquipos.addActionListener(e -> {
@@ -192,7 +193,7 @@ public class AplicacionVentana extends JFrame {
 
         //Gestion de Usuarios
         gestionUsuarios.add(listarUsuarios);
-        gestionUsuarios.add(registrarUsuario);
+        //gestionUsuarios.add(registrarUsuario);
 
         //Gestion de Equipos
         gestionEquipos.add(listarEquipos);

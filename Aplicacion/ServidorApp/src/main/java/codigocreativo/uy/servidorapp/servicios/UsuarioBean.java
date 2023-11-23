@@ -28,7 +28,7 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public void eliminarUsuario(Usuario u) {
-        em.createQuery("UPDATE Usuario u SET u.estado = 'ELIMINADO' WHERE u.id = :id")
+        em.createQuery("UPDATE Usuario u SET u.estado = 'INACTIVO' WHERE u.id = :id")
                 .setParameter("id", u.getId())
                 .executeUpdate();
         em.flush();

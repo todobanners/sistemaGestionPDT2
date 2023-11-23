@@ -30,7 +30,7 @@ public class PerfilBean implements PerfilRemote {
     @Override
     public void eliminarPerfil(Perfil p) {
         //use the enum to set the state
-        em.createQuery("UPDATE Perfil p SET p.estado = 'ELIMINADO' WHERE p.id = :id").setParameter("id", p.getId()).executeUpdate();
+        em.createQuery("UPDATE Perfil p SET p.estado = 'INACTIVO' WHERE p.id = :id").setParameter("id", p.getId()).executeUpdate();
     }
 
     @Override

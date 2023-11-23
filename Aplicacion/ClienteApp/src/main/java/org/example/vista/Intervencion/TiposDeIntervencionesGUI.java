@@ -1,4 +1,4 @@
-package org.example.vista.Usuario;
+package org.example.vista.Intervencion;
 
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.servicios.TipoIntervencioneRemote;

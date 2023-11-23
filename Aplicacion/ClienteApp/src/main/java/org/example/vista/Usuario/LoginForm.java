@@ -2,7 +2,6 @@ package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
-import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.modelo.Conexion;
 import org.example.controlador.AplicacionVentana;
 import org.example.controlador.Sesion;
@@ -10,11 +9,8 @@ import org.example.controlador.Sesion;
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
 
 import static javax.swing.UIManager.setLookAndFeel;
 
@@ -156,8 +152,8 @@ public class LoginForm extends JFrame {
             throw new Exception("Usuario o contraseña incorrectos");
         } else if (usuario.getEstado().equals(Estados.SIN_VALIDAR)) {
             throw new Exception("Usuario aun no validado, consulte a un administrador para conocer su estado");
-        } else if (usuario.getEstado().equals(Estados.ELIMINADO)) {
-            throw new Exception("Usuario eliminado");
+        } else if (usuario.getEstado().equals(Estados.INACTIVO)) {
+            throw new Exception("Usuario desactivado, consulte a un administrador para conocer su estado");
         } else {
             Sesion sesion = Sesion.getInstancia(usuario);
             JOptionPane.showMessageDialog(null, "Bienvenido "+usuario.getNombre()+"!");

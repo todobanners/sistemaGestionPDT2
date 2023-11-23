@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 import static javax.swing.UIManager.setLookAndFeel;
 //todo: Validar nombre usuario existente, cedula existente, email existente
 //todo: Usar hasheo para password
+//todo: Quitar el generador de cedula
 
 
 public class RegistroUsuarioNuevo extends JFrame {

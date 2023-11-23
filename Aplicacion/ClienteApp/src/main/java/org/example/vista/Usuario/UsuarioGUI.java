@@ -69,7 +69,7 @@ public class UsuarioGUI {
         filtroFiltrarBoton.addActionListener(e -> {
             try {
                 //Verificar si se selecciono el campo email y validar que sea un email
-                if (filtroBuscarCombo.getSelectedIndex() == 3 && !validarEmail(filtroValor.getText())) {
+                if (filtroBuscarCombo.getSelectedIndex() == 3 && !Validator.validarEmail(filtroValor.getText())) {
                     JOptionPane.showMessageDialog(null, "El campo debe ser un email valido");
                 } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0 || filtroBuscarCombo.getSelectedIndex() == 1) {
                     JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
@@ -330,11 +330,4 @@ public class UsuarioGUI {
         }
         return "No se encontro el perfil";
     }*/
-
-    public boolean validarEmail(String email){
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
 }

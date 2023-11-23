@@ -1,11 +1,32 @@
+/*
+
+
+
+
+
+
+
+                                        Este requisito no va implementado, este registro debe sacarse
+                                        //TODO: Borrar UsuarioRegistroGUI.java
+
+
+
+
+
+
+
+*/
+
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
+import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
+import org.example.modelo.DatePickerUtil;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -29,7 +50,7 @@ public class UsuarioRegistroGUI {
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
     private JPanel calendarioContenedor;
-    JDateChooser fechaChooser = new JDateChooser();
+    DatePicker fechaChooser = DatePickerUtil.createCustomDatePicker();
 
     public JPanel getPanel(){
         return registrarUsuario;
@@ -39,15 +60,7 @@ public class UsuarioRegistroGUI {
 
         calendarioContenedor.add(fechaChooser);//agrego el calendario al panel
 
-        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
-            perfil.addItem(p);
-        }
-        for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
-            institucion.addItem(i);
-        }
-        for (Estados e : Estados.values()){
-            estado.addItem(e);
-        }
+        generadorCombos();
 
         agregarUsuarioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -59,13 +72,11 @@ public class UsuarioRegistroGUI {
                 user.setIdInstitucion(institucionAgregar);
                 user.setEmail(email.getText());
                 user.setContrasenia(passwordField1.getText());
-                Date fechaElegida = fechaChooser.getDate();
-                LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                user.setFechaNacimiento(localDate);
-
+                user.setFechaNacimiento(fechaChooser.getDate());
                 user.setEstado((Estados) estado.getSelectedItem());
                 user.setNombre(nombre.getText());
                 user.setApellido(apellido.getText());
+                user.setNombreUsuario(nombre.getText().toLowerCase()+"."+apellido.getText().toLowerCase());
                 try {
                     Conexion.obtenerUsuarioBean().crearUsuario(user);
                     // informar que usuario se registro
@@ -76,5 +87,18 @@ public class UsuarioRegistroGUI {
 
             }
         });
+    }
+
+    public void generadorCombos() throws NamingException {
+        //genero el combo de perfiles
+        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
+            perfil.addItem(p);
+        }
+        for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
+            institucion.addItem(i);
+        }
+        for (Estados e : Estados.values()){
+            estado.addItem(e);
+        }
     }
 }
