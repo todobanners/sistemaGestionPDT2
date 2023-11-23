@@ -7,7 +7,8 @@ import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DateTimePicker;
 import org.example.modelo.Conexion;
-import org.example.modelo.DatePickerUtil;
+import org.example.modelo.Utilidades;
+
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -31,7 +32,7 @@ public class IntervencionGUI {
 
     private JScrollPane panelTabla;
     private JPanel fecha;
-    DateTimePicker selectorFecha = DatePickerUtil.createCustomDateTimePicker();
+    DateTimePicker selectorFecha = Utilidades.createCustomDateTimePicker();
     public JPanel getPanel(){
         return panelIntervencion;
     }

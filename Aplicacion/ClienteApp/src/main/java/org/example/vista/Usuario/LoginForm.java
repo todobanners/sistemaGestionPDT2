@@ -1,7 +1,8 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
+import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.controlador.AplicacionVentana;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
@@ -10,8 +11,11 @@ import org.example.modelo.Utilidades;
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 
 public class LoginForm extends JFrame {
     private JButton loginButton;
@@ -73,10 +77,10 @@ public class LoginForm extends JFrame {
             }
         });
 
-        soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
+        //soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
                 //Este boton sirve para generar datos de prueba, descomentar para usar
 
-        /*soyUnBotonQueButton.addActionListener(new ActionListener() {
+        soyUnBotonQueButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Cree algunos datos para funcionar, admin admin");
 
@@ -96,7 +100,7 @@ public class LoginForm extends JFrame {
                     usuario.setApellido("Administrador");
                     usuario.setCedula("12345678");
                     usuario.setEmail("algo@algo.com");
-                    usuario.setContrasenia(Utilidades.hashClave("admin");
+                    usuario.setContrasenia(Utilidades.hashClave("admin"));
                     usuario.setEstado(Estados.ACTIVO);
                     usuario.setNombreUsuario("admin");
                     institucion.setId(1L);
@@ -138,7 +142,7 @@ public class LoginForm extends JFrame {
                     throw new RuntimeException(ex);
                 }
             }
-        });*/
+        });
     }
 
     private void login() throws Exception {

@@ -3,6 +3,7 @@ package org.example.controlador;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 
 import org.example.vista.Equipo.EquiposGUI;
+import org.example.vista.HomeGUI;
 import org.example.vista.Intervencion.IntervencionGUI;
 import org.example.vista.Intervencion.ListadoDeIntervencionesGUI;
 import org.example.vista.Intervencion.TiposDeIntervencionesGUI;
@@ -66,6 +67,7 @@ public class AplicacionVentana extends JFrame {
         //Declaro el submenu de Gestion de Equipos
         JMenuItem listarEquipos =       new JMenuItem("Listar Equipos");
         JMenuItem registrarEquipo =     new JMenuItem("Registrar Equipo");
+        JMenuItem fotosEquipos =        new JMenuItem("Fotos de Equipos");
         //Fin declaracion submenu de Gestion de Equipos
 
         //Declaro el submenu de Gestion de Ubicaciones
@@ -131,6 +133,13 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
+        fotosEquipos.addActionListener(e -> {
+            try {
+                changePanel(new HomeGUI().getPanel());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         //Listado de Ubicaciones
         listarUbicaciones.addActionListener(e -> {
@@ -191,6 +200,7 @@ public class AplicacionVentana extends JFrame {
         InicioPrincipal.add(modificarDatosPropios);
         InicioPrincipal.add(cerrarSesion);
 
+
         //Gestion de Usuarios
         gestionUsuarios.add(listarUsuarios);
         //gestionUsuarios.add(registrarUsuario);
@@ -198,6 +208,7 @@ public class AplicacionVentana extends JFrame {
         //Gestion de Equipos
         gestionEquipos.add(listarEquipos);
         gestionEquipos.add(registrarEquipo);
+        gestionEquipos.add(fotosEquipos);
 
         //Gestion de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
