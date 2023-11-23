@@ -4,8 +4,10 @@ import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
+import com.github.lgooddatepicker.components.DatePicker;
 import com.toedter.calendar.JDateChooser;
 import org.example.modelo.Conexion;
+import org.example.modelo.DatePickerUtil;
 import org.example.modelo.Validator;
 
 import javax.naming.NamingException;
@@ -15,6 +17,7 @@ import javax.swing.table.TableColumn;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -54,7 +57,7 @@ public class UsuarioGUI {
     private JButton limpiarCamposButton;
     private JTextField accCampoID;
 
-    JDateChooser fechaChooser = new JDateChooser();
+    DatePicker fechaChooser = DatePickerUtil.createCustomDatePicker();
     public JPanel getPanel() {
         return userGUI;
     }
@@ -142,7 +145,7 @@ public class UsuarioGUI {
                     accComboEstado.setSelectedItem(usuario.getEstado());
                     accCampoUsername.setText(usuario.getNombreUsuario());
                     accCampoID.setText(usuario.getId().toString());
-                    fechaChooser.setDate(fecha);
+                    fechaChooser.setDate(usuario.getFechaNacimiento());
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -164,22 +167,29 @@ public class UsuarioGUI {
         editarSeleccionadoButton.addActionListener(e -> {
             Long id = Long.valueOf(accCampoID.getText());
             Usuario usuario = null;
-            try {
-                usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
-                //Validar campos que requieren solo letras
-                if (Validator.contieneSoloLetras(accCampoNombre.getText())) {
-                    JOptionPane.showMessageDialog(null, "El campo nombre no puede contener numeros");
-                } else if (Validator.contieneSoloLetras(accCampoApellido.getText())) {
-                    JOptionPane.showMessageDialog(null, "El campo apellido no puede contener numeros");
-                } else if (!Validator.validarEmail(accCampoEmail.getText())) {
-                    JOptionPane.showMessageDialog(null, "El campo email no es valido");
-                } else if (fechaChooser.getDate() == null) {
-                    JOptionPane.showMessageDialog(null, "El campo fecha de nacimiento no puede estar vacio");
-                } else if (Validator.contieneSoloNumeros(accCampoCedula.getText())) {
-                    JOptionPane.showMessageDialog(null, "El campo cedula no puede contener letras u otros caracteres solo numeros");
-                }else if(!Validator.validarMinimoCaracteres(accCampoCedula.getText(),8)){
-                    JOptionPane.showMessageDialog(null, "El campo cedula debe tener almenos 8 caracteres");
-                } else {
+
+            if (accCampoNombre.getText().isEmpty() || accCampoApellido.getText().isEmpty() || accCampoCedula.getText().isEmpty() || accCampoEmail.getText().isEmpty() || accCampoTelefono.getText().isEmpty() || fechaChooser.getDate() == null){
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+            }
+            // Verifico que el nombre y apellido contengan solo letras
+            else if (Validator.contieneSoloLetras(accCampoNombre.getText()) || Validator.contieneSoloLetras(accCampoApellido.getText())){
+                JOptionPane.showMessageDialog(null, "Los campos nombre y apellido solo pueden contener letras");
+            }
+            // Verifico que la cedula sea valida
+            else if (!Validator.validarCedula(accCampoCedula.getText())){
+                JOptionPane.showMessageDialog(null, "La cédula ingresada no es válida");
+            }
+            // Verifico que el email sea valido
+            else if (!Validator.validarEmail(accCampoEmail.getText())){
+                JOptionPane.showMessageDialog(null, "El email ingresado no es valido");
+            }
+            // Verifico que el telefono contenga solo numeros
+            else if (Validator.contieneSoloNumeros(accCampoTelefono.getText())){
+                JOptionPane.showMessageDialog(null, "El campo telefono solo puede contener numeros");
+            } else {
+
+                try {
+                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
                     usuario.setNombre(accCampoNombre.getText());
                     usuario.setApellido(accCampoApellido.getText());
                     usuario.setCedula(accCampoCedula.getText());
@@ -189,18 +199,23 @@ public class UsuarioGUI {
                     usuario.setIdInstitucion((Institucion) accComboInstitucion.getSelectedItem());
                     usuario.setEstado((Estados) accComboEstado.getSelectedItem());
                     usuario.setNombreUsuario(accCampoUsername.getText());
-                    //convertir LocalDate a Date
-                    Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                    fechaChooser.setDate(fecha);
+                    usuario.setFechaNacimiento(fechaChooser.getDate());
+
                     Conexion.obtenerUsuarioBean().modificarUsuario(usuario);
                     JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+
                     limpiarCamposButton.doClick();
                     List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
                     generarTabla(listaUsuarios);
+
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
                 }
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
+
+
+
             }
+
         });
         borrarSeleccionadoButton.addActionListener(e -> {
             Long id = Long.valueOf(accCampoID.getText());
@@ -279,10 +294,10 @@ public class UsuarioGUI {
 
     public void cargarCombos() throws NamingException {
         //Se cargan los combos de estado
-        for (Estados e : Estados.values()) {
-            filtroEstadoCombo.addItem(e);
-            accComboEstado.addItem(e);
-        }
+        /*for (Estados e : Estados.values()) {
+            filtroEstadoCombo.addItem(e.getValor());
+            accComboEstado.addItem(e.getValor());
+        }*/
         //Se cargan los combos de tipo de usuario
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
             filtroTipoCombo.addItem(p);
@@ -296,7 +311,7 @@ public class UsuarioGUI {
         filtroBuscarCombo.addItem("Nombre");
         filtroBuscarCombo.addItem("Apellido");
         filtroBuscarCombo.addItem("Nombre de usuario");
-        filtroBuscarCombo.addItem("email");
+        filtroBuscarCombo.addItem("Email");
     }
 
     public String filtroBuscador(int campo){
