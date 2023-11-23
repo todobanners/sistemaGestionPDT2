@@ -117,7 +117,11 @@ public class RegistroUsuarioNuevo extends JFrame {
                 usuario.setCedula(cedulaTextField.getText());
                 usuario.setNombreUsuario(userTextField.getText()); //El nombre de usuario esta formado por el nombre.apellido en minuscula
                 usuario.setEmail(emailTextField.getText());
-                usuario.setContrasenia(clave.getText());
+
+                //hasheo la contraseña
+
+
+                usuario.setContrasenia(Utilidades.hashClave(clave.getText()));
                 usuario.setFechaNacimiento(selectorFecha.getDate());
                 Perfil perfil = (Perfil) comboBoxTipo.getSelectedItem();
                 usuario.setIdPerfil(perfil);

@@ -43,14 +43,13 @@ public class ModificarDatosPropiosGUI {
         contenedorFechaNacimiento.add(selectorFecha);
 
         usernameTextField.setText(usuario.getNombreUsuario());
-        passwordField1.setText(usuario.getContrasenia());
-        passwordField2.setText(usuario.getContrasenia());
+        //passwordField1.setText(usuario.getContrasenia());
+        //passwordField2.setText(usuario.getContrasenia());
         email.setText(usuario.getEmail());
         cedula.setText(usuario.getCedula());
         apellido1.setText(usuario.getApellido());
         nombre1.setText(usuario.getNombre());
         id.setText(usuario.getId().toString());
-        //Date fecha = Date.from(usuario.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
         selectorFecha.setDate(usuario.getFechaNacimiento());
 
         //TODO: Falta verificacion de fecha
@@ -76,7 +75,7 @@ public class ModificarDatosPropiosGUI {
                 //Genero objeto usuario
                 usuario.setId(Long.parseLong(id.getText()));
                 usuario.setNombreUsuario(usernameTextField.getText());
-                usuario.setContrasenia(passwordField1.getText());
+                usuario.setContrasenia(Utilidades.hashClave(passwordField1.getText()));
                 usuario.setEmail(email.getText());
                 usuario.setCedula(cedula.getText());
                 usuario.setApellido(apellido1.getText());

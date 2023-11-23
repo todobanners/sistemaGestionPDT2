@@ -5,6 +5,7 @@ import codigocreativo.uy.servidorapp.enumerados.Estados;
 import org.example.controlador.AplicacionVentana;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
+import org.example.modelo.Utilidades;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -143,6 +144,7 @@ public class LoginForm extends JFrame {
     private void login() throws Exception {
         String username = textField1.getText();
         String password = new String(passwordField1.getPassword());
+        password = Utilidades.hashClave(password);
 
         Usuario usuario = Conexion.obtenerUsuarioBean().login(username,password);
 
