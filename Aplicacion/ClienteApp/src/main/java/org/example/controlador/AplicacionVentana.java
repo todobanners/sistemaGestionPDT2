@@ -39,7 +39,7 @@ public class AplicacionVentana extends JFrame {
         setVisible(true);
         setBounds(10,10,800,800);
         //panel de ventana inicio
-        changePanel(new EquiposGUI().getPanel());
+        changePanel(new HomeGUI().getPanel());
     }
 
 
