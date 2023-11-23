@@ -96,7 +96,7 @@ public class LoginForm extends JFrame {
                     usuario.setApellido("Administrador");
                     usuario.setCedula("12345678");
                     usuario.setEmail("algo@algo.com");
-                    usuario.setContrasenia("admin");
+                    usuario.setContrasenia(Utilidades.hashClave("admin");
                     usuario.setEstado(Estados.ACTIVO);
                     usuario.setNombreUsuario("admin");
                     institucion.setId(1L);

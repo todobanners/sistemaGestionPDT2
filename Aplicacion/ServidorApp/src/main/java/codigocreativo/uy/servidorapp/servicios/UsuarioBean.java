@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
+import javax.swing.*;
 import java.util.List;
 @Stateless
 public class UsuarioBean implements UsuarioRemote {
@@ -37,6 +38,18 @@ public class UsuarioBean implements UsuarioRemote {
     @Override
     public Usuario obtenerUsuario(Long id) {
         return em.find(Usuario.class, id);
+    }
+
+    @Override
+    public Usuario obtenerUsuarioPorCI(String ci) {
+        try {
+            return em.createQuery("SELECT u FROM Usuario u WHERE u.cedula = :ci", Usuario.class)
+                    .setParameter("ci", ci)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("No se encontro el usuario");
+            return null;
+        }
     }
 
     @Override

@@ -12,6 +12,7 @@ public interface UsuarioRemote {
     public void modificarUsuario(Usuario u);
     public void eliminarUsuario(Usuario u);
     public Usuario obtenerUsuario(Long id);
+    public Usuario obtenerUsuarioPorCI(String ci);
     public List<Usuario> obtenerUsuarios();
     public List<Usuario> obtenerUsuariosFiltrado(String filtro, String valor);
     public Usuario login(String usuario, String password);
