@@ -16,11 +16,15 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import static javax.swing.UIManager.setLookAndFeel;
 //todo: Validar nombre usuario existente, cedula existente, email existente
 //todo: Usar hasheo para password
+//todo: Boton cancelar no hace nada, debe volver a la pantalla de login
+
+
 public class RegistroUsuarioNuevo extends JFrame {
     private JPanel registroUsuario;
     private JTextField nombreTextField;
@@ -56,6 +60,8 @@ public class RegistroUsuarioNuevo extends JFrame {
 
         fechaNacimiento.add(selectorFecha);
         userTextField.setEnabled(false);
+        //Por razones de validacion este campo es autogenerado con una CI valida
+        cedulaTextField.setText(Validator.generarCedulaUruguaya());
 
         //Obtencion de valores del combobox
         for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
@@ -63,6 +69,12 @@ public class RegistroUsuarioNuevo extends JFrame {
         }
 
         apellidoTextField.addCaretListener(e ->{
+            String nombre = nombreTextField.getText().toLowerCase();
+            String apellido = apellidoTextField.getText().toLowerCase();
+            String nombreUsuario = nombre+ "." + apellido;
+            userTextField.setText(nombreUsuario);
+        });
+        nombreTextField.addCaretListener(e ->{
             String nombre = nombreTextField.getText().toLowerCase();
             String apellido = apellidoTextField.getText().toLowerCase();
             String nombreUsuario = nombre+ "." + apellido;
@@ -148,4 +160,5 @@ public class RegistroUsuarioNuevo extends JFrame {
 
 
     }
+
 }
