@@ -34,7 +34,7 @@ public class LoginForm extends JFrame {
     public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panel1);
-        pack();
+
         setSize(500, 700);
         setBackground(Color.WHITE);
         ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");
@@ -53,6 +53,7 @@ public class LoginForm extends JFrame {
         loginButton.setBackground(Color.decode("#2F9C95"));
         cancelarButton.setFont(f);
         cancelarButton.setBackground(Color.decode("#e06666"));
+        pack();
         loginButton.addActionListener(e -> {
             try {
                 login();
