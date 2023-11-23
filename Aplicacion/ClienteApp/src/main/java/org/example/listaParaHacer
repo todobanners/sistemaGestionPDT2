@@ -1,0 +1,73 @@
+ERRORES DIFICULTAD MEDIA/BAJA
+
+- CAMA en UBICACION deberia ser un String es mas facil de dejar en null con msj de "no tiene"
+
+- GARANTIA en EQUIPO no está hecha la columna en la tabla
+- MARCA en EQUIPO no está
+
+- MARCA deberia desplegar un combo que al selecionar la MARCA te despliegue el combo de MODELO asociado a esa MARCA
+
+- Limpiar los campos al guardar EQUIPO nuevo
+
+- Al registrar el USUARIO tiene que estar sin validar por defecto // hasta que le ADMIN lo valide
+
+REPARADO - Boton cancelar en REGISTRO USUARIO no hace nada
+
+- El LISTADO de USUARIO al filtrar por apellido lanza un msj de error que no puede contener numero
+
+- MODIFICAR UBICACION falta botones de confirmacion
+
+- Borrar ventana de ingresar UBICACION
+
+- REGISTRO DE INTERVENCION tiene que tener un combo en Id de equipo que te traiga los disponibles
+
+- EDITAR EQUIPO no funciona // ya no esta el id en la lista para seleccionar
+
+- PERFIL campo nombre disable ya que no se permite modificar segun requerimientos
+
+- RESTOS DE MSJ DE CONFIRMACION Y EXTIO SEGUN ESTE TODO FUNCIONANO // ULTIMO CONSIGNA EN RETOCAR
+
+
+
+ERRORES PRIORIDAD Y DIFICULTAD ALTA
+
+REPARADO - REGISTRO DE USUARIO no funciona
+REPARADO - Cedula no valida
+REPARADO - Desde la app no lanza msj de error pero no REGISTRA USUARIO
+REAPRADO - CONTRASEÑA sin encriptar en la base de datos
+
+
+- DAR DE BAJA en EQUIPO no funciona // ya no abre la ventana que abria antes cuando estaba el id
+
+- REGISTRAR EN EQUIPO no funciona en EQUIPO
+
+- No carga TELEFONOS en el USUARIO
+
+- No se pueden cargar IMAGENES en EQUIPO
+
+- Borrar UBICACION no funciona // funcionaba antes
+
+- TIPO DE INTERVENCION no funciona AGREGAR
+
+- TIPO DE INTERVENCION sale un msj que no se pudo conectar con el server antes de abrir la ventana
+
+- TIPO DE INTERVENCION no muestra el LISTADO
+
+- TRABAJAR INTERVENCION boton no hace nada / deberia descargar el reporte
+
+- LISTAR INTERVENCIONES no hay input para modificar FECHA DESDE para hacer los filtros
+
+- LISTAR INTERVENCIONES debe tener los FILTROS de requerimientos funcionando
+
+
+
+En definitiva que requerimiento se debe solucionar urgente
+RF 001-01 - REGISTRO DE USUARIO
+RF 001-06 - MODIFICACION DE DATOS PROPIOS DEL USUARIO
+RF 006-02 - BAJA DE EQUIPO
+RF 007-04 - MOVIMIENTO DE EQUIPO
+RF 007-05 - LISTADO DE MOVIMIENTO DE EQUIPO
+RF 0014-01 - INGRESO DE TIPO DE INTERVENCION
+RF 0014-02 - LISTADO DE TIPO DE INTERVENCIONES
+RF 0014-03 - MODIFICACION DE TIPO DE INTERVENCION
+RF 0014-04 - BAJA DE TIPO DE INTERVENCION
