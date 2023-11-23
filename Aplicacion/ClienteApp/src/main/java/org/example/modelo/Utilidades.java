@@ -12,6 +12,9 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.jose4j.json.internal.json_simple.JSONObject;
+import org.jose4j.json.internal.json_simple.parser.JSONParser;
+import org.jose4j.json.internal.json_simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -111,9 +114,18 @@ public class Utilidades {
                 String responseContent = EntityUtils.toString(responseEntity);
                 System.out.println("Response status: " + response.getStatusLine());
                 System.out.println("Response content: " + responseContent);
-                // Suponiendo que la respuesta es la URL de la imagen
-                System.out.println("Image URL: " + responseContent);
-                return responseContent;
+
+                // Parsear la respuesta JSON
+            JSONParser parser = new JSONParser();
+            JSONObject jsonResponse = (JSONObject) parser.parse(responseContent);
+            // Obtener la URL de la imagen
+            JSONObject data = (JSONObject) jsonResponse.get("data");
+            String imageUrl = (String) data.get("url");
+
+            System.out.println("Image URL: " + imageUrl);
+            return imageUrl;
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
             } finally {
                 response.close();
             }

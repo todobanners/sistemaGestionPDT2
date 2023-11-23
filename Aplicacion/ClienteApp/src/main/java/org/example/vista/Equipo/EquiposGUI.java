@@ -72,6 +72,28 @@ public class EquiposGUI {
         actualizarTabla();
         fechaAdqContainer.add(fechaCompraDate);
         cargarCombos();
+        File imagenSubida = null;
+
+        imagenBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File imagenSubida = fileChooser.getSelectedFile();
+                    filePathField.setText(imagenSubida.getAbsolutePath());
+                    // Aquí puedes manejar el archivo seleccionado
+                    // Por ejemplo, puedes subirlo a un servidor
+                    try {
+                        String URLimagen = Utilidades.subirImagen(imagenSubida);
+                        filePathField.setText(URLimagen);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
+            }
+        });
 
 
         editarSeleccionadoButton.addActionListener(new ActionListener() {
@@ -146,6 +168,8 @@ public class EquiposGUI {
                     equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
                     equipo.setFechaAdquisicion(fechaCompraDate.getDate());
                     equipo.setEstado((Estados) estadoCombo.getSelectedItem());
+                    equipo.setImagen(filePathField.getText());
+                    //Utilidades.subirImagen(imagenSubida);
                     agregarEquipo(equipo);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -153,25 +177,8 @@ public class EquiposGUI {
                 }
             }
         });
-        imagenBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    filePathField.setText(selectedFile.getAbsolutePath());
-                    // Aquí puedes manejar el archivo seleccionado
-                    // Por ejemplo, puedes subirlo a un servidor
-                    try {
-                        Utilidades.subirImagen(selectedFile);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
 
-                }
-            }
-        });
+
     }
 
 
