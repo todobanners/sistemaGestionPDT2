@@ -3,7 +3,17 @@ package codigocreativo.uy.servidorapp.enumerados;
 import java.io.Serializable;
 
 public enum Estados implements Serializable {
-    ACTIVO,
-    INACTIVO,
-    SIN_VALIDAR
+    ACTIVO("Activo"),
+    INACTIVO("Inactivo"),
+    SIN_VALIDAR("Sin validar");
+
+    private String valor;
+
+    Estados(String valor) {
+        this.valor = valor;
+    }
+
+    public String getValor() {
+        return valor;
+    }
 }
