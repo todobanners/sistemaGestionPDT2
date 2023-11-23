@@ -1,5 +1,6 @@
 package org.example.modelo;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,5 +67,26 @@ public class Validator {
         int verificadorIngresado = Character.getNumericValue(cedula.charAt(7));
 
         return verificadorCalculado == verificadorIngresado;
+    }
+
+    //Funcion que genera una CI valida
+    public static String generarCedulaUruguaya() {
+        Random random = new Random();
+        int numeroCedula = 1000000 + random.nextInt(9000000);
+
+        int[] coeficientes = {2, 9, 8, 7, 6, 3, 4};
+        int suma = 0;
+
+        for (int i = 0; i < coeficientes.length; i++) {
+            suma += coeficientes[i] * Character.getNumericValue(Integer.toString(numeroCedula).charAt(i));
+        }
+
+        int verificadorCalculado = 10 - (suma % 10);
+
+        if (verificadorCalculado == 10) {
+            verificadorCalculado = 0;
+        }
+
+        return Integer.toString(numeroCedula) + verificadorCalculado;
     }
 }

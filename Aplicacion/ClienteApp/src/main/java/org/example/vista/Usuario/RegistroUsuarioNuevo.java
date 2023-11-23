@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 import static javax.swing.UIManager.setLookAndFeel;
 //todo: Validar nombre usuario existente, cedula existente, email existente
 //todo: Usar hasheo para password
-//todo: Boton cancelar no hace nada, debe volver a la pantalla de login
 
 
 public class RegistroUsuarioNuevo extends JFrame {
@@ -135,7 +134,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 //usuario.setTelefono(telefonoTextField.getText());
                 try {
                     Conexion.obtenerUsuarioBean().crearUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario creado con exito");
+                    JOptionPane.showMessageDialog(null, "Usuario creado con exito, debera esperar a que un administrador lo valide");
                 } catch (Exception exception) {
                     exception.printStackTrace();
                     JOptionPane.showMessageDialog(null, "No se pudo crear el usuario Error:"+exception.getMessage());
