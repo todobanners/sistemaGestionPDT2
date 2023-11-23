@@ -4,9 +4,19 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.DateTimePicker;
 import com.github.lgooddatepicker.components.TimePickerSettings;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -82,5 +92,33 @@ public class Utilidades {
         timePickerButton.setIcon(tiempoIcon);
 
         return dateTimePicker;
+    }
+
+    private static final String API_KEY = "c06165e921ae196cb18e841cc45031c4";
+    private static final String URL_UPLOAD = "https://api.imgbb.com/1/upload?key=" + API_KEY;
+
+    public static String subirImagen(File imageFile) throws IOException {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        try {
+            HttpPost uploadFile = new HttpPost(URL_UPLOAD);
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.addPart("image", new FileBody(imageFile));
+            HttpEntity multipart = builder.build();
+            uploadFile.setEntity(multipart);
+            CloseableHttpResponse response = httpClient.execute(uploadFile);
+            try {
+                HttpEntity responseEntity = response.getEntity();
+                String responseContent = EntityUtils.toString(responseEntity);
+                System.out.println("Response status: " + response.getStatusLine());
+                System.out.println("Response content: " + responseContent);
+                // Suponiendo que la respuesta es la URL de la imagen
+                System.out.println("Image URL: " + responseContent);
+                return responseContent;
+            } finally {
+                response.close();
+            }
+        } finally {
+            httpClient.close();
+        }
     }
 }

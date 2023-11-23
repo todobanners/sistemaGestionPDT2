@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class EquiposGUI {
@@ -47,13 +49,14 @@ public class EquiposGUI {
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
     private JComboBox estadoCombo;
+    private JLabel filePathField;
     DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
     public JPanel getPanel() {
         return equipoPanel;
     }
 
-    public EquiposGUI() throws Exception{
+    public EquiposGUI() throws Exception {
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Interno");
@@ -146,15 +149,27 @@ public class EquiposGUI {
                     agregarEquipo(equipo);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo "+ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo " + ex.getMessage());
                 }
             }
         });
-        tablaScrollPane.addMouseListener(new MouseAdapter() {
+        imagenBtn.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    filePathField.setText(selectedFile.getAbsolutePath());
+                    // Aquí puedes manejar el archivo seleccionado
+                    // Por ejemplo, puedes subirlo a un servidor
+                    try {
+                        Utilidades.subirImagen(selectedFile);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
+                }
             }
         });
     }
