@@ -4,7 +4,7 @@ import codigocreativo.uy.servidorapp.entidades.Usuario;
 
 public class Sesion {
     private static Sesion instance;
-    private Usuario usuario;
+    private static Usuario usuario;
 
     private Sesion(Usuario usuario) {
         this.usuario = usuario;
@@ -22,7 +22,7 @@ public class Sesion {
         return instance;
     }
 
-    public Usuario getUsuario() {
+    public static Usuario getUsuario() {
         return usuario;
     }
 }
