@@ -1,6 +1,8 @@
 package org.example.vista.Usuario;
 
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.DTO.PerfilDto;
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
@@ -77,7 +79,7 @@ public class RegistroUsuarioNuevo extends JFrame {
         });
 
         aceptarButton.addActionListener(e -> {
-            Usuario usuario = new Usuario();
+            UsuarioDto usuario = new UsuarioDto();
             //Validamos los campos
             // Verifico que los campos esten todos completos
             if (nombreTextField.getText().isEmpty() || apellidoTextField.getText().isEmpty() || cedulaTextField.getText().isEmpty() || userTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || telefonoTextField.getText().isEmpty() || clave.getPassword().length == 0 || claveRepetir.getPassword().length == 0 || selectorFecha.getDate() == null){
@@ -110,7 +112,7 @@ public class RegistroUsuarioNuevo extends JFrame {
             else {
                 //Guardo los datos en la tabla
                 //Genero objeto usuario
-                Institucion institucion = new Institucion();
+                InstitucionDto institucion = new InstitucionDto();
                 institucion.setId(1L);
                 usuario.setIdInstitucion(institucion);
                 usuario.setNombre(nombreTextField.getText());
@@ -124,7 +126,7 @@ public class RegistroUsuarioNuevo extends JFrame {
 
                 usuario.setContrasenia(Utilidades.hashClave(clave.getText()));
                 usuario.setFechaNacimiento(selectorFecha.getDate());
-                Perfil perfil = (Perfil) comboBoxTipo.getSelectedItem();
+                PerfilDto perfil = (PerfilDto) comboBoxTipo.getSelectedItem();
                 usuario.setIdPerfil(perfil);
                 usuario.setEstado(Estados.SIN_VALIDAR);
                 UsuariosTelefonoId usuariosTelefonoId = new UsuariosTelefonoId();

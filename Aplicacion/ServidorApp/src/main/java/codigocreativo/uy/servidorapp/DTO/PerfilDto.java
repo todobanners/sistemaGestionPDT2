@@ -50,13 +50,13 @@ public class PerfilDto implements Serializable {
         return this;
     }
 
-    public void setPermisos(List<PermisoDto> permisos) {
+    /*public void setPermisos(List<PermisoDto> permisos) {
         this.permisos = permisos;
     }
 
     public List<PermisoDto> getPermisos() {
         return permisos;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {

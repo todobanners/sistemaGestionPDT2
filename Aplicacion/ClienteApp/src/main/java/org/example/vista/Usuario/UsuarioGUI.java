@@ -63,7 +63,7 @@ public class UsuarioGUI {
 
     public UsuarioGUI() throws NamingException {
         //Se muestra un listado con los usuarios registrados en la tabla
-        List<Usuario> tabla = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+        List<UsuarioDto> tabla = Conexion.obtenerUsuarioBean().obtenerUsuarios();
         generarTabla(tabla);
         cargarCombos();
         accContenedorFecha.add(fechaChooser);//agrego el calendario al panel
@@ -78,7 +78,7 @@ public class UsuarioGUI {
                 } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 1) {
                     JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
                 } else {
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
+                    List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
                     generarTabla(listaUsuarios);
                 }
             } catch (NamingException ex) {
@@ -88,7 +88,7 @@ public class UsuarioGUI {
         filtroLimpiarBoton.addActionListener(e -> {
             limpiarFiltros();
             try {
-                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
                 generarTabla(listaUsuarios);
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
@@ -98,7 +98,7 @@ public class UsuarioGUI {
             try {
                 //Estados estado = Estados.valueOf((String) filtroEstadoCombo.getSelectedItem());
 
-                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosPorEstado((Estados) filtroEstadoCombo.getSelectedItem());
+                List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosPorEstado((Estados) filtroEstadoCombo.getSelectedItem());
                 generarTabla(listaUsuarios);
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
@@ -110,9 +110,10 @@ public class UsuarioGUI {
                 super.mouseClicked(e);
                 int fila = tableUsuarios.getSelectedRow();
                 String ci = (String) tableUsuarios.getValueAt(fila, 0);
-                Usuario usuario = null;
+                UsuarioDto usuario = null;
                 try {
-                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuarioPorCI(ci);
+                    //TODO: Volver a buscar el usuario por ID poniendolo en la tabla y ocultando ID
+                    //usuario = Conexion.obtenerUsuarioBean().obtenerUsuarioPorCI(ci);
                     PerfilDto perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
                     // Obtener el ID del perfil que quieres seleccionar en el JComboBox
                     Long perfilId = perfil.getId();
@@ -206,7 +207,7 @@ public class UsuarioGUI {
                     JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
 
                     limpiarCamposButton.doClick();
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                    List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
                     generarTabla(listaUsuarios);
 
                 } catch (NamingException ex) {
@@ -231,7 +232,7 @@ public class UsuarioGUI {
                     usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
                     Conexion.obtenerUsuarioBean().eliminarUsuario(usuario);
                     JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
-                    List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                    List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
                     generarTabla(listaUsuarios);
                     limpiarCamposButton.doClick();
                 } catch (NamingException ex) {
@@ -244,7 +245,7 @@ public class UsuarioGUI {
                 //obtenemos el id de la seleccion del combo
                 String idPerfil = ((Perfil) filtroTipoCombo.getSelectedItem()).getId().toString();
 
-                List<Usuario> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
+                List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
                 generarTabla(listaUsuarios);
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);

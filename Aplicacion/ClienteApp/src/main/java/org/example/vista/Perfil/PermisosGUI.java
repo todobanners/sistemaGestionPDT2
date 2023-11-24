@@ -1,5 +1,6 @@
 package org.example.vista.Perfil;
 
+import codigocreativo.uy.servidorapp.DTO.PermisoDto;
 import codigocreativo.uy.servidorapp.entidades.Permiso;
 import codigocreativo.uy.servidorapp.servicios.PermisoRemote;
 import org.example.modelo.Conexion;
@@ -40,7 +41,7 @@ public class PermisosGUI {
 
     private void actualizarTabla() {
         model.setRowCount(0);
-        for (Permiso permiso : permisoBean.obtenerPermisos()) {
+        for (PermisoDto permiso : permisoBean.obtenerPermisos()) {
             model.addRow(new Object[]{permiso.getId(), permiso.getTipoPermiso()});
         }
     }

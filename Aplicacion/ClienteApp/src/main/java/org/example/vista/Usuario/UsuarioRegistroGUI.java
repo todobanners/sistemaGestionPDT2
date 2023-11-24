@@ -21,6 +21,7 @@ package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.DTO.PerfilDto;
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
@@ -62,11 +63,11 @@ public class UsuarioRegistroGUI {
 
         agregarUsuarioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Usuario user = new Usuario();
+                UsuarioDto user = new UsuarioDto();
                 user.setCedula(cedula.getText());
-                Perfil perfilAgregar = (Perfil) perfil.getSelectedItem();
+                PerfilDto perfilAgregar = (PerfilDto) perfil.getSelectedItem();
                 user.setIdPerfil(perfilAgregar);
-                Institucion institucionAgregar = (Institucion) institucion.getSelectedItem();
+                InstitucionDto institucionAgregar = (InstitucionDto) institucion.getSelectedItem();
                 user.setIdInstitucion(institucionAgregar);
                 user.setEmail(email.getText());
                 user.setContrasenia(passwordField1.getText());

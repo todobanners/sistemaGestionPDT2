@@ -53,7 +53,7 @@ public class BajaEquipoGUI {
     private void initComponents() throws Exception {
         fechaAdqContainer.add(fechaCompraDate);
 
-        for (Usuario usuario : Conexion.obtenerUsuarioBean().obtenerUsuarios()) {
+        for (UsuarioDto usuario : Conexion.obtenerUsuarioBean().obtenerUsuarios()) {
             usuarioCombo.addItem(usuario);
         }
 
