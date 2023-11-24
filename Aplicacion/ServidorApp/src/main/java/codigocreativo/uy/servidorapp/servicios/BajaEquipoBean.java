@@ -1,8 +1,7 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.DTO.BajaEquipoDto;
 import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
-import codigocreativo.uy.servidorapp.entidades.Equipo;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -15,7 +14,7 @@ public class BajaEquipoBean implements BajaEquipoRemote {
 
 
     @Override
-    public void crearBajaEquipo(BajaEquipo bajaEquipo) {
+    public void crearBajaEquipo(BajaEquipoDto bajaEquipo) {
         em.persist(bajaEquipo);
         em.flush();
     }

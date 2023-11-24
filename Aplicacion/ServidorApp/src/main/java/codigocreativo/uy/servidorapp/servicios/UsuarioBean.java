@@ -1,8 +1,11 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
+import codigocreativo.uy.servidorapp.DTOMappers.UsuarioMapper;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
@@ -13,6 +16,9 @@ import java.util.List;
 public class UsuarioBean implements UsuarioRemote {
     @PersistenceContext (unitName = "default")
     private EntityManager em;
+
+    @Inject
+    UsuarioMapper usuarioMapper;
 
     @Override
     public void crearUsuario(Usuario u) {
@@ -48,6 +54,11 @@ public class UsuarioBean implements UsuarioRemote {
     @Override
     public Usuario obtenerUsuario(Long id) {
         return em.find(Usuario.class, id);
+    }
+
+    @Override
+    public UsuarioDto obtenerUsuarioDto(Long id) {
+        return usuarioMapper.toDto(em.find(Usuario.class, id));
     }
 
     @Override

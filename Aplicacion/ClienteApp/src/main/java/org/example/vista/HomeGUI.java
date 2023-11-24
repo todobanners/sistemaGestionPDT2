@@ -1,5 +1,6 @@
 package org.example.vista;
 
+import codigocreativo.uy.servidorapp.DTO.EquipoDto;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
@@ -37,9 +38,9 @@ public class HomeGUI {
 
         executorService.execute(() -> {
             try {
-                List<Equipo> equipos = Conexion.obtenerEquipoBean().listarEquipos();
+                List<EquipoDto> equipos = Conexion.obtenerEquipoBean().listarEquipos();
                 titulo.setText("Bienvenido/a " + Sesion.getUsuario().getNombre() + " " + Sesion.getUsuario().getApellido() + "!");
-                for (Equipo equipo : equipos) {
+                for (EquipoDto equipo : equipos) {
                     String imageUrl = equipo.getImagen();
                     if (imageUrl != null && !imageUrl.isEmpty()) {
                         URL url = new URL(imageUrl);

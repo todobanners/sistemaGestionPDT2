@@ -22,16 +22,18 @@ public class ModelosEquipoDto implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public ModelosEquipoDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public ModelosEquipoDto setNombre(String nombre) {
         this.nombre = nombre;
+        return this;
     }
 
     @Override

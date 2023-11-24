@@ -1,44 +1,55 @@
 package codigocreativo.uy.servidorapp.servicios;
 
-import codigocreativo.uy.servidorapp.entidades.Intervencion;
+import codigocreativo.uy.servidorapp.DTO.IntervencionDto;
+import codigocreativo.uy.servidorapp.DTOMappers.IntervencionMapper;
+import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
+
 @Stateless
-public class IntervencionBean implements IntervencionRemote{
-    @PersistenceContext (unitName = "default")
+public class IntervencionBean implements IntervencionRemote {
+    @PersistenceContext(unitName = "default")
     private EntityManager em;
 
+    @Inject //Se inyecta el mapper
+    private IntervencionMapper intervencionMapper;
+
     @Override
-    public Intervencion crear(Intervencion intervencion) throws ServiciosException {
-        em.persist(intervencion);
-        em.flush();
-        return intervencion;
+    public void crear(IntervencionDto intervencion) throws ServiciosException {
+        //Se "transforma" el DTO a una entidad
+        Intervencion intervencionEntity = intervencionMapper.toEntity(intervencion);
+        //Hardcodeo de id de usuario
+        Usuario usuario = em.find(Usuario.class, 1L);
+        if (usuario == null) {
+            throw new ServiciosException("No se encontro el usuario con id 1");
+        }
+        intervencionEntity.setIdUsuario(usuario);
+
+        //Se persiste la entidad (no el DTO)
+        em.persist(intervencionEntity);
     }
 
     @Override
-    public void actualizar(Intervencion intervencion) throws ServiciosException {
-        em.merge(intervencion);
-        em.flush();
+    public void actualizar(IntervencionDto intervencion) throws ServiciosException {
+        //Se "transforma" el DTO a una entidad
+        Intervencion intervencionEntity = intervencionMapper.toEntity(intervencion);
+
+        //Se actualiza la entidad (no el DTO)
+        em.merge(intervencionEntity);
     }
 
-    @Override
-    public void eliminar(Long id) throws ServiciosException {
-        Intervencion intervencion = em.find(Intervencion.class, id);
-        em.remove(intervencion);
-        em.flush();
-    }
 
     @Override
-    public Intervencion obtenerPorId(Long id) throws ServiciosException {
-        return em.find(Intervencion.class, id);
-    }
+    public List<IntervencionDto> obtenerTodas() throws ServiciosException {
+        //Se obtienen todas las entidades
+        List<Intervencion> intervenciones = em.createQuery("SELECT i FROM Intervencion i", Intervencion.class).getResultList();
 
-    @Override
-    public List<Intervencion> obtenerTodas() throws ServiciosException {
-        return em.createQuery("SELECT i FROM Intervencion i", Intervencion.class).getResultList();
+        //Se transforman la lista de entidades en una lista de DTOs (hay un metodo que recibe una lista y devuelve otra lista ya transformada)
+        return intervencionMapper.toDto(intervenciones);
     }
 }

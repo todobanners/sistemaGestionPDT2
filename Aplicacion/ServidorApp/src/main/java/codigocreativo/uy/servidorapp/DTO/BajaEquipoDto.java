@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.DTO;
 
+import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 
 import java.io.Serializable;
@@ -7,64 +8,75 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * DTO for {@link codigocreativo.uy.servidorapp.entidades.BajaEquipo}
+ * DTO for {@link BajaEquipo}
  */
 public class BajaEquipoDto implements Serializable {
     private Long id;
     private String razon;
     private LocalDate fecha;
+    private UsuarioDto idUsuario;
+    private EquipoDto idEquipo;
     private Estados estado;
     private String comentarios;
 
     public BajaEquipoDto() {
     }
 
-    public BajaEquipoDto(Long id, String razon, LocalDate fecha, Estados estado, String comentarios) {
+    public BajaEquipoDto(Long id, String razon, LocalDate fecha,
+                         UsuarioDto idUsuario,
+                         EquipoDto idEquipo, Estados estado, String comentarios) {
         this.id = id;
         this.razon = razon;
         this.fecha = fecha;
         this.estado = estado;
         this.comentarios = comentarios;
+        this.idUsuario = idUsuario;
+        this.idEquipo = idEquipo;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public BajaEquipoDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getRazon() {
         return razon;
     }
 
-    public void setRazon(String razon) {
+    public BajaEquipoDto setRazon(String razon) {
         this.razon = razon;
+        return this;
     }
 
     public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public BajaEquipoDto setFecha(LocalDate fecha) {
         this.fecha = fecha;
+        return this;
     }
 
     public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(Estados estado) {
+    public BajaEquipoDto setEstado(Estados estado) {
         this.estado = estado;
+        return this;
     }
 
     public String getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(String comentarios) {
+    public BajaEquipoDto setComentarios(String comentarios) {
         this.comentarios = comentarios;
+        return this;
     }
 
     @Override
@@ -92,5 +104,23 @@ public class BajaEquipoDto implements Serializable {
                 "fecha = " + fecha + ", " +
                 "estado = " + estado + ", " +
                 "comentarios = " + comentarios + ")";
+    }
+
+    public UsuarioDto getIdUsuario() {
+        return idUsuario;
+    }
+
+    public BajaEquipoDto setIdUsuario(UsuarioDto idUsuario) {
+        this.idUsuario = idUsuario;
+        return this;
+    }
+
+    public EquipoDto getIdEquipo() {
+        return idEquipo;
+    }
+
+    public BajaEquipoDto setIdEquipo(EquipoDto idEquipo) {
+        this.idEquipo = idEquipo;
+        return this;
     }
 }

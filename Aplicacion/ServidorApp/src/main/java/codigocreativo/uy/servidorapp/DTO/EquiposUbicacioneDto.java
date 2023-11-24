@@ -9,40 +9,38 @@ import java.util.Objects;
  */
 public class EquiposUbicacioneDto implements Serializable {
     private Long id;
-    private Long idUbicacion;
+    private EquipoDto idEquipo;
+    private UbicacionDto idUbicacion;
     private LocalDate fecha;
 
     public EquiposUbicacioneDto() {
     }
 
-    public EquiposUbicacioneDto(Long id, Long idUbicacion, LocalDate fecha) {
+    public EquiposUbicacioneDto(Long id,
+                                EquipoDto idEquipo,
+                                UbicacionDto idUbicacion, LocalDate fecha) {
         this.id = id;
-        this.idUbicacion = idUbicacion;
         this.fecha = fecha;
+        this.idEquipo = idEquipo;
+        this.idUbicacion = idUbicacion;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public EquiposUbicacioneDto setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdUbicacion() {
-        return idUbicacion;
-    }
-
-    public void setIdUbicacion(Long idUbicacion) {
-        this.idUbicacion = idUbicacion;
+        return this;
     }
 
     public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public EquiposUbicacioneDto setFecha(LocalDate fecha) {
         this.fecha = fecha;
+        return this;
     }
 
     @Override
@@ -51,20 +49,36 @@ public class EquiposUbicacioneDto implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         EquiposUbicacioneDto entity = (EquiposUbicacioneDto) o;
         return Objects.equals(this.id, entity.id) &&
-                Objects.equals(this.idUbicacion, entity.idUbicacion) &&
                 Objects.equals(this.fecha, entity.fecha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idUbicacion, fecha);
+        return Objects.hash(id, fecha);
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
-                "idUbicacion = " + idUbicacion + ", " +
                 "fecha = " + fecha + ")";
+    }
+
+    public EquipoDto getIdEquipo() {
+        return idEquipo;
+    }
+
+    public EquiposUbicacioneDto setIdEquipo(EquipoDto idEquipo) {
+        this.idEquipo = idEquipo;
+        return this;
+    }
+
+    public UbicacionDto getIdUbicacion() {
+        return idUbicacion;
+    }
+
+    public EquiposUbicacioneDto setIdUbicacion(UbicacionDto idUbicacion) {
+        this.idUbicacion = idUbicacion;
+        return this;
     }
 }

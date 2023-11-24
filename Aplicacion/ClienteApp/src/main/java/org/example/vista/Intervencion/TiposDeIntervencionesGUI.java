@@ -77,12 +77,7 @@ public class TiposDeIntervencionesGUI {
                     JOptionPane.showMessageDialog(null, "El nombre no puede tener más de 30 caracteres");
                 } else {
                     TiposIntervencioneDto tipoIntervencioneDto = new TiposIntervencioneDto(null, textNombre.getText(), (Estados) comboEstado.getSelectedItem());
-                    if (tipoIntervencioneRemoteBean.crearTipoIntervencion(tipoIntervencioneDto)) {
-                        JOptionPane.showMessageDialog(null, "Se ha creado el tipo de intervención");
-                        actualizarTabla();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo crear el tipo de intervención");
-                    }
+                    tipoIntervencioneRemoteBean.crearTipoIntervencion(tipoIntervencioneDto);
                 }
             }
         });
@@ -136,12 +131,7 @@ public class TiposDeIntervencionesGUI {
                 ModificarTipoDeIntervencion modificarTipoDeIntervencion = new ModificarTipoDeIntervencion(nombre, estado);
                 if (modificarTipoDeIntervencion.getNombreSel() != null && modificarTipoDeIntervencion.getEstadoSel() != null) {
                     TiposIntervencioneDto tipoIntervencioneDto = new TiposIntervencioneDto(id, nombre, modificarTipoDeIntervencion.getEstadoSel());
-                    if (tipoIntervencioneRemoteBean.modificarTipoIntervencion(tipoIntervencioneDto)) {
-                        JOptionPane.showMessageDialog(null, "Se ha modificado el tipo de intervención");
-                        actualizarTabla();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo modificar el tipo de intervención");
-                    }
+                    tipoIntervencioneRemoteBean.modificarTipoIntervencion(tipoIntervencioneDto);
                 }
             }
         });
@@ -156,12 +146,9 @@ public class TiposDeIntervencionesGUI {
                 Estados estado = (Estados) model.getValueAt(tablaTiposDeIntervenciones.getSelectedRow(), 1);
                 if (estado.equals(Estados.INACTIVO)) {
                     JOptionPane.showMessageDialog(null, "El tipo de intervención ya está dado de baja");
-                } else if (tipoIntervencioneRemoteBean.eliminarTipoIntervencion(id)) {
-                    JOptionPane.showMessageDialog(null, "Se ha dado de baja el tipo de intervención");
-                    actualizarTabla();
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo dar de baja el tipo de intervención");
+                    return;
                 }
+                tipoIntervencioneRemoteBean.eliminarTipoIntervencion(id);
             }
         });
     }

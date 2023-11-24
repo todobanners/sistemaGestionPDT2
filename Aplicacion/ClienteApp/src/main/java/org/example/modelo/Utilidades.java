@@ -25,6 +25,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 
 public class Utilidades {
     public static String hashClave(String password) {
@@ -124,5 +125,10 @@ public class Utilidades {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public static LocalDate convertirStringADate(String s) {
+        String[] fecha = s.split("-");
+        return LocalDate.of(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
     }
 }

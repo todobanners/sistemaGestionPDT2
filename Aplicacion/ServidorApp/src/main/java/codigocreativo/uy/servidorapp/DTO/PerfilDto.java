@@ -26,24 +26,27 @@ public class PerfilDto implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public PerfilDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombrePerfil() {
         return nombrePerfil;
     }
 
-    public void setNombrePerfil(String nombrePerfil) {
+    public PerfilDto setNombrePerfil(String nombrePerfil) {
         this.nombrePerfil = nombrePerfil;
+        return this;
     }
 
     public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(Estados estado) {
+    public PerfilDto setEstado(Estados estado) {
         this.estado = estado;
+        return this;
     }
 
     @Override

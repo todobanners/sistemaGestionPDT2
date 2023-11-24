@@ -1,5 +1,8 @@
 package org.example.vista.Equipo;
 
+import codigocreativo.uy.servidorapp.DTO.BajaEquipoDto;
+import codigocreativo.uy.servidorapp.DTO.EquipoDto;
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
@@ -29,9 +32,9 @@ public class BajaEquipoGUI {
     private JButton cancelarButton;
 
 
-    private Equipo equipoSeleccionado;
+    private EquipoDto equipoSeleccionado;
 
-    public BajaEquipoGUI(Equipo equipo) throws Exception {
+    public BajaEquipoGUI(EquipoDto equipo) throws Exception {
         this.equipoSeleccionado = equipo;
         initComponents();
         if (equipoSeleccionado != null) {
@@ -48,7 +51,7 @@ public class BajaEquipoGUI {
             usuarioCombo.addItem(usuario);
         }
 
-        for (Equipo equipo : Conexion.obtenerEquipoBean().listarEquipos()) {
+        for (EquipoDto equipo : Conexion.obtenerEquipoBean().listarEquipos()) {
             equipoCombo.addItem(equipo);
         }
 
@@ -61,7 +64,7 @@ public class BajaEquipoGUI {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (camposValidos()) {
-                        BajaEquipo bajaEquipo = obtenerBajaEquipoDesdeFormulario();
+                        BajaEquipoDto bajaEquipo = obtenerBajaEquipoDesdeFormulario();
                         Conexion.obtenerBajaEquipoBean().crearBajaEquipo(bajaEquipo);
                         JOptionPane.showMessageDialog(null, "Equipo dado de baja exitosamente");
                         actualizarListaEquipos();
@@ -99,10 +102,10 @@ public class BajaEquipoGUI {
         }
     }
 
-    private BajaEquipo obtenerBajaEquipoDesdeFormulario() {
-        BajaEquipo bajaEquipo = new BajaEquipo();
+    private BajaEquipoDto obtenerBajaEquipoDesdeFormulario() {
+        BajaEquipoDto bajaEquipo = new BajaEquipoDto();
         bajaEquipo.setId(equipoSeleccionado.getId());
-        bajaEquipo.setIdUsuario((Usuario) usuarioCombo.getSelectedItem());
+        bajaEquipo.setIdUsuario((UsuarioDto) usuarioCombo.getSelectedItem());
         bajaEquipo.setIdEquipo(equipoSeleccionado);
         bajaEquipo.setComentarios(comentarioText.getText());
         bajaEquipo.setRazon(razonText.getText());
@@ -132,7 +135,7 @@ public class BajaEquipoGUI {
             // Cambia esta línea
             // BajaEquipo bajaEquipo = new BajaEquipo(equipoSeleccionado);
             // por
-            BajaEquipo bajaEquipo = new BajaEquipo();
+            BajaEquipoDto bajaEquipo = new BajaEquipoDto();
             bajaEquipo.setIdEquipo(equipoSeleccionado);
             // Resto del código...
         } catch (Exception ex) {

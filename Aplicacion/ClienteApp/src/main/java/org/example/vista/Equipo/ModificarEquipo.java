@@ -1,5 +1,6 @@
 package org.example.vista.Equipo;
 
+import codigocreativo.uy.servidorapp.DTO.*;
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
@@ -32,9 +33,9 @@ public class ModificarEquipo {
     private JComboBox estadoCombo;
     private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
-    private Equipo equipoSeleccionado;
+    private EquipoDto equipoSeleccionado;
 
-    public ModificarEquipo(Equipo equipo) throws Exception {
+    public ModificarEquipo(EquipoDto equipo) throws Exception {
         this.equipoSeleccionado = equipo;
         initComponents();
         if (equipoSeleccionado != null) {
@@ -77,7 +78,7 @@ public class ModificarEquipo {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (camposValidos()) {
-                        Equipo equipoModificado = obtenerEquipoDesdeFormulario();
+                        EquipoDto equipoModificado = obtenerEquipoDesdeFormulario();
                         Conexion.obtenerEquipoBean().modificarEquipo(equipoModificado);
                         JOptionPane.showMessageDialog(null, "Equipo modificado exitosamente");
                         actualizarListaEquipos();
@@ -118,17 +119,17 @@ public class ModificarEquipo {
         }
     }
 
-    private Equipo obtenerEquipoDesdeFormulario() {
-        Equipo equipoModificado = new Equipo();
+    private EquipoDto obtenerEquipoDesdeFormulario() {
+        EquipoDto equipoModificado = new EquipoDto();
         equipoModificado.setId(equipoSeleccionado.getId());
         equipoModificado.setIdInterno(idInternoText.getText());
-        equipoModificado.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()));
+        equipoModificado.setIdUbicacion(((UbicacionDto) ubicacionCombo.getSelectedItem()));
         equipoModificado.setNroSerie(nroSerieText.getText());
         equipoModificado.setNombre(nombreText.getText());
-        equipoModificado.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
-        equipoModificado.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
-        equipoModificado.setIdPais((Pais) paisCombo.getSelectedItem());
-        equipoModificado.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
+        equipoModificado.setIdTipo((TiposEquipoDto) tipoCombo.getSelectedItem());
+        equipoModificado.setIdProveedor(((ProveedoresEquipoDto) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
+        equipoModificado.setIdPais((PaisDto) paisCombo.getSelectedItem());
+        equipoModificado.setIdModelo((ModelosEquipoDto) modeloCombo.getSelectedItem());
         equipoModificado.setFechaAdquisicion(fechaCompraDate.getDate());
         equipoModificado.setEstado((Estados) estadoCombo.getSelectedItem());
         return equipoModificado;

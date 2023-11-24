@@ -10,6 +10,7 @@ package org.example.vista.Equipo;
 *
 * */
 
+import codigocreativo.uy.servidorapp.DTO.*;
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
@@ -94,7 +95,7 @@ public class EquiposGUI {
                 if (filaSeleccionada != -1) {
                     long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
 
-                    Equipo equipoSeleccionado = null;
+                    EquipoDto equipoSeleccionado = null;
                     try {
                         equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
                     } catch (NamingException ex) {
@@ -121,7 +122,7 @@ public class EquiposGUI {
                 if (filaSeleccionada != -1) {
                     long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
 
-                    Equipo equipoSeleccionado = null;
+                    EquipoDto equipoSeleccionado = null;
                     try {
                         equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
                     } catch (NamingException ex) {
@@ -148,15 +149,15 @@ public class EquiposGUI {
         guardarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Equipo equipo = new Equipo();
+                    EquipoDto equipo = new EquipoDto();
                     equipo.setIdInterno(idInternoText.getText());
-                    equipo.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()));
+                    equipo.setIdUbicacion(((UbicacionDto) ubicacionCombo.getSelectedItem()));
                     equipo.setNroSerie(nroSerieText.getText());
                     equipo.setNombre(nombreText.getText());
-                    equipo.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
-                    equipo.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
-                    equipo.setIdPais((Pais) paisCombo.getSelectedItem());
-                    equipo.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
+                    equipo.setIdTipo((TiposEquipoDto) tipoCombo.getSelectedItem());
+                    equipo.setIdProveedor(((ProveedoresEquipoDto) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
+                    equipo.setIdPais((PaisDto) paisCombo.getSelectedItem());
+                    equipo.setIdModelo((ModelosEquipoDto) modeloCombo.getSelectedItem());
                     equipo.setFechaAdquisicion(fechaCompraDate.getDate());
                     equipo.setEstado((Estados) estadoCombo.getSelectedItem());
                     equipo.setImagen(Utilidades.subirImagen(imagenSubida));
@@ -190,7 +191,7 @@ public class EquiposGUI {
         });
     }
 
-    public void agregarEquipo(Equipo equipo) throws Exception {
+    public void agregarEquipo(EquipoDto equipo) throws Exception {
         try {
             Conexion.obtenerEquipoBean().crearEquipo(equipo);
             JOptionPane.showMessageDialog(null, "Equipo registrado con exito");

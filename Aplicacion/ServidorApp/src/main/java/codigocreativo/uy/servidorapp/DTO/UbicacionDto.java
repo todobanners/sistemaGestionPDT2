@@ -13,68 +13,71 @@ public class UbicacionDto implements Serializable {
     private Long piso;
     private Long numero;
     private Long cama;
-    private InstitucionDto idInstitucion;
 
     public UbicacionDto() {
     }
 
-    public UbicacionDto(Long id, String nombre, String sector, Long piso, Long numero, Long cama,
-                        InstitucionDto idInstitucion) {
+    public UbicacionDto(Long id, String nombre, String sector, Long piso, Long numero, Long cama) {
         this.id = id;
         this.nombre = nombre;
         this.sector = sector;
         this.piso = piso;
         this.numero = numero;
         this.cama = cama;
-        this.idInstitucion = idInstitucion;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public UbicacionDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public UbicacionDto setNombre(String nombre) {
         this.nombre = nombre;
+        return this;
     }
 
     public String getSector() {
         return sector;
     }
 
-    public void setSector(String sector) {
+    public UbicacionDto setSector(String sector) {
         this.sector = sector;
+        return this;
     }
 
     public Long getPiso() {
         return piso;
     }
 
-    public void setPiso(Long piso) {
+    public UbicacionDto setPiso(Long piso) {
         this.piso = piso;
+        return this;
     }
 
     public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
+    public UbicacionDto setNumero(Long numero) {
         this.numero = numero;
+        return this;
     }
 
     public Long getCama() {
         return cama;
     }
 
-    public void setCama(Long cama) {
+    public UbicacionDto setCama(Long cama) {
         this.cama = cama;
+        return this;
     }
 
     @Override
@@ -104,13 +107,5 @@ public class UbicacionDto implements Serializable {
                 "piso = " + piso + ", " +
                 "numero = " + numero + ", " +
                 "cama = " + cama + ")";
-    }
-
-    public InstitucionDto getIdInstitucion() {
-        return idInstitucion;
-    }
-
-    public void setIdInstitucion(InstitucionDto idInstitucion) {
-        this.idInstitucion = idInstitucion;
     }
 }

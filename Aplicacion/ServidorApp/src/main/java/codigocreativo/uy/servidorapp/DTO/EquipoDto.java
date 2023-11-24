@@ -1,18 +1,27 @@
 package codigocreativo.uy.servidorapp.DTO;
 
+import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
- * DTO for {@link codigocreativo.uy.servidorapp.entidades.Equipo}
+ * DTO for {@link Equipo}
  */
 public class EquipoDto implements Serializable {
     private Long id;
     private String idInterno;
     private String nroSerie;
+    private TiposEquipoDto idTipo;
+    private ProveedoresEquipoDto idProveedor;
+    private PaisDto idPais;
+    private ModelosEquipoDto idModelo;
+    private Set<EquiposUbicacioneDto> equiposUbicaciones = new LinkedHashSet<>();
+    private UbicacionDto idUbicacion;
     private String nombre;
     private String imagen;
     private LocalDate fechaAdquisicion;
@@ -21,7 +30,13 @@ public class EquipoDto implements Serializable {
     public EquipoDto() {
     }
 
-    public EquipoDto(Long id, String idInterno, String nroSerie, String nombre, String imagen, LocalDate fechaAdquisicion, Estados estado) {
+    public EquipoDto(Long id, String idInterno, String nroSerie,
+                     TiposEquipoDto idTipo,
+                     ProveedoresEquipoDto idProveedor,
+                     PaisDto idPais,
+                     ModelosEquipoDto idModelo,
+                     Set<EquiposUbicacioneDto> equiposUbicaciones,
+                     UbicacionDto idUbicacion, String nombre, String imagen, LocalDate fechaAdquisicion, Estados estado) {
         this.id = id;
         this.idInterno = idInterno;
         this.nroSerie = nroSerie;
@@ -29,62 +44,75 @@ public class EquipoDto implements Serializable {
         this.imagen = imagen;
         this.fechaAdquisicion = fechaAdquisicion;
         this.estado = estado;
+        this.idTipo = idTipo;
+        this.idProveedor = idProveedor;
+        this.idPais = idPais;
+        this.idModelo = idModelo;
+        this.equiposUbicaciones = equiposUbicaciones;
+        this.idUbicacion = idUbicacion;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public EquipoDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getIdInterno() {
         return idInterno;
     }
 
-    public void setIdInterno(String idInterno) {
+    public EquipoDto setIdInterno(String idInterno) {
         this.idInterno = idInterno;
+        return this;
     }
 
     public String getNroSerie() {
         return nroSerie;
     }
 
-    public void setNroSerie(String nroSerie) {
+    public EquipoDto setNroSerie(String nroSerie) {
         this.nroSerie = nroSerie;
+        return this;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public EquipoDto setNombre(String nombre) {
         this.nombre = nombre;
+        return this;
     }
 
     public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public EquipoDto setImagen(String imagen) {
         this.imagen = imagen;
+        return this;
     }
 
     public LocalDate getFechaAdquisicion() {
         return fechaAdquisicion;
     }
 
-    public void setFechaAdquisicion(LocalDate fechaAdquisicion) {
+    public EquipoDto setFechaAdquisicion(LocalDate fechaAdquisicion) {
         this.fechaAdquisicion = fechaAdquisicion;
+        return this;
     }
 
     public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(Estados estado) {
+    public EquipoDto setEstado(Estados estado) {
         this.estado = estado;
+        return this;
     }
 
     @Override
@@ -108,13 +136,60 @@ public class EquipoDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "idInterno = " + idInterno + ", " +
-                "nroSerie = " + nroSerie + ", " +
-                "nombre = " + nombre + ", " +
-                "imagen = " + imagen + ", " +
-                "fechaAdquisicion = " + fechaAdquisicion + ", " +
-                "estado = " + estado + ")";
+        return idInterno + " - " + nombre;
+    }
+
+    public TiposEquipoDto getIdTipo() {
+        return idTipo;
+    }
+
+    public EquipoDto setIdTipo(TiposEquipoDto idTipo) {
+        this.idTipo = idTipo;
+        return this;
+    }
+
+    public ProveedoresEquipoDto getIdProveedor() {
+        return idProveedor;
+    }
+
+    public EquipoDto setIdProveedor(ProveedoresEquipoDto idProveedor) {
+        this.idProveedor = idProveedor;
+        return this;
+    }
+
+    public PaisDto getIdPais() {
+        return idPais;
+    }
+
+    public EquipoDto setIdPais(PaisDto idPais) {
+        this.idPais = idPais;
+        return this;
+    }
+
+    public ModelosEquipoDto getIdModelo() {
+        return idModelo;
+    }
+
+    public EquipoDto setIdModelo(ModelosEquipoDto idModelo) {
+        this.idModelo = idModelo;
+        return this;
+    }
+
+    public Set<EquiposUbicacioneDto> getEquiposUbicaciones() {
+        return equiposUbicaciones;
+    }
+
+    public EquipoDto setEquiposUbicaciones(Set<EquiposUbicacioneDto> equiposUbicaciones) {
+        this.equiposUbicaciones = equiposUbicaciones;
+        return this;
+    }
+
+    public UbicacionDto getIdUbicacion() {
+        return idUbicacion;
+    }
+
+    public EquipoDto setIdUbicacion(UbicacionDto idUbicacion) {
+        this.idUbicacion = idUbicacion;
+        return this;
     }
 }

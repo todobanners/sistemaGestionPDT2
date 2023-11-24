@@ -26,24 +26,27 @@ public class TiposIntervencioneDto implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public TiposIntervencioneDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombreTipo() {
         return nombreTipo;
     }
 
-    public void setNombreTipo(String nombreTipo) {
+    public TiposIntervencioneDto setNombreTipo(String nombreTipo) {
         this.nombreTipo = nombreTipo;
+        return this;
     }
 
     public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(Estados estado) {
+    public TiposIntervencioneDto setEstado(Estados estado) {
         this.estado = estado;
+        return this;
     }
 
     @Override
@@ -63,9 +66,6 @@ public class TiposIntervencioneDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombreTipo = " + nombreTipo + ", " +
-                "estado = " + estado + ")";
+        return nombreTipo;
     }
 }
