@@ -60,6 +60,7 @@ public class EquiposGUI {
     public EquiposGUI() throws Exception {
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
         model.addColumn("ID Interno");
         model.addColumn("Ubicación");
         model.addColumn("Nro. Serie");
@@ -169,6 +170,37 @@ public class EquiposGUI {
         });
 
 
+        equiposTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    Equipo equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    idInternoText.setText(equipoSeleccionado.getIdInterno());
+                    ubicacionCombo.setSelectedItem(equipoSeleccionado.getIdUbicacion());
+                    nroSerieText.setText(equipoSeleccionado.getNroSerie());
+                    nombreText.setText(equipoSeleccionado.getNombre());
+                    tipoCombo.setSelectedItem(equipoSeleccionado.getIdTipo());
+                    proveedorCombo.setSelectedItem(equipoSeleccionado.getIdProveedor());
+                    paisCombo.setSelectedItem(equipoSeleccionado.getIdPais());
+                    modeloCombo.setSelectedItem(equipoSeleccionado.getIdModelo());
+                    fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+                    estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
+                    filePathField.setText(equipoSeleccionado.getImagen());
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
+                }
+            }
+        });
     }
 
 
@@ -177,6 +209,7 @@ public class EquiposGUI {
         model.setRowCount(0);
         Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
             model.addRow(new Object[]{
+                    equipo.getId(),
                     equipo.getIdInterno(),
                     equipo.getIdUbicacion().getNombre(),
                     equipo.getNroSerie(),
@@ -188,6 +221,7 @@ public class EquiposGUI {
                     equipo.getFechaAdquisicion()
             });
         });
+        equiposTable.removeColumn(equiposTable.getColumnModel().getColumn(0));
     }
 
     public void agregarEquipo(Equipo equipo) throws Exception {
