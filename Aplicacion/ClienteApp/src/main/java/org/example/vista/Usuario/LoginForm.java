@@ -77,6 +77,13 @@ public class LoginForm extends JFrame {
             }
         });
 
+        passwordField1.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        loginButton.doClick();
+    }
+});
+
         //soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
                 //Este boton sirve para generar datos de prueba, descomentar para usar
 

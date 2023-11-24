@@ -65,7 +65,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="admin"/>
+              <text value="admin123"/>
             </properties>
           </component>
           <component id="74212" class="javax.swing.JButton" binding="soyUnBotonQueButton" default-binding="true">

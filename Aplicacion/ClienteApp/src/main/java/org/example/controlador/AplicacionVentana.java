@@ -47,8 +47,10 @@ public class AplicacionVentana extends JFrame {
 
         JMenuBar miMenuBar = new JMenuBar();
         // Declaro la barra de menu
-        JMenu InicioPrincipal =         new JMenu("Inicio");
-        JMenu gestionUsuarios =         new JMenu("Gestión Usuarios");
+        JMenu InicioPrincipal =         new JMenu("");
+        InicioPrincipal.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/workshop-icon.png",60,60));
+        JMenu gestionUsuarios =         new JMenu("");
+        gestionUsuarios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/usuarios.png",60,60));
         JMenu gestionEquipos =          new JMenu("Gestión Equipos");
         JMenu gestionUbicaciones =      new JMenu("Gestión de Ubicaciones");
         JMenu gestionIntervenciones =   new JMenu("Gestión de Intervenciones");
@@ -57,7 +59,9 @@ public class AplicacionVentana extends JFrame {
 
         //Declaro los submenus de Inicio
         JMenuItem modificarDatosPropios = new JMenuItem("Modificar mis datos");
+        modificarDatosPropios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/editarMisDatos.png",30,30));
         JMenuItem cerrarSesion =          new JMenuItem("Cerrar Sesion");
+        cerrarSesion.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/logout.png",30,30));
 
         //Declaro el submenu de Gestion de Usuarios
         JMenuItem listarUsuarios =      new JMenuItem("Listar Usuarios");
@@ -243,5 +247,12 @@ public class AplicacionVentana extends JFrame {
         //redibujar
         getContentPane().revalidate();
     }
+
+    public ImageIcon resizeIcon(String imagePath, int width, int height) {
+    ImageIcon originalIcon = new ImageIcon(imagePath);
+    Image originalImage = originalIcon.getImage();
+    Image resizedImage = originalImage.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+    return new ImageIcon(resizedImage);
+}
 
 }
