@@ -1,9 +1,7 @@
 package codigocreativo.uy.servidorapp.DTO;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * DTO for {@link codigocreativo.uy.servidorapp.entidades.MarcasModelo}
@@ -11,16 +9,13 @@ import java.util.Set;
 public class MarcasModeloDto implements Serializable {
     private Long id;
     private String nombre;
-    private Set<ModelosEquipoDto> modelosEquipos = new LinkedHashSet<>();
 
     public MarcasModeloDto() {
     }
 
-    public MarcasModeloDto(Long id, String nombre,
-                           Set<ModelosEquipoDto> modelosEquipos) {
+    public MarcasModeloDto(Long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        this.modelosEquipos = modelosEquipos;
     }
 
     public Long getId() {
@@ -62,12 +57,4 @@ public class MarcasModeloDto implements Serializable {
                 "nombre = " + nombre + ")";
     }
 
-    public Set<ModelosEquipoDto> getModelosEquipos() {
-        return modelosEquipos;
-    }
-
-    public MarcasModeloDto setModelosEquipos(Set<ModelosEquipoDto> modelosEquipos) {
-        this.modelosEquipos = modelosEquipos;
-        return this;
-    }
 }

@@ -17,10 +17,5 @@ public interface EquipoMapper {
 
     List<Equipo> toEntity(List<EquipoDto> equipoDto);
 
-    @AfterMapping
-    default void linkEquiposUbicaciones(@MappingTarget Equipo equipo) {
-        equipo.getEquiposUbicaciones().forEach(equiposUbicacione -> equiposUbicacione.setIdEquipo(equipo));
-    }
-
     List<EquipoDto> toDto(List<Equipo> equipo);
 }
