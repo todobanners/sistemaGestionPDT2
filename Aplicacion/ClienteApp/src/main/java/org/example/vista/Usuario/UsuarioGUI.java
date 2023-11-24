@@ -3,44 +3,38 @@ package org.example.vista.Usuario;
 import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.DTO.PerfilDto;
 import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
-import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;
 import org.example.modelo.Utilidades;
 import org.example.modelo.Validator;
-
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
 /*
     TODO:
-        * Falta las validaciones y mensajes de error
-        * Falta el telefono, tanto en registro como en visualizacion
+        * Faltan las validaciones y mensajes de error
+        * Falta el teléfono, tanto en registro como en visualización
 
-        Estas tareas estan asignadas a Eduardo
+        Estas tareas están asignadas a Eduardo
 */
 
 public class UsuarioGUI {
     private JPanel userGUI;
     private JPanel accContenedorFecha;
 
-    private JComboBox filtroEstadoCombo;
-    private JComboBox filtroTipoCombo;
+    private JComboBox<Estados> filtroEstadoCombo;
+    private JComboBox<PerfilDto> filtroTipoCombo;
     private JTextField filtroValor;
     private JButton filtroLimpiarBoton;
     private JButton filtroFiltrarBoton;
     private JTable tableUsuarios;
-    private JComboBox filtroBuscarCombo;
+    private JComboBox<String> filtroBuscarCombo;
     private JTextField accCampoNombre;
     private JButton borrarSeleccionadoButton;
     private JButton editarSeleccionadoButton;
@@ -49,9 +43,9 @@ public class UsuarioGUI {
     private JTextField accCampoEmail;
     private JTextField accCampoTelefono;
 
-    private JComboBox accComboPerfil;
-    private JComboBox accComboInstitucion;
-    private JComboBox accComboEstado;
+    private JComboBox<PerfilDto> accComboPerfil;
+    private JComboBox<InstitucionDto> accComboInstitucion;
+    private JComboBox<Estados> accComboEstado;
     private JTextField accCampoUsername;
     private JButton limpiarCamposButton;
     private JTextField accCampoID;
@@ -62,21 +56,21 @@ public class UsuarioGUI {
     }
 
     public UsuarioGUI() throws NamingException {
-        //Se muestra un listado con los usuarios registrados en la tabla
+        // Se muestra un listado con los usuarios registrados en la tabla
         List<UsuarioDto> tabla = Conexion.obtenerUsuarioBean().obtenerUsuarios();
         generarTabla(tabla);
         cargarCombos();
-        accContenedorFecha.add(fechaChooser);//agrego el calendario al panel
+        accContenedorFecha.add(fechaChooser); // agrego el calendario al panel
 
         filtroFiltrarBoton.addActionListener(e -> {
             try {
-                //Verificar si se selecciono el campo email y validar que sea un email
+                // Verificar si se seleccionó el campo email y validar que sea un email
                 if (filtroBuscarCombo.getSelectedIndex() == 3 && !Validator.validarEmail(filtroValor.getText())) {
-                    JOptionPane.showMessageDialog(null, "El campo debe ser un email valido");
+                    JOptionPane.showMessageDialog(null, "El campo debe ser un email válido");
                 } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
+                    JOptionPane.showMessageDialog(null, "El campo no puede contener números");
                 } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "El campo no puede contener numeros");
+                    JOptionPane.showMessageDialog(null, "El campo no puede contener números");
                 } else {
                     List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
                     generarTabla(listaUsuarios);
@@ -96,7 +90,7 @@ public class UsuarioGUI {
         });
         filtroEstadoCombo.addActionListener(e -> {
             try {
-                //Estados estado = Estados.valueOf((String) filtroEstadoCombo.getSelectedItem());
+                // Estados estado = Estados.valueOf((String) filtroEstadoCombo.getSelectedItem());
 
                 List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosPorEstado((Estados) filtroEstadoCombo.getSelectedItem());
                 generarTabla(listaUsuarios);
@@ -109,10 +103,10 @@ public class UsuarioGUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 int fila = tableUsuarios.getSelectedRow();
-                Long idUsuario = (Long) tableUsuarios.getValueAt(fila, 0);
-                UsuarioDto usuario = null;
+                Long id = (Long) tableUsuarios.getModel().getValueAt(fila, 0);
+                UsuarioDto usuario;
                 try {
-                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(idUsuario);
+                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
                     PerfilDto perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
                     // Obtener el ID del perfil que quieres seleccionar en el JComboBox
                     Long perfilId = perfil.getId();
@@ -123,21 +117,21 @@ public class UsuarioGUI {
                     accCampoApellido.setText(usuario.getApellido());
                     accCampoCedula.setText(usuario.getCedula());
                     accCampoEmail.setText(usuario.getEmail());
-                    //accCampoTelefono.setText(usuario.getTelefono());
+                    // accCampoTelefono.setText(usuario.getTelefono());
 
                     // Recorrer el JComboBox para encontrar el objeto Perfil con el ID correspondiente
                     for (int i = 0; i < accComboPerfil.getItemCount(); i++) {
-                        PerfilDto item = (PerfilDto) accComboPerfil.getItemAt(i);
+                        PerfilDto item = accComboPerfil.getItemAt(i);
                         if (Objects.equals(item.getId(), perfilId)) {
                             accComboPerfil.setSelectedItem(item);
                             break; // Una vez encontrado, se sale del bucle
                         }
                     }
 
-                    // Recorrer el JComboBox para encontrar el objeto Institucion con el ID correspondiente
+                    // Recorrer el JComboBox para encontrar el objeto Institución con el ID correspondiente
                     for (int i = 0; i < accComboInstitucion.getItemCount(); i++) {
-                        InstitucionDto item = (InstitucionDto) accComboInstitucion.getItemAt(i);
-                        if (item.getId() == institucionId) {
+                        InstitucionDto item = accComboInstitucion.getItemAt(i);
+                        if (Objects.equals(item.getId(), institucionId)) {
                             accComboInstitucion.setSelectedItem(item);
                             break; // Una vez encontrado, se sale del bucle
                         }
@@ -166,7 +160,7 @@ public class UsuarioGUI {
         });
         editarSeleccionadoButton.addActionListener(e -> {
             Long id = Long.valueOf(accCampoID.getText());
-            UsuarioDto usuario = null;
+            UsuarioDto usuario;
 
             if (accCampoNombre.getText().isEmpty() || accCampoApellido.getText().isEmpty() || accCampoCedula.getText().isEmpty() || accCampoEmail.getText().isEmpty() || accCampoTelefono.getText().isEmpty() || fechaChooser.getDate() == null){
                 JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
@@ -175,17 +169,17 @@ public class UsuarioGUI {
             else if (Validator.contieneSoloLetras(accCampoNombre.getText()) || Validator.contieneSoloLetras(accCampoApellido.getText())){
                 JOptionPane.showMessageDialog(null, "Los campos nombre y apellido solo pueden contener letras");
             }
-            // Verifico que la cedula sea valida
+            // Verifico que la cédula sea válida
             else if (!Validator.validarCedula(accCampoCedula.getText())){
                 JOptionPane.showMessageDialog(null, "La cédula ingresada no es válida");
             }
-            // Verifico que el email sea valido
+            // Verifico que el email sea válido
             else if (!Validator.validarEmail(accCampoEmail.getText())){
-                JOptionPane.showMessageDialog(null, "El email ingresado no es valido");
+                JOptionPane.showMessageDialog(null, "El email ingresado no es válido");
             }
-            // Verifico que el telefono contenga solo numeros
+            // Verifico que el teléfono contenga solo números
             else if (Validator.contieneSoloNumeros(accCampoTelefono.getText())){
-                JOptionPane.showMessageDialog(null, "El campo telefono solo puede contener numeros");
+                JOptionPane.showMessageDialog(null, "El campo teléfono solo puede contener números");
             } else {
 
                 try {
@@ -194,7 +188,7 @@ public class UsuarioGUI {
                     usuario.setApellido(accCampoApellido.getText());
                     usuario.setCedula(accCampoCedula.getText());
                     usuario.setEmail(accCampoEmail.getText());
-                    //usuario.setTelefono(accCampoTelefono.getText());
+                    // usuario.setTelefono(accCampoTelefono.getText());
                     usuario.setIdPerfil((PerfilDto) accComboPerfil.getSelectedItem());
                     usuario.setIdInstitucion((InstitucionDto) accComboInstitucion.getSelectedItem());
                     Estados estado = (Estados) accComboEstado.getSelectedItem();
@@ -203,7 +197,7 @@ public class UsuarioGUI {
                     usuario.setFechaNacimiento(fechaChooser.getDate());
 
                     Conexion.obtenerUsuarioBean().modificarUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+                    JOptionPane.showMessageDialog(null, "Usuario modificado con éxito");
 
                     limpiarCamposButton.doClick();
                     List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
@@ -212,25 +206,21 @@ public class UsuarioGUI {
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
-
-
-
             }
-
         });
         borrarSeleccionadoButton.addActionListener(e -> {
             Long id = Long.valueOf(accCampoID.getText());
-            UsuarioDto usuario = null;
-            //consultar al usuario si realmente desea borrar el usuario
+            UsuarioDto usuario;
+            // consultar al usuario si realmente desea borrar el usuario
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "¿Esta seguro que desea eliminar el usuario?","Warning",dialogButton);
+            int dialogResult = JOptionPane.showConfirmDialog (null, "¿Está seguro que desea eliminar el usuario?","Advertencia",dialogButton);
             if(dialogResult == JOptionPane.NO_OPTION){
-                JOptionPane.showMessageDialog(null, "Operacion cancelada");
+                JOptionPane.showMessageDialog(null, "Operación cancelada");
             }else if(dialogResult == JOptionPane.YES_OPTION){
                 try {
                     usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
                     Conexion.obtenerUsuarioBean().eliminarUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
+                    JOptionPane.showMessageDialog(null, "Usuario eliminado con éxito");
                     List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
                     generarTabla(listaUsuarios);
                     limpiarCamposButton.doClick();
@@ -241,8 +231,8 @@ public class UsuarioGUI {
         });
         filtroTipoCombo.addActionListener(e -> {
             try {
-                //obtenemos el id de la seleccion del combo
-                String idPerfil = ((PerfilDto) filtroTipoCombo.getSelectedItem()).getId().toString();
+                // obtenemos el id de la selección del combo
+                String idPerfil = ((PerfilDto) Objects.requireNonNull(filtroTipoCombo.getSelectedItem())).getId().toString();
 
                 List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
                 generarTabla(listaUsuarios);
@@ -259,58 +249,54 @@ public class UsuarioGUI {
         fechaChooser.setDate(null);
     }
 
-    public void generarTabla(List tabla) throws NamingException {
+    public void generarTabla(List<UsuarioDto> tabla) throws NamingException {
         DefaultTableModel model = new DefaultTableModel();
 
-        //Se le asignan los nombres a las columnas
+        // Se le asignan los nombres a las columnas
         model.addColumn("ID");
-        model.addColumn("Cedula");
+        model.addColumn("Cédula");
         model.addColumn("Nombre");
         model.addColumn("Apellido");
-        model.addColumn("email");
-        model.addColumn("Fecha nacimiento");
+        model.addColumn("Email");
+        model.addColumn("Fecha de nacimiento");
         model.addColumn("Estado");
-        model.addColumn("Institucion");
-        model.addColumn("Tipo de user");
+        model.addColumn("Institución");
+        model.addColumn("Tipo de usuario");
         tableUsuarios.setModel(model);
-        //TableColumn columna = tableUsuarios.getColumnModel().getColumn(0);
-        //columna.setPreferredWidth(30);
-        //le introducimos datos a la tabla
+
         model.setRowCount(0);
-        for (int i = 0; i < tabla.size(); i++) {
-            UsuarioDto usuario = (UsuarioDto) tabla.get(i);
+        for (UsuarioDto usuarioDto : tabla) {
             Object[] data = new Object[9];
-            data[0] = usuario.getId();
-            data[1] = usuario.getCedula();
-            data[2] = usuario.getNombre();
-            data[3] = usuario.getApellido();
-            data[4] = usuario.getEmail();
-            data[5] = usuario.getFechaNacimiento();
-            data[6] = usuario.getEstado();
-            data[7] = usuario.getIdInstitucion().getNombre();
-            data[8] = usuario.getIdPerfil().getNombrePerfil();
+            data[0] = usuarioDto.getId();
+            data[1] = usuarioDto.getCedula();
+            data[2] = usuarioDto.getNombre();
+            data[3] = usuarioDto.getApellido();
+            data[4] = usuarioDto.getEmail();
+            data[5] = usuarioDto.getFechaNacimiento();
+            data[6] = usuarioDto.getEstado();
+            data[7] = usuarioDto.getIdInstitucion().getNombre();
+            data[8] = usuarioDto.getIdPerfil().getNombrePerfil();
             model.addRow(data);
         }
-        //Le quito la columna de ID
         tableUsuarios.removeColumn(tableUsuarios.getColumnModel().getColumn(0));
     }
 
     public void cargarCombos() throws NamingException {
-        //Se cargan los combos de estado
+        // Se cargan los combos de estado
         for (Estados e : Estados.values()) {
             filtroEstadoCombo.addItem(e);
             accComboEstado.addItem(e);
         }
-        //Se cargan los combos de tipo de usuario
+        // Se cargan los combos de tipo de usuario
         for (PerfilDto p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
             filtroTipoCombo.addItem(p);
             accComboPerfil.addItem(p);
         }
-        //Se cargan los combos de institucion
+        // Se cargan los combos de institución
         for (InstitucionDto i : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
             accComboInstitucion.addItem(i);
         }
-        //Se cargan los combos de buscar por
+        // Se cargan los combos de buscar por
         filtroBuscarCombo.addItem("Nombre");
         filtroBuscarCombo.addItem("Apellido");
         filtroBuscarCombo.addItem("Nombre de usuario");
@@ -321,19 +307,19 @@ public class UsuarioGUI {
         String eleccion = "";
         switch (campo){
             case 0:
-                //Filtro por nombre
+                // Filtro por nombre
                 eleccion = "nombre";
                 break;
             case 1:
-                //Filtro por apellido
+                // Filtro por apellido
                 eleccion = "apellido";
                 break;
             case 2:
-                //Filtro por nombre de usuario
+                // Filtro por nombre de usuario
                 eleccion = "nombreUsuario";
                 break;
             case 3:
-                //Filtro por email
+                // Filtro por email
                 eleccion = "email";
                 break;
         }
