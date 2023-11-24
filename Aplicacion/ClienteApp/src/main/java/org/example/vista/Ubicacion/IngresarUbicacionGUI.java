@@ -1,5 +1,7 @@
 package org.example.vista.Ubicacion;
 
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.enumerados.Sectores;
@@ -37,7 +39,7 @@ public class IngresarUbicacionGUI {
             this.Sector.addItem(sector.getValor());
         }
 
-        for (Institucion institucion : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
+        for (InstitucionDto institucion : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
             this.institucion.addItem(institucion.getNombre());
         }
 
@@ -65,7 +67,7 @@ public class IngresarUbicacionGUI {
                 }
 
                 // Crear una instancia de Ubicacion
-                Ubicacion ubicacion = new Ubicacion();
+                UbicacionDto ubicacion = new UbicacionDto();
                 ubicacion.setSector(sector);
                 ubicacion.setNombre(nombre);
                 ubicacion.setNumero(Long.parseLong(numeroText));
@@ -78,7 +80,7 @@ public class IngresarUbicacionGUI {
 
                 try {
                     // Obtener la institución
-                    Institucion institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada);
+                    InstitucionDto institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada);
 
                     if (institucion != null) {
                         // Asignar la institución a la ubicación

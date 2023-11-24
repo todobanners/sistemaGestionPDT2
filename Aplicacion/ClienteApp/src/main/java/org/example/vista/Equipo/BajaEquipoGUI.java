@@ -8,19 +8,24 @@ import codigocreativo.uy.servidorapp.entidades.Equipo;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
+import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
 import org.example.modelo.Utilidades;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class BajaEquipoGUI {
 
     private JPanel BajaEquipoPanel;
     private JPanel accionesPanel;
     private JPanel formularioPanel;
-    private JPanel accionesTablaPanel;
     private JTextField comentarioText;
     private JTextField razonText;
     private JComboBox usuarioCombo;
@@ -30,6 +35,7 @@ public class BajaEquipoGUI {
     private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
     private JButton guardarButton;
     private JButton cancelarButton;
+    private JButton imagenActual;
 
 
     private EquipoDto equipoSeleccionado;
@@ -94,8 +100,20 @@ public class BajaEquipoGUI {
             usuarioCombo.setSelectedItem(equipoSeleccionado);
             equipoCombo.setSelectedItem(equipoSeleccionado.getNombre());
             estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
-            // Asegúrate de cargar la fecha correctamente
             fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+            // Cargar imagen y mostrarla en el botón, gestionando excepciones y falta de imagen
+            try {
+                URL url = new URL(equipoSeleccionado.getImagen());
+                Image image = ImageIO.read(url);
+                Image scaledImage = image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+                imagenActual.setIcon(new ImageIcon(scaledImage));
+            } catch (MalformedURLException e) {
+                JOptionPane.showMessageDialog(null, "Error: La URL de la imagen no es válida.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error: No se pudo cargar la imagen.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Error: No se ha seleccionado ningún equipo");
@@ -105,14 +123,14 @@ public class BajaEquipoGUI {
     private BajaEquipoDto obtenerBajaEquipoDesdeFormulario() {
         BajaEquipoDto bajaEquipo = new BajaEquipoDto();
         bajaEquipo.setId(equipoSeleccionado.getId());
-        bajaEquipo.setIdUsuario((UsuarioDto) usuarioCombo.getSelectedItem());
+        //bajaEquipo.setIdUsuario((UsuarioDto) usuarioCombo.getSelectedItem());
+        bajaEquipo.setIdUsuario(Sesion.getUsuario());
         bajaEquipo.setIdEquipo(equipoSeleccionado);
         bajaEquipo.setComentarios(comentarioText.getText());
         bajaEquipo.setRazon(razonText.getText());
-        /*Date fechaElegida = fechaCompraDate.getDate();
-        LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();*/
         bajaEquipo.setFecha(fechaCompraDate.getDate());
-        bajaEquipo.setEstado((Estados) estadoCombo.getSelectedItem());
+        bajaEquipo.setEstado(Estados.INACTIVO);
+
         return bajaEquipo;
     }
 

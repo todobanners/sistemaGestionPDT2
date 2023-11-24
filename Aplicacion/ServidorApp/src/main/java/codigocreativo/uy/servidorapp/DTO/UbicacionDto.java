@@ -15,7 +15,7 @@ public class UbicacionDto implements Serializable {
     private Long piso;
     private Long numero;
     private Long cama;
-    private UbicacionDto idInstitucion;
+    private InstitucionDto idInstitucion;
 
     public UbicacionDto() {
     }
@@ -112,11 +112,11 @@ public class UbicacionDto implements Serializable {
                 "cama = " + cama + ")";
     }
 
-    public UbicacionDto getIdInstitucion() {
+    public InstitucionDto getIdInstitucion() {
         return idInstitucion;
     }
 
-    public void setIdInstitucion(UbicacionDto idInstitucion) {
+    public void setIdInstitucion(InstitucionDto idInstitucion) {
         this.idInstitucion = idInstitucion;
     }
 }

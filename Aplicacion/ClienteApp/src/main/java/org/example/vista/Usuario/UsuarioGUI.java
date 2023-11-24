@@ -1,5 +1,6 @@
 package org.example.vista.Usuario;
 
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
@@ -113,7 +114,7 @@ public class UsuarioGUI {
                     Perfil perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
                     // Obtener el ID del perfil que quieres seleccionar en el JComboBox
                     Long perfilId = perfil.getId();
-                    Institucion institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(usuario.getIdInstitucion().getId());
+                    InstitucionDto institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(usuario.getIdInstitucion().getId());
                     Long institucionId = institucion.getId();
                     fechaChooser.setDate(usuario.getFechaNacimiento());
                     accCampoNombre.setText(usuario.getNombre());
@@ -302,7 +303,7 @@ public class UsuarioGUI {
             accComboPerfil.addItem(p);
         }
         //Se cargan los combos de institucion
-        for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
+        for (InstitucionDto i : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
             accComboInstitucion.addItem(i);
         }
         //Se cargan los combos de buscar por

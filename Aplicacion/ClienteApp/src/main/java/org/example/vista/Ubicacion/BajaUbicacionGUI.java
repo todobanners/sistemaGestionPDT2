@@ -1,5 +1,7 @@
 package org.example.vista.Ubicacion;
 
+import codigocreativo.uy.servidorapp.DTO.BajaUbicacionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.entidades.BajaUbicacion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
@@ -36,13 +38,13 @@ public class BajaUbicacionGUI {
     JDateChooser selectorFecha = new JDateChooser();
 
 
-    private Ubicacion ubicacionSeleccionada;
+    private UbicacionDto ubicacionSeleccionada;
     //private Usuario user;
     //private Sesion sesion;
 
     private BajaUbicacion baja;
 
-    public BajaUbicacionGUI(Ubicacion ubicacionSeleccionada) {
+    public BajaUbicacionGUI(UbicacionDto ubicacionSeleccionada) {
         this.ubicacionSeleccionada = ubicacionSeleccionada;
         this.baja = new BajaUbicacion();
         initComponents();
@@ -113,11 +115,11 @@ public class BajaUbicacionGUI {
 
     private void confirmarBaja() {
         // Obtener los valores de los componentes y aplicar las modificaciones a la ubicación
-        BajaUbicacion baja = new BajaUbicacion();
+        BajaUbicacionDto baja = new BajaUbicacionDto();
         baja.setRazon(razon.getText());
         baja.setComentario(comentario.getText());
         baja.setIdUbicacion(ubicacionSeleccionada);
-        baja.setIdUsuario(Sesion.getInstancia().getUsuario());
+        //TODO: Aplicar DTO baja.setIdUsuario(Sesion.getInstancia().getUsuario());
 
         Date fechaElegida = (Date) selectorFecha.getDate();
         LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

@@ -58,23 +58,23 @@ public class ModificarEquipo {
 
 
 
-        for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
+        for (UbicacionDto ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
         }
 
-        for (TiposEquipo tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
+        for (TiposEquipoDto tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
             tipoCombo.addItem(tipo);
         }
 
-        for (ProveedoresEquipo proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
+        for (ProveedoresEquipoDto proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
             proveedorCombo.addItem(proveedor);
         }
 
-        for (Pais pais : Conexion.obtenerPaisBean().obtenerpais()) {
+        for (PaisDto pais : Conexion.obtenerPaisBean().obtenerpais()) {
             paisCombo.addItem(pais);
         }
 
-        for (ModelosEquipo modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
+        for (ModelosEquipoDto modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
             modeloCombo.addItem(modelo);
         }
 

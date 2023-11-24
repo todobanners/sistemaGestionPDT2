@@ -1,8 +1,10 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.DTO.BajaEquipoDto;
+import codigocreativo.uy.servidorapp.DTOMappers.BajaEquipoMapper;
 import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -11,11 +13,14 @@ import java.util.List;
 public class BajaEquipoBean implements BajaEquipoRemote {
     @PersistenceContext (unitName = "default")
     private EntityManager em;
+    @Inject
+    private BajaEquipoMapper bajaEquipoMapper;
 
 
     @Override
     public void crearBajaEquipo(BajaEquipoDto bajaEquipo) {
-        em.persist(bajaEquipo);
+        BajaEquipo bajaEquipoEntity = bajaEquipoMapper.toEntity(bajaEquipo);
+        em.persist(bajaEquipoEntity);
         em.flush();
     }
 
