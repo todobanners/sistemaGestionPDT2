@@ -1,7 +1,10 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTOMappers.InstitucionMapper;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -12,20 +15,27 @@ public class InstitucionBean implements InstitucionRemote{
     @PersistenceContext (unitName = "default")
     private EntityManager em;
 
+    @Inject //Se inyecta el mapper
+    private InstitucionMapper institucionMapper;
+
     @Override
-    public void agregarInstitucion(Institucion i) {
-        em.persist(i);
+    public void agregarInstitucion(InstitucionDto i) {
+        Institucion institucionEntity = institucionMapper.toEntity(i);
+        em.persist(institucionEntity);
         em.flush();
     }
 
     @Override
-    public void eliminarInstitucion(Institucion i) {
-        em.remove (i);
+    public void eliminarInstitucion(InstitucionDto i) {
+        Institucion institucionEntity = institucionMapper.toEntity(i);
+        em.remove(institucionEntity);
+        em.flush();
 
     }
     @Override
-    public void modificarInstitucion(Institucion i) {
-        em.persist(i);
+    public void modificarInstitucion(InstitucionDto i) {
+        Institucion institucionEntity = institucionMapper.toEntity(i);
+        em.persist(institucionEntity);
         em.flush();
 
     }
@@ -36,17 +46,24 @@ public class InstitucionBean implements InstitucionRemote{
     }
 
     @Override
-    public List<Institucion> obtenerInstituciones() {
-        return em.createQuery("SELECT i FROM Institucion i", Institucion.class).getResultList();
+    public List<InstitucionDto> obtenerInstituciones() {
+        List<Institucion> instituciones = em.createQuery("SELECT i FROM Institucion i", Institucion.class).getResultList();
+        return institucionMapper.toDto(instituciones);
     }
 
     @Override
-    public Institucion obtenerInstitucionPorNombre(String nombre) {
-        return em.createQuery("SELECT i FROM Institucion i WHERE i.nombre = :nombre", Institucion.class).setParameter("nombre", nombre).getSingleResult();
+    public InstitucionDto obtenerInstitucionPorNombre(String nombre) {
+        Institucion institucion = em.createQuery("SELECT i FROM Institucion i WHERE i.nombre = :nombre", Institucion.class)
+                .setParameter("nombre", nombre)
+                .getSingleResult();
+        return institucionMapper.toDto(institucion);
     }
 
     @Override
-    public Institucion obtenerInstitucionPorId(Long id) {
-        return em.createQuery("SELECT i FROM Institucion i WHERE i.id = :id", Institucion.class).setParameter("id", id).getSingleResult();
+    public InstitucionDto obtenerInstitucionPorId(Long id) {
+        Institucion institucion = em.createQuery("SELECT i FROM Institucion i WHERE i.id = :id", Institucion.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        return institucionMapper.toDto(institucion);
     }
 }
