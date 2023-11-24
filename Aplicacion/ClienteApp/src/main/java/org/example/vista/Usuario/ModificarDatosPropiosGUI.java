@@ -1,5 +1,6 @@
 package org.example.vista.Usuario;
 
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.controlador.Sesion;
@@ -38,7 +39,7 @@ public class ModificarDatosPropiosGUI {
 
     public ModificarDatosPropiosGUI() {
         Sesion sesion = Sesion.getInstancia();
-        Usuario usuario = sesion.getUsuario();
+        UsuarioDto usuario = sesion.getUsuario();
 
         contenedorFechaNacimiento.add(selectorFecha);
 

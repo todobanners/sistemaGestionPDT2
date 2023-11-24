@@ -10,7 +10,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
-import javax.swing.*;
 import java.util.List;
 @Stateless
 public class UsuarioBean implements UsuarioRemote {
@@ -22,23 +21,12 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public void crearUsuario(Usuario u) {
-        Usuario usuario = new Usuario();
-        usuario.setCedula(u.getCedula());
-        usuario.setEmail(u.getEmail());
-        usuario.setContrasenia(u.getContrasenia());
-        usuario.setFechaNacimiento(u.getFechaNacimiento());
-        usuario.setEstado(u.getEstado());
-        usuario.setNombre(u.getNombre());
-        usuario.setApellido(u.getApellido());
-        usuario.setNombreUsuario(u.getNombreUsuario());
-        usuario.setIdInstitucion(u.getIdInstitucion());
-        usuario.setIdPerfil(u.getIdPerfil());
-        em.persist(usuario);
+        em.persist(u);
         em.flush();
     }
 
     @Override
-    public void modificarUsuario(Usuario u) {
+    public void modificarUsuario(UsuarioDto u) {
         em.merge(u);
         em.flush();
     }
@@ -88,10 +76,10 @@ public class UsuarioBean implements UsuarioRemote {
         return em.createQuery("SELECT u FROM Usuario u WHERE u.estado = :estado", Usuario.class)
                 .setParameter("estado", estado)
                 .getResultList();
-        }
+    }
 
     @Override
-    public Usuario login(String usuario, String password) {
+    public UsuarioDto login(String usuario, String password) {
         try {
             Usuario user = em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :usuario AND u.contrasenia = :password", Usuario.class)
                     .setParameter("usuario", usuario)
@@ -99,7 +87,7 @@ public class UsuarioBean implements UsuarioRemote {
                     .getSingleResult();
 
             if (user != null && user.getContrasenia().equals(password)) {
-                return user;
+                return usuarioMapper.toDto(user);
             } else {
                 return null;
             }

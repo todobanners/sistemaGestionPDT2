@@ -1,6 +1,6 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.entidades.*;
+import codigocreativo.uy.servidorapp.DTO.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.controlador.AplicacionVentana;
@@ -85,24 +85,24 @@ public class LoginForm extends JFrame {
             }
         });
 
-        //soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
+        soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
         //Este boton sirve para generar datos de prueba, descomentar para usar
 
-        soyUnBotonQueButton.addActionListener(new ActionListener() {
+        /*soyUnBotonQueButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Cree algunos datos para funcionar, admin admin");
 
                 try {
-                    Institucion institucion = new Institucion();
+                    InstitucionDto institucion = new InstitucionDto();
                     institucion.setNombre("CodigoCreativo");
                     Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
                     ///////////////////////
-                    Perfil perfil = new Perfil();
+                    PerfilDto perfil = new PerfilDto();
                     perfil.setNombrePerfil("Administrador");
                     perfil.setEstado(Estados.ACTIVO);
                     Conexion.obtenerPerfilBean().crearPerfil(perfil);
                     //////////////////////////
-                    Usuario usuario = new Usuario();
+                    UsuarioDto usuario = new UsuarioDto();
                     usuario.setFechaNacimiento(LocalDate.now());
                     usuario.setNombre("Administrador");
                     usuario.setApellido("Administrador");
@@ -117,7 +117,7 @@ public class LoginForm extends JFrame {
                     usuario.setIdPerfil(perfil);
                     Conexion.obtenerUsuarioBean().crearUsuario(usuario);
                     //////////////////////////
-                    Ubicacion ubicacion = new Ubicacion();
+                    UbicacionDto ubicacion = new UbicacionDto();
                     institucion.setId(1L);
                     ubicacion.setIdInstitucion(institucion);
                     ubicacion.setNumero(2L);
@@ -126,19 +126,19 @@ public class LoginForm extends JFrame {
                     ubicacion.setSector("Sector");
                     Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
                     //////////////////////////
-                    ProveedoresEquipo proveedoresEquipo = new ProveedoresEquipo();
+                    ProveedoresEquipoDto proveedoresEquipo = new ProveedoresEquipoDto();
                     proveedoresEquipo.setNombre("Proveedor");
                     Conexion.obtenerProveedoresEquipoBean().CrearProveedoresEquipo(proveedoresEquipo);
                     //////////////////////////////
-                    Pais pais = new Pais();
+                    PaisDto pais = new PaisDto();
                     pais.setNombre("Uruguay");
                     Conexion.obtenerPaisBean().crearPais(pais);
                     /////////////////////////////////////////////////////
-                    MarcasModelo marcasModelos = new MarcasModelo();
+                    MarcasModeloDto marcasModelos = new MarcasModeloDto();
                     marcasModelos.setNombre("Marca");
                     Conexion.obtenerMarcaBean().crearMarcasModelo(marcasModelos);
                     ////////////////////////////////////////
-                    ModelosEquipo modelosEquipo = new ModelosEquipo();
+                    ModelosEquipoDto modelosEquipo = new ModelosEquipoDto();
                     modelosEquipo.setNombre("Modelo");
                     marcasModelos.setId(1L);
                     modelosEquipo.setIdMarca(marcasModelos);
@@ -150,7 +150,7 @@ public class LoginForm extends JFrame {
                     throw new RuntimeException(ex);
                 }
             }
-        });
+        });*/
     }
 
     private void login() throws Exception {
@@ -158,7 +158,7 @@ public class LoginForm extends JFrame {
         String password = new String(passwordField1.getPassword());
         password = Utilidades.hashClave(password);
 
-        Usuario usuario = Conexion.obtenerUsuarioBean().login(username,password);
+        UsuarioDto usuario = Conexion.obtenerUsuarioBean().login(username,password);
 
         if (usuario == null) {
             throw new Exception("Usuario o contraseña incorrectos");

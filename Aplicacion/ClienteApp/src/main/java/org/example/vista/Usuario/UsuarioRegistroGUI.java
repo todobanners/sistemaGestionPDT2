@@ -19,6 +19,8 @@
 
 package org.example.vista.Usuario;
 
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTO.PerfilDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
@@ -87,10 +89,10 @@ public class UsuarioRegistroGUI {
 
     public void generadorCombos() throws NamingException {
         //genero el combo de perfiles
-        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
+        for (PerfilDto p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
             perfil.addItem(p);
         }
-        for (Institucion i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
+        for (InstitucionDto i : Conexion.obtenerInstitucionBean().obtenerInstituciones()){
             institucion.addItem(i);
         }
         for (Estados e : Estados.values()){

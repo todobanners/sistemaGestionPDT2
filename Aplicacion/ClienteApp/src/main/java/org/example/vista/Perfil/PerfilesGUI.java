@@ -1,5 +1,6 @@
 package org.example.vista.Perfil;
 
+import codigocreativo.uy.servidorapp.DTO.PerfilDto;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.servicios.PerfilRemote;
@@ -64,7 +65,7 @@ public class PerfilesGUI {
         AbstractHyperlinkAction<Object> simpleAction = new AbstractHyperlinkAction<Object>(null) {
 
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
+                PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
                 PerfilPermisosGUI perfilPermisosGUI = new PerfilPermisosGUI(perfil);
 
             }
@@ -88,7 +89,7 @@ public class PerfilesGUI {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = new Perfil();
+                PerfilDto perfil = new PerfilDto();
                 if (!Validator.validarMaximoCaracteres(textNombre.getText(), 20)) {
                     JOptionPane.showMessageDialog(null, "El nombre no debe tener mas de 20 caracteres");
                 }else if (!Validator.validarMinimoCaracteres(textNombre.getText(), 3)) {
@@ -106,7 +107,7 @@ public class PerfilesGUI {
         editarPerfilSeleccionadoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
+                PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
                 /*if (Validator.validarMaximoCaracteres(textNombre.getText(), 20)) {
                     JOptionPane.showMessageDialog(null, "El nombre no debe tener mas de 20 caracteres");
                 }else if (Validator.validarMinimoCaracteres(textNombre.getText(), 2)) {
@@ -124,7 +125,7 @@ public class PerfilesGUI {
         borrarPerfilSeleccionadoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
+                PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
                 perfilesPermisoBean.eliminarPerfil(perfil);
                 JOptionPane.showMessageDialog(null, "Perfil eliminado");
                 actualizarTabla();
@@ -136,7 +137,7 @@ public class PerfilesGUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 //Cargar datos del perfil seleccionado
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
+                PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
                 textNombre.setText(perfil.getNombrePerfil());
                 comboEstado.setSelectedItem(perfil.getEstado());
 
@@ -147,7 +148,7 @@ public class PerfilesGUI {
             public void actionPerformed(ActionEvent e) {
                 //Cargar datos de la tabla filtrados por estado
                 model.setRowCount(0);
-                for (Perfil perfil : perfilesPermisoBean.listarPerfilesPorEstado((Estados) filtroEstadoCombo.getSelectedItem())) {
+                for (PerfilDto perfil : perfilesPermisoBean.listarPerfilesPorEstado((Estados) filtroEstadoCombo.getSelectedItem())) {
                     model.addRow(new Object[]{perfil.getId(), perfil.getNombrePerfil(), "Ver permisos", perfil.getEstado()});
                     System.out.println(perfil.getNombrePerfil());
                 }
@@ -158,7 +159,7 @@ public class PerfilesGUI {
             public void actionPerformed(ActionEvent e) {
                 //Cargar datos de la tabla filtrados por nombre
                 model.setRowCount(0);
-                for (Perfil perfil : perfilesPermisoBean.listarPerfilesPorNombre(filtroNombreCampo.getText())) {
+                for (PerfilDto perfil : perfilesPermisoBean.listarPerfilesPorNombre(filtroNombreCampo.getText())) {
                     model.addRow(new Object[]{perfil.getId(), perfil.getNombrePerfil(), "Ver permisos", perfil.getEstado()});
                     System.out.println(perfil.getNombrePerfil());
                 }
@@ -177,7 +178,7 @@ public class PerfilesGUI {
 
     private void actualizarTabla() {
         model.setRowCount(0);
-        for (Perfil perfil : perfilesPermisoBean.obtenerPerfiles()) {
+        for (PerfilDto perfil : perfilesPermisoBean.obtenerPerfiles()) {
             model.addRow(new Object[]{perfil.getId(), perfil.getNombrePerfil(), "Ver permisos", perfil.getEstado()});
             System.out.println(perfil.getNombrePerfil());
         }

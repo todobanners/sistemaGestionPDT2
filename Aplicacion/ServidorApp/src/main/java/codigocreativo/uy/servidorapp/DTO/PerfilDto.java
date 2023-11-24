@@ -3,6 +3,7 @@ package codigocreativo.uy.servidorapp.DTO;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -49,6 +50,14 @@ public class PerfilDto implements Serializable {
         return this;
     }
 
+    public void setPermisos(List<PermisoDto> permisos) {
+        this.permisos = permisos;
+    }
+
+    public List<PermisoDto> getPermisos() {
+        return permisos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,4 +80,6 @@ public class PerfilDto implements Serializable {
                 "nombrePerfil = " + nombrePerfil + ", " +
                 "estado = " + estado + ")";
     }
+
+
 }

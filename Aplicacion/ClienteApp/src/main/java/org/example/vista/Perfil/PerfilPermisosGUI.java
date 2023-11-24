@@ -1,5 +1,7 @@
 package org.example.vista.Perfil;
 
+import codigocreativo.uy.servidorapp.DTO.PerfilDto;
+import codigocreativo.uy.servidorapp.DTO.PermisoDto;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Permiso;
 import codigocreativo.uy.servidorapp.servicios.PerfilRemote;
@@ -21,12 +23,12 @@ public class PerfilPermisosGUI {
     private JButton guardarButton;
     private JButton cerrarButton;
 
-    private final Perfil perfil;
+    private final PerfilDto perfil;
 
     private PerfilRemote perfilesBean;
     private PermisoRemote permisoBean;
 
-    public PerfilPermisosGUI(Perfil p) {
+    public PerfilPermisosGUI(PerfilDto p) {
         perfil = p;
         try {
             perfilesBean = Conexion.obtenerPerfilBean();
@@ -48,10 +50,10 @@ public class PerfilPermisosGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ListModel model = dual.getSourceListModel();
-                List<Permiso> permisos = permisoBean.obtenerPermisos();
+                List<PermisoDto> permisos = permisoBean.obtenerPermisos();
                 for (int i = 0; i < model.getSize(); i++) {
                     String permiso = (String) model.getElementAt(i);
-                    for (Permiso p : permisos) {
+                    for (PermisoDto p : permisos) {
                         if (p.getTipoPermiso().equals(permiso)) {
                             permisos.remove(p);
                             break;
@@ -77,10 +79,10 @@ public class PerfilPermisosGUI {
     }
 
     private void actualizarDual() {
-        List<Permiso> permisosAsignados = perfil.getPermisos();
-        List<Permiso> permisosDisponibles = permisoBean.obtenerPermisos();
+        List<PermisoDto> permisosAsignados = perfil.getPermisos();
+        List<PermisoDto> permisosDisponibles = permisoBean.obtenerPermisos();
 
-        for (Permiso p : permisosAsignados) {
+        for (PermisoDto p : permisosAsignados) {
             permisosDisponibles.removeIf(permiso -> permiso.getId() == p.getId());
         }
 
