@@ -23,12 +23,6 @@ public class IntervencionBean implements IntervencionRemote {
     public void crear(IntervencionDto intervencion) throws ServiciosException {
         //Se "transforma" el DTO a una entidad
         Intervencion intervencionEntity = intervencionMapper.toEntity(intervencion);
-        //Hardcodeo de id de usuario
-        Usuario usuario = em.find(Usuario.class, 1L);
-        if (usuario == null) {
-            throw new ServiciosException("No se encontro el usuario con id 1");
-        }
-        intervencionEntity.setIdUsuario(usuario);
 
         //Se persiste la entidad (no el DTO)
         em.persist(intervencionEntity);
