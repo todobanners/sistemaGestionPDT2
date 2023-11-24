@@ -116,7 +116,7 @@ public class PerfilesGUI {
                     JOptionPane.showMessageDialog(null, "El nombre solo debe contener letras");
                 } else{}*/
                 //perfil.setNombrePerfil(textNombre.getText());
-                    perfil.setEstado(Estados.valueOf(comboEstado.getSelectedItem().toString()));
+                    perfil.setEstado((Estados) comboEstado.getSelectedItem());
                     perfilesPermisoBean.modificarPerfil(perfil);
                     JOptionPane.showMessageDialog(null, "Perfil modificado");
                     actualizarTabla();
