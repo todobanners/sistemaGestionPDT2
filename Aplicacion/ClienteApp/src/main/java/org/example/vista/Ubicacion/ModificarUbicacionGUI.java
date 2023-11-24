@@ -1,5 +1,7 @@
 package org.example.vista.Ubicacion;
 
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.enumerados.Sectores;
@@ -30,9 +32,9 @@ public class ModificarUbicacionGUI {
     private JLabel InstitucionLabel;
     private JComboBox<String> institucion;
 
-    private Ubicacion ubicacionSeleccionada;
+    private UbicacionDto ubicacionSeleccionada;
 
-    public ModificarUbicacionGUI(Ubicacion ubicacionSeleccionada) {
+    public ModificarUbicacionGUI(UbicacionDto ubicacionSeleccionada) {
         this.ubicacionSeleccionada = ubicacionSeleccionada;
         initComponents();
         asignarValores();
@@ -96,8 +98,8 @@ public class ModificarUbicacionGUI {
 
         // Obtener instituciones y agregarlas al combobox
         try {
-            List<Institucion> instituciones = Conexion.obtenerInstitucionBean().obtenerInstituciones();
-            for (Institucion inst : instituciones) {
+            List<InstitucionDto> instituciones = Conexion.obtenerInstitucionBean().obtenerInstituciones();
+            for (InstitucionDto inst : instituciones) {
                 institucion.addItem(inst.getNombre());
             }
         } catch (NamingException ex) {
@@ -156,7 +158,7 @@ public class ModificarUbicacionGUI {
 
             try {
                 // Obtener la institución
-                Institucion inst = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada);
+                InstitucionDto inst = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada);
 
                 if (inst != null) {
                     // Asignar la institución a la ubicación

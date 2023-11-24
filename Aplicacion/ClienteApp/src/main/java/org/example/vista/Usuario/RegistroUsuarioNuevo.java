@@ -1,5 +1,6 @@
 package org.example.vista.Usuario;
 
+import codigocreativo.uy.servidorapp.DTO.PerfilDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
@@ -58,7 +59,7 @@ public class RegistroUsuarioNuevo extends JFrame {
         cedulaTextField.setText(Validator.generarCedulaUruguaya());
 
         //Obtencion de valores del combobox
-        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
+        for (PerfilDto p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
             comboBoxTipo.addItem(p);
         }
 

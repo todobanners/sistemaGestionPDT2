@@ -11,8 +11,8 @@ import java.util.List;
 public interface UsuarioRemote {
     public void crearUsuario(Usuario u);
     public void modificarUsuario(UsuarioDto u);
-    public void eliminarUsuario(Usuario u);
-    public Usuario obtenerUsuario(Long id);
+    public void eliminarUsuario(UsuarioDto u);
+    public UsuarioDto obtenerUsuario(Long id);
     public UsuarioDto obtenerUsuarioDto(Long id);
     public Usuario obtenerUsuarioPorCI(String ci);
     public List<Usuario> obtenerUsuarios();

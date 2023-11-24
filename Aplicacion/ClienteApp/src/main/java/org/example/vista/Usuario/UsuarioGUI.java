@@ -1,6 +1,8 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTO.PerfilDto;
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
@@ -111,7 +113,7 @@ public class UsuarioGUI {
                 Usuario usuario = null;
                 try {
                     usuario = Conexion.obtenerUsuarioBean().obtenerUsuarioPorCI(ci);
-                    Perfil perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
+                    PerfilDto perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
                     // Obtener el ID del perfil que quieres seleccionar en el JComboBox
                     Long perfilId = perfil.getId();
                     InstitucionDto institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorId(usuario.getIdInstitucion().getId());
@@ -164,7 +166,7 @@ public class UsuarioGUI {
         });
         editarSeleccionadoButton.addActionListener(e -> {
             Long id = Long.valueOf(accCampoID.getText());
-            Usuario usuario = null;
+            UsuarioDto usuario = null;
 
             if (accCampoNombre.getText().isEmpty() || accCampoApellido.getText().isEmpty() || accCampoCedula.getText().isEmpty() || accCampoEmail.getText().isEmpty() || accCampoTelefono.getText().isEmpty() || fechaChooser.getDate() == null){
                 JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
@@ -193,8 +195,8 @@ public class UsuarioGUI {
                     usuario.setCedula(accCampoCedula.getText());
                     usuario.setEmail(accCampoEmail.getText());
                     //usuario.setTelefono(accCampoTelefono.getText());
-                    usuario.setIdPerfil((Perfil) accComboPerfil.getSelectedItem());
-                    usuario.setIdInstitucion((Institucion) accComboInstitucion.getSelectedItem());
+                    usuario.setIdPerfil((PerfilDto) accComboPerfil.getSelectedItem());
+                    usuario.setIdInstitucion((InstitucionDto) accComboInstitucion.getSelectedItem());
                     Estados estado = (Estados) accComboEstado.getSelectedItem();
                     usuario.setEstado(estado);
                     usuario.setNombreUsuario(accCampoUsername.getText());
@@ -218,7 +220,7 @@ public class UsuarioGUI {
         });
         borrarSeleccionadoButton.addActionListener(e -> {
             Long id = Long.valueOf(accCampoID.getText());
-            Usuario usuario = null;
+            UsuarioDto usuario = null;
             //consultar al usuario si realmente desea borrar el usuario
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog (null, "¿Esta seguro que desea eliminar el usuario?","Warning",dialogButton);
@@ -298,7 +300,7 @@ public class UsuarioGUI {
             accComboEstado.addItem(e);
         }
         //Se cargan los combos de tipo de usuario
-        for (Perfil p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
+        for (PerfilDto p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
             filtroTipoCombo.addItem(p);
             accComboPerfil.addItem(p);
         }

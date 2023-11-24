@@ -1,5 +1,7 @@
 package org.example.vista.Ubicacion;
 
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.entidades.Institucion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
@@ -37,7 +39,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     }
 
     public ListadoDeUbicacionesGUI() throws NamingException, ServiciosException {
-        List<Ubicacion> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
+        List<UbicacionDto> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
         generarTabla(listaUbicaciones);
 
         //anadir sectores desde el enumerado sectores
@@ -45,7 +47,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             Sector.addItem(codigocreativo.uy.servidorapp.enumerados.Sectores.values()[i].getValor());
         }
 
-        List<Institucion> inst = Conexion.obtenerInstitucionBean().obtenerInstituciones();
+        List<InstitucionDto> inst = Conexion.obtenerInstitucionBean().obtenerInstituciones();
         for (int i = 0; i < inst.size(); i++) {
             institucion.addItem(inst.get(i));
         }
@@ -109,7 +111,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 super.mouseClicked(e);
                 int ubicacionSeleccionada = table1.getSelectedRow();
                 if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) { // Si se seleccionó una ubicación
-                    Ubicacion ubi = listaUbicaciones.get(ubicacionSeleccionada);
+                    UbicacionDto ubi = listaUbicaciones.get(ubicacionSeleccionada);
                     Sector.setSelectedItem(ubi.getSector());
                     Nombre.setText(ubi.getNombre());
                     Número.setText(String.valueOf(ubi.getNumero()));
@@ -128,13 +130,13 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         agregarNuevoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ubicacion ubi = new Ubicacion();
+                UbicacionDto ubi = new UbicacionDto();
                 ubi.setSector((String) Sector.getSelectedItem());
                 ubi.setNombre(Nombre.getText());
                 ubi.setNumero(Long.parseLong(Número.getText()));
                 ubi.setPiso(Long.parseLong(Piso.getText()));
                 ubi.setCama(Long.parseLong(Cama.getText()));
-                Institucion institucion1 = (Institucion) institucion.getSelectedItem();
+                InstitucionDto institucion1 = (InstitucionDto) institucion.getSelectedItem();
                 ubi.setIdInstitucion(institucion1);
                 confirmarAltaOModificar(ubi, "alta");
 
@@ -161,7 +163,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
 
     }
 
-    private void confirmarAltaOModificar(Ubicacion ubicacionSeleccionada, String accion) {
+    private void confirmarAltaOModificar(UbicacionDto ubicacionSeleccionada, String accion) {
         // Obtener los valores de los componentes y aplicar las modificaciones a la ubicación
         if (ubicacionSeleccionada != null) {
             String sector = (String) Sector.getSelectedItem();
@@ -169,7 +171,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             String numeroText = Número.getText();
             String pisoText = Piso.getText();
             String camaText = Cama.getText();
-            Institucion institucionSeleccionada = (Institucion) institucion.getSelectedItem();
+            InstitucionDto institucionSeleccionada = (InstitucionDto) institucion.getSelectedItem();
 
             // Validar campos obligatorios
             if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty()) {
@@ -196,7 +198,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
 
             try {
                 // Obtener la institución
-                Institucion inst = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada.getNombre());
+                InstitucionDto inst = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada.getNombre());
 
                 if (inst != null) {
                     // Asignar la institución a la ubicación
