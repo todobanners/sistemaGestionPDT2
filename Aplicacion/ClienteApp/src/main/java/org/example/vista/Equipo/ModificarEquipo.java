@@ -7,9 +7,15 @@ import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;
 import org.example.modelo.Utilidades;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 
 public class ModificarEquipo {
@@ -17,7 +23,6 @@ public class ModificarEquipo {
     private JPanel ModificarEquipoPanel;
     private JPanel accionesPanel;
     private JPanel formularioPanel;
-    private JPanel accionesTablaPanel;
     private JTextField idInternoText;
     private JComboBox ubicacionCombo;
     private JTextField nroSerieText;
@@ -31,6 +36,9 @@ public class ModificarEquipo {
     private JButton guardarButton;
     private JButton cancelarButton;
     private JComboBox estadoCombo;
+    private JButton imagenActual;
+    private JLabel filePathField;
+    private File imagenSubida;
     private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
     private EquipoDto equipoSeleccionado;
@@ -47,6 +55,8 @@ public class ModificarEquipo {
 
     private void initComponents() throws Exception {
         fechaAdqContainer.add(fechaCompraDate);
+
+
 
         for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
@@ -71,7 +81,17 @@ public class ModificarEquipo {
         for (Estados estado : Estados.values()) {
             estadoCombo.addItem(estado);
         }
-        // Configurar los componentes de la interfaz aquí...
+        imagenBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    imagenSubida = fileChooser.getSelectedFile();
+                    filePathField.setText(imagenSubida.getAbsolutePath());
+                }
+            }
+        });
 
         guardarButton.addActionListener(new ActionListener() {
             @Override
@@ -101,7 +121,7 @@ public class ModificarEquipo {
         });
     }
 
-    private void cargarDatosEquipo() {
+    private void cargarDatosEquipo() throws IOException {
         if (equipoSeleccionado != null) {
             idInternoText.setText(equipoSeleccionado.getIdInterno());
             ubicacionCombo.setSelectedItem(equipoSeleccionado.getIdUbicacion());
@@ -113,6 +133,20 @@ public class ModificarEquipo {
             modeloCombo.setSelectedItem(equipoSeleccionado.getIdModelo());
             estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
             fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+            // Cargar imagen y mostrarla en el botón, gestionando excepciones y falta de imagen
+            try {
+                URL url = new URL(equipoSeleccionado.getImagen());
+                Image image = ImageIO.read(url);
+                Image scaledImage = image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+                imagenActual.setIcon(new ImageIcon(scaledImage));
+                filePathField.setText(equipoSeleccionado.getImagen());
+            } catch (MalformedURLException e) {
+                JOptionPane.showMessageDialog(null, "Error: La URL de la imagen no es válida.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error: No se pudo cargar la imagen.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Error: No se ha seleccionado ningún equipo");
@@ -132,6 +166,20 @@ public class ModificarEquipo {
         equipoModificado.setIdModelo((ModelosEquipoDto) modeloCombo.getSelectedItem());
         equipoModificado.setFechaAdquisicion(fechaCompraDate.getDate());
         equipoModificado.setEstado((Estados) estadoCombo.getSelectedItem());
+        if (imagenSubida != null) {
+            try {
+                guardarButton.setText("Subiendo imagen...");
+                String nuevaImagen = Utilidades.subirImagen(imagenSubida);
+                equipoModificado.setImagen(nuevaImagen);
+                guardarButton.setText("Guardar");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al subir la nueva imagen");
+            }
+        } else {
+            equipoModificado.setImagen(equipoSeleccionado.getImagen());
+        }
+
         return equipoModificado;
     }
 

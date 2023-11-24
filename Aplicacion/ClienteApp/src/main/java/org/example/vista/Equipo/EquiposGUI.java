@@ -1,14 +1,14 @@
 package org.example.vista.Equipo;
 /*
-* TODO: Agregar funcionalidad de los botones
-*  - Dar de baja seleccionado
-*  - Editar seleccionado
-*  - Registrar movimiento
-* TODO: Crear filtros para la tabla
-* TODO: Ver como hacer para que se muestre la imagen del equipo en la pantalla principal
-*  todo: arreglar tamano de botones
-*
-* */
+ * TODO: Agregar funcionalidad de los botones
+ *  - Dar de baja seleccionado
+ *  - Editar seleccionado
+ *  - Registrar movimiento
+ * TODO: Crear filtros para la tabla
+ * TODO: Ver como hacer para que se muestre la imagen del equipo en la pantalla principal
+ *  todo: arreglar tamano de botones
+ *
+ * */
 
 import codigocreativo.uy.servidorapp.DTO.*;
 import codigocreativo.uy.servidorapp.entidades.*;
@@ -61,6 +61,7 @@ public class EquiposGUI {
     public EquiposGUI() throws Exception {
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
         model.addColumn("ID Interno");
         model.addColumn("Ubicación");
         model.addColumn("Nro. Serie");
@@ -76,17 +77,16 @@ public class EquiposGUI {
         cargarCombos();
 
         imagenBtn.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            imagenSubida = fileChooser.getSelectedFile();
-            filePathField.setText(imagenSubida.getAbsolutePath());
-        }
-    }
-});
-
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    imagenSubida = fileChooser.getSelectedFile();
+                    filePathField.setText(imagenSubida.getAbsolutePath());
+                }
+            }
+        });
 
         editarSeleccionadoButton.addActionListener(new ActionListener() {
             @Override
@@ -170,6 +170,37 @@ public class EquiposGUI {
         });
 
 
+        /*equiposTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    Equipo equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    idInternoText.setText(equipoSeleccionado.getIdInterno());
+                    ubicacionCombo.setSelectedItem(equipoSeleccionado.getIdUbicacion());
+                    nroSerieText.setText(equipoSeleccionado.getNroSerie());
+                    nombreText.setText(equipoSeleccionado.getNombre());
+                    tipoCombo.setSelectedItem(equipoSeleccionado.getIdTipo());
+                    proveedorCombo.setSelectedItem(equipoSeleccionado.getIdProveedor());
+                    paisCombo.setSelectedItem(equipoSeleccionado.getIdPais());
+                    modeloCombo.setSelectedItem(equipoSeleccionado.getIdModelo());
+                    fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+                    estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
+                    filePathField.setText(equipoSeleccionado.getImagen());
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
+                }
+            }
+        });*/
     }
 
 
@@ -178,6 +209,7 @@ public class EquiposGUI {
         model.setRowCount(0);
         Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
             model.addRow(new Object[]{
+                    equipo.getId(),
                     equipo.getIdInterno(),
                     equipo.getIdUbicacion().getNombre(),
                     equipo.getNroSerie(),
@@ -189,6 +221,7 @@ public class EquiposGUI {
                     equipo.getFechaAdquisicion()
             });
         });
+        equiposTable.removeColumn(equiposTable.getColumnModel().getColumn(0));
     }
 
     public void agregarEquipo(EquipoDto equipo) throws Exception {
@@ -206,7 +239,6 @@ public class EquiposGUI {
         for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
         }
-
         for (TiposEquipo tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
             tipoCombo.addItem(tipo);
         }
