@@ -1,6 +1,7 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.DTO.*;
+import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.controlador.AplicacionVentana;
@@ -85,10 +86,10 @@ public class LoginForm extends JFrame {
             }
         });
 
-        soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
+        //soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
         //Este boton sirve para generar datos de prueba, descomentar para usar
 
-        /*soyUnBotonQueButton.addActionListener(new ActionListener() {
+        soyUnBotonQueButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Cree algunos datos para funcionar, admin admin");
 
@@ -150,7 +151,7 @@ public class LoginForm extends JFrame {
                     throw new RuntimeException(ex);
                 }
             }
-        });*/
+        });
     }
 
     private void login() throws Exception {

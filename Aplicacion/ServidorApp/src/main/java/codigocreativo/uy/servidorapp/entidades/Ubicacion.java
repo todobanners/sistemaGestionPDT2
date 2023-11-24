@@ -35,6 +35,7 @@ public class Ubicacion implements Serializable {
     @JoinColumn(name = "ID_INSTITUCION")
     private Institucion idInstitucion;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", length = 15)
     private Estados estado;
 

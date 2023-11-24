@@ -169,7 +169,7 @@ public class IntervencionGUI {
                     filtro.put("motivo", null);
                 }
                 if (!(comboFiltroEquipo.getSelectedItem().equals("Todos"))) {
-                    filtro.put("equipo", String.valueOf(((Equipo) comboFiltroEquipo.getSelectedItem()).getId()));
+                    filtro.put("equipo", String.valueOf(((EquipoDto) comboFiltroEquipo.getSelectedItem()).getId()));
 
                 } else {
                     filtro.put("equipo", null);

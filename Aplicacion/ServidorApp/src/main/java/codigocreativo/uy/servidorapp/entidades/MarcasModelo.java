@@ -3,6 +3,8 @@ package codigocreativo.uy.servidorapp.entidades;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "MARCAS_MODELO")
@@ -14,6 +16,17 @@ public class MarcasModelo implements Serializable {
 
     @Column(name = "NOMBRE", nullable = false, length = 30)
     private String nombre;
+
+    @OneToMany(mappedBy = "idMarca")
+    private Set<ModelosEquipo> modelosEquipos = new LinkedHashSet<>();
+
+    public Set<ModelosEquipo> getModelosEquipos() {
+        return modelosEquipos;
+    }
+
+    public void setModelosEquipos(Set<ModelosEquipo> modelosEquipos) {
+        this.modelosEquipos = modelosEquipos;
+    }
 
     public Long getId() {
         return id;

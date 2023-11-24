@@ -156,7 +156,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         modelo.setColumnIdentifiers(columnas);
         table1.setModel(modelo);
         for (int i = 0; i < lista.size(); i++) {
-            Ubicacion ubi = (Ubicacion) lista.get(i);
+            UbicacionDto ubi = (UbicacionDto) lista.get(i);
             String[] fila = {ubi.getSector(), ubi.getNombre(), String.valueOf(ubi.getNumero()), String.valueOf(ubi.getPiso()), String.valueOf(ubi.getCama()), ubi.getIdInstitucion().getNombre()};
             modelo.addRow(fila);
         }

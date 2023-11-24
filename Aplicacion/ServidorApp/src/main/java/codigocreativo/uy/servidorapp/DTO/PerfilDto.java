@@ -3,6 +3,7 @@ package codigocreativo.uy.servidorapp.DTO;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
  * DTO for {@link codigocreativo.uy.servidorapp.entidades.Perfil}
  */
 public class PerfilDto implements Serializable {
+    private List<PermisoDto> permisos = new LinkedList<>();
     private Long id;
     private String nombrePerfil;
     private Estados estado;
@@ -17,10 +19,12 @@ public class PerfilDto implements Serializable {
     public PerfilDto() {
     }
 
-    public PerfilDto(Long id, String nombrePerfil, Estados estado) {
+    public PerfilDto(
+            List<PermisoDto> permisos, Long id, String nombrePerfil, Estados estado) {
         this.id = id;
         this.nombrePerfil = nombrePerfil;
         this.estado = estado;
+        this.permisos = permisos;
     }
 
     public Long getId() {
@@ -50,14 +54,6 @@ public class PerfilDto implements Serializable {
         return this;
     }
 
-    /*public void setPermisos(List<PermisoDto> permisos) {
-        this.permisos = permisos;
-    }
-
-    public List<PermisoDto> getPermisos() {
-        return permisos;
-    }*/
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,5 +77,12 @@ public class PerfilDto implements Serializable {
                 "estado = " + estado + ")";
     }
 
+    public List<PermisoDto> getPermisos() {
+        return permisos;
+    }
 
+    public PerfilDto setPermisos(List<PermisoDto> permisos) {
+        this.permisos = permisos;
+        return this;
+    }
 }

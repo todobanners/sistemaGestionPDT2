@@ -13,39 +13,35 @@ import java.util.List;
 public class PermisoBean implements PermisoRemote{
     @PersistenceContext (unitName = "default")
     private EntityManager em;
-    //inyecto el dto mapper
+
     @Inject
-    PermisoMapper permisoMapper;
+    private PermisoMapper permisoMapper;
+
     @Override
     public void crearPermiso(PermisoDto p) {
-        Permiso permisoEntity = permisoMapper.toEntity(p);
-        em.persist(permisoEntity);
+        em.persist(permisoMapper.toEntity(p));
         em.flush();
     }
 
     @Override
     public void modificarPermiso(PermisoDto p) {
-        Permiso permisoEntity = permisoMapper.toEntity(p);
-        em.merge(permisoEntity);
+        em.merge(permisoMapper.toEntity(p));
         em.flush();
     }
 
     @Override
     public void eliminarPermiso(PermisoDto p) {
-        Permiso permisoEntity = permisoMapper.toEntity(p);
-        em.remove(permisoEntity);
+        em.remove(permisoMapper.toEntity(p));
         em.flush();
     }
 
     @Override
     public PermisoDto obtenerPermiso(Long id) {
-        Permiso permiso = em.find(Permiso.class, id);
-        return permisoMapper.toDto(permiso);
+        return permisoMapper.toDto(em.find(Permiso.class, id));
     }
 
     @Override
     public List<PermisoDto> obtenerPermisos() {
-        List<Permiso> permisos = em.createQuery("SELECT p FROM Permiso p", Permiso.class).getResultList();
-        return permisoMapper.toDto(permisos);
+        return permisoMapper.toDto(em.createQuery("SELECT p FROM Permiso p", Permiso.class).getResultList());
     }
 }

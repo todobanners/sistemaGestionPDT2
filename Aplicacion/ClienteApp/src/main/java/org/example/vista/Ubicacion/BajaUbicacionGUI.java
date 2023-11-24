@@ -42,11 +42,11 @@ public class BajaUbicacionGUI {
     //private Usuario user;
     //private Sesion sesion;
 
-    private BajaUbicacion baja;
+    private BajaUbicacionDto baja;
 
     public BajaUbicacionGUI(UbicacionDto ubicacionSeleccionada) {
         this.ubicacionSeleccionada = ubicacionSeleccionada;
-        this.baja = new BajaUbicacion();
+        this.baja = new BajaUbicacionDto();
         initComponents();
         asignarValores();
     }

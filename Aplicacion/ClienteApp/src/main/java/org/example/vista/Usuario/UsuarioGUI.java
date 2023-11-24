@@ -112,8 +112,7 @@ public class UsuarioGUI {
                 String ci = (String) tableUsuarios.getValueAt(fila, 0);
                 UsuarioDto usuario = null;
                 try {
-                    //TODO: Volver a buscar el usuario por ID poniendolo en la tabla y ocultando ID
-                    //usuario = Conexion.obtenerUsuarioBean().obtenerUsuarioPorCI(ci);
+                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuarioPorCI(ci);
                     PerfilDto perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
                     // Obtener el ID del perfil que quieres seleccionar en el JComboBox
                     Long perfilId = perfil.getId();
@@ -128,7 +127,7 @@ public class UsuarioGUI {
 
                     // Recorrer el JComboBox para encontrar el objeto Perfil con el ID correspondiente
                     for (int i = 0; i < accComboPerfil.getItemCount(); i++) {
-                        Perfil item = (Perfil) accComboPerfil.getItemAt(i);
+                        PerfilDto item = (PerfilDto) accComboPerfil.getItemAt(i);
                         if (Objects.equals(item.getId(), perfilId)) {
                             accComboPerfil.setSelectedItem(item);
                             break; // Una vez encontrado, se sale del bucle
@@ -137,7 +136,7 @@ public class UsuarioGUI {
 
                     // Recorrer el JComboBox para encontrar el objeto Institucion con el ID correspondiente
                     for (int i = 0; i < accComboInstitucion.getItemCount(); i++) {
-                        Institucion item = (Institucion) accComboInstitucion.getItemAt(i);
+                        InstitucionDto item = (InstitucionDto) accComboInstitucion.getItemAt(i);
                         if (item.getId() == institucionId) {
                             accComboInstitucion.setSelectedItem(item);
                             break; // Una vez encontrado, se sale del bucle
@@ -243,7 +242,7 @@ public class UsuarioGUI {
         filtroTipoCombo.addActionListener(e -> {
             try {
                 //obtenemos el id de la seleccion del combo
-                String idPerfil = ((Perfil) filtroTipoCombo.getSelectedItem()).getId().toString();
+                String idPerfil = ((PerfilDto) filtroTipoCombo.getSelectedItem()).getId().toString();
 
                 List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
                 generarTabla(listaUsuarios);
@@ -279,7 +278,7 @@ public class UsuarioGUI {
         //le introducimos datos a la tabla
         model.setRowCount(0);
         for (int i = 0; i < tabla.size(); i++) {
-            Usuario usuario = (Usuario) tabla.get(i);
+            UsuarioDto usuario = (UsuarioDto) tabla.get(i);
             Object[] data = new Object[8];
             //data[0] = usuario.getId();
             data[0] = usuario.getCedula();
