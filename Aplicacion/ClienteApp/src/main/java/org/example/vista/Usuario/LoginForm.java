@@ -77,8 +77,16 @@ public class LoginForm extends JFrame {
             }
         });
 
+        //Al pulsar enter en el campo de contraseña se ejecuta el boton de login
+        passwordField1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginButton.doClick();
+            }
+        });
+
         //soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
-                //Este boton sirve para generar datos de prueba, descomentar para usar
+        //Este boton sirve para generar datos de prueba, descomentar para usar
 
         soyUnBotonQueButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
