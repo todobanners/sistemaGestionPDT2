@@ -109,10 +109,10 @@ public class UsuarioGUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 int fila = tableUsuarios.getSelectedRow();
-                String ci = (String) tableUsuarios.getValueAt(fila, 0);
+                Long idUsuario = (Long) tableUsuarios.getValueAt(fila, 0);
                 UsuarioDto usuario = null;
                 try {
-                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuarioPorCI(ci);
+                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(idUsuario);
                     PerfilDto perfil = Conexion.obtenerPerfilBean().obtenerPerfil(usuario.getIdPerfil().getId());
                     // Obtener el ID del perfil que quieres seleccionar en el JComboBox
                     Long perfilId = perfil.getId();
@@ -263,7 +263,7 @@ public class UsuarioGUI {
         DefaultTableModel model = new DefaultTableModel();
 
         //Se le asignan los nombres a las columnas
-        //model.addColumn("ID");
+        model.addColumn("ID");
         model.addColumn("Cedula");
         model.addColumn("Nombre");
         model.addColumn("Apellido");
@@ -279,18 +279,20 @@ public class UsuarioGUI {
         model.setRowCount(0);
         for (int i = 0; i < tabla.size(); i++) {
             UsuarioDto usuario = (UsuarioDto) tabla.get(i);
-            Object[] data = new Object[8];
-            //data[0] = usuario.getId();
-            data[0] = usuario.getCedula();
-            data[1] = usuario.getNombre();
-            data[2] = usuario.getApellido();
-            data[3] = usuario.getEmail();
-            data[4] = usuario.getFechaNacimiento();
-            data[5] = usuario.getEstado();
-            data[6] = usuario.getIdInstitucion().getNombre();
-            data[7] = usuario.getIdPerfil().getNombrePerfil();
+            Object[] data = new Object[9];
+            data[0] = usuario.getId();
+            data[1] = usuario.getCedula();
+            data[2] = usuario.getNombre();
+            data[3] = usuario.getApellido();
+            data[4] = usuario.getEmail();
+            data[5] = usuario.getFechaNacimiento();
+            data[6] = usuario.getEstado();
+            data[7] = usuario.getIdInstitucion().getNombre();
+            data[8] = usuario.getIdPerfil().getNombrePerfil();
             model.addRow(data);
         }
+        //Le quito la columna de ID
+        tableUsuarios.removeColumn(tableUsuarios.getColumnModel().getColumn(0));
     }
 
     public void cargarCombos() throws NamingException {
