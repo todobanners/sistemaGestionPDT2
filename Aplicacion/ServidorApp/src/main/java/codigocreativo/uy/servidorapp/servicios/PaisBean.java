@@ -1,8 +1,10 @@
 package codigocreativo.uy.servidorapp.servicios;
 
-import codigocreativo.uy.servidorapp.entidades.MarcasModelo;
+import codigocreativo.uy.servidorapp.DTO.PaisDto;
+import codigocreativo.uy.servidorapp.DTOMappers.PaisMapper;
 import codigocreativo.uy.servidorapp.entidades.Pais;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -11,28 +13,25 @@ import java.util.List;
 public class PaisBean implements PaisRemote{
     @PersistenceContext (unitName = "default")
     private EntityManager em;
-
+    @Inject
+    private PaisMapper paisMapper;
 
     @Override
-    public void crearPais(Pais pais) {
-        em.persist(pais);
+    public void crearPais(PaisDto pais) {
+        Pais paisEntity = paisMapper.toEntity(pais);
+        em.persist(paisEntity);
         em.flush();
     }
 
     @Override
-    public void modificarPais(Pais pais) {
-        em.merge(pais);
+    public void modificarPais(PaisDto pais) {
+        em.merge(paisMapper.toEntity(pais));
         em.flush();
     }
 
     @Override
-    public void obtenerPais(Long id) {
-        em.find(Pais.class, id);
-    }
-
-
-    @Override
-    public List<Pais> obtenerpais() {
-        return em.createQuery("SELECT Pais FROM Pais pais", Pais.class).getResultList();
+    public List<PaisDto> obtenerpais() {
+        List<Pais> paises = em.createQuery("SELECT p FROM Pais p", Pais.class).getResultList();
+        return paisMapper.toDto(paises);
     }
 }

@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.DTO;
 
+import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 
 import java.io.Serializable;
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * DTO for {@link codigocreativo.uy.servidorapp.entidades.Usuario}
+ * DTO for {@link Usuario}
  */
 public class UsuarioDto implements Serializable {
     private Long id;
@@ -19,6 +20,8 @@ public class UsuarioDto implements Serializable {
     private String nombre;
     private String apellido;
     private String nombreUsuario;
+    private InstitucionDto idInstitucion;
+    private PerfilDto idPerfil;
 
     public UsuarioDto() {
     }
@@ -149,5 +152,21 @@ public class UsuarioDto implements Serializable {
                 "nombre = " + nombre + ", " +
                 "apellido = " + apellido + ", " +
                 "nombreUsuario = " + nombreUsuario + ")";
+    }
+
+    public void setIdInstitucion(InstitucionDto idInstitucion) {
+        this.idInstitucion = idInstitucion;
+    }
+
+    public InstitucionDto getIdInstitucion() {
+        return idInstitucion;
+    }
+
+    public void setIdPerfil(PerfilDto idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    public PerfilDto getIdPerfil() {
+        return idPerfil;
     }
 }

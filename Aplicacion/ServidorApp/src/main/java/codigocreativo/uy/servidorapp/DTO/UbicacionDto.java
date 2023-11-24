@@ -1,10 +1,12 @@
 package codigocreativo.uy.servidorapp.DTO;
 
+import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * DTO for {@link codigocreativo.uy.servidorapp.entidades.Ubicacion}
+ * DTO for {@link Ubicacion}
  */
 public class UbicacionDto implements Serializable {
     private Long id;
@@ -13,6 +15,7 @@ public class UbicacionDto implements Serializable {
     private Long piso;
     private Long numero;
     private Long cama;
+    private UbicacionDto idInstitucion;
 
     public UbicacionDto() {
     }
@@ -107,5 +110,13 @@ public class UbicacionDto implements Serializable {
                 "piso = " + piso + ", " +
                 "numero = " + numero + ", " +
                 "cama = " + cama + ")";
+    }
+
+    public UbicacionDto getIdInstitucion() {
+        return idInstitucion;
+    }
+
+    public void setIdInstitucion(UbicacionDto idInstitucion) {
+        this.idInstitucion = idInstitucion;
     }
 }
