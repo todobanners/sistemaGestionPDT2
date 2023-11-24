@@ -1,5 +1,6 @@
 package codigocreativo.uy.servidorapp.entidades;
 
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -33,6 +34,18 @@ public class Ubicacion implements Serializable {
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_INSTITUCION")
     private Institucion idInstitucion;
+
+    @Column(name = "ESTADO", length = 15)
+    private Estados estado;
+
+    public Estados getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estados estado) {
+        this.estado = estado;
+    }
+
 
     public Long getId() {
         return id;

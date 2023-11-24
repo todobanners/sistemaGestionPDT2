@@ -1,7 +1,10 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.DTO.OperacionDto;
+import codigocreativo.uy.servidorapp.DTOMappers.OperacionMapper;
 import codigocreativo.uy.servidorapp.entidades.Operacion;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -10,22 +13,27 @@ import jakarta.persistence.PersistenceContext;
 public class OperacionBean implements OperacionRemote{
     @PersistenceContext (unitName = "default")
     private EntityManager em;
+
+    @Inject
+    private OperacionMapper operacionMapper;
+
     @Override
-    public void crearOperacion(Operacion o) {
-        em.persist(o);
+    public void crearOperacion(OperacionDto o) {
+        em.persist(operacionMapper.toEntity(o));
         em.flush();
     }
 
     @Override
-    public void modificarOperacion(Operacion o) {
-        em.merge(o);
+    public void modificarOperacion(OperacionDto o) {
+        em.merge(operacionMapper.toEntity(o));
         em.flush();
 
     }
 
     @Override
-    public void eliminarOperacion(Operacion o) {
-        em.remove(o);
+    public void eliminarOperacion(OperacionDto o) {
+        em.remove(operacionMapper.toEntity(o));
+        em.flush();
 
     }
 }

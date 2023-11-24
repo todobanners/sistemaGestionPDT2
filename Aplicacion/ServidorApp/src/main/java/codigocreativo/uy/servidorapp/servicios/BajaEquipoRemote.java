@@ -9,6 +9,7 @@ import java.util.List;
 @Remote
 public interface BajaEquipoRemote {
     public void crearBajaEquipo(BajaEquipoDto bajaEquipoequipo);
-    public List<BajaEquipo> obtenerEquipos();
+    public List<BajaEquipoDto> obtenerBajasEquipos();
+    public BajaEquipoDto obtenerBajaEquipo(Long id);
 
 }

@@ -9,36 +9,36 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
-@Stateless
-public class ModelosEquipoBean implements ModelosEquipoRemote{
-    @PersistenceContext (unitName = "default")
-    private EntityManager em;
-    @Inject
-    private ModelosEquipoMapper ModelosEquipoMapper;
 
+@Stateless
+public class ModelosEquipoBean implements ModelosEquipoRemote {
+    @PersistenceContext(unitName = "default")
+    private EntityManager em;
+
+    @Inject
+    private ModelosEquipoMapper modelosEquipoMapper;
 
     @Override
     public void crearModelosEquipo(ModelosEquipoDto modelosEquipo) {
-        ModelosEquipo modelosEquipoEntity = ModelosEquipoMapper.toEntity(modelosEquipo);
-        em.persist(modelosEquipoEntity);
-        em.flush();
-    }
-
-    /*@Override
-    public void modificarModelosEquipo(ModelosEquipo modelosEquipo) {
-        em.merge(modelosEquipo);
+        em.persist(modelosEquipoMapper.toEntity(modelosEquipo));
         em.flush();
     }
 
     @Override
-    public void obtenerModelosEquipo(Long id) {
-        em.find(ModelosEquipo.class, id);
-    }*/
+    public void modificarModelosEquipo(ModelosEquipoDto modelosEquipo) {
+        em.merge(modelosEquipoMapper.toEntity(modelosEquipo));
+        em.flush();
+    }
+
+    @Override
+    public ModelosEquipoDto obtenerModelosEquipo(Long id) {
+        return modelosEquipoMapper.toDto(em.find(ModelosEquipo.class, id));
+    }
+
 
     @Override
     public List<ModelosEquipoDto> listarModelosEquipo() {
-        List<ModelosEquipo> modelosEquipo = em.createQuery("SELECT m FROM ModelosEquipo m", ModelosEquipo.class).getResultList();
-        return ModelosEquipoMapper.toDto(modelosEquipo);
+        return modelosEquipoMapper.toDto(em.createQuery("SELECT modelosEquipo FROM ModelosEquipo modelosEquipo", ModelosEquipo.class).getResultList());
     }
 }
 

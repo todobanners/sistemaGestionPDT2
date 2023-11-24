@@ -22,16 +22,19 @@ import java.util.List;
 public class BajaUbicacionBean implements BajaUbicacionRemote {
     @PersistenceContext(unitName = "default")
     private EntityManager em;
+
     @Inject
-    private BajaUbicacionMapper bajaUbicacionMapper;
+    BajaUbicacionMapper bajaUbicacionMapper;
 
     @Override
-    @Transactional
     public void crearBajaUbicacion(BajaUbicacionDto bajaUbicacion) throws ServiciosException {
         try {
-            BajaUbicacion bajaUbicacionEntity = bajaUbicacionMapper.toEntity(bajaUbicacion);
-            em.persist(bajaUbicacionEntity);
-            em.flush();
+            // Persistir la baja de ubicación
+            em.persist(bajaUbicacionMapper.toEntity(bajaUbicacion));
+            // Dar de baja lógica a la ubicación
+            em.createQuery("UPDATE Ubicacion ubicacion SET ubicacion.estado = codigocreativo.uy.servidorapp.enumerados.Estados.INACTIVO WHERE ubicacion.id = :id")
+                    .setParameter("id", bajaUbicacion.getIdUbicacion().getId())
+                    .executeUpdate();
         } catch (Exception e) {
             throw new ServiciosException("No se pudo crear la baja de ubicación");
         }
@@ -50,6 +53,10 @@ public class BajaUbicacionBean implements BajaUbicacionRemote {
 
     @Override
     public List<BajaUbicacionDto> listarBajaUbicaciones() throws ServiciosException {
-        return em.createQuery("SELECT u FROM BajaUbicacion u", BajaUbicacion.class).getResultList();
+        try {
+            return bajaUbicacionMapper.toDto(em.createQuery("SELECT bajaUbicacion FROM BajaUbicacion bajaUbicacion", BajaUbicacion.class).getResultList());
+        } catch (Exception e) {
+            throw new ServiciosException("No se pudo listar las bajas de ubicaciones");
+        }
     }
 }

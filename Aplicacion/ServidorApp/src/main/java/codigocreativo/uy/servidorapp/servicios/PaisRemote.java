@@ -10,6 +10,5 @@ import java.util.List;
 public interface PaisRemote {
     public void crearPais(PaisDto pais);
     public void modificarPais(PaisDto pais);
-    //public void obtenerPais(Long id);
     List<PaisDto> obtenerpais();
 }
