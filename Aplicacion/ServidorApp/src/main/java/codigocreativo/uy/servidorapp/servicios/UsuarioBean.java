@@ -20,28 +20,28 @@ public class UsuarioBean implements UsuarioRemote {
     UsuarioMapper usuarioMapper;
 
     @Override
-    public void crearUsuario(Usuario u) {
-        em.persist(u);
-        em.flush();
+    public void crearUsuario(UsuarioDto u) {
+        Usuario usuario = usuarioMapper.toEntity(u);
+        em.persist(usuario);
     }
 
     @Override
     public void modificarUsuario(UsuarioDto u) {
-        em.merge(u);
-        em.flush();
+        Usuario usuario = usuarioMapper.toEntity(u);
+        em.merge(usuario);
     }
 
     @Override
     public void eliminarUsuario(UsuarioDto u) {
-        em.createQuery("UPDATE Usuario u SET u.estado = 'INACTIVO' WHERE u.id = :id")
+        Usuario usuario = em.createQuery("UPDATE Usuario u SET u.estado = 'INACTIVO' WHERE u.id = :id", Usuario.class)
                 .setParameter("id", u.getId())
-                .executeUpdate();
+                .getSingleResult();
         em.flush();
     }
 
     @Override
     public UsuarioDto obtenerUsuario(Long id) {
-        return em.find(Usuario.class, id);
+        return usuarioMapper.toDto(em.find(Usuario.class, id));
     }
 
     @Override
@@ -50,32 +50,23 @@ public class UsuarioBean implements UsuarioRemote {
     }
 
     @Override
-    public Usuario obtenerUsuarioPorCI(String ci) {
-        try {
-            return em.createQuery("SELECT u FROM Usuario u WHERE u.cedula = :ci", Usuario.class)
-                    .setParameter("ci", ci)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            System.out.println("No se encontro el usuario");
-            return null;
-        }
+    public List<UsuarioDto> obtenerUsuarios() {
+        List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
+        return usuarioMapper.toDto(usuarios);
     }
 
     @Override
-    public List<Usuario> obtenerUsuarios() {
-        return em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
+    public List<UsuarioDto> obtenerUsuariosFiltrado(String filtro, String valor) {
+        List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u WHERE u." + filtro + " LIKE '%" + valor + "%'", Usuario.class).getResultList();
+        return usuarioMapper.toDto(usuarios);
     }
 
     @Override
-    public List<Usuario> obtenerUsuariosFiltrado(String filtro, String valor) {
-        return em.createQuery("SELECT u FROM Usuario u WHERE u." + filtro + " LIKE '%" + valor + "%'", Usuario.class).getResultList();
-    }
-
-    @Override
-    public List<Usuario> obtenerUsuariosPorEstado(Estados estado) {
-        return em.createQuery("SELECT u FROM Usuario u WHERE u.estado = :estado", Usuario.class)
+    public List<UsuarioDto> obtenerUsuariosPorEstado(Estados estado) {
+        List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u WHERE u.estado = :estado", Usuario.class)
                 .setParameter("estado", estado)
                 .getResultList();
+        return usuarioMapper.toDto(usuarios);
     }
 
     @Override
