@@ -1,14 +1,14 @@
 package org.example.vista.Equipo;
 /*
-* TODO: Agregar funcionalidad de los botones
-*  - Dar de baja seleccionado
-*  - Editar seleccionado
-*  - Registrar movimiento
-* TODO: Crear filtros para la tabla
-* TODO: Ver como hacer para que se muestre la imagen del equipo en la pantalla principal
-*  todo: arreglar tamano de botones
-*
-* */
+ * TODO: Agregar funcionalidad de los botones
+ *  - Dar de baja seleccionado
+ *  - Editar seleccionado
+ *  - Registrar movimiento
+ * TODO: Crear filtros para la tabla
+ * TODO: Ver como hacer para que se muestre la imagen del equipo en la pantalla principal
+ *  todo: arreglar tamano de botones
+ *
+ * */
 
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
@@ -76,17 +76,16 @@ public class EquiposGUI {
         cargarCombos();
 
         imagenBtn.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JFileChooser fileChooser = new JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            imagenSubida = fileChooser.getSelectedFile();
-            filePathField.setText(imagenSubida.getAbsolutePath());
-        }
-    }
-});
-
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    imagenSubida = fileChooser.getSelectedFile();
+                    filePathField.setText(imagenSubida.getAbsolutePath());
+                }
+            }
+        });
 
         editarSeleccionadoButton.addActionListener(new ActionListener() {
             @Override
@@ -170,7 +169,7 @@ public class EquiposGUI {
         });
 
 
-        equiposTable.addMouseListener(new MouseAdapter() {
+        /*equiposTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -200,7 +199,7 @@ public class EquiposGUI {
                     JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
                 }
             }
-        });
+        });*/
     }
 
 
@@ -239,7 +238,6 @@ public class EquiposGUI {
         for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
         }
-
         for (TiposEquipo tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
             tipoCombo.addItem(tipo);
         }
