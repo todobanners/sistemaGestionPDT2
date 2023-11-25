@@ -8,6 +8,7 @@ import org.example.vista.Intervencion.IntervencionGUI;
 import org.example.vista.Intervencion.TiposDeIntervencionesGUI;
 import org.example.vista.Perfil.PerfilesGUI;
 import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
+import org.example.vista.Ubicacion.MovimientoEquiposGUI;
 import org.example.vista.Usuario.*;
 
 import javax.naming.NamingException;
@@ -68,6 +69,7 @@ public class AplicacionVentana extends JFrame {
 
         //Declaro el submenu de Gestion de Ubicaciones
         JMenuItem listarUbicaciones =   new JMenuItem("Listar Ubicaciones");
+        JMenuItem movimientoEquipos =   new JMenuItem("Movimiento de Equipos");
         //Fin declaracion submenu de Gestion de Ubicaciones
 
         JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
@@ -135,6 +137,14 @@ public class AplicacionVentana extends JFrame {
             }
         });
 
+        movimientoEquipos.addActionListener(e -> {
+            try {
+                changePanel(new MovimientoEquiposGUI().getPanel());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
         // Tipos de Intervenciones
 
         listarTiposDeIntervenciones.addActionListener(e -> {
@@ -179,6 +189,7 @@ public class AplicacionVentana extends JFrame {
 
         //Gestion de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
+        gestionUbicaciones.add(movimientoEquipos);
 
         //Gestion de Intervenciones
         gestionIntervenciones.add(registrarIntervencion);

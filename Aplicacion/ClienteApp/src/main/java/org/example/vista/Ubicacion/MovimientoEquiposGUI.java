@@ -27,4 +27,12 @@ public class MovimientoEquiposGUI {
     private JTextField textField5;
     private JButton guardarButton;
     private JButton cancelarButton;
+
+    public JPanel getPanel(){
+        return movimientoEquipos;
+    };
+
+    public MovimientoEquiposGUI(){
+
+    }
 }
