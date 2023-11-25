@@ -3,12 +3,12 @@
   <grid id="27dc6" binding="movimientoEquipos" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="696" height="400"/>
+      <xy x="20" y="20" width="750" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="2b70c" binding="filtros" layout-manager="GridLayoutManager" row-count="2" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="2b70c" binding="filtros" layout-manager="GridLayoutManager" row-count="2" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -72,31 +72,31 @@
               <text value="Fecha hasta"/>
             </properties>
           </component>
-          <component id="b4fdf" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="b4fdf" class="javax.swing.JComboBox" binding="filtroComboEquipo">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="c9af2" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+          <component id="c9af2" class="javax.swing.JComboBox" binding="filtroComboIdentificador">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="66a98" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+          <component id="66a98" class="javax.swing.JComboBox" binding="filtroComboInstitucion">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="68c0d" class="javax.swing.JComboBox" binding="comboBox4" default-binding="true">
+          <component id="68c0d" class="javax.swing.JComboBox" binding="filtroComboSector">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="8b4f6" class="javax.swing.JComboBox" binding="comboBox5" default-binding="true">
+          <component id="8b4f6" class="javax.swing.JComboBox" binding="filtroComboUsuario">
             <constraints>
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -118,6 +118,22 @@
             <border type="none"/>
             <children/>
           </grid>
+          <component id="a73bf" class="javax.swing.JButton" binding="filtrarButton" default-binding="true">
+            <constraints>
+              <grid row="1" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Filtrar"/>
+            </properties>
+          </component>
+          <component id="3486d" class="javax.swing.JButton" binding="limpiarButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Limpiar"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <scrollpane id="72046" binding="scroll">
@@ -134,7 +150,7 @@
         </children>
       </scrollpane>
       <grid id="ff51d" binding="acciones" layout-manager="GridLayoutManager" row-count="7" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="10" left="10" bottom="10" right="10"/>
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -234,13 +250,13 @@
               <text value="Observaciones"/>
             </properties>
           </component>
-          <component id="fb19f" class="javax.swing.JComboBox" binding="comboBox6" default-binding="true">
+          <component id="fb19f" class="javax.swing.JComboBox" binding="agregarComboEquipo">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="b6864" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="b6864" class="javax.swing.JTextField" binding="agregarCampoIdEquipo">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -248,25 +264,25 @@
             </constraints>
             <properties/>
           </component>
-          <component id="b75a1" class="javax.swing.JComboBox" binding="comboBox7" default-binding="true">
+          <component id="b75a1" class="javax.swing.JComboBox" binding="agregarComboInstitucion">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="79db7" class="javax.swing.JComboBox" binding="comboBox8" default-binding="true">
+          <component id="79db7" class="javax.swing.JComboBox" binding="agregarComboSector">
             <constraints>
               <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="90dd4" class="javax.swing.JComboBox" binding="comboBox9" default-binding="true">
+          <component id="90dd4" class="javax.swing.JComboBox" binding="agregarComboUbicacion">
             <constraints>
               <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="aee02" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="aee02" class="javax.swing.JTextField" binding="agregarCampoNumero">
             <constraints>
               <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -274,13 +290,13 @@
             </constraints>
             <properties/>
           </component>
-          <component id="5a8a0" class="javax.swing.JComboBox" binding="comboBox10" default-binding="true">
+          <component id="5a8a0" class="javax.swing.JComboBox" binding="agregarComboUsuario">
             <constraints>
               <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
           </component>
-          <component id="24b6b" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+          <component id="24b6b" class="javax.swing.JTextField" binding="agregarCampoObservaciomes">
             <constraints>
               <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -296,7 +312,7 @@
             <border type="none"/>
             <children/>
           </grid>
-          <component id="7c76e" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+          <component id="7c76e" class="javax.swing.JTextField" binding="agregarCampoCama">
             <constraints>
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -304,7 +320,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="32dc2" class="javax.swing.JTextField" binding="textField5" default-binding="true">
+          <component id="32dc2" class="javax.swing.JTextField" binding="agregarCampoPiso">
             <constraints>
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
