@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="2036d" binding="contenedorHerramientas" layout-manager="GridLayoutManager" row-count="7" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="2036d" binding="contenedorHerramientas" layout-manager="GridLayoutManager" row-count="7" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -121,7 +121,7 @@
           </component>
           <component id="d665f" class="javax.swing.JButton" binding="modificarButton" default-binding="true">
             <constraints>
-              <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="3" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Modificar seleccionado"/>
@@ -129,7 +129,7 @@
           </component>
           <component id="37987" class="javax.swing.JButton" binding="eliminarButton" default-binding="true">
             <constraints>
-              <grid row="3" column="2" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="3" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Eliminar"/>
@@ -141,6 +141,14 @@
             </constraints>
             <properties>
               <text value="Agregar nuevo"/>
+            </properties>
+          </component>
+          <component id="bd870" class="javax.swing.JSeparator">
+            <constraints>
+              <grid row="0" column="2" row-span="7" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <orientation value="1"/>
             </properties>
           </component>
         </children>
