@@ -23,7 +23,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -65,6 +64,7 @@ public class EquiposGUI {
     private JButton botonLimpiarFiltros;
     private JPanel panelDatePickerFin;
     private JButton exportarAExcelButton;
+    private JButton listarMovimientosButton;
 
     private File imagenSubida;
     DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
@@ -424,6 +424,33 @@ public class EquiposGUI {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "No se pudo exportar a excel");
+                }
+            }
+        });
+        listarMovimientosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    EquipoDto equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    ListadoMovimientos listadoMovimientos = null;
+                    try {
+                        listadoMovimientos = new ListadoMovimientos(equipoSeleccionado);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    listadoMovimientos.setVisible(true);
+                    listadoMovimientos.pack();
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
                 }
             }
         });

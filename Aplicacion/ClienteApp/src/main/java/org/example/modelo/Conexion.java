@@ -60,6 +60,8 @@ public class Conexion {
     private static final String EJB_BAJA_UBICACION = "ejb:/ServidorApp-1.0-SNAPSHOT/BajaUbicacionBean!codigocreativo.uy.servidorapp.servicios.BajaUbicacionRemote";
     // Nombre del EJB de Baja de Equipos
     private static final String EJB_BAJA_EQUIPO = "ejb:/ServidorApp-1.0-SNAPSHOT/BajaEquipoBean!codigocreativo.uy.servidorapp.servicios.BajaEquipoRemote";
+// Nombre del EJB de Baja de Equipos
+    private static final String EJB_EQUIPO_UBICACION = "ejb:/ServidorApp-1.0-SNAPSHOT/EquiposUbicacioneBean!codigocreativo.uy.servidorapp.servicios.EquiposUbicacioneRemote";
 
     // Métodos para obtener los EJBs
     public static UsuarioRemote obtenerUsuarioBean() throws NamingException {
@@ -110,5 +112,8 @@ public class Conexion {
 
     public static BajaEquipoRemote obtenerBajaEquipoBean() throws NamingException {
         return (BajaEquipoRemote) ctx.lookup(EJB_BAJA_EQUIPO);
+    }
+    public static EquiposUbicacioneRemote obtenerEquipoUbicacionBean() throws NamingException {
+        return (EquiposUbicacioneRemote) ctx.lookup(EJB_EQUIPO_UBICACION);
     }
 }
