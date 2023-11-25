@@ -185,7 +185,9 @@ public class UsuarioGUI {
             else if (Validator.contieneSoloNumeros(accCampoTelefono.getText())){
                 JOptionPane.showMessageDialog(null, "El campo teléfono solo puede contener números");
             } else {
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar los datos?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
 
+                if (confirmacion == JOptionPane.YES_OPTION) {
                 try {
                     usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
                     usuario.setNombre(accCampoNombre.getText());
@@ -210,6 +212,7 @@ public class UsuarioGUI {
                 } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
             }
         });
         borrarSeleccionadoButton.addActionListener(e -> {
