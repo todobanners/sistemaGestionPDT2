@@ -8,14 +8,14 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.JAKARTA_CDI)
 public interface IntervencionMapper {
-    Intervencion toEntity(IntervencionDto intervencionDto);
+    Intervencion toEntity(IntervencionDto intervencionDto, @Context CycleAvoidingMappingContext context);
 
-    IntervencionDto toDto(Intervencion intervencion);
+    IntervencionDto toDto(Intervencion intervencion, @Context CycleAvoidingMappingContext context);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Intervencion partialUpdate(IntervencionDto intervencionDto, @MappingTarget Intervencion intervencion);
+    Intervencion partialUpdate(IntervencionDto intervencionDto, @MappingTarget Intervencion intervencion, @Context CycleAvoidingMappingContext context);
 
-    List<Intervencion> toEntity(List<IntervencionDto> intervencionDto);
+    List<Intervencion> toEntity(List<IntervencionDto> intervencionDto, @Context CycleAvoidingMappingContext context);
 
-    List<IntervencionDto> toDto(List<Intervencion> intervencion);
+    List<IntervencionDto> toDto(List<Intervencion> intervencion, @Context CycleAvoidingMappingContext context);
 }
