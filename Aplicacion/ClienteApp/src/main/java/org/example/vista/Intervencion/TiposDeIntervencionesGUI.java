@@ -124,7 +124,7 @@ public class TiposDeIntervencionesGUI {
                         model.addRow(new Object[]{tipoIntervencione.getNombreTipo(), tipoIntervencione.getEstado()});
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "No se encontraron resultados para la búsqueda");
+                        //JOptionPane.showMessageDialog(null, "No se encontraron resultados para la búsqueda");
                     }
                 });
             }
@@ -185,6 +185,4 @@ public class TiposDeIntervencionesGUI {
             model.addRow(new Object[]{tipoIntervencione.getNombreTipo(), tipoIntervencione.getEstado(), tipoIntervencione.getId()});
         });
     }
-
-
 }
