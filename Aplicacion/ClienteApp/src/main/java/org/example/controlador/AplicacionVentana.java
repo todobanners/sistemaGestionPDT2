@@ -72,11 +72,11 @@ public class AplicacionVentana extends JFrame {
 
         //Declaro el submenu de Gestion de Ubicaciones
         JMenuItem listarUbicaciones =   new JMenuItem("Listar Ubicaciones");
-        JMenuItem registrarUbicacion =  new JMenuItem("Registrar Ubicacion");
+        //JMenuItem registrarUbicacion =  new JMenuItem("Registrar Ubicacion");
         //Fin declaracion submenu de Gestion de Ubicaciones
 
         //Declaro el submenu de Gestion de Intervenciones
-        JMenuItem listarIntervenciones =new JMenuItem("Listar Intervenciones");
+        //JMenuItem listarIntervenciones =new JMenuItem("Listar Intervenciones");
         JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
         JMenuItem listarTiposDeIntervenciones =new JMenuItem("Tipos de Intervenciones");
         //Fin declaracion submenu de Gestion de Intervenciones
@@ -150,13 +150,13 @@ public class AplicacionVentana extends JFrame {
             }
         });
         //Registrar Ubicacion
-        registrarUbicacion.addActionListener(e -> {
+        /*registrarUbicacion.addActionListener(e -> {
             try {
                 changePanel(new IngresarUbicacionGUI().getPanel());
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
-        });
+        });*/
         // Tipos de Intervenciones
 
         listarTiposDeIntervenciones.addActionListener(e -> {
@@ -168,7 +168,7 @@ public class AplicacionVentana extends JFrame {
                 });
 
         //Listado de Intervenciones
-        listarIntervenciones.addActionListener(e -> {
+        /*listarIntervenciones.addActionListener(e -> {
             try {
                 changePanel(new ListadoDeIntervencionesGUI().getPanel());
             } catch (NamingException ex) {
@@ -176,7 +176,7 @@ public class AplicacionVentana extends JFrame {
             } catch (ServiciosException ex) {
                 throw new RuntimeException(ex);
             }
-        });
+        });*/
         //Registrar Intervencion
         registrarIntervencion.addActionListener(e -> {
             try {
@@ -212,10 +212,10 @@ public class AplicacionVentana extends JFrame {
 
         //Gestion de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
-        gestionUbicaciones.add(registrarUbicacion);
+        //gestionUbicaciones.add(registrarUbicacion);
 
         //Gestion de Intervenciones
-        gestionIntervenciones.add(listarIntervenciones);
+        //gestionIntervenciones.add(listarIntervenciones);
         gestionIntervenciones.add(registrarIntervencion);
         gestionIntervenciones.add(listarTiposDeIntervenciones);
 
