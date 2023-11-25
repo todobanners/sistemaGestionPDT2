@@ -19,6 +19,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -27,7 +30,6 @@ public class IntervencionGUI {
     private JComboBox comboTipodeIntervencion;
     private JTextField textMotivo;
     private JTextArea textComentarios;
-    //  private JPanel panelAcciones;
     private JButton registrarIntervencionButton;
     private JTable tablaIntervenciones;
     private IntervencionRemote intervencionRemoteBean;
@@ -36,8 +38,6 @@ public class IntervencionGUI {
     private JScrollPane panelTabla;
     private JPanel fecha;
     private JButton filtroBoton;
-    private JComboBox filtroEstadoCombo;
-    private JLabel estadoTipo;
     private JButton limpiarButton;
     private JButton exportarAExcelButton;
     private JPanel panelDatePickerInicio;
@@ -73,10 +73,6 @@ public class IntervencionGUI {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo conectar con el servidor");
         }
-        //Cargar el combo de estados
-        for (Estados estado : Estados.values()) {
-            filtroEstadoCombo.addItem(estado);
-        }
         //Cargar los combo de tipos de intervenciones
         comboFiltroTipo.addItem("Todos");
         for (TiposIntervencioneDto tipoIntervencione : Conexion.obtenerTiposIntervencionBean().obtenerTiposIntervenciones()) {
@@ -104,12 +100,7 @@ public class IntervencionGUI {
         registrarIntervencionButton.addActionListener(e -> {
             IntervencionDto intervencion = new IntervencionDto();
             try {
-                intervencion.setIdTipo((TiposIntervencioneDto) comboTipodeIntervencion.getSelectedItem())
-                        .setFechaHora(selectorFecha.getDateTimePermissive())
-                        .setMotivo(textMotivo.getText())
-                        .setIdEquipo((EquipoDto) comboEquipos.getSelectedItem())
-                        .setComentarios(textComentarios.getText())
-                        .setIdUsuario(Conexion.obtenerUsuarioBean().obtenerUsuarioDto(Sesion.getUsuario().getId()));//TODO: cambiar por el dto
+                intervencion.setIdTipo((TiposIntervencioneDto) comboTipodeIntervencion.getSelectedItem()).setFechaHora(selectorFecha.getDateTimePermissive()).setMotivo(textMotivo.getText()).setIdEquipo((EquipoDto) comboEquipos.getSelectedItem()).setComentarios(textComentarios.getText()).setIdUsuario(Conexion.obtenerUsuarioBean().obtenerUsuarioDto(Sesion.getUsuario().getId()));//TODO: cambiar por el dto
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
@@ -117,8 +108,7 @@ public class IntervencionGUI {
 
             try {
                 // Antes de crear la intervención, mostrar el cuadro de diálogo de confirmación
-                int opcion = JOptionPane.showConfirmDialog(
-                        panelIntervencion, // Componente padre
+                int opcion = JOptionPane.showConfirmDialog(panelIntervencion, // Componente padre
                         "¿Estás seguro de que quieres registrar?", // Mensaje
                         "Confirmación", // Título del cuadro de diálogo
                         JOptionPane.OK_CANCEL_OPTION // Tipo de opciones
@@ -143,11 +133,7 @@ public class IntervencionGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 HashMap<String, Object> filtro = new HashMap<>();
-                if (!filtroEstadoCombo.getSelectedItem().equals("Todos")) {
-                    filtro.put("estado", filtroEstadoCombo.getSelectedItem().toString());
-                } else {
-                    filtro.put("estado", null);
-                }
+
                 if (dateChooserInicio.getDate() != null) {
                     filtro.put("fechaInicio", dateChooserInicio.getDate());
                 } else {
@@ -163,13 +149,13 @@ public class IntervencionGUI {
                 } else {
                     filtro.put("tipo", null);
                 }
-                if (!(textFiltroMotivo.getText().equals(""))) {
+                if (!(textFiltroMotivo.getText().isEmpty())) {
                     filtro.put("motivo", textFiltroMotivo.getText());
                 } else {
                     filtro.put("motivo", null);
                 }
                 if (!(comboFiltroEquipo.getSelectedItem().equals("Todos"))) {
-                    filtro.put("equipo", String.valueOf(((EquipoDto) comboFiltroEquipo.getSelectedItem()).getId()));
+                    filtro.put("equipo", ((EquipoDto) comboFiltroEquipo.getSelectedItem()).getId());
 
                 } else {
                     filtro.put("equipo", null);
@@ -178,43 +164,90 @@ public class IntervencionGUI {
                 System.out.println(filtro);
 
                 //Filtrar desde el cliente
-                DefaultTableModel modelFiltrado = model;
-                model.setRowCount(0);
-                modelFiltrado.getDataVector().forEach(row -> {
-                    Vector<String> rowVector = (Vector<String>) row;
-                    if (filtro.get("estado") != null && !rowVector.elementAt(1).equals(filtro.get("estado"))) {
-                        return;
-                    }
-                    //Filtrar por fecha. Usando objetos Date, no Strings
-                    if (filtro.get("fechaInicio") != null && filtro.get("fechaFin") != null) {
-                        if (rowVector.elementAt(0).compareTo(filtro.get("fechaInicio").toString()) < 0 || rowVector.elementAt(0).compareTo(filtro.get("fechaFin").toString()) > 0) {
-                            return;
-                        }
-                    } else if (filtro.get("fechaInicio") != null) {
-                        if (rowVector.elementAt(0).compareTo(filtro.get("fechaInicio").toString()) < 0) {
-                            return;
-                        }
-                    } else if (filtro.get("fechaFin") != null) {
-                        if (rowVector.elementAt(0).compareTo(filtro.get("fechaFin").toString()) > 0) {
-                            return;
-                        }
-                    }
-                    if (filtro.get("tipo") != null && !rowVector.elementAt(2).equals(filtro.get("tipo"))) {
-                        return;
-                    }
-                    if (filtro.get("motivo") != null && !rowVector.elementAt(3).equals(filtro.get("motivo"))) {
-                        return;
-                    }
-                    if (filtro.get("equipo") != null && !rowVector.elementAt(4).equals(filtro.get("equipo"))) {
-                        return;
-                    }
-                    model.addRow(rowVector);
-                });
-                if (model.getRowCount() == 0) {
-                    JOptionPane.showMessageDialog(null, "No se encontraron resultados para la búsqueda");
+                Vector<Vector<Object>> dataVector = new Vector<>();
+                try {
+                    actualizarTabla();
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ServiciosException ex) {
+                    throw new RuntimeException(ex);
                 }
 
+                model.getDataVector().forEach(row -> {
+                    Vector<Object> rowVector = (Vector<Object>) row;
+                    // Initialize a flag to track whether the row passes all conditions
+                    boolean shouldAddRow = true;
 
+                    if (filtro.get("fechaInicio") != null && filtro.get("fechaFin") != null) {
+                        LocalDate fechaInicio = ((LocalDate) filtro.get("fechaInicio"));
+                        LocalDate fechaFin = ((LocalDate) filtro.get("fechaFin"));
+                        LocalDate fechaActual = ((LocalDateTime) rowVector.elementAt(0)).toLocalDate();
+
+                        if (fechaActual.isBefore(fechaInicio) || fechaActual.isAfter(fechaFin)) {
+                            shouldAddRow = false;
+                        }
+                    } else if (filtro.get("fechaInicio") != null) {
+                        LocalDate fechaInicio = ((LocalDate) filtro.get("fechaInicio"));
+                        LocalDate fechaActual = ((LocalDateTime) rowVector.elementAt(0)).toLocalDate();
+
+                        if (fechaActual.isBefore(fechaInicio)) {
+                            shouldAddRow = false;
+                        }
+                    } else if (filtro.get("fechaFin") != null) {
+                        LocalDate fechaFin = ((LocalDate) filtro.get("fechaFin"));
+                        LocalDate fechaActual = ((LocalDateTime) rowVector.elementAt(0)).toLocalDate();
+
+                        if (fechaActual.isAfter(fechaFin)) {
+                            shouldAddRow = false;
+                        }
+                    }
+
+
+                    // Filter by tipo (case-insensitive search)
+                    if (filtro.get("tipo") != null && !rowVector.elementAt(1).toString().toLowerCase().contains(filtro.get("tipo").toString().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+
+// Filter by motivo (case-insensitive search)
+                    if (filtro.get("motivo") != null && !rowVector.elementAt(2).toString().toLowerCase().contains(filtro.get("motivo").toString().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+
+
+                    // Filter by equipo
+                    if (filtro.get("equipo") != null && !rowVector.elementAt(3).equals(filtro.get("equipo"))) {
+                        shouldAddRow = false;
+                    }
+
+                    // If the row passes all filters, add it to modelFiltrado
+                    if (shouldAddRow) {
+                        dataVector.add(rowVector);
+                    }
+                });
+                if (dataVector.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No se encontraron resultados para la búsqueda");
+                }
+                model.setRowCount(0);
+                dataVector.forEach(model::addRow);
+
+
+            }
+        });
+        limpiarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dateChooserInicio.setDate(null);
+                dateChooserFin.setDate(null);
+                comboFiltroTipo.setSelectedIndex(0);
+                textFiltroMotivo.setText("");
+                comboFiltroEquipo.setSelectedIndex(0);
+                try {
+                    actualizarTabla();
+                } catch (NamingException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ServiciosException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
@@ -223,13 +256,7 @@ public class IntervencionGUI {
         DefaultTableModel model = (DefaultTableModel) tablaIntervenciones.getModel();
         model.setRowCount(0);
         for (IntervencionDto intervencion : intervencionRemoteBean.obtenerTodas()) {
-            model.addRow(new Object[]{
-                    intervencion.getFechaHora(),
-                    intervencion.getIdTipo().getNombreTipo(),
-                    intervencion.getMotivo(),
-                    intervencion.getIdEquipo().getId(),
-                    intervencion.getComentarios()
-            });
+            model.addRow(new Object[]{intervencion.getFechaHora(), intervencion.getIdTipo().getNombreTipo(), intervencion.getMotivo(), intervencion.getIdEquipo().getId(), intervencion.getComentarios()});
         }
     }
 
