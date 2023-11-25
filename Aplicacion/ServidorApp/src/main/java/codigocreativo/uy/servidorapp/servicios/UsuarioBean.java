@@ -66,7 +66,9 @@ public class UsuarioBean implements UsuarioRemote {
     }
 
     @Override
-    public List<UsuarioDto> obtenerUsuariosFiltrado(String filtro, String valor) {
+    public List<UsuarioDto> obtenerUsuariosFiltrado(String filtro, Object valor) {
+        System.out.println("SELECT u FROM Usuario u WHERE u." + filtro + " = :valor");
+        System.out.println("valor: " + valor);
         return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u WHERE u." + filtro + " = :valor", Usuario.class)
                 .setParameter("valor", valor)
                 .getResultList(), new CycleAvoidingMappingContext());

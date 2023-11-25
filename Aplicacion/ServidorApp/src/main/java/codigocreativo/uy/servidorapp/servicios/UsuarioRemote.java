@@ -16,7 +16,7 @@ public interface UsuarioRemote {
     public UsuarioDto obtenerUsuarioDto(Long id);
     public UsuarioDto obtenerUsuarioPorCI(String ci);
     public List<UsuarioDto> obtenerUsuarios();
-    public List<UsuarioDto> obtenerUsuariosFiltrado(String filtro, String valor);
+    public List<UsuarioDto> obtenerUsuariosFiltrado(String filtro, Object valor);
     public UsuarioDto login(String usuario, String password);
     public List<UsuarioDto> obtenerUsuariosPorEstado(Estados estado);
 }

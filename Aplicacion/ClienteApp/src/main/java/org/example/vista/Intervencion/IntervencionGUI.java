@@ -250,6 +250,12 @@ public class IntervencionGUI {
                 }
             }
         });
+        exportarAExcelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public void actualizarTabla() throws NamingException, ServiciosException {

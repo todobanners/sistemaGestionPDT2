@@ -239,9 +239,9 @@ public class UsuarioGUI {
         filtroTipoCombo.addActionListener(e -> {
             try {
                 // obtenemos el id de la selección del combo
-                String idPerfil = ((PerfilDto) Objects.requireNonNull(filtroTipoCombo.getSelectedItem())).getId().toString();
+                Long idPerfil = ((PerfilDto) filtroTipoCombo.getSelectedItem()).getId();
 
-                List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil", idPerfil);
+                List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado("idPerfil.id", idPerfil);
                 generarTabla(listaUsuarios);
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
