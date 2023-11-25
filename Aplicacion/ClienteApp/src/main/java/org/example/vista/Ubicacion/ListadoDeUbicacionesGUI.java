@@ -55,20 +55,22 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         modificarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el elemento seleccionado en la lista
-                int ubicacionSeleccionada = table1.getSelectedRow();
+                //Preguntar al usuario si desea modificar la ubicacion
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Seguro que deseas modificar esta ubicación?",
+                        "Confirmar modificación", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    // Obtener el elemento seleccionado en la lista
+                    int ubicacionSeleccionada = table1.getSelectedRow();
 
-                if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) {
-                    // Puedes abrir una nueva ventana para modificar la ubicación,
-                    // o realizar las acciones necesarias según tus requisitos.
-                    // Por ejemplo, podrías crear un nuevo formulario de modificación.
-                    confirmarAltaOModificar(listaUbicaciones.get(ubicacionSeleccionada), "modificar");
-                    // Ejemplo de cómo abrir un nuevo formulario para modificar la ubicación
-                    //ModificarUbicacionGUI modificarUbicacionGUI = new ModificarUbicacionGUI(ubicacionSeleccionada);
-                    //modificarUbicacionGUI.mostrarVentana();
+                    if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) {
+                        confirmarAltaOModificar(listaUbicaciones.get(ubicacionSeleccionada), "modificar");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecciona una ubicación para modificar");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Selecciona una ubicación para modificar");
+                    JOptionPane.showMessageDialog(null, "No se modificó la ubicación");
                 }
+
             }
         });
 
@@ -198,9 +200,9 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             ubicacionSeleccionada.setPiso(Long.parseLong(pisoText));
 
             // Validar si el campo Cama no está vacío
-            if (!camaText.isEmpty()) {
+            /*if (!camaText.isEmpty()) {
                 ubicacionSeleccionada.setCama(Long.parseLong(camaText));
-            }
+            }*/
 
             try {
                 // Obtener la institución

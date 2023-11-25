@@ -53,42 +53,6 @@ public class BajaUbicacionGUI {
 
     private void initComponents() {
 
-        /*bajaUbicacion = new JPanel();
-        institucion = new JTextField();
-        usuario = new JTextField();
-        ubicacion = new JTextField();
-        razon = new JTextField();
-        comentario = new JTextField();
-        fecha = new JPanel();
-        confirmar = new JButton();
-        //cancelar = new JButton();
-        labelComentario = new JLabel("comentario");
-        labelFecha = new JLabel("fecha");
-        labelUbicacion = new JLabel("ubicacion");
-        labelRazon = new JLabel("razon");
-        labelInstitucion = new JLabel("institucion");
-        labelUsuario = new JLabel("usuario");*/
-
-        // Configurar el diseño del panel
-        //bajaUbicacion.setLayout(new GridLayout(8, 3));
-
-        //fecha.add(selectorFecha);
-
-        /*bajaUbicacion.add(labelInstitucion);
-        bajaUbicacion.add(institucion);
-        bajaUbicacion.add(labelUsuario);
-        bajaUbicacion.add(usuario);
-        bajaUbicacion.add(labelUbicacion);
-        bajaUbicacion.add(ubicacion);
-        bajaUbicacion.add(labelRazon);
-        bajaUbicacion.add(razon);
-        bajaUbicacion.add(labelComentario);
-        bajaUbicacion.add(comentario);
-        bajaUbicacion.add(labelFecha);
-        bajaUbicacion.add(fecha);
-        bajaUbicacion.add(confirmar);*/
-        //bajaUbicacion.add(cancelar);
-
         // Configurar eventos de botones
         confirmar.addActionListener(new ActionListener() {
             @Override
@@ -108,7 +72,7 @@ public class BajaUbicacionGUI {
             razon.setText("");
             comentario.setText("");
             ubicacion.setText(ubicacionSeleccionada.getNombre());
-            usuario.setText(Sesion.getInstancia().getUsuario().getNombre());
+            usuario.setText(Sesion.getUsuario().getNombre());
 
         }
     }
@@ -119,9 +83,9 @@ public class BajaUbicacionGUI {
         baja.setRazon(razon.getText());
         baja.setComentario(comentario.getText());
         baja.setIdUbicacion(ubicacionSeleccionada);
-        //TODO: Aplicar DTO baja.setIdUsuario(Sesion.getInstancia().getUsuario());
+        baja.setIdUsuario(Sesion.getUsuario());
 
-        Date fechaElegida = (Date) selectorFecha.getDate();
+        Date fechaElegida = selectorFecha.getDate();
         LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         baja.setFecha(localDate);
 
