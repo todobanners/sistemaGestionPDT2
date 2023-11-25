@@ -5,12 +5,15 @@ import codigocreativo.uy.servidorapp.enumerados.Estados;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * DTO for {@link Usuario}
  */
 public class UsuarioDto implements Serializable {
+    private Set<UsuariosTelefonoDto> usuariosTelefonos = new LinkedHashSet<>();
     private Long id;
     private String cedula;
     private String email;
@@ -159,5 +162,14 @@ public class UsuarioDto implements Serializable {
 
     public PerfilDto getIdPerfil() {
         return idPerfil;
+    }
+
+    public Set<UsuariosTelefonoDto> getUsuariosTelefonos() {
+        return usuariosTelefonos;
+    }
+
+    public UsuarioDto setUsuariosTelefonos(Set<UsuariosTelefonoDto> usuariosTelefonos) {
+        this.usuariosTelefonos = usuariosTelefonos;
+        return this;
     }
 }

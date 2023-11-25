@@ -7,13 +7,16 @@ import java.util.Objects;
  * DTO for {@link codigocreativo.uy.servidorapp.entidades.UsuariosTelefono}
  */
 public class UsuariosTelefonoDto implements Serializable {
+    private UsuariosTelefonoIdDto id;
     private UsuarioDto idUsuario;
 
     public UsuariosTelefonoDto() {
     }
 
-    public UsuariosTelefonoDto(UsuarioDto idUsuario) {
+    public UsuariosTelefonoDto(
+            UsuariosTelefonoIdDto id, UsuarioDto idUsuario) {
         this.idUsuario = idUsuario;
+        this.id = id;
     }
 
     public UsuarioDto getIdUsuario() {
@@ -42,5 +45,14 @@ public class UsuariosTelefonoDto implements Serializable {
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "idUsuario = " + idUsuario + ")";
+    }
+
+    public UsuariosTelefonoIdDto getId() {
+        return id;
+    }
+
+    public UsuariosTelefonoDto setId(UsuariosTelefonoIdDto id) {
+        this.id = id;
+        return this;
     }
 }
