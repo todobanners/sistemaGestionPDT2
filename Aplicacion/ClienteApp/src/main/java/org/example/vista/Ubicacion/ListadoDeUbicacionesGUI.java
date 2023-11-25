@@ -45,8 +45,8 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         }
 
         List<InstitucionDto> inst = Conexion.obtenerInstitucionBean().obtenerInstituciones();
-        for (InstitucionDto institucionDto : inst) {
-            institucion.addItem(institucionDto);
+        for (int i = 0; i < inst.size(); i++) {
+            institucion.addItem(inst.get(i));
         }
 
         modificarButton.addActionListener(new ActionListener() {
@@ -178,7 +178,6 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             String camaText = Cama.getText();
             InstitucionDto institucionSeleccionada = (InstitucionDto) institucion.getSelectedItem();
 
-
             // Validar campos obligatorios
             if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
@@ -204,7 +203,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
 
             try {
                 // Obtener la institución
-                InstitucionDto inst = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada.getNombre());
+                InstitucionDto inst = (InstitucionDto) institucion.getSelectedItem();
 
                 if (inst != null) {
                     // Asignar la institución a la ubicación
@@ -217,7 +216,6 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                         JOptionPane.showMessageDialog(null, "Ubicación agregada correctamente");
                     }
                     else if (accion.equals("modificar")) {
-
                         Conexion.obtenerUbicacionBean().modificarUbicacion(ubicacionSeleccionada);
                         // Mostrar mensaje de éxito
                         JOptionPane.showMessageDialog(null, "Ubicación modificada correctamente");
