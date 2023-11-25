@@ -22,8 +22,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Vector;
 
 public class EquiposGUI {
     private JPanel equipoPanel;
@@ -72,9 +74,9 @@ public class EquiposGUI {
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
-        model.addColumn("ID Interno");
+        model.addColumn("idInterno");
         model.addColumn("Ubicación");
-        model.addColumn("Nro. Serie");
+        model.addColumn("nroSerie");
         model.addColumn("Nombre");
         model.addColumn("Tipo");
         model.addColumn("Proveedor");
@@ -215,24 +217,66 @@ public class EquiposGUI {
         });*/
 
         //Funcionalidades de los filtros
-        filtroComboUbicacion.addActionListener(new ActionListener() {
-            @Override
+
+        botonBuscarFiltro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    actualizarTabla(Conexion.obtenerEquipoBean().obtenerEquiposFiltrado("idUbicacion", "21"));
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                HashMap<String, Object> filtros = new HashMap<>();
+
+                if (!idInternoText.getText().isEmpty()) {
+                    filtros.put("idInterno", idInternoText.getText());
+                }
+                if (!nroSerieText.getText().isEmpty()) {
+                    filtros.put("nroSerie", nroSerieText.getText());
+                }
+                if (!nombreText.getText().isEmpty()) {
+                    filtros.put("nombre", nombreText.getText());
+                }
+                if (tipoCombo.getSelectedItem() != null) {
+                    filtros.put("idTipo", ((TiposEquipoDto) tipoCombo.getSelectedItem()).getId());
+                }
+                if (proveedorCombo.getSelectedItem() != null) {
+                    filtros.put("idProveedor", ((ProveedoresEquipoDto) proveedorCombo.getSelectedItem()).getId());
+                }
+                if (paisCombo.getSelectedItem() != null) {
+                    filtros.put("idPais", ((PaisDto) paisCombo.getSelectedItem()).getId());
+                }
+                if (modeloCombo.getSelectedItem() != null) {
+                    filtros.put("idModelo", ((ModelosEquipoDto) modeloCombo.getSelectedItem()).getId());
+                }
+                if (fechaCompraDate.getDate() != null) {
+                    filtros.put("fechaAdquisicion", fechaCompraDate.getDate());
+                }
+
+                // Filtrar los datos en el cliente
+                DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
+                Vector<Vector<Object>> dataVector = new Vector<>();
+
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    boolean matches = true;
+                    for (String key : filtros.keySet()) {
+                        if (filtros.get(key) != null && !filtros.get(key).equals(model.getValueAt(i, getColumnIndex(key)))) {
+                            matches = false;
+                            break;
+                        }
+                    }
+                    if (matches) {
+                        dataVector.add((Vector<Object>) model.getDataVector().get(i));
+                    }
+                }
+
+                model.setRowCount(0);
+                for (Vector<Object> row : dataVector) {
+                    model.addRow(row);
                 }
             }
-        });
-        filtroComboProveedor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    actualizarTabla(Conexion.obtenerEquipoBean().obtenerEquiposFiltrado("idProveedor", ( filtroComboProveedor.getSelectedItem().toString())));
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+
+            private int getColumnIndex(String columnName) {
+                for (int i = 0; i < equiposTable.getColumnCount(); i++) {
+                    if (equiposTable.getColumnName(i).equals(columnName)) {
+                        return i;
+                    }
                 }
+                return -1;
             }
         });
     }
@@ -299,6 +343,10 @@ public class EquiposGUI {
         for (Estados estado : Estados.values()) {
             estadoCombo.addItem(estado);
         }
+
+        filtroComboSelectorBusqueda.addItem("Nombre");
+        filtroComboSelectorBusqueda.addItem("Numero de Serie");
+        filtroComboSelectorBusqueda.addItem("ID Interno");
     }
 
     public void limpiarCampos() {
