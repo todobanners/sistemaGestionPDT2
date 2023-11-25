@@ -3,6 +3,8 @@ package codigocreativo.uy.servidorapp.entidades;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "MARCAS_MODELO")

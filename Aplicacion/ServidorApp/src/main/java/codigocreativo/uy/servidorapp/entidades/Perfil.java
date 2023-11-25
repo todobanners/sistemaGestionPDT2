@@ -25,12 +25,12 @@ public class Perfil implements Serializable {
     @Column(name = "ESTADO", nullable = false, length = 20)
     private Estados estado;
 
-    @Transient
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "PERFILES_PERMISOS",
             joinColumns = @JoinColumn(name = "ID_PERFIL"),
             inverseJoinColumns = @JoinColumn(name = "ID_PERMISO"))
     private List<Permiso> permisos = new LinkedList<>();
+
 
     public List<Permiso> getPermisos() {
         return permisos;

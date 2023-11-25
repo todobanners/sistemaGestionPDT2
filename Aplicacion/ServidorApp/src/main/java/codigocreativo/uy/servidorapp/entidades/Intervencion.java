@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "INTERVENCIONES")
@@ -34,7 +35,7 @@ public class Intervencion implements Serializable {
     private String motivo;
 
     @Column(name = "FECHA_HORA", nullable = false)
-    private LocalDate fechaHora;
+    private LocalDateTime fechaHora;
 
     @Column(name = "COMENTARIOS")
     private String comentarios;
@@ -79,11 +80,11 @@ public class Intervencion implements Serializable {
         this.motivo = motivo;
     }
 
-    public LocalDate getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDate fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
     }
 

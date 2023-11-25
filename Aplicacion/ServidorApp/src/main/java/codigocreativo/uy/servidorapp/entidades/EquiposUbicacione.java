@@ -1,6 +1,8 @@
 package codigocreativo.uy.servidorapp.entidades;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,14 +15,33 @@ public class EquiposUbicacione implements Serializable {
     @Column(name = "ID_MOVIMIENTO", nullable = false)
     private Long id;
 
-    @Column(name = "ID_EQUIPO")
-    private Long idEquipo;
-
-    @Column(name = "ID_UBICACION")
-    private Long idUbicacion;
-
     @Column(name = "FECHA")
     private LocalDate fecha;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_EQUIPO")
+    private Equipo idEquipo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_UBICACION")
+    private Ubicacion idUbicacion;
+
+    public Ubicacion getIdUbicacion() {
+        return idUbicacion;
+    }
+
+    public void setIdUbicacion(Ubicacion idUbicacion) {
+        this.idUbicacion = idUbicacion;
+    }
+
+    public Equipo getIdEquipo() {
+        return idEquipo;
+    }
+
+    public void setIdEquipo(Equipo idEquipo) {
+        this.idEquipo = idEquipo;
+    }
 
     public Long getId() {
         return id;
@@ -28,22 +49,6 @@ public class EquiposUbicacione implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdEquipo() {
-        return idEquipo;
-    }
-
-    public void setIdEquipo(Long idEquipo) {
-        this.idEquipo = idEquipo;
-    }
-
-    public Long getIdUbicacion() {
-        return idUbicacion;
-    }
-
-    public void setIdUbicacion(Long idUbicacion) {
-        this.idUbicacion = idUbicacion;
     }
 
     public LocalDate getFecha() {

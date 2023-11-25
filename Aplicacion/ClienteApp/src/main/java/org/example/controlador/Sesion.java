@@ -1,17 +1,17 @@
 package org.example.controlador;
 
-import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 
 public class Sesion {
     private static Sesion instance;
-    private Usuario usuario;
+    private static UsuarioDto usuario;
 
-    private Sesion(Usuario usuario) {
+    private Sesion(UsuarioDto usuario) {
         this.usuario = usuario;
     }
     //crea una nueva instancia de la sesión si la instancia actual es null o si el
     //usuario proporcionado no es el mismo que el usuario de la sesión actual
-    public static Sesion getInstancia(Usuario usuario) {
+    public static Sesion getInstancia(UsuarioDto usuario) {
         if(instance == null || (usuario != null && !usuario.equals(instance.getUsuario()))) {
             instance = new Sesion(usuario);
         }
@@ -22,7 +22,7 @@ public class Sesion {
         return instance;
     }
 
-    public Usuario getUsuario() {
+    public static UsuarioDto getUsuario() {
         return usuario;
     }
 }

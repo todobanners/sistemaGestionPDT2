@@ -11,7 +11,11 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "BAJA_EQUIPOS")
 public class BajaEquipo implements Serializable {
+
+    private static final long serialVersionUID = 2L;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_BAJA", nullable = false)
     private Long id;
 

@@ -1,7 +1,10 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.DTO.PermisoDto;
+import codigocreativo.uy.servidorapp.DTOMappers.PermisoMapper;
 import codigocreativo.uy.servidorapp.entidades.Permiso;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
@@ -10,31 +13,35 @@ import java.util.List;
 public class PermisoBean implements PermisoRemote{
     @PersistenceContext (unitName = "default")
     private EntityManager em;
+
+    @Inject
+    private PermisoMapper permisoMapper;
+
     @Override
-    public void crearPermiso(Permiso p) {
-        em.persist(p);
+    public void crearPermiso(PermisoDto p) {
+        em.persist(permisoMapper.toEntity(p));
         em.flush();
     }
 
     @Override
-    public void modificarPermiso(Permiso p) {
-        em.merge(p);
+    public void modificarPermiso(PermisoDto p) {
+        em.merge(permisoMapper.toEntity(p));
         em.flush();
     }
 
     @Override
-    public void eliminarPermiso(Permiso p) {
-        em.remove(p);
+    public void eliminarPermiso(PermisoDto p) {
+        em.remove(permisoMapper.toEntity(p));
         em.flush();
     }
 
     @Override
-    public void obtenerPermiso(Long id) {
-        em.find(Permiso.class, id);
+    public PermisoDto obtenerPermiso(Long id) {
+        return permisoMapper.toDto(em.find(Permiso.class, id));
     }
 
     @Override
-    public List<Permiso> obtenerPermisos() {
-        return em.createQuery("SELECT p FROM Permiso p", Permiso.class).getResultList();
+    public List<PermisoDto> obtenerPermisos() {
+        return permisoMapper.toDto(em.createQuery("SELECT p FROM Permiso p", Permiso.class).getResultList());
     }
 }

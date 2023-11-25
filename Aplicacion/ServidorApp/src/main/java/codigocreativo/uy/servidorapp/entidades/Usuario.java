@@ -7,6 +7,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USUARIOS")
@@ -19,11 +21,6 @@ public class Usuario implements Serializable {
 
     @Column(name = "CEDULA", length = 8)
     private String cedula;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_PERFIL")
-    private Perfil idPerfil;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
@@ -51,6 +48,23 @@ public class Usuario implements Serializable {
 
     @Column(name = "nombre_usuario", unique = true, length = 100)
     private String nombreUsuario;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "ID_PERFIL")
+    private Perfil idPerfil;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idUsuario", cascade = CascadeType.ALL)
+    private Set<UsuariosTelefono> usuariosTelefonos = new LinkedHashSet<>();
+
+    public Set<UsuariosTelefono> getUsuariosTelefonos() {
+        return usuariosTelefonos;
+    }
+
+    public void setUsuariosTelefonos(Set<UsuariosTelefono> usuariosTelefonos) {
+        this.usuariosTelefonos = usuariosTelefonos;
+    }
+
 
     public String getNombreUsuario() {
         return nombreUsuario;
