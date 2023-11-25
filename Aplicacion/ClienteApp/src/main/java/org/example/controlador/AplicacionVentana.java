@@ -21,72 +21,80 @@ public class AplicacionVentana extends JFrame {
 
     public AplicacionVentana(String s) throws Exception {
         super(s);
-        //Agregar un LaF
+        // Agregar un LaF
         setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         pack();
-        //Font por defecto para Menues
+        // Fuente por defecto para Menús
         Font f = new Font("sans-serif", Font.PLAIN, 12);
         UIManager.put("Menu.font", f);
         UIManager.put("MenuItem.font", f);
 
-        //iniciar menu
-        JMenuBar menuBar=initMenuBar();
+        // Iniciar menú
+        JMenuBar menuBar = initMenuBar();
         setJMenuBar(menuBar);
 
         setVisible(true);
         setBounds(10,10,800,800);
-        //panel de ventana inicio
-        changePanel(new HomeGUI().getPanel());
+        // Panel de ventana inicio
+        changePanel(new HomeGUI().getPanel(), "Inicio");
     }
 
 
     JMenuBar initMenuBar(){
 
         JMenuBar miMenuBar = new JMenuBar();
-        // Declaro la barra de menu
+        // Declaro la barra de menú
         JMenu InicioPrincipal =         new JMenu("Inicio");
         JMenu gestionUsuarios =         new JMenu("Gestión Usuarios");
         JMenu gestionEquipos =          new JMenu("Gestión Equipos");
         JMenu gestionUbicaciones =      new JMenu("Gestión de Ubicaciones");
         JMenu gestionIntervenciones =   new JMenu("Gestión de Intervenciones");
-        JMenu gestionPerfiles =         new JMenu("Gestion de Perfiles");
-        //Fin declaracion barra de menu
+        JMenu gestionPerfiles =         new JMenu("Gestión de Perfiles");
+        // Fin declaración barra de menú
 
-        //Declaro los submenus de Inicio
+        // Declaro los submenús de Inicio
+        JMenuItem fotosEquipos =        new JMenuItem("Inicio");
         JMenuItem modificarDatosPropios = new JMenuItem("Modificar mis datos");
-        JMenuItem cerrarSesion =          new JMenuItem("Cerrar Sesion");
+        JMenuItem cerrarSesion =          new JMenuItem("Cerrar Sesión");
 
-        //Declaro el submenu de Gestion de Usuarios
-        JMenuItem listarUsuarios =      new JMenuItem("Listar Usuarios");
-        //Fin declaracion submenu de Gestion de Usuarios
+        // Declaro el submenú de Gestión de Usuarios
+        JMenuItem listarUsuarios =      new JMenuItem("Gestionar usuarios");
+        // Fin declaración submenú de Gestión de Usuarios
 
-        //Declaro el submenu de Gestion de Equipos
-        JMenuItem listarEquipos =       new JMenuItem("Listar Equipos");
-        JMenuItem fotosEquipos =        new JMenuItem("Fotos de Equipos");
-        //Fin declaracion submenu de Gestion de Equipos
+        // Declaro el submenú de Gestión de Equipos
+        JMenuItem listarEquipos =       new JMenuItem("Gestionar equipos");
 
-        //Declaro el submenu de Gestion de Ubicaciones
-        JMenuItem listarUbicaciones =   new JMenuItem("Listar Ubicaciones");
+        // Fin declaración submenú de Gestión de Equipos
+
+        // Declaro el submenú de Gestión de Ubicaciones
+        JMenuItem listarUbicaciones =   new JMenuItem("Gestionar ubicaciones");
         JMenuItem movimientoEquipos =   new JMenuItem("Movimiento de Equipos");
-        //Fin declaracion submenu de Gestion de Ubicaciones
+        // Fin declaración submenú de Gestión de Ubicaciones
 
-        JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
-        JMenuItem listarTiposDeIntervenciones =new JMenuItem("Tipos de Intervenciones");
-        //Fin declaracion submenu de Gestion de Intervenciones
+        JMenuItem gestionarIntervenciones =new JMenuItem("Gestionar intervenciones");
+        JMenuItem listarTiposDeIntervenciones =new JMenuItem("Gestionar tipos de intervenciones");
+        // Fin declaración submenú de Gestión de Intervenciones
 
-        //Declaro el submenu de Gestion de Perfiles
-        JMenuItem listarPerfiles = new JMenuItem("Listar Perfiles");
+        // Declaro el submenú de Gestión de Perfiles
+        JMenuItem listarPerfiles = new JMenuItem("Gestionar perfiles");
 
-        //Menu Inicio
-        //Menu de dashboard
+        // Menú Inicio
+        // Menú de dashboard
+        fotosEquipos.addActionListener(e -> {
+            try {
+                changePanel(new HomeGUI().getPanel(), "Inicio");
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         modificarDatosPropios.addActionListener(e -> {
-            changePanel(new ModificarDatosPropiosGUI().getPanel());
+            changePanel(new ModificarDatosPropiosGUI().getPanel(), "Modificar mis datos");
         });
         cerrarSesion.addActionListener(e -> {
             Sesion.getInstancia(null);
-            //cerar ventana y abrir login
+            // Cerrar ventana y abrir login
             LoginForm loginForm = null;
             try {
                 loginForm = new LoginForm();
@@ -98,40 +106,34 @@ public class AplicacionVentana extends JFrame {
             setVisible(false);
 
         });
-        //Fin menu de dashboard
+        // Fin menú de dashboard
 
 
-        //Establezco la funcionalidad de los submenus para mover entre paneles
+        // Establezco la funcionalidad de los submenús para mover entre paneles
 
-        //Listado de Usuarios
+        // Listado de Usuarios
         listarUsuarios.addActionListener(e -> {
             try {
-                changePanel(new UsuarioGUI().getPanel());
+                changePanel(new UsuarioGUI().getPanel(), "Gestión de Usuarios");
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
         });
 
-        //Listado de Equipos
+        // Listado de Equipos
         listarEquipos.addActionListener(e -> {
             try {
-                changePanel(new EquiposGUI().getPanel());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-        fotosEquipos.addActionListener(e -> {
-            try {
-                changePanel(new HomeGUI().getPanel());
+                changePanel(new EquiposGUI().getPanel(), "Gestión de Equipos");
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
         });
 
-        //Listado de Ubicaciones
+
+        // Listado de Ubicaciones
         listarUbicaciones.addActionListener(e -> {
             try {
-                changePanel(new ListadoDeUbicacionesGUI().getPanel());
+                changePanel(new ListadoDeUbicacionesGUI().getPanel(), "Gestión de Ubicaciones");
             } catch (NamingException | ServiciosException ex) {
                 throw new RuntimeException(ex);
             }
@@ -139,7 +141,7 @@ public class AplicacionVentana extends JFrame {
 
         movimientoEquipos.addActionListener(e -> {
             try {
-                changePanel(new MovimientoEquiposGUI().getPanel());
+                changePanel(new MovimientoEquiposGUI().getPanel(), "Movimiento de Equipos");
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -149,75 +151,84 @@ public class AplicacionVentana extends JFrame {
 
         listarTiposDeIntervenciones.addActionListener(e -> {
             try {
-                 changePanel(new TiposDeIntervencionesGUI().getPanel());
+                 changePanel(new TiposDeIntervencionesGUI().getPanel(), "Gestión de Tipos de Intervenciones");
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
                 });
 
-        //Registrar Intervencion
-        registrarIntervencion.addActionListener(e -> {
+        // Registrar Intervención
+        gestionarIntervenciones.addActionListener(e -> {
             try {
-                changePanel(new IntervencionGUI().getPanel());
+                changePanel(new IntervencionGUI().getPanel(), "Gestión de Intervenciones");
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
         });
 
 
-        //Liestado de PErfiles
+        // Listado de Perfiles
         listarPerfiles.addActionListener(e -> {
-            changePanel(new PerfilesGUI().getPanel());
+            changePanel(new PerfilesGUI().getPanel(), "Gestión de Perfiles");
         });
 
-        //Fin establecimiento de funcionalidad de submenus
+        // Fin establecimiento de funcionalidad de submenús
 
-        //Agrego los submenus a los menus
+        // Agrego los submenús a los menús
 
-        //Inicio
+        // Inicio
+        InicioPrincipal.add(fotosEquipos);
         InicioPrincipal.add(modificarDatosPropios);
         InicioPrincipal.add(cerrarSesion);
 
 
-        //Gestion de Usuarios
+        // Gestión de Usuarios
         gestionUsuarios.add(listarUsuarios);
 
 
-        //Gestion de Equipos
+        // Gestión de Equipos
         gestionEquipos.add(listarEquipos);
-        gestionEquipos.add(fotosEquipos);
 
-        //Gestion de Ubicaciones
+
+        // Gestión de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
         gestionUbicaciones.add(movimientoEquipos);
 
-        //Gestion de Intervenciones
-        gestionIntervenciones.add(registrarIntervencion);
+        // Gestión de Intervenciones
+        gestionIntervenciones.add(gestionarIntervenciones);
         gestionIntervenciones.add(listarTiposDeIntervenciones);
 
-        //Gestion de Perfiles
+        // Gestión de Perfiles
         gestionPerfiles.add(listarPerfiles);
-        //Fin agregado de submenus a los menus
+        // Fin agregado de submenús a los menús
 
-        //Agrego los menus a la barra de menu
+        // Agrego los menús a la barra de menú
         miMenuBar.add(InicioPrincipal);
         miMenuBar.add(gestionUsuarios);
         miMenuBar.add(gestionEquipos);
         miMenuBar.add(gestionUbicaciones);
         miMenuBar.add(gestionIntervenciones);
         miMenuBar.add(gestionPerfiles);
-        //Fin agregado de menus a la barra de menu
+        // Fin agregado de menús a la barra de menú
         return miMenuBar;
     }
 
-    public void changePanel(JPanel jPanel){
-        Container c=getContentPane();
-        //remover panel actual
-        remove(c);
-        //seteamos nuevo panel
-        setContentPane(jPanel);
-        //redibujar
-        getContentPane().revalidate();
-    }
+    public void changePanel(JPanel jPanel, String title){
+    Container c = getContentPane();
+    // Remover contenido actual
+    c.removeAll();
+    // Crear y agregar el título
+    JLabel titleLabel = new JLabel(title);
+    titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+    titleLabel.setHorizontalAlignment(JLabel.CENTER);
+    c.add(titleLabel, BorderLayout.NORTH);
+    // Agregar el nuevo panel
+    c.add(jPanel, BorderLayout.CENTER);
+    // Setear el título de la ventana
+    setTitle(title + " - Gestión de mantenimiento- Código Creativo");
+    // Redibujar
+    c.revalidate();
+    c.repaint();
+}
 
 }
