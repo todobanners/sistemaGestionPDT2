@@ -1,6 +1,7 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
+import codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext;
 import codigocreativo.uy.servidorapp.DTOMappers.UsuarioMapper;
 import codigocreativo.uy.servidorapp.entidades.Usuario;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
@@ -23,12 +24,12 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public void crearUsuario(UsuarioDto u) {
-        em.persist(usuarioMapper.toEntity(u));
+        em.persist(usuarioMapper.toEntity(u, new CycleAvoidingMappingContext()));
     }
 
     @Override
     public void modificarUsuario(UsuarioDto u) {
-        em.merge(usuarioMapper.toEntity(u));
+        em.merge(usuarioMapper.toEntity(u, new CycleAvoidingMappingContext()));
         em.flush();
     }
 
@@ -42,40 +43,40 @@ public class UsuarioBean implements UsuarioRemote {
 
     @Override
     public UsuarioDto obtenerUsuario(Long id) {
-        return usuarioMapper.toDto(em.find(Usuario.class, id));
+        return usuarioMapper.toDto(em.find(Usuario.class, id), new CycleAvoidingMappingContext());
     }
 
     @Override
     public UsuarioDto obtenerUsuarioDto(Long id) {
         return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u WHERE u.id = :id", Usuario.class)
                 .setParameter("id", id)
-                .getSingleResult());
+                .getSingleResult(), new CycleAvoidingMappingContext());
     }
 
     @Override
     public UsuarioDto obtenerUsuarioPorCI(String ci) {
         return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u WHERE u.cedula = :ci", Usuario.class)
                 .setParameter("ci", ci)
-                .getSingleResult());
+                .getSingleResult(), new CycleAvoidingMappingContext());
     }
 
     @Override
     public List<UsuarioDto> obtenerUsuarios() {
-        return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList());
+        return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList(), new CycleAvoidingMappingContext());
     }
 
     @Override
     public List<UsuarioDto> obtenerUsuariosFiltrado(String filtro, String valor) {
         return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u WHERE u." + filtro + " = :valor", Usuario.class)
                 .setParameter("valor", valor)
-                .getResultList());
+                .getResultList(), new CycleAvoidingMappingContext());
     }
 
     @Override
     public List<UsuarioDto> obtenerUsuariosPorEstado(Estados estado) {
         return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u WHERE u.estado = :estado", Usuario.class)
                 .setParameter("estado", estado)
-                .getResultList());
+                .getResultList(), new CycleAvoidingMappingContext());
         }
 
     @Override
@@ -84,7 +85,7 @@ public class UsuarioBean implements UsuarioRemote {
             return usuarioMapper.toDto(em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :usuario AND u.contrasenia = :password", Usuario.class)
                     .setParameter("usuario", usuario)
                     .setParameter("password", password)
-                    .getSingleResult());
+                    .getSingleResult(), new CycleAvoidingMappingContext());
         } catch (NoResultException e) {
             return null;
         }
