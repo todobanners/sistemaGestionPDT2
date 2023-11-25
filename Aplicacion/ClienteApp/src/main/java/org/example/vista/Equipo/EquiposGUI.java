@@ -73,6 +73,7 @@ public class EquiposGUI {
         model.addColumn("Fecha Adquisición");
         equiposTable.setModel(model);
         actualizarTabla();
+        equiposTable.removeColumn(equiposTable.getColumnModel().getColumn(0));
         fechaAdqContainer.add(fechaCompraDate);
         cargarCombos();
 
@@ -162,6 +163,7 @@ public class EquiposGUI {
                     equipo.setEstado((Estados) estadoCombo.getSelectedItem());
                     equipo.setImagen(Utilidades.subirImagen(imagenSubida));
                     agregarEquipo(equipo);
+                    limpiarCampos();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo " + ex.getMessage());
@@ -221,7 +223,7 @@ public class EquiposGUI {
                     equipo.getFechaAdquisicion()
             });
         });
-        equiposTable.removeColumn(equiposTable.getColumnModel().getColumn(0));
+
     }
 
     public void agregarEquipo(EquipoDto equipo) throws Exception {
@@ -258,5 +260,14 @@ public class EquiposGUI {
         for (Estados estado : Estados.values()) {
             estadoCombo.addItem(estado);
         }
+    }
+
+    public void limpiarCampos() {
+        idInternoText.setText("");
+        nroSerieText.setText("");
+        nombreText.setText("");
+        filePathField.setText("");
+        imagenSubida = null;
+        fechaCompraDate.setDate(null);
     }
 }

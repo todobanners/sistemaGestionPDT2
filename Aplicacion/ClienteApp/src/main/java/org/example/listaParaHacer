@@ -1,19 +1,19 @@
 ERRORES DIFICULTAD MEDIA/BAJA
 
-- CAMA en UBICACION deberia ser un String es mas facil de dejar en null con msj de "no tiene"
+- CAMA en UBICACION deberia ser un String es mas facil de dejar en null con msj de "no tiene" {Nota de desarrollo: No se cambia a string, debe ser int, se maneja el null en los casos especificos}
 
 - GARANTIA en EQUIPO no está hecha la columna en la tabla
-- MARCA en EQUIPO no está
+- MARCA en EQUIPO no está //Esto esta en los requerimientos?
 
-- MARCA deberia desplegar un combo que al selecionar la MARCA te despliegue el combo de MODELO asociado a esa MARCA
+- MARCA deberia desplegar un combo que al selecionar la MARCA te despliegue el combo de MODELO asociado a esa MARCA // Revisar requerimientos
 
-- Limpiar los campos al guardar EQUIPO nuevo
+REPARADO Limpiar los campos al guardar EQUIPO nuevo
 
-- Al registrar el USUARIO tiene que estar sin validar por defecto // hasta que le ADMIN lo valide
+FUNCIONA Al registrar el USUARIO tiene que estar sin validar por defecto // hasta que le ADMIN lo valide
 
 REPARADO - Boton cancelar en REGISTRO USUARIO no hace nada
 
-- El LISTADO de USUARIO al filtrar por apellido lanza un msj de error que no puede contener numero
+REPARADO {Muestra que no peude estar vacio el campo} El LISTADO de USUARIO al filtrar por apellido lanza un msj de error que no puede contener numero
 
 - MODIFICAR UBICACION falta botones de confirmacion
 
@@ -21,7 +21,7 @@ REPARADO - Boton cancelar en REGISTRO USUARIO no hace nada
 
 - REGISTRO DE INTERVENCION tiene que tener un combo en Id de equipo que te traiga los disponibles
 
-- EDITAR EQUIPO no funciona // ya no esta el id en la lista para seleccionar
+- EDITAR EQUIPO no funciona // ya no esta el id en la lista para seleccionar [REPARADO, Id no va en listado, Editar Equipo funciona, falta refresh de listado al editar]
 
 - PERFIL campo nombre disable ya que no se permite modificar segun requerimientos
 
@@ -37,13 +37,13 @@ REPARADO - Desde la app no lanza msj de error pero no REGISTRA USUARIO
 REAPRADO - CONTRASEÑA sin encriptar en la base de datos
 
 
-- DAR DE BAJA en EQUIPO no funciona // ya no abre la ventana que abria antes cuando estaba el id
+REPARADO DAR DE BAJA en EQUIPO no funciona // ya no abre la ventana que abria antes cuando estaba el id
 
 - REGISTRAR EN EQUIPO no funciona en EQUIPO
 
 - No carga TELEFONOS en el USUARIO
 
-- No se pueden cargar IMAGENES en EQUIPO
+REPARADO No se pueden cargar IMAGENES en EQUIPO
 
 - Borrar UBICACION no funciona // funcionaba antes
 

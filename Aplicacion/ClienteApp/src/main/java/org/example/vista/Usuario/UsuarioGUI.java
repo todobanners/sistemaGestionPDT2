@@ -65,13 +65,17 @@ public class UsuarioGUI {
         filtroFiltrarBoton.addActionListener(e -> {
             try {
                 // Verificar si se seleccionó el campo email y validar que sea un email
-                if (filtroBuscarCombo.getSelectedIndex() == 3 && !Validator.validarEmail(filtroValor.getText())) {
-                    JOptionPane.showMessageDialog(null, "El campo debe ser un email válido");
+                if (filtroValor.getText().isEmpty()) {//el campo no puede estar vacio
+                    JOptionPane.showMessageDialog(null, "El campo Valor a filtrar no puede estar vacío");
                 } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 0) {
                     JOptionPane.showMessageDialog(null, "El campo no puede contener números");
                 } else if (Validator.contieneSoloLetras(filtroValor.getText()) && filtroBuscarCombo.getSelectedIndex() == 1) {
                     JOptionPane.showMessageDialog(null, "El campo no puede contener números");
-                } else {
+                } else if (filtroValor.getText().isEmpty()) {//el campo no puede estar vacio
+                    JOptionPane.showMessageDialog(null, "El campo Valor a filtrar no puede estar vacío");
+                } else if (filtroBuscarCombo.getSelectedIndex() == 3 && !Validator.validarEmail(filtroValor.getText())) {
+                    JOptionPane.showMessageDialog(null, "El campo debe ser un email válido");
+                }else {
                     List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuariosFiltrado(filtroBuscador(filtroBuscarCombo.getSelectedIndex()), filtroValor.getText());
                     generarTabla(listaUsuarios);
                 }
@@ -243,10 +247,7 @@ public class UsuarioGUI {
     }
 
     public void limpiarFiltros(){
-        filtroEstadoCombo.setSelectedIndex(0);
-        filtroTipoCombo.setSelectedIndex(0);
         filtroValor.setText("");
-        fechaChooser.setDate(null);
     }
 
     public void generarTabla(List<UsuarioDto> tabla) throws NamingException {
