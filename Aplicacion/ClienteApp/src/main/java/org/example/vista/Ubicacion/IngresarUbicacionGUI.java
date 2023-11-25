@@ -27,7 +27,7 @@ public class IngresarUbicacionGUI {
     private JPanel IngresoUbicacionNueva;
     private JButton enviarButton;
     private JButton cancelarButton;
-    private JComboBox<String> institucion;
+    private JComboBox institucion;
 
     public JPanel getPanel() {
         return IngresoUbicacionNueva;
@@ -40,7 +40,7 @@ public class IngresarUbicacionGUI {
         }
 
         for (InstitucionDto institucion : Conexion.obtenerInstitucionBean().obtenerInstituciones()) {
-            this.institucion.addItem(institucion.getNombre());
+            this.institucion.addItem(institucion);
         }
 
         enviarButton.addActionListener(new ActionListener() {
@@ -52,10 +52,10 @@ public class IngresarUbicacionGUI {
                 String numeroText = Número.getText();
                 String pisoText = Piso.getText();
                 String camaText = Cama.getText();
-                String institucionSeleccionada = (String) institucion.getSelectedItem();
+                InstitucionDto institucionSeleccionada = (InstitucionDto) institucion.getSelectedItem();
 
                 // Validar campos obligatorios
-                if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty() || institucionSeleccionada.isEmpty()) {
+                if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -72,6 +72,7 @@ public class IngresarUbicacionGUI {
                 ubicacion.setNombre(nombre);
                 ubicacion.setNumero(Long.parseLong(numeroText));
                 ubicacion.setPiso(Long.parseLong(pisoText));
+                ubicacion.setIdInstitucion(institucionSeleccionada);
 
                 // Validar si el campo cama no está vacío
                 if (!camaText.isEmpty()) {
@@ -79,25 +80,15 @@ public class IngresarUbicacionGUI {
                 }
 
                 try {
-                    // Obtener la institución
-                    InstitucionDto institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada);
 
-                    if (institucion != null) {
-                        // Asignar la institución a la ubicación
-                        ubicacion.setIdInstitucion(institucion);
+                    Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
 
-                        // Persistir la ubicación
-                        Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
+                    // Mostrar mensaje de éxito
+                    JOptionPane.showMessageDialog(null, "Ubicación creada correctamente");
 
-                        // Mostrar mensaje de éxito
-                        JOptionPane.showMessageDialog(null, "Ubicación creada correctamente");
+                    // Limpiar los campos del formulario
+                    limpiarCampos();
 
-                        // Limpiar los campos del formulario
-                        limpiarCampos();
-                    } else {
-                        // Mostrar mensaje de error
-                        JOptionPane.showMessageDialog(null, "No se encontró ninguna institución con ese nombre");
-                    }
 
                 } catch (NamingException | ServiciosException ex) {
                     // Mostrar mensaje de error
