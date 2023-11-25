@@ -1,5 +1,8 @@
 package org.example.vista.Ubicacion;
 
+import com.github.lgooddatepicker.components.DatePicker;
+import org.example.modelo.Utilidades;
+
 import javax.swing.*;
 
 public class MovimientoEquiposGUI {
@@ -27,12 +30,21 @@ public class MovimientoEquiposGUI {
     private JTextField textField5;
     private JButton guardarButton;
     private JButton cancelarButton;
+    private JPanel contenedorFechaSalida;
+
+    DatePicker filtroFechaDesde = Utilidades.createCustomDatePicker();
+    DatePicker filtroFechaHasta = Utilidades.createCustomDatePicker();
+    DatePicker fechaSalida = Utilidades.createCustomDatePicker();
+
 
     public JPanel getPanel(){
         return movimientoEquipos;
     };
 
     public MovimientoEquiposGUI(){
+        contenedorFechaFiltroDesde.add(filtroFechaDesde);
+        contenedoFechaFiltroHasta.add(filtroFechaHasta);
+        contenedorFechaSalida.add(fechaSalida);
 
     }
 }
