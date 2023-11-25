@@ -5,10 +5,8 @@ import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.vista.Equipo.EquiposGUI;
 import org.example.vista.HomeGUI;
 import org.example.vista.Intervencion.IntervencionGUI;
-import org.example.vista.Intervencion.ListadoDeIntervencionesGUI;
 import org.example.vista.Intervencion.TiposDeIntervencionesGUI;
 import org.example.vista.Perfil.PerfilesGUI;
-import org.example.vista.Ubicacion.IngresarUbicacionGUI;
 import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
 import org.example.vista.Usuario.*;
 
@@ -72,11 +70,11 @@ public class AplicacionVentana extends JFrame {
 
         //Declaro el submenu de Gestion de Ubicaciones
         JMenuItem listarUbicaciones =   new JMenuItem("Listar Ubicaciones");
-        //JMenuItem registrarUbicacion =  new JMenuItem("Registrar Ubicacion");
+        //JMenuItem registrarUbicacion =  new JMenuItem("Registrar Ubicacion"); TODO: borrar del menu
         //Fin declaracion submenu de Gestion de Ubicaciones
 
         //Declaro el submenu de Gestion de Intervenciones
-        //JMenuItem listarIntervenciones =new JMenuItem("Listar Intervenciones");
+        //JMenuItem listarIntervenciones =new JMenuItem("Listar Intervenciones"); TODO: borrar del menu
         JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
         JMenuItem listarTiposDeIntervenciones =new JMenuItem("Tipos de Intervenciones");
         //Fin declaracion submenu de Gestion de Intervenciones
@@ -117,7 +115,7 @@ public class AplicacionVentana extends JFrame {
             }
         });
         //Registrar Usuario
-        /*registrarUsuario.addActionListener(e -> {
+        /*registrarUsuario.addActionListener(e -> { TODO: borrar del menu
             try {
                 changePanel(new UsuarioRegistroGUI().getPanel());
             } catch (NamingException ex) {
@@ -150,7 +148,7 @@ public class AplicacionVentana extends JFrame {
             }
         });
         //Registrar Ubicacion
-        /*registrarUbicacion.addActionListener(e -> {
+        /*registrarUbicacion.addActionListener(e -> { TODO: borrar del menu
             try {
                 changePanel(new IngresarUbicacionGUI().getPanel());
             } catch (NamingException ex) {
@@ -168,7 +166,7 @@ public class AplicacionVentana extends JFrame {
                 });
 
         //Listado de Intervenciones
-        /*listarIntervenciones.addActionListener(e -> {
+        /*listarIntervenciones.addActionListener(e -> {     TODO: borrar del menu
             try {
                 changePanel(new ListadoDeIntervencionesGUI().getPanel());
             } catch (NamingException ex) {
@@ -203,7 +201,7 @@ public class AplicacionVentana extends JFrame {
 
         //Gestion de Usuarios
         gestionUsuarios.add(listarUsuarios);
-        //gestionUsuarios.add(registrarUsuario);
+        //gestionUsuarios.add(registrarUsuario); TODO: borrar del menu
 
         //Gestion de Equipos
         gestionEquipos.add(listarEquipos);
@@ -212,10 +210,10 @@ public class AplicacionVentana extends JFrame {
 
         //Gestion de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
-        //gestionUbicaciones.add(registrarUbicacion);
+        //gestionUbicaciones.add(registrarUbicacion); TODO: borrar del menu
 
         //Gestion de Intervenciones
-        //gestionIntervenciones.add(listarIntervenciones);
+        //gestionIntervenciones.add(listarIntervenciones); TODO: borrar del menu
         gestionIntervenciones.add(registrarIntervencion);
         gestionIntervenciones.add(listarTiposDeIntervenciones);
 

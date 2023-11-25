@@ -2,8 +2,6 @@ package org.example.vista.Ubicacion;
 
 import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
-import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.modelo.Conexion;
 import org.example.modelo.Validator;
@@ -27,7 +25,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
 
     private JComboBox Sector;
     private JTextField Nombre;
-    private JTextField Número;
+    private JTextField Numero;
     private JTextField Piso;
     private JTextField Cama;
     private JComboBox institucion;
@@ -116,7 +114,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                     UbicacionDto ubi = listaUbicaciones.get(ubicacionSeleccionada);
                     Sector.setSelectedItem(ubi.getSector());
                     Nombre.setText(ubi.getNombre());
-                    Número.setText(String.valueOf(ubi.getNumero()));
+                    Numero.setText(String.valueOf(ubi.getNumero()));
                     Piso.setText(String.valueOf(ubi.getPiso()));
                     if (ubi.getCama() == null) {
                         Cama.setText("");
@@ -135,7 +133,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 UbicacionDto ubi = new UbicacionDto();
                 ubi.setSector((String) Sector.getSelectedItem());
                 ubi.setNombre(Nombre.getText());
-                ubi.setNumero(Long.parseLong(Número.getText()));
+                ubi.setNumero(Long.parseLong(Numero.getText()));
                 ubi.setPiso(Long.parseLong(Piso.getText()));
                 //Permito que cama pueda ser null
                 String camaText = Cama.getText();
@@ -176,7 +174,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         if (ubicacionSeleccionada != null) {
             String sector = (String) Sector.getSelectedItem();
             String nombre = Nombre.getText();
-            String numeroText = Número.getText();
+            String numeroText = Numero.getText();
             String pisoText = Piso.getText();
             String camaText = Cama.getText();
             InstitucionDto institucionSeleccionada = (InstitucionDto) institucion.getSelectedItem();
