@@ -59,22 +59,17 @@ public class AplicacionVentana extends JFrame {
 
         //Declaro el submenu de Gestion de Usuarios
         JMenuItem listarUsuarios =      new JMenuItem("Listar Usuarios");
-        //JMenuItem registrarUsuario =    new JMenuItem("Registrar Usuario"); TODO: borrar del menu
         //Fin declaracion submenu de Gestion de Usuarios
 
         //Declaro el submenu de Gestion de Equipos
         JMenuItem listarEquipos =       new JMenuItem("Listar Equipos");
-        JMenuItem registrarEquipo =     new JMenuItem("Registrar Equipo");
         JMenuItem fotosEquipos =        new JMenuItem("Fotos de Equipos");
         //Fin declaracion submenu de Gestion de Equipos
 
         //Declaro el submenu de Gestion de Ubicaciones
         JMenuItem listarUbicaciones =   new JMenuItem("Listar Ubicaciones");
-        //JMenuItem registrarUbicacion =  new JMenuItem("Registrar Ubicacion"); TODO: borrar del menu
         //Fin declaracion submenu de Gestion de Ubicaciones
 
-        //Declaro el submenu de Gestion de Intervenciones
-        //JMenuItem listarIntervenciones =new JMenuItem("Listar Intervenciones"); TODO: borrar del menu
         JMenuItem registrarIntervencion =new JMenuItem("Registrar Intervencion");
         JMenuItem listarTiposDeIntervenciones =new JMenuItem("Tipos de Intervenciones");
         //Fin declaracion submenu de Gestion de Intervenciones
@@ -114,14 +109,6 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
-        //Registrar Usuario
-        /*registrarUsuario.addActionListener(e -> { TODO: borrar del menu
-            try {
-                changePanel(new UsuarioRegistroGUI().getPanel());
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
-            }
-        });*/
 
         //Listado de Equipos
         listarEquipos.addActionListener(e -> {
@@ -147,14 +134,7 @@ public class AplicacionVentana extends JFrame {
                 throw new RuntimeException(ex);
             }
         });
-        //Registrar Ubicacion
-        /*registrarUbicacion.addActionListener(e -> { TODO: borrar del menu
-            try {
-                changePanel(new IngresarUbicacionGUI().getPanel());
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
-            }
-        });*/
+
         // Tipos de Intervenciones
 
         listarTiposDeIntervenciones.addActionListener(e -> {
@@ -165,16 +145,6 @@ public class AplicacionVentana extends JFrame {
             }
                 });
 
-        //Listado de Intervenciones
-        /*listarIntervenciones.addActionListener(e -> {     TODO: borrar del menu
-            try {
-                changePanel(new ListadoDeIntervencionesGUI().getPanel());
-            } catch (NamingException ex) {
-                throw new RuntimeException(ex);
-            } catch (ServiciosException ex) {
-                throw new RuntimeException(ex);
-            }
-        });*/
         //Registrar Intervencion
         registrarIntervencion.addActionListener(e -> {
             try {
@@ -201,19 +171,16 @@ public class AplicacionVentana extends JFrame {
 
         //Gestion de Usuarios
         gestionUsuarios.add(listarUsuarios);
-        //gestionUsuarios.add(registrarUsuario); TODO: borrar del menu
+
 
         //Gestion de Equipos
         gestionEquipos.add(listarEquipos);
-        gestionEquipos.add(registrarEquipo);
         gestionEquipos.add(fotosEquipos);
 
         //Gestion de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
-        //gestionUbicaciones.add(registrarUbicacion); TODO: borrar del menu
 
         //Gestion de Intervenciones
-        //gestionIntervenciones.add(listarIntervenciones); TODO: borrar del menu
         gestionIntervenciones.add(registrarIntervencion);
         gestionIntervenciones.add(listarTiposDeIntervenciones);
 
