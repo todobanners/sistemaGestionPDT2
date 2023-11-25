@@ -64,6 +64,7 @@ public class EquiposGUI {
     private JButton botonBuscarFiltro;
     private JButton botonLimpiarFiltros;
     private JPanel panelDatePickerFin;
+    private JButton exportarAExcelButton;
 
     private File imagenSubida;
     DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
@@ -388,6 +389,41 @@ public class EquiposGUI {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(null, "No se pudo limpiar los filtros ");
+                }
+            }
+        });
+        exportarAExcelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Vector<String> columnas = new Vector<>();
+                columnas.add("ID");
+                columnas.add("Ubicacion");
+                columnas.add("Numero de Serie");
+                columnas.add("Nombre");
+                columnas.add("Tipo");
+                columnas.add("Proveedor");
+                columnas.add("Pais");
+                columnas.add("Modelo");
+                columnas.add("Fecha Adquisicion");
+                Vector<Vector<Object>> dataVector = new Vector<>();
+                int rowCount = model.getRowCount();
+                int columnCount = model.getColumnCount();
+
+                for (int row = 0; row < rowCount; row++) {
+                    Vector<Object> rowData = new Vector<>();
+
+                    for (int col = 1; col < columnCount; col++) {
+                        Object cellValue = model.getValueAt(row, col);
+                        rowData.add(cellValue);
+                    }
+
+                    dataVector.add(rowData);
+                }
+                try {
+                    Utilidades.exportarAExcel(columnas, dataVector, "Equipos");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "No se pudo exportar a excel");
                 }
             }
         });
