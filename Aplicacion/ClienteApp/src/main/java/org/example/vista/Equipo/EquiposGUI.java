@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -36,18 +38,17 @@ public class EquiposGUI {
     private JTextField idInternoText;
     private JTextField nroSerieText;
     private JTextField nombreText;
-    private JComboBox<TiposEquipoDto> tipoCombo;
-    private JComboBox<ProveedoresEquipoDto> proveedorCombo;
-    private JComboBox<PaisDto> paisCombo;
-    private JComboBox<ModelosEquipoDto> modeloCombo;
-    private JComboBox<UbicacionDto> ubicacionCombo;
-    private JComboBox<Estados> estadoCombo;
-    private JComboBox<UbicacionDto> filtroComboUbicacion;
-    private JComboBox<ProveedoresEquipoDto> filtroComboProveedor;
-    private JComboBox<PaisDto> filtroComboPais;
-    private JComboBox<ModelosEquipoDto> filtroComboModelo;
-    private JComboBox<MarcasModeloDto> filtroComboMarca;
-    private JComboBox<TiposEquipoDto> filtroComboTipo;
+    private JComboBox<Object> tipoCombo;
+    private JComboBox<Object> proveedorCombo;
+    private JComboBox<Object> paisCombo;
+    private JComboBox<Object> modeloCombo;
+    private JComboBox<Object> ubicacionCombo;
+    private JComboBox<Object> estadoCombo;
+    private JComboBox<Object> filtroComboUbicacion;
+    private JComboBox<Object> filtroComboProveedor;
+    private JComboBox<Object> filtroComboPais;
+    private JComboBox<Object> filtroComboModelo;
+    private JComboBox<Object> filtroComboTipo;
     private JComboBox<String> filtroComboSelectorBusqueda;
     private JButton imagenBtn;
     private JPanel fechaAdqContainer;
@@ -56,12 +57,13 @@ public class EquiposGUI {
     private JButton darBajaSeleccionadoButton;
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
-    private JPanel filtroFechaContenedor;
+    private JPanel panelDatePickerInicio;
     private JLabel filePathField;
 
     private JTextField filtroCampoValorBusqueda;
     private JButton botonBuscarFiltro;
     private JButton botonLimpiarFiltros;
+    private JPanel panelDatePickerFin;
 
     private File imagenSubida;
     DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
@@ -88,6 +90,12 @@ public class EquiposGUI {
         equiposTable.removeColumn(equiposTable.getColumnModel().getColumn(0));
         fechaAdqContainer.add(fechaCompraDate);
         cargarCombos();
+
+        //Inicializar ambos datepickers de los filtros
+        DatePicker fechaInicio = Utilidades.createCustomDatePicker();
+        DatePicker fechaFin = Utilidades.createCustomDatePicker();
+        panelDatePickerInicio.add(fechaInicio);
+        panelDatePickerFin.add(fechaFin);
 
         imagenBtn.addActionListener(new ActionListener() {
             @Override
@@ -222,52 +230,136 @@ public class EquiposGUI {
             public void actionPerformed(ActionEvent e) {
                 HashMap<String, Object> filtros = new HashMap<>();
 
-                if (!idInternoText.getText().isEmpty()) {
-                    filtros.put("idInterno", idInternoText.getText());
-                }
-                if (!nroSerieText.getText().isEmpty()) {
-                    filtros.put("nroSerie", nroSerieText.getText());
-                }
-                if (!nombreText.getText().isEmpty()) {
-                    filtros.put("nombre", nombreText.getText());
-                }
-                if (tipoCombo.getSelectedItem() != null) {
-                    filtros.put("idTipo", ((TiposEquipoDto) tipoCombo.getSelectedItem()).getId());
-                }
-                if (proveedorCombo.getSelectedItem() != null) {
-                    filtros.put("idProveedor", ((ProveedoresEquipoDto) proveedorCombo.getSelectedItem()).getId());
-                }
-                if (paisCombo.getSelectedItem() != null) {
-                    filtros.put("idPais", ((PaisDto) paisCombo.getSelectedItem()).getId());
-                }
-                if (modeloCombo.getSelectedItem() != null) {
-                    filtros.put("idModelo", ((ModelosEquipoDto) modeloCombo.getSelectedItem()).getId());
-                }
-                if (fechaCompraDate.getDate() != null) {
-                    filtros.put("fechaAdquisicion", fechaCompraDate.getDate());
+                //Cargar el hashmap con los filtros todos en null
+                filtros.put("idInterno", null);
+                filtros.put("ubicacion", null);
+                filtros.put("nroSerie", null);
+                filtros.put("nombre", null);
+                filtros.put("tipo", null);
+                filtros.put("proveedor", null);
+                filtros.put("pais", null);
+                filtros.put("modelo", null);
+                filtros.put("fechaInicio", null);
+                filtros.put("fechaFin", null);
+
+
+                //Cargar el hashmap con los filtros que se hayan seleccionado
+                if (filtroComboSelectorBusqueda.getSelectedItem().equals("Nombre")) {
+                    filtros.put("nombre", filtroCampoValorBusqueda.getText());
+                } else if (filtroComboSelectorBusqueda.getSelectedItem().equals("Numero de Serie")) {
+                    filtros.put("nroSerie", filtroCampoValorBusqueda.getText());
+                } else if (filtroComboSelectorBusqueda.getSelectedItem().equals("ID Interno")) {
+                    filtros.put("idInterno", filtroCampoValorBusqueda.getText());
                 }
 
-                // Filtrar los datos en el cliente
-                DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
+                //Fechas
+                if (fechaInicio.getDate() != null) {
+                    filtros.put("fechaInicio", fechaInicio.getDate());
+                }
+                if (fechaFin.getDate() != null) {
+                    filtros.put("fechaFin", fechaFin.getDate());
+                }
+
+
+                if (!filtroComboUbicacion.getSelectedItem().equals("Todos")) {
+                    filtros.put("ubicacion", (UbicacionDto) filtroComboUbicacion.getSelectedItem());
+                }
+                if (!filtroComboTipo.getSelectedItem().equals("Todos")) {
+                    filtros.put("tipo", (TiposEquipoDto) filtroComboTipo.getSelectedItem());
+                }
+                if (!filtroComboProveedor.getSelectedItem().equals("Todos")) {
+                    filtros.put("proveedor", (ProveedoresEquipoDto) filtroComboProveedor.getSelectedItem());
+                }
+                if (!filtroComboPais.getSelectedItem().equals("Todos")) {
+                    filtros.put("pais", (PaisDto) filtroComboPais.getSelectedItem());
+                }
+                if (!filtroComboModelo.getSelectedItem().equals("Todos")) {
+                    filtros.put("modelo", (ModelosEquipoDto) filtroComboModelo.getSelectedItem());
+                }
+
+
+                //Filtrar desde el cliente
                 Vector<Vector<Object>> dataVector = new Vector<>();
+                try {
+                    actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "No se pudo filtrar la tabla");
+                }
 
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    boolean matches = true;
-                    for (String key : filtros.keySet()) {
-                        if (filtros.get(key) != null && !filtros.get(key).equals(model.getValueAt(i, getColumnIndex(key)))) {
-                            matches = false;
-                            break;
+
+                model.getDataVector().forEach(row -> {
+                    Vector<Object> rowVector = (Vector<Object>) row;
+
+                    boolean shouldAddRow = true;
+
+                    //Id interno
+                    if (filtros.get("idInterno") != null && !rowVector.elementAt(1).toString().toLowerCase().contains(filtros.get("idInterno").toString().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Ubicacion
+                    if (filtros.get("ubicacion") != null && !rowVector.elementAt(2).toString().toLowerCase().contains(((UbicacionDto) filtros.get("ubicacion")).getNombre().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Numero de serie
+                    if (filtros.get("nroSerie") != null && !rowVector.elementAt(3).toString().toLowerCase().contains(filtros.get("nroSerie").toString().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Nombre
+                    if (filtros.get("nombre") != null && !rowVector.elementAt(4).toString().toLowerCase().contains(filtros.get("nombre").toString().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Tipo
+                    if (filtros.get("tipo") != null && !rowVector.elementAt(5).toString().toLowerCase().contains(((TiposEquipoDto) filtros.get("tipo")).getNombreTipo().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Proveedor
+                    if (filtros.get("proveedor") != null && !rowVector.elementAt(6).toString().toLowerCase().contains(((ProveedoresEquipoDto) filtros.get("proveedor")).getNombre().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Pais
+                    if (filtros.get("pais") != null && !rowVector.elementAt(7).toString().toLowerCase().contains(((PaisDto) filtros.get("pais")).getNombre().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Modelo
+                    if (filtros.get("modelo") != null && !rowVector.elementAt(8).toString().toLowerCase().contains(((ModelosEquipoDto) filtros.get("modelo")).getNombre().toLowerCase())) {
+                        shouldAddRow = false;
+                    }
+                    //Fecha de adquisicion
+                    if (filtros.get("fechaInicio") != null && filtros.get("fechaFin") != null) {
+                        LocalDate fechaInicio = ((LocalDate) filtros.get("fechaInicio"));
+                        LocalDate fechaFin = ((LocalDate) filtros.get("fechaFin"));
+                        LocalDate fechaActual = ((LocalDate) rowVector.elementAt(9));
+
+                        if (fechaActual.isBefore(fechaInicio) || fechaActual.isAfter(fechaFin)) {
+                            shouldAddRow = false;
+                        }
+                    } else if (filtros.get("fechaInicio") != null) {
+                        LocalDate fechaInicio = ((LocalDate) filtros.get("fechaInicio"));
+                        LocalDate fechaActual = ((LocalDate) rowVector.elementAt(9));
+
+                        if (fechaActual.isBefore(fechaInicio)) {
+                            shouldAddRow = false;
+                        }
+                    } else if (filtros.get("fechaFin") != null) {
+                        LocalDate fechaFin = ((LocalDate) filtros.get("fechaFin"));
+                        LocalDate fechaActual = ((LocalDate) rowVector.elementAt(9));
+
+                        if (fechaActual.isAfter(fechaFin)) {
+                            shouldAddRow = false;
                         }
                     }
-                    if (matches) {
-                        dataVector.add((Vector<Object>) model.getDataVector().get(i));
-                    }
-                }
 
-                model.setRowCount(0);
-                for (Vector<Object> row : dataVector) {
-                    model.addRow(row);
+                    if (shouldAddRow) {
+                        dataVector.add(rowVector);
+                    }
+
+                });
+                if (dataVector.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No se encontraron resultados para la búsqueda");
                 }
+                model.setRowCount(0);
+                dataVector.forEach(model::addRow);
             }
 
             private int getColumnIndex(String columnName) {
@@ -277,6 +369,26 @@ public class EquiposGUI {
                     }
                 }
                 return -1;
+            }
+        });
+        botonLimpiarFiltros.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
+                    filtroComboUbicacion.setSelectedIndex(0);
+                    filtroComboProveedor.setSelectedIndex(0);
+                    filtroComboPais.setSelectedIndex(0);
+                    filtroComboModelo.setSelectedIndex(0);
+                    filtroComboTipo.setSelectedIndex(0);
+                    filtroComboSelectorBusqueda.setSelectedIndex(0);
+                    filtroCampoValorBusqueda.setText("");
+                    fechaInicio.setDate(null);
+                    fechaFin.setDate(null);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "No se pudo limpiar los filtros ");
+                }
             }
         });
     }
@@ -311,11 +423,18 @@ public class EquiposGUI {
             actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo" + e.getMessage());
         }
     }
 
     public void cargarCombos() throws Exception {
+        //Agregar un item "Todos" a los combos de filtro
+        filtroComboUbicacion.addItem("Todos");
+        filtroComboProveedor.addItem("Todos");
+        filtroComboPais.addItem("Todos");
+        filtroComboModelo.addItem("Todos");
+        filtroComboTipo.addItem("Todos");
+
         for (UbicacionDto ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
             filtroComboUbicacion.addItem(ubicacion);
