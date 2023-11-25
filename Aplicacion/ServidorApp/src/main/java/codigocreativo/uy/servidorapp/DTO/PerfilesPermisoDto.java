@@ -40,7 +40,6 @@ public class PerfilesPermisoDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "idPerfil = " + idPerfil + ")";
+        return idPerfil.toString();
     }
 }

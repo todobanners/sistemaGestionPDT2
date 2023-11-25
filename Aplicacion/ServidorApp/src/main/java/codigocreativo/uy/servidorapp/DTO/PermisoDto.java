@@ -52,8 +52,6 @@ public class PermisoDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "tipoPermiso = " + tipoPermiso + ")";
+        return tipoPermiso;
     }
 }

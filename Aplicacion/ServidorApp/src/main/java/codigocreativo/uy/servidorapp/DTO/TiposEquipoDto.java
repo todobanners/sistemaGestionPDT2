@@ -52,8 +52,6 @@ public class TiposEquipoDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombreTipo = " + nombreTipo + ")";
+        return nombreTipo;
     }
 }

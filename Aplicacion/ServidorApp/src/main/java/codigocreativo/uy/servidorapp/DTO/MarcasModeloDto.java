@@ -52,9 +52,7 @@ public class MarcasModeloDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombre = " + nombre + ")";
+        return nombre;
     }
 
 }

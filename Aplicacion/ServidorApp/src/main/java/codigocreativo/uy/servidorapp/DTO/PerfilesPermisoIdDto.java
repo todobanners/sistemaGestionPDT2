@@ -52,8 +52,6 @@ public class PerfilesPermisoIdDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "idPerfil = " + idPerfil + ", " +
-                "idPermiso = " + idPermiso + ")";
+        return idPerfil.toString() + " " + idPermiso.toString();
     }
 }

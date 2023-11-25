@@ -52,8 +52,6 @@ public class OperacionDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombreOperacion = " + nombreOperacion + ")";
+        return nombreOperacion;
     }
 }

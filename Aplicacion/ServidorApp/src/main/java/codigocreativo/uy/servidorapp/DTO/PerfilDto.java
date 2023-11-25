@@ -71,10 +71,7 @@ public class PerfilDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombrePerfil = " + nombrePerfil + ", " +
-                "estado = " + estado + ")";
+        return nombrePerfil;
     }
 
     public List<PermisoDto> getPermisos() {

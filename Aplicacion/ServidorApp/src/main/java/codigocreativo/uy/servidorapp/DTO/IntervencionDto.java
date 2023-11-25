@@ -88,11 +88,7 @@ public class IntervencionDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "motivo = " + motivo + ", " +
-                "fechaHora = " + fechaHora + ", " +
-                "comentarios = " + comentarios + ")";
+        return motivo;
     }
 
     public UsuarioDto getIdUsuario() {

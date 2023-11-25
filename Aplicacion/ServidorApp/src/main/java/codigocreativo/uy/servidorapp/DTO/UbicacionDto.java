@@ -103,13 +103,7 @@ public class UbicacionDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombre = " + nombre + ", " +
-                "sector = " + sector + ", " +
-                "piso = " + piso + ", " +
-                "numero = " + numero + ", " +
-                "cama = " + cama + ")";
+        return nombre + " - " +sector;
     }
 
     public InstitucionDto getIdInstitucion() {

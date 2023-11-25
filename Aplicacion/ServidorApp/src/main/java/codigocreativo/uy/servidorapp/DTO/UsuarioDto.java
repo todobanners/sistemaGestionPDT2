@@ -142,16 +142,7 @@ public class UsuarioDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "cedula = " + cedula + ", " +
-                "email = " + email + ", " +
-                "contrasenia = " + contrasenia + ", " +
-                "fechaNacimiento = " + fechaNacimiento + ", " +
-                "estado = " + estado + ", " +
-                "nombre = " + nombre + ", " +
-                "apellido = " + apellido + ", " +
-                "nombreUsuario = " + nombreUsuario + ")";
+        return nombre + " " + apellido;
     }
 
     public void setIdInstitucion(InstitucionDto idInstitucion) {
