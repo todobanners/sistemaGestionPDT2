@@ -135,7 +135,7 @@ public class BajaEquipoGUI {
     private void actualizarListaEquipos() throws Exception {
         EquiposGUI equiposGUI = new EquiposGUI();
         try {
-            equiposGUI.actualizarTabla();
+            equiposGUI.actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
 
             // Cambia esta línea
             // BajaEquipo bajaEquipo = new BajaEquipo(equipoSeleccionado);

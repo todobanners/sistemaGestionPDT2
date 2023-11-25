@@ -11,7 +11,6 @@ package org.example.vista.Equipo;
  * */
 
 import codigocreativo.uy.servidorapp.DTO.*;
-import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;
@@ -22,10 +21,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class EquiposGUI {
@@ -35,13 +32,21 @@ public class EquiposGUI {
     private JTable equiposTable;
     private JPanel formularioPanel;
     private JTextField idInternoText;
-    private JComboBox ubicacionCombo;
     private JTextField nroSerieText;
     private JTextField nombreText;
-    private JComboBox tipoCombo;
-    private JComboBox proveedorCombo;
-    private JComboBox paisCombo;
-    private JComboBox modeloCombo;
+    private JComboBox<TiposEquipoDto> tipoCombo;
+    private JComboBox<ProveedoresEquipoDto> proveedorCombo;
+    private JComboBox<PaisDto> paisCombo;
+    private JComboBox<ModelosEquipoDto> modeloCombo;
+    private JComboBox<UbicacionDto> ubicacionCombo;
+    private JComboBox<Estados> estadoCombo;
+    private JComboBox<UbicacionDto> filtroComboUbicacion;
+    private JComboBox<ProveedoresEquipoDto> filtroComboProveedor;
+    private JComboBox<PaisDto> filtroComboPais;
+    private JComboBox<ModelosEquipoDto> filtroComboModelo;
+    private JComboBox<MarcasModeloDto> filtroComboMarca;
+    private JComboBox<TiposEquipoDto> filtroComboTipo;
+    private JComboBox<String> filtroComboSelectorBusqueda;
     private JButton imagenBtn;
     private JPanel fechaAdqContainer;
     private JButton guardarButton;
@@ -49,8 +54,13 @@ public class EquiposGUI {
     private JButton darBajaSeleccionadoButton;
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
-    private JComboBox estadoCombo;
+    private JPanel filtroFechaContenedor;
     private JLabel filePathField;
+
+    private JTextField filtroCampoValorBusqueda;
+    private JButton botonBuscarFiltro;
+    private JButton botonLimpiarFiltros;
+
     private File imagenSubida;
     DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
@@ -72,7 +82,7 @@ public class EquiposGUI {
         model.addColumn("Modelo");
         model.addColumn("Fecha Adquisición");
         equiposTable.setModel(model);
-        actualizarTabla();
+        actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
         equiposTable.removeColumn(equiposTable.getColumnModel().getColumn(0));
         fechaAdqContainer.add(fechaCompraDate);
         cargarCombos();
@@ -203,13 +213,37 @@ public class EquiposGUI {
                 }
             }
         });*/
+
+        //Funcionalidades de los filtros
+        filtroComboUbicacion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    actualizarTabla(Conexion.obtenerEquipoBean().obtenerEquiposFiltrado("idUbicacion", "21"));
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        filtroComboProveedor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    actualizarTabla(Conexion.obtenerEquipoBean().obtenerEquiposFiltrado("idProveedor", ( filtroComboProveedor.getSelectedItem().toString())));
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
 
-    public void actualizarTabla() throws Exception {
+    public void actualizarTabla(List<EquipoDto> datos) throws Exception {
         DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
         model.setRowCount(0);
-        Conexion.obtenerEquipoBean().listarEquipos().forEach(equipo -> {
+        //Conexion.obtenerEquipoBean().listarEquipos()
+
+        datos.forEach(equipo -> {
             model.addRow(new Object[]{
                     equipo.getId(),
                     equipo.getIdInterno(),
@@ -230,7 +264,7 @@ public class EquiposGUI {
         try {
             Conexion.obtenerEquipoBean().crearEquipo(equipo);
             JOptionPane.showMessageDialog(null, "Equipo registrado con exito");
-            actualizarTabla();
+            actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo"+e.getMessage());
@@ -240,21 +274,26 @@ public class EquiposGUI {
     public void cargarCombos() throws Exception {
         for (UbicacionDto ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
+            filtroComboUbicacion.addItem(ubicacion);
         }
         for (TiposEquipoDto tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
             tipoCombo.addItem(tipo);
+            filtroComboTipo.addItem(tipo);
         }
 
         for (ProveedoresEquipoDto proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
             proveedorCombo.addItem(proveedor);
+            filtroComboProveedor.addItem(proveedor);
         }
 
         for (PaisDto pais : Conexion.obtenerPaisBean().obtenerpais()) {
             paisCombo.addItem(pais);
+            filtroComboPais.addItem(pais);
         }
 
         for (ModelosEquipoDto modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
             modeloCombo.addItem(modelo);
+            filtroComboModelo.addItem(modelo);
         }
 
         for (Estados estado : Estados.values()) {

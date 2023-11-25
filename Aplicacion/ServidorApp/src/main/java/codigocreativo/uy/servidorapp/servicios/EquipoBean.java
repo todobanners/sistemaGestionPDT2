@@ -4,7 +4,6 @@ import codigocreativo.uy.servidorapp.DTO.BajaEquipoDto;
 import codigocreativo.uy.servidorapp.DTO.EquipoDto;
 import codigocreativo.uy.servidorapp.DTOMappers.BajaEquipoMapper;
 import codigocreativo.uy.servidorapp.DTOMappers.EquipoMapper;
-import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
@@ -42,6 +41,13 @@ public class EquipoBean implements EquipoRemote {
                 .setParameter("id", bajaEquipo.getIdEquipo().getId())
                 .executeUpdate();
         em.flush();
+    }
+
+    @Override
+    public List<EquipoDto> obtenerEquiposFiltrado(String filtro, String valor) {
+        return equipoMapper.toDto(em.createQuery("SELECT e FROM Equipo e WHERE e." + filtro + " = :valor", Equipo.class)
+                .setParameter("valor", valor)
+                .getResultList());
     }
 
     @Override

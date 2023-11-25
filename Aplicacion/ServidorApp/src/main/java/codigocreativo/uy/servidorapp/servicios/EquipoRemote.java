@@ -13,6 +13,9 @@ public interface EquipoRemote {
     public void crearEquipo(EquipoDto equipo);
     public void modificarEquipo(EquipoDto equipo);
     public void eliminarEquipo(BajaEquipoDto bajaEquipo);
+
+    List<EquipoDto> obtenerEquiposFiltrado(String filtro, String valor);
+
     public EquipoDto obtenerEquipo(Long id);
     public List<EquipoDto> listarEquipos();
 
