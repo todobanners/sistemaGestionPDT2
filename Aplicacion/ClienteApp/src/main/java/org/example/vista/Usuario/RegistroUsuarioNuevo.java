@@ -17,9 +17,9 @@ import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
-//todo: Validar nombre usuario existente, cedula existente, email existente
-//todo: Usar hasheo para password
-//todo: Quitar el generador de cedula
+//todo: Validar nombre de usuario existente, cédula existente, email existente
+//todo: Usar hash para contraseña
+//todo: Quitar el generador de cédula
 
 
 public class RegistroUsuarioNuevo extends JFrame {
@@ -57,10 +57,10 @@ public class RegistroUsuarioNuevo extends JFrame {
 
         fechaNacimiento.add(selectorFecha);
         userTextField.setEnabled(false);
-        //Por razones de validacion este campo es autogenerado con una CI valida
+        //Por razones de validación este campo es autogenerado con una CI válida
         cedulaTextField.setText(Validator.generarCedulaUruguaya());
 
-        //Obtencion de valores del combobox
+        //Obtención de valores del combobox
         for (PerfilDto p : Conexion.obtenerPerfilBean().obtenerPerfiles()){
             comboBoxTipo.addItem(p);
         }
@@ -81,7 +81,7 @@ public class RegistroUsuarioNuevo extends JFrame {
         aceptarButton.addActionListener(e -> {
             UsuarioDto usuario = new UsuarioDto();
             //Validamos los campos
-            // Verifico que los campos esten todos completos
+            // Verifico que los campos estén todos completos
             if (nombreTextField.getText().isEmpty() || apellidoTextField.getText().isEmpty() || cedulaTextField.getText().isEmpty() || userTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || telefonoTextField.getText().isEmpty() || clave.getPassword().length == 0 || claveRepetir.getPassword().length == 0 || selectorFecha.getDate() == null){
                 JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
             }
@@ -89,25 +89,25 @@ public class RegistroUsuarioNuevo extends JFrame {
             else if (Validator.contieneSoloLetras(nombreTextField.getText()) || Validator.contieneSoloLetras(apellidoTextField.getText())){
                 JOptionPane.showMessageDialog(null, "Los campos nombre y apellido solo pueden contener letras");
             }
-            // Verifico que la cedula sea valida
+            // Verifico que la cédula sea válida
             else if (!Validator.validarCedula(cedulaTextField.getText())){
                 JOptionPane.showMessageDialog(null, "La cédula ingresada no es válida");
             }
-            // Verifico que el email sea valido
+            // Verifico que el email sea válido
             else if (!Validator.validarEmail(emailTextField.getText())){
-                JOptionPane.showMessageDialog(null, "El email ingresado no es valido");
+                JOptionPane.showMessageDialog(null, "El email ingresado no es válido");
             }
-            // Verifico que el telefono contenga solo numeros
+            // Verifico que el teléfono contenga solo números
             else if (Validator.contieneSoloNumeros(telefonoTextField.getText())){
-                JOptionPane.showMessageDialog(null, "El campo telefono solo puede contener numeros");
+                JOptionPane.showMessageDialog(null, "El campo teléfono solo puede contener números");
             }
-            // Verifico que las claves coinciden
+            // Verifico que las claves coincidan
             else if (!Arrays.equals(clave.getPassword(), claveRepetir.getPassword())){
                 JOptionPane.showMessageDialog(null, "Las claves ingresadas no coinciden");
             }
-            // Verifico que la contraseña tenga almenos una letra y un numero
+            // Verifico que la contraseña tenga al menos una letra y un número
             else if (!Validator.validarContrasena(new String(clave.getPassword()))){
-                JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener almenos una letra y un numero y contener almenos 8 caracteres");
+                JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener al menos una letra y un número y contener al menos 8 caracteres");
             }
             else {
                 //Guardo los datos en la tabla
@@ -118,7 +118,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 usuario.setNombre(nombreTextField.getText());
                 usuario.setApellido(apellidoTextField.getText());
                 usuario.setCedula(cedulaTextField.getText());
-                usuario.setNombreUsuario(userTextField.getText()); //El nombre de usuario esta formado por el nombre.apellido en minuscula
+                usuario.setNombreUsuario(userTextField.getText()); //El nombre de usuario está formado por el nombre.apellido en minúscula
                 usuario.setEmail(emailTextField.getText());
 
                 //hasheo la contraseña
@@ -136,7 +136,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 //usuario.setTelefono(telefonoTextField.getText());
                 try {
                     Conexion.obtenerUsuarioBean().crearUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario creado con exito, debera esperar a que un administrador lo valide");
+                    JOptionPane.showMessageDialog(null, "Usuario creado con éxito, deberá esperar a que un administrador lo valide");
                 } catch (Exception exception) {
                     exception.printStackTrace();
                     JOptionPane.showMessageDialog(null, "No se pudo crear el usuario Error:"+exception.getMessage());
@@ -145,9 +145,9 @@ public class RegistroUsuarioNuevo extends JFrame {
         });
 
         cancelarButton.addActionListener(e -> {
-            //Muestra cartel de confirmacion de cancelacion
+            //Muestra cartel de confirmación de cancelación
             int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Esta accion borrará todo y volverás al Login","¿Deseas cancelar?",dialogButton);
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Esta acción borrará todo y volverás al Login","¿Deseas cancelar?",dialogButton);
             if(dialogResult == JOptionPane.YES_OPTION){
                 //Genera un nuevo formulario de login
                 limpiarCampos();

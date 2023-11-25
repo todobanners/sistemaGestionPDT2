@@ -86,72 +86,6 @@ public class LoginForm extends JFrame {
             }
         });
 
-        //soyUnBotonQueButton.setVisible(false); // comentar esta linea para usar el boton de datos de prueba
-        //Este boton sirve para generar datos de prueba, descomentar para usar
-
-        soyUnBotonQueButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Cree algunos datos para funcionar, admin admin");
-
-                try {
-                    InstitucionDto institucion = new InstitucionDto();
-                    institucion.setNombre("CodigoCreativo");
-                    Conexion.obtenerInstitucionBean().agregarInstitucion(institucion);
-                    ///////////////////////
-                    PerfilDto perfil = new PerfilDto();
-                    perfil.setNombrePerfil("Administrador");
-                    perfil.setEstado(Estados.ACTIVO);
-                    Conexion.obtenerPerfilBean().crearPerfil(perfil);
-                    //////////////////////////
-                    UsuarioDto usuario = new UsuarioDto();
-                    usuario.setFechaNacimiento(LocalDate.now());
-                    usuario.setNombre("Administrador");
-                    usuario.setApellido("Administrador");
-                    usuario.setCedula("12345678");
-                    usuario.setEmail("algo@algo.com");
-                    usuario.setContrasenia(Utilidades.hashClave("admin"));
-                    usuario.setEstado(Estados.ACTIVO);
-                    usuario.setNombreUsuario("admin");
-                    institucion.setId(1L);
-                    usuario.setIdInstitucion(institucion);
-                    perfil.setId(1L);
-                    usuario.setIdPerfil(perfil);
-                    Conexion.obtenerUsuarioBean().crearUsuario(usuario);
-                    //////////////////////////
-                    UbicacionDto ubicacion = new UbicacionDto();
-                    institucion.setId(1L);
-                    ubicacion.setIdInstitucion(institucion);
-                    ubicacion.setNumero(2L);
-                    ubicacion.setPiso(1L);
-                    ubicacion.setNombre("CTI");
-                    ubicacion.setSector("Sector");
-                    Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
-                    //////////////////////////
-                    ProveedoresEquipoDto proveedoresEquipo = new ProveedoresEquipoDto();
-                    proveedoresEquipo.setNombre("Proveedor");
-                    Conexion.obtenerProveedoresEquipoBean().CrearProveedoresEquipo(proveedoresEquipo);
-                    //////////////////////////////
-                    PaisDto pais = new PaisDto();
-                    pais.setNombre("Uruguay");
-                    Conexion.obtenerPaisBean().crearPais(pais);
-                    /////////////////////////////////////////////////////
-                    MarcasModeloDto marcasModelos = new MarcasModeloDto();
-                    marcasModelos.setNombre("Marca");
-                    Conexion.obtenerMarcaBean().crearMarcasModelo(marcasModelos);
-                    ////////////////////////////////////////
-                    ModelosEquipoDto modelosEquipo = new ModelosEquipoDto();
-                    modelosEquipo.setNombre("Modelo");
-                    marcasModelos.setId(1L);
-                    modelosEquipo.setIdMarca(marcasModelos);
-                    Conexion.obtenerModeloBean().crearModelosEquipo(modelosEquipo);
-                    ///////////////////////////////////////////////////////////////
-
-
-                } catch (NamingException | ServiciosException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
     }
 
     private void login() throws Exception {
@@ -162,16 +96,16 @@ public class LoginForm extends JFrame {
         UsuarioDto usuario = Conexion.obtenerUsuarioBean().login(username,password);
 
         if (usuario == null) {
-            throw new Exception("Usuario o contraseña incorrectos");
+            throw new Exception("Usuario o contraseña incorrecta");
         } else if (usuario.getEstado().equals(Estados.SIN_VALIDAR)) {
-            throw new Exception("Usuario aun no validado, consulte a un administrador para conocer su estado");
+            throw new Exception("Usuario aún no validado, consulte a un administrador para conocer su estado");
         } else if (usuario.getEstado().equals(Estados.INACTIVO)) {
             throw new Exception("Usuario desactivado, consulte a un administrador para conocer su estado");
         } else {
             Sesion sesion = Sesion.getInstancia(usuario);
-            JOptionPane.showMessageDialog(null, "Bienvenido "+usuario.getNombre()+"!");
+            JOptionPane.showMessageDialog(null, "¡Bienvenido "+usuario.getNombre()+"!");
             setVisible(false);
-            new AplicacionVentana("CodigoCreativo - Sistema de gestion de mantenimiento");
+            new AplicacionVentana("CodigoCreativo - Sistema de gestión de mantenimiento");
         }
     }
 
