@@ -201,7 +201,7 @@ public class ModificarEquipo {
         // Llama a la función de la clase EquiposGUI que actualiza la tabla
         EquiposGUI equiposGUI = new EquiposGUI();
         try {
-            equiposGUI.actualizarTabla();
+            equiposGUI.actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al actualizar la lista de equipos");
