@@ -24,7 +24,7 @@ public class BajaEquipoBean implements BajaEquipoRemote {
      * También toma el estado de la baja de equipo y la aplica al equipo (también puede reactivar un equipo).
      * @param bajaEquipo Recibe un objeto de tipo BajaEquipoDto
      */
-    @Override
+    /*@Override
     public void crearBajaEquipo(BajaEquipoDto bajaEquipo) {
         em.persist(bajaEquipoMapper.toEntity(bajaEquipo));
         Estados estadoEn = bajaEquipo.getEstado();
@@ -33,8 +33,22 @@ public class BajaEquipoBean implements BajaEquipoRemote {
                 .setParameter("id", bajaEquipo.getIdEquipo().getId())
                 .setParameter("estadoEnum", estadoEn)
                 .executeUpdate();
-    }
+    }*/
 
+    @Override
+    public void crearBajaEquipo(BajaEquipoDto bajaEquipo) {
+        BajaEquipo entity = bajaEquipoMapper.toEntity(bajaEquipo);
+        if (entity.getId() != null) {
+            entity = em.merge(entity);
+        }
+        em.persist(entity);
+        Estados estadoEn = bajaEquipo.getEstado();
+
+        em.createQuery("UPDATE Equipo equipo SET equipo.estado = :estadoEnum WHERE equipo.id = :id")
+                .setParameter("id", bajaEquipo.getIdEquipo().getId())
+                .setParameter("estadoEnum", estadoEn)
+                .executeUpdate();
+    }
     @Override
     public List<BajaEquipoDto> obtenerBajasEquipos() {
         return bajaEquipoMapper.toDto(em.createQuery("SELECT bajaEquipo FROM BajaEquipo bajaEquipo", BajaEquipo.class).getResultList());

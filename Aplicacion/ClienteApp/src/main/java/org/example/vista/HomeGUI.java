@@ -29,6 +29,19 @@ public class HomeGUI {
     }
 
     public HomeGUI() throws NamingException, IOException {
+        FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT) {
+            @Override
+            public Dimension preferredLayoutSize(Container target) {
+                if (target.getWidth() > 0) {
+                    int w = target.getWidth();
+                    int h = super.preferredLayoutSize(target).height;
+                    return new Dimension(w, h);
+                } else {
+                    return super.preferredLayoutSize(target);
+                }
+            }
+        };
+        panel1.setLayout(flowLayout);
         executorService = Executors.newSingleThreadExecutor();
         progressBar = new JProgressBar();
         progressBar.setIndeterminate(true);

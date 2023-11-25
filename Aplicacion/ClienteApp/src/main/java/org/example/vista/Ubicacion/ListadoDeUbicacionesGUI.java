@@ -135,7 +135,13 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 ubi.setNombre(Nombre.getText());
                 ubi.setNumero(Long.parseLong(Número.getText()));
                 ubi.setPiso(Long.parseLong(Piso.getText()));
-                ubi.setCama(Long.parseLong(Cama.getText()));
+                //Permito que cama pueda ser null
+                String camaText = Cama.getText();
+                if (camaText != null && !camaText.isEmpty()) {
+                    ubi.setCama(Long.parseLong(camaText));
+                } else {
+                    ubi.setCama(null);
+                }
                 InstitucionDto institucion1 = (InstitucionDto) institucion.getSelectedItem();
                 ubi.setIdInstitucion(institucion1);
                 confirmarAltaOModificar(ubi, "alta");
@@ -179,8 +185,8 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 return;
             }
 
-            // Validar que los campos numericos solo contengan números
-            if (Validator.contieneSoloNumeros(numeroText) || Validator.contieneSoloNumeros(pisoText) || Validator.contieneSoloNumeros(camaText)) {
+            // Validar que los campos numéricos solo contengan números
+            if (Validator.contieneSoloNumeros(numeroText) || Validator.contieneSoloNumeros(pisoText) || (!camaText.isEmpty() && Validator.contieneSoloNumeros(camaText))) {
                 JOptionPane.showMessageDialog(null, "Los campos numéricos solo aceptan números", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }

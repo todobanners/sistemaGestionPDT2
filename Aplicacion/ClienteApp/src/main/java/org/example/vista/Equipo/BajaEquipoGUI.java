@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 
 public class BajaEquipoGUI {
 
@@ -25,14 +26,15 @@ public class BajaEquipoGUI {
     private JPanel formularioPanel;
     private JTextField comentarioText;
     private JTextField razonText;
-    private JComboBox usuarioCombo;
-    private JComboBox equipoCombo;
-    private JComboBox estadoCombo;
+    //private JComboBox usuarioCombo;
+    //private JComboBox equipoCombo;
+    //private JComboBox estadoCombo;
     private JPanel fechaAdqContainer;
     private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
     private JButton guardarButton;
     private JButton cancelarButton;
     private JButton imagenActual;
+    private JLabel labelUserId;
 
 
     private EquipoDto equipoSeleccionado;
@@ -49,25 +51,13 @@ public class BajaEquipoGUI {
 
     private void initComponents() throws Exception {
         fechaAdqContainer.add(fechaCompraDate);
-
-        for (UsuarioDto usuario : Conexion.obtenerUsuarioBean().obtenerUsuarios()) {
-            usuarioCombo.addItem(usuario);
-        }
-
-        for (EquipoDto equipo : Conexion.obtenerEquipoBean().listarEquipos()) {
-            equipoCombo.addItem(equipo);
-        }
-
-        for (Estados estado : Estados.values()) {
-            estadoCombo.addItem(estado);
-        }
-
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (camposValidos()) {
                         BajaEquipoDto bajaEquipo = obtenerBajaEquipoDesdeFormulario();
+                        System.out.println(bajaEquipo.getIdUsuario());
                         Conexion.obtenerBajaEquipoBean().crearBajaEquipo(bajaEquipo);
                         JOptionPane.showMessageDialog(null, "Equipo dado de baja exitosamente");
                         actualizarListaEquipos();
@@ -94,10 +84,11 @@ public class BajaEquipoGUI {
         if (equipoSeleccionado != null) {
             comentarioText.setText("");
             razonText.setText("");
-            usuarioCombo.setSelectedItem(equipoSeleccionado);
-            equipoCombo.setSelectedItem(equipoSeleccionado.getNombre());
-            estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
-            fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+            //usuarioCombo.setSelectedItem(equipoSeleccionado);
+            //equipoCombo.setSelectedItem(equipoSeleccionado.getNombre());
+            //estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
+            fechaCompraDate.setDate(LocalDate.now());
+            labelUserId.setText(String.valueOf(Sesion.getUsuario()) + "-" + Sesion.getUsuario().getId());
             // Cargar imagen y mostrarla en el botón, gestionando excepciones y falta de imagen
             try {
                 URL url = new URL(equipoSeleccionado.getImagen());
@@ -120,7 +111,6 @@ public class BajaEquipoGUI {
     private BajaEquipoDto obtenerBajaEquipoDesdeFormulario() {
         BajaEquipoDto bajaEquipo = new BajaEquipoDto();
         bajaEquipo.setId(equipoSeleccionado.getId());
-        //bajaEquipo.setIdUsuario((UsuarioDto) usuarioCombo.getSelectedItem());
         bajaEquipo.setIdUsuario(Sesion.getUsuario());
         bajaEquipo.setIdEquipo(equipoSeleccionado);
         bajaEquipo.setComentarios(comentarioText.getText());
