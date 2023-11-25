@@ -32,10 +32,7 @@ public class ModificarDatosPropiosGUI {
     private JButton confirmarButton;
     private JButton cancelarButton;
     private JButton buttonTelefonos;
-//TODO: Falta telefono
 
-    // JDateChooser selectorFecha = new JDateChooser();
-//DatePicker selectorFecha = new DatePicker();
     DatePicker selectorFecha = Utilidades.createCustomDatePicker();
 
     public JPanel getPanel() {
@@ -49,8 +46,6 @@ public class ModificarDatosPropiosGUI {
         contenedorFechaNacimiento.add(selectorFecha);
 
         usernameTextField.setText(usuario.getNombreUsuario());
-        //passwordField1.setText(usuario.getContrasenia());
-        //passwordField2.setText(usuario.getContrasenia());
         email.setText(usuario.getEmail());
         cedula.setText(usuario.getCedula());
         apellido1.setText(usuario.getApellido());

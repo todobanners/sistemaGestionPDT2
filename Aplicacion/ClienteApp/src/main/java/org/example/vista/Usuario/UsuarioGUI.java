@@ -3,6 +3,7 @@ package org.example.vista.Usuario;
 import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.DTO.PerfilDto;
 import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
+import codigocreativo.uy.servidorapp.DTO.UsuariosTelefonoDto;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;
@@ -11,10 +12,11 @@ import org.example.modelo.Validator;
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /*
     TODO:
@@ -49,6 +51,7 @@ public class UsuarioGUI {
     private JTextField accCampoUsername;
     private JButton limpiarCamposButton;
     private JTextField accCampoID;
+    private JButton buttonEditarTelefono;
 
     DatePicker fechaChooser = Utilidades.createCustomDatePicker();
     public JPanel getPanel() {
@@ -121,6 +124,22 @@ public class UsuarioGUI {
                     accCampoApellido.setText(usuario.getApellido());
                     accCampoCedula.setText(usuario.getCedula());
                     accCampoEmail.setText(usuario.getEmail());
+
+
+                    //Obtener los telefonos del usuario
+                    Set<UsuariosTelefonoDto> telefonos = usuario.getUsuariosTelefonos();
+                    String telefonosString = "";
+                    for (UsuariosTelefonoDto telefono : telefonos) {
+                        telefonosString += telefono.getNumero() + ",";
+                    }
+                    //Eliminar la ultima coma
+                    if (!telefonosString.isEmpty()) {
+                        telefonosString = telefonosString.substring(0, telefonosString.length() - 1);
+                    }
+                    accCampoTelefono.setText(telefonosString);
+
+
+
                     // accCampoTelefono.setText(usuario.getTelefono());
 
                     // Recorrer el JComboBox para encontrar el objeto Perfil con el ID correspondiente
@@ -188,33 +207,75 @@ public class UsuarioGUI {
                 int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar los datos?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
 
                 if (confirmacion == JOptionPane.YES_OPTION) {
-                try {
-                    usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
-                    usuario.setNombre(accCampoNombre.getText());
-                    usuario.setApellido(accCampoApellido.getText());
-                    usuario.setCedula(accCampoCedula.getText());
-                    usuario.setEmail(accCampoEmail.getText());
-                    // usuario.setTelefono(accCampoTelefono.getText());
-                    usuario.setIdPerfil((PerfilDto) accComboPerfil.getSelectedItem());
-                    usuario.setIdInstitucion((InstitucionDto) accComboInstitucion.getSelectedItem());
-                    Estados estado = (Estados) accComboEstado.getSelectedItem();
-                    usuario.setEstado(estado);
-                    usuario.setNombreUsuario(accCampoUsername.getText());
-                    usuario.setFechaNacimiento(fechaChooser.getDate());
+                    try {
+                        usuario = Conexion.obtenerUsuarioBean().obtenerUsuario(id);
+                        usuario.setNombre(accCampoNombre.getText());
+                        usuario.setApellido(accCampoApellido.getText());
+                        usuario.setCedula(accCampoCedula.getText());
+                        usuario.setEmail(accCampoEmail.getText());
+                        // usuario.setTelefono(accCampoTelefono.getText());
+                        usuario.setIdPerfil((PerfilDto) accComboPerfil.getSelectedItem());
+                        usuario.setIdInstitucion((InstitucionDto) accComboInstitucion.getSelectedItem());
+                        Estados estado = (Estados) accComboEstado.getSelectedItem();
+                        usuario.setEstado(estado);
+                        usuario.setNombreUsuario(accCampoUsername.getText());
+                        usuario.setFechaNacimiento(fechaChooser.getDate());
 
-                    Conexion.obtenerUsuarioBean().modificarUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario modificado con éxito");
+                        List<String> tel = Arrays.asList(accCampoTelefono.getText().split(","));
+                        Set<UsuariosTelefonoDto> telefonosDto = new LinkedHashSet<>();
+                        for (String telefono : tel) {
+                            UsuariosTelefonoDto telefonoDto = new UsuariosTelefonoDto();
+                            telefonoDto.setNumero(telefono);
+                            telefonoDto.setIdUsuario(usuario);
+                            telefonosDto.add(telefonoDto);
+                        }
+                        usuario.setUsuariosTelefonos(telefonosDto);
 
-                    limpiarCamposButton.doClick();
-                    List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
-                    generarTabla(listaUsuarios);
+                        Conexion.obtenerUsuarioBean().modificarUsuario(usuario);
+                        JOptionPane.showMessageDialog(null, "Usuario modificado con éxito");
 
-                } catch (NamingException ex) {
-                    throw new RuntimeException(ex);
+                        limpiarCamposButton.doClick();
+                        List<UsuarioDto> listaUsuarios = Conexion.obtenerUsuarioBean().obtenerUsuarios();
+                        generarTabla(listaUsuarios);
+
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
+        });
+
+        buttonEditarTelefono.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Obtener los telefonos del textfield asumiendo que estan separados por comas
+                String telefonos = accCampoTelefono.getText();
+                List<String> listaTelefonos = Arrays.asList(telefonos.split(","));
+
+                ModificarTelefonos modificarTelefonos = new ModificarTelefonos(listaTelefonos);
+
+                modificarTelefonos.pack();
+
+                modificarTelefonos.setVisible(true);
+
+                //Obtener los telefonos ingresados
+                List<String> telefonosIngresados = modificarTelefonos.getTelefonos();
+
+                //Limpiar el textfield
+                accCampoTelefono.setText("");
+
+                //Agregar los telefonos al textfield
+                if (!telefonosIngresados.isEmpty()) {
+                    for (String telefono : telefonosIngresados) {
+                        UsuarioGUI.this.accCampoTelefono.setText(UsuarioGUI.this.accCampoTelefono.getText() + telefono + ",");
+                    }
+                    //Eliminar la ultima coma
+                    accCampoTelefono.setText(accCampoTelefono.getText().substring(0, accCampoTelefono.getText().length() - 1));
+                }
+
             }
         });
+
         borrarSeleccionadoButton.addActionListener(e -> {
             Long id = Long.valueOf(accCampoID.getText());
             UsuarioDto usuario;

@@ -20,7 +20,6 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     private JButton modificarButton;
     private JButton eliminarButton;
     private JPanel contenedorHerramientas;
-    private JPanel contenedorFiltro;
     private JTable table1;
 
     private JComboBox Sector;
@@ -46,8 +45,8 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         }
 
         List<InstitucionDto> inst = Conexion.obtenerInstitucionBean().obtenerInstituciones();
-        for (int i = 0; i < inst.size(); i++) {
-            institucion.addItem(inst.get(i));
+        for (InstitucionDto institucionDto : inst) {
+            institucion.addItem(institucionDto);
         }
 
         modificarButton.addActionListener(new ActionListener() {
@@ -179,6 +178,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             String camaText = Cama.getText();
             InstitucionDto institucionSeleccionada = (InstitucionDto) institucion.getSelectedItem();
 
+
             // Validar campos obligatorios
             if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco", "Error", JOptionPane.ERROR_MESSAGE);
@@ -217,6 +217,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                         JOptionPane.showMessageDialog(null, "Ubicación agregada correctamente");
                     }
                     else if (accion.equals("modificar")) {
+
                         Conexion.obtenerUbicacionBean().modificarUbicacion(ubicacionSeleccionada);
                         // Mostrar mensaje de éxito
                         JOptionPane.showMessageDialog(null, "Ubicación modificada correctamente");

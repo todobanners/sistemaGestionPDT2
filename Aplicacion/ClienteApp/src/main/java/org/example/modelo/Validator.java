@@ -35,7 +35,7 @@ public class Validator {
 
     // Método para validar que una cadena contenga solo números
     public static boolean contieneSoloNumeros(String numero) {
-        return numero == null || !numero.matches("^[0-9]+$");
+        return numero == null || !numero.matches("^[0-9,]+$");
     }
 
     // Método para validar una contraseña (requiere al menos 8 caracteres, una letra y un número)
