@@ -1,11 +1,16 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.DTO.BajaUbicacionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.DTOMappers.BajaUbicacionMapper;
+import codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext;
+import codigocreativo.uy.servidorapp.DTOMappers.UbicacionMapper;
 import codigocreativo.uy.servidorapp.entidades.BajaUbicacion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionManagement;
 import jakarta.ejb.TransactionManagementType;
@@ -26,17 +31,22 @@ public class BajaUbicacionBean implements BajaUbicacionRemote {
     @Inject
     BajaUbicacionMapper bajaUbicacionMapper;
 
+    @Inject
+    UbicacionMapper ubicacionMapper;
+
+    @EJB
+    UbicacionRemote ubicacionBean;
+
+    @Transactional
     @Override
     public void crearBajaUbicacion(BajaUbicacionDto bajaUbicacion) throws ServiciosException {
         try {
             // Persistir la baja de ubicación
-            em.persist(bajaUbicacionMapper.toEntity(bajaUbicacion));
+            em.persist(bajaUbicacionMapper.toEntity(bajaUbicacion, new CycleAvoidingMappingContext()));
             // Dar de baja lógica a la ubicación
-            em.createQuery("UPDATE Ubicacion ubicacion SET ubicacion.estado = codigocreativo.uy.servidorapp.enumerados.Estados.INACTIVO WHERE ubicacion.id = :id")
-                    .setParameter("id", bajaUbicacion.getIdUbicacion().getId())
-                    .executeUpdate();
         } catch (Exception e) {
-            throw new ServiciosException("No se pudo crear la baja de ubicación");
+            e.printStackTrace();
+            throw new ServiciosException(e.getMessage());
         }
     }
 
@@ -54,9 +64,22 @@ public class BajaUbicacionBean implements BajaUbicacionRemote {
     @Override
     public List<BajaUbicacionDto> listarBajaUbicaciones() throws ServiciosException {
         try {
-            return bajaUbicacionMapper.toDto(em.createQuery("SELECT bajaUbicacion FROM BajaUbicacion bajaUbicacion", BajaUbicacion.class).getResultList());
+            return bajaUbicacionMapper.toDto(em.createQuery("SELECT bajaUbicacion FROM BajaUbicacion bajaUbicacion", BajaUbicacion.class).getResultList(), new CycleAvoidingMappingContext());
         } catch (Exception e) {
             throw new ServiciosException("No se pudo listar las bajas de ubicaciones");
+        }
+    }
+
+    @Override
+    public void bajaLogicaUbicacion(UbicacionDto ub) throws ServiciosException {
+        Ubicacion ubicacion = ubicacionMapper.toEntity(ub);
+        try {
+            ubicacion.setEstado(Estados.INACTIVO);
+            em.merge(ubicacion);
+            em.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServiciosException(e.getMessage());
         }
     }
 }

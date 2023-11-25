@@ -5,18 +5,18 @@ import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.DTOMappers.EquipoMapper;
 import codigocreativo.uy.servidorapp.DTOMappers.UbicacionMapper;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 
 @Stateless
 public class UbicacionBean implements UbicacionRemote {
-    @PersistenceContext (unitName = "default")
+    @PersistenceContext(unitName = "default")
     private EntityManager em;
 
     @Inject
@@ -47,14 +47,14 @@ public class UbicacionBean implements UbicacionRemote {
     }
 
     @Override
-    @Transactional
     public void borrarUbicacion(Long id) throws ServiciosException {
         try {
-            em.remove(ubicacionMapper.toEntity(obtenerUbicacionPorId(id)));
-            em.flush();
+            em.createQuery("UPDATE Ubicacion ubicacion SET ubicacion.estado = 'INACTIVO' WHERE ubicacion.id = :id")
+                    .setParameter("id", id)
+                    .executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ServiciosException("No se pudo borrar la ubicacion");
+            throw new ServiciosException(e.getMessage());
         }
     }
 
@@ -78,5 +78,18 @@ public class UbicacionBean implements UbicacionRemote {
     @Override
     public UbicacionDto obtenerUbicacionPorId(Long id) throws ServiciosException {
         return ubicacionMapper.toDto(em.createQuery("SELECT u FROM Ubicacion u WHERE u.id = :id", Ubicacion.class).setParameter("id", id).getSingleResult());
+    }
+
+    @Override
+    public void bajaLogicaUbicacion(UbicacionDto ub) throws ServiciosException {
+        Ubicacion ubicacion = ubicacionMapper.toEntity(ub);
+        try {
+            ubicacion.setEstado(Estados.INACTIVO);
+            em.merge(ubicacion);
+            em.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServiciosException(e.getMessage());
+        }
     }
 }

@@ -12,4 +12,5 @@ public interface BajaEquipoRemote {
     public List<BajaEquipoDto> obtenerBajasEquipos();
     public BajaEquipoDto obtenerBajaEquipo(Long id);
 
+
 }

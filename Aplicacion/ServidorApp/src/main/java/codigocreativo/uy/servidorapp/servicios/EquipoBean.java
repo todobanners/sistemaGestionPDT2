@@ -3,6 +3,7 @@ package codigocreativo.uy.servidorapp.servicios;
 import codigocreativo.uy.servidorapp.DTO.BajaEquipoDto;
 import codigocreativo.uy.servidorapp.DTO.EquipoDto;
 import codigocreativo.uy.servidorapp.DTOMappers.BajaEquipoMapper;
+import codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext;
 import codigocreativo.uy.servidorapp.DTOMappers.EquipoMapper;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import jakarta.ejb.Stateless;
@@ -36,7 +37,7 @@ public class EquipoBean implements EquipoRemote {
 
     @Override
     public void eliminarEquipo(BajaEquipoDto bajaEquipo) {
-        em.persist(bajaEquipoMapper.toEntity(bajaEquipo));
+        em.persist(bajaEquipoMapper.toEntity(bajaEquipo, new CycleAvoidingMappingContext()));
         em.createQuery("UPDATE Equipo equipo SET equipo.estado = 'INACTIVO' WHERE equipo.id = :id")
                 .setParameter("id", bajaEquipo.getIdEquipo().getId())
                 .executeUpdate();

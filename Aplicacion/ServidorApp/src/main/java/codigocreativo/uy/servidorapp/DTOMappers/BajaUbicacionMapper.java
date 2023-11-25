@@ -8,14 +8,14 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.CDI, uses = {UsuarioMapper.class, UbicacionMapper.class})
 public interface BajaUbicacionMapper {
-    BajaUbicacion toEntity(BajaUbicacionDto bajaUbicacionDto);
+    BajaUbicacion toEntity(BajaUbicacionDto bajaUbicacionDto, @Context CycleAvoidingMappingContext context);
 
-    BajaUbicacionDto toDto(BajaUbicacion bajaUbicacion);
+    BajaUbicacionDto toDto(BajaUbicacion bajaUbicacion, @Context CycleAvoidingMappingContext context);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    BajaUbicacion partialUpdate(BajaUbicacionDto bajaUbicacionDto, @MappingTarget BajaUbicacion bajaUbicacion);
+    BajaUbicacion partialUpdate(BajaUbicacionDto bajaUbicacionDto, @MappingTarget BajaUbicacion bajaUbicacion, @Context CycleAvoidingMappingContext context);
 
-    List<BajaUbicacion> toEntity(List<BajaUbicacionDto> bajaUbicacionDto);
+    List<BajaUbicacion> toEntity(List<BajaUbicacionDto> bajaUbicacionDto, @Context CycleAvoidingMappingContext context);
 
-    List<BajaUbicacionDto> toDto(List<BajaUbicacion> bajaUbicacion);
+    List<BajaUbicacionDto> toDto(List<BajaUbicacion> bajaUbicacion, @Context CycleAvoidingMappingContext context);
 }

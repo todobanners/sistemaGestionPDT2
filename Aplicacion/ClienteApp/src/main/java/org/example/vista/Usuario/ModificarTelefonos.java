@@ -112,6 +112,8 @@ public class ModificarTelefonos extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 // Eliminar el panel del panel de telefonos
                 panelTelefonos.remove(panel);
+                textField.setText("");
+
                 // Actualizar el panel
                 panelTelefonos.updateUI();
             }

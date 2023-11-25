@@ -122,7 +122,7 @@ public class PerfilesGUI {
 
                 PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(filaSeleccionada, 0));
 
-                int confirmacion = JOptionPane.showConfirmDialog(null, "¿El nombre del perfil no puede cambiar?, ¿Estás seguro de modificar el perfil?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el perfil?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
 
                 if (confirmacion == JOptionPane.YES_OPTION) {
                     perfil.setEstado((Estados) comboEstado.getSelectedItem());

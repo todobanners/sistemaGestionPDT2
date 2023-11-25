@@ -94,7 +94,7 @@ public class BajaUbicacionGUI {
             Conexion.obtenerBajaUbicacionBean().crearBajaUbicacion(baja);
 
             // Eliminar la ubicación de la lista
-            Conexion.obtenerUbicacionBean().borrarUbicacion(ubicacionSeleccionada.getId());
+            Conexion.obtenerUbicacionBean().bajaLogicaUbicacion(ubicacionSeleccionada);
 
             // Mostrar mensaje de éxito
             JOptionPane.showMessageDialog(null, "Ubicación eliminada correctamente");
