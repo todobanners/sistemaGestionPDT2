@@ -78,73 +78,102 @@ public class RegistroUsuarioNuevo extends JFrame {
         });
 
         aceptarButton.addActionListener(e -> {
-            UsuarioDto usuario = new UsuarioDto();
-            //Validamos los campos
-            // Verifico que los campos estén todos completos
-            if (nombreTextField.getText().isEmpty() || apellidoTextField.getText().isEmpty() || cedulaTextField.getText().isEmpty() || userTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || telefonoTextField.getText().isEmpty() || clave.getPassword().length == 0 || claveRepetir.getPassword().length == 0 || selectorFecha.getDate() == null){
+            // Validar que todos los campos estén completos
+            if (nombreTextField.getText().isEmpty() || apellidoTextField.getText().isEmpty() ||
+                    cedulaTextField.getText().isEmpty() || userTextField.getText().isEmpty() ||
+                    emailTextField.getText().isEmpty() || telefonoTextField.getText().isEmpty() ||
+                    clave.getPassword().length == 0 || claveRepetir.getPassword().length == 0 ||
+                    selectorFecha.getDate() == null) {
                 JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+                return;
             }
-            // Verifico que el nombre y apellido contengan solo letras
-            else if (Validator.contieneSoloLetras(nombreTextField.getText()) || Validator.contieneSoloLetras(apellidoTextField.getText())) {
+
+            // Validar que el nombre y apellido contengan solo letras
+            if (Validator.contieneSoloLetras(nombreTextField.getText()) || Validator.contieneSoloLetras(apellidoTextField.getText())) {
                 JOptionPane.showMessageDialog(null, "Los campos nombre y apellido solo pueden contener letras");
+                return;
             }
-            // Verifico que la cédula sea válida
-            else if (!Validator.validarCedula(cedulaTextField.getText())) {
+
+            // Validar que la cédula sea válida
+            if (!Validator.validarCedula(cedulaTextField.getText())) {
                 JOptionPane.showMessageDialog(null, "La cédula ingresada no es válida");
+                return;
             }
-            // Verifico que el email sea válido
-            else if (!Validator.validarEmail(emailTextField.getText())) {
+
+            // Validar que el email sea válido
+            if (!Validator.validarEmail(emailTextField.getText())) {
                 JOptionPane.showMessageDialog(null, "El email ingresado no es válido");
+                return;
             }
 
-            // Verifico que las claves coinciden
-            else if (!Arrays.equals(clave.getPassword(), claveRepetir.getPassword())) {
+            // Validar que las claves coincidan
+            if (!Arrays.equals(clave.getPassword(), claveRepetir.getPassword())) {
                 JOptionPane.showMessageDialog(null, "Las claves ingresadas no coinciden");
+                return;
             }
-            // Verifico que la contraseña tenga al menos una letra y un número
-            else if (!Validator.validarContrasena(new String(clave.getPassword()))) {
+
+            // Validar que la contraseña tenga al menos una letra y un número
+            if (!Validator.validarContrasena(new String(clave.getPassword()))) {
                 JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener al menos una letra y un número y contener al menos 8 caracteres");
-            } else {
-                //Guardo los datos en la tabla
-                //Genero objeto usuario
-                InstitucionDto institucion = new InstitucionDto();
-                institucion.setId(1L);
-                usuario.setIdInstitucion(institucion);
-                usuario.setNombre(nombreTextField.getText());
-                usuario.setApellido(apellidoTextField.getText());
-                usuario.setCedula(cedulaTextField.getText());
-                usuario.setNombreUsuario(userTextField.getText()); //El nombre de usuario está formado por el nombre.apellido en minúscula
-                usuario.setEmail(emailTextField.getText());
+                return;
+            }
 
-                //hasheo la contraseña
+            // Crear el objeto UsuarioDto y realizar las operaciones necesarias
+            UsuarioDto usuario = new UsuarioDto();
 
+            // Generar objeto InstitucionDto (asumiendo que tienes un método para obtener la institución)
+            InstitucionDto institucion = new InstitucionDto();
+            institucion.setId(1L);
+            usuario.setIdInstitucion(institucion);
 
-                usuario.setContrasenia(Utilidades.hashClave(clave.getText()));
-                usuario.setFechaNacimiento(selectorFecha.getDate());
-                PerfilDto perfil = (PerfilDto) comboBoxTipo.getSelectedItem();
-                usuario.setIdPerfil(perfil);
-                usuario.setEstado(Estados.SIN_VALIDAR);
-                List<String> telefonos = Arrays.asList(telefonoTextField.getText().split(","));
-                Set<UsuariosTelefonoDto> telefonosDto = new LinkedHashSet<>();
-                for (String telefono : telefonos) {
-                    UsuariosTelefonoDto telefonoDto = new UsuariosTelefonoDto();
-                    UsuariosTelefonoIdDto id = new UsuariosTelefonoIdDto();
-                    id.setNumero(telefono);
-                    id.setIdUsuario(usuario.getId());
-                    telefonoDto.setId(id);
-                    telefonosDto.add(telefonoDto);
-                }
-                usuario.setUsuariosTelefonos(telefonosDto);
+            // Resto del código para completar el objeto usuario
+            usuario.setNombre(nombreTextField.getText());
+            usuario.setApellido(apellidoTextField.getText());
+            usuario.setCedula(cedulaTextField.getText());
+            usuario.setNombreUsuario(userTextField.getText());
+            usuario.setEmail(emailTextField.getText());
+            usuario.setContrasenia(Utilidades.hashClave(new String(clave.getPassword())));
+            usuario.setFechaNacimiento(selectorFecha.getDate());
+            PerfilDto perfil = (PerfilDto) comboBoxTipo.getSelectedItem();
+            usuario.setIdPerfil(perfil);
+            usuario.setEstado(Estados.SIN_VALIDAR);
 
+            // Crear objetos UsuariosTelefonoDto y UsuariosTelefonoIdDto
+            List<String> telefonos = Arrays.asList(telefonoTextField.getText().split(","));
+            Set<UsuariosTelefonoDto> telefonosDto = new LinkedHashSet<>();
+            for (String telefono : telefonos) {
+                UsuariosTelefonoDto telefonoDto = new UsuariosTelefonoDto();
+                UsuariosTelefonoIdDto id = new UsuariosTelefonoIdDto();
+                id.setNumero(telefono);
+                id.setIdUsuario(usuario.getId());
+                telefonoDto.setId(id);
+                telefonosDto.add(telefonoDto);
+            }
+            usuario.setUsuariosTelefonos(telefonosDto);
+
+            try {
+                // Crear el usuario en la base de datos
+                Conexion.obtenerUsuarioBean().crearUsuario(usuario);
+
+                // Mostrar mensaje de confirmación
+                JOptionPane.showMessageDialog(null, "Usuario creado con éxito, deberá esperar a que un administrador lo valide");
+
+                // Limpiar campos y salir al login
+                limpiarCampos();
+                setVisible(false);
+                LoginForm loginForm = null;
                 try {
-                    Conexion.obtenerUsuarioBean().crearUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario creado con éxito, deberá esperar a que un administrador lo valide");
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "No se pudo crear el usuario Error:" + exception.getMessage());
+                    loginForm = new LoginForm();
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                    throw new RuntimeException(ex);
                 }
+                loginForm.setVisible(true);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                JOptionPane.showMessageDialog(null, "No se pudo crear el usuario Error:" + exception.getMessage());
             }
         });
+
 
         cancelarButton.addActionListener(e -> {
             //Muestra cartel de confirmación de cancelación
