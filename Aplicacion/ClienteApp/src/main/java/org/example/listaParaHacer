@@ -1,6 +1,6 @@
 ERRORES DIFICULTAD MEDIA/BAJA
 
-- CAMA en UBICACION deberia ser un String es mas facil de dejar en null con msj de "no tiene" {Nota de desarrollo: No se cambia a string, debe ser int, se maneja el null en los casos especificos}
+REPARADO {Aparece vacio si no tiene} CAMA en UBICACION deberia ser un String es mas facil de dejar en null con msj de "no tiene" {Nota de desarrollo: No se cambia a string, debe ser int, se maneja el null en los casos especificos}
 
 - GARANTIA en EQUIPO no está hecha la columna en la tabla
 - MARCA en EQUIPO no está //Esto esta en los requerimientos?
