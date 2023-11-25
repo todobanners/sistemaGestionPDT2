@@ -264,7 +264,22 @@ public class IntervencionGUI {
         exportarAExcelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    Vector<String> columnas = new Vector<>();
+                    columnas.add("Fecha");
+                    columnas.add("Tipo de Intervención");
+                    columnas.add("Motivo");
+                    columnas.add("Equipo");
+                    columnas.add("Comentarios");
+                    Vector<Vector<Object>> dataVector = new Vector<>();
+                    model.getDataVector().forEach(row -> {
+                        Vector<Object> rowVector = (Vector<Object>) row;
+                        dataVector.add(rowVector);
+                    });
+                    Utilidades.exportarAExcel(columnas, dataVector, "Intervenciones");
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
