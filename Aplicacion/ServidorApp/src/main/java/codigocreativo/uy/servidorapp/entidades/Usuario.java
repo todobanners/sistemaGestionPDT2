@@ -22,8 +22,6 @@ public class Usuario implements Serializable {
     @Column(name = "CEDULA", length = 8)
     private String cedula;
 
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "ID_INSTITUCION")
@@ -56,7 +54,7 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "ID_PERFIL")
     private Perfil idPerfil;
 
-    @OneToMany(mappedBy = "idUsuario")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idUsuario", cascade = CascadeType.ALL)
     private Set<UsuariosTelefono> usuariosTelefonos = new LinkedHashSet<>();
 
     public Set<UsuariosTelefono> getUsuariosTelefonos() {

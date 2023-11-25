@@ -7,24 +7,35 @@ import java.util.Objects;
  * DTO for {@link codigocreativo.uy.servidorapp.entidades.UsuariosTelefono}
  */
 public class UsuariosTelefonoDto implements Serializable {
-    private UsuariosTelefonoIdDto id;
+    private Long id;
+    private String numero;
     private UsuarioDto idUsuario;
 
     public UsuariosTelefonoDto() {
     }
 
-    public UsuariosTelefonoDto(
-            UsuariosTelefonoIdDto id, UsuarioDto idUsuario) {
-        this.idUsuario = idUsuario;
+    public UsuariosTelefonoDto(Long id, String numero,
+                               UsuarioDto idUsuario) {
         this.id = id;
-    }
-
-    public UsuarioDto getIdUsuario() {
-        return idUsuario;
-    }
-
-    public UsuariosTelefonoDto setIdUsuario(UsuarioDto idUsuario) {
+        this.numero = numero;
         this.idUsuario = idUsuario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UsuariosTelefonoDto setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public UsuariosTelefonoDto setNumero(String numero) {
+        this.numero = numero;
         return this;
     }
 
@@ -33,26 +44,28 @@ public class UsuariosTelefonoDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsuariosTelefonoDto entity = (UsuariosTelefonoDto) o;
-        return Objects.equals(this.idUsuario, entity.idUsuario);
+        return Objects.equals(this.id, entity.id) &&
+                Objects.equals(this.numero, entity.numero);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUsuario);
+        return Objects.hash(id, numero);
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
-                "idUsuario = " + idUsuario + ")";
+                "id = " + id + ", " +
+                "numero = " + numero + ")";
     }
 
-    public UsuariosTelefonoIdDto getId() {
-        return id;
+    public UsuarioDto getIdUsuario() {
+        return idUsuario;
     }
 
-    public UsuariosTelefonoDto setId(UsuariosTelefonoIdDto id) {
-        this.id = id;
+    public UsuariosTelefonoDto setIdUsuario(UsuarioDto idUsuario) {
+        this.idUsuario = idUsuario;
         return this;
     }
 }

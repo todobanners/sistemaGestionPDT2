@@ -96,15 +96,18 @@ public class IntervencionGUI {
 
         actualizarTabla();
 
-
         registrarIntervencionButton.addActionListener(e -> {
             IntervencionDto intervencion = new IntervencionDto();
             try {
-                intervencion.setIdTipo((TiposIntervencioneDto) comboTipodeIntervencion.getSelectedItem()).setFechaHora(selectorFecha.getDateTimePermissive()).setMotivo(textMotivo.getText()).setIdEquipo((EquipoDto) comboEquipos.getSelectedItem()).setComentarios(textComentarios.getText()).setIdUsuario(Conexion.obtenerUsuarioBean().obtenerUsuarioDto(Sesion.getUsuario().getId()));//TODO: cambiar por el dto
+                intervencion.setIdTipo((TiposIntervencioneDto) comboTipodeIntervencion.getSelectedItem())
+                        .setFechaHora(selectorFecha.getDateTimePermissive())
+                        .setMotivo(textMotivo.getText())
+                        .setIdEquipo((EquipoDto) comboEquipos.getSelectedItem())
+                        .setComentarios(textComentarios.getText())
+                        .setIdUsuario(Conexion.obtenerUsuarioBean().obtenerUsuarioDto(Sesion.getUsuario().getId()));
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
-
 
             try {
                 // Antes de crear la intervención, mostrar el cuadro de diálogo de confirmación
@@ -123,11 +126,19 @@ public class IntervencionGUI {
                         ex.printStackTrace();
                     }
                     actualizarTabla();
+
+                    // Limpiar los campos después de registrar la intervención
+                    comboTipodeIntervencion.setSelectedIndex(0);
+                    textMotivo.setText("");
+                    textComentarios.setText("");
+                    comboEquipos.setSelectedIndex(0);
+                    selectorFecha.clear();
                 }
             } catch (ServiciosException | NamingException ex) {
                 throw new RuntimeException(ex);
             }
         });
+
 
         filtroBoton.addActionListener(new ActionListener() {
             @Override

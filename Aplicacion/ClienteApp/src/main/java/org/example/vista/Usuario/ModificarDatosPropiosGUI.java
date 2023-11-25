@@ -1,7 +1,7 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.DTO.UsuariosTelefonoDto;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
@@ -12,6 +12,10 @@ import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ModificarDatosPropiosGUI {
     private JPanel modificarDatosPropios;
@@ -27,6 +31,7 @@ public class ModificarDatosPropiosGUI {
     private JTextField telefono;
     private JButton confirmarButton;
     private JButton cancelarButton;
+    private JButton buttonTelefonos;
 //TODO: Falta telefono
 
     // JDateChooser selectorFecha = new JDateChooser();
@@ -52,6 +57,17 @@ public class ModificarDatosPropiosGUI {
         nombre1.setText(usuario.getNombre());
         id.setText(usuario.getId().toString());
         selectorFecha.setDate(usuario.getFechaNacimiento());
+        //Obtener los telefonos del usuario
+        Set<UsuariosTelefonoDto> telefonos = usuario.getUsuariosTelefonos();
+        String telefonosString = "";
+        for (UsuariosTelefonoDto telefono : telefonos) {
+            telefonosString += telefono.getNumero() + ",";
+        }
+        //Eliminar la ultima coma
+        if (!telefonosString.isEmpty()) {
+            telefonosString = telefonosString.substring(0, telefonosString.length() - 1);
+        }
+        telefono.setText(telefonosString);
 
         //TODO: Falta verificacion de fecha
 
@@ -82,6 +98,16 @@ public class ModificarDatosPropiosGUI {
                 usuario.setApellido(apellido1.getText());
                 usuario.setNombre(nombre1.getText());
 
+                List<String> tel = Arrays.asList(telefono.getText().split(","));
+                Set<UsuariosTelefonoDto> telefonosDto = new LinkedHashSet<>();
+                for (String telefono : tel) {
+                    UsuariosTelefonoDto telefonoDto = new UsuariosTelefonoDto();
+                    telefonoDto.setNumero(telefono);
+                    telefonoDto.setIdUsuario(usuario);
+                    telefonosDto.add(telefonoDto);
+                }
+                usuario.setUsuariosTelefonos(telefonosDto);
+
                 //Date fechaElegida = selectorFecha.getDate();
                 //LocalDate localdate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
@@ -103,8 +129,7 @@ public class ModificarDatosPropiosGUI {
 
                     JOptionPane.showMessageDialog(null, "Los datos se han modificado correctamente", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                     limpiarCampos();
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(null, "Operacion cancelada, los datos no se han modificado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -118,11 +143,40 @@ public class ModificarDatosPropiosGUI {
                 int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la modificación de los datos?", "Confirmación", JOptionPane.YES_NO_OPTION);
                 if (opcion == JOptionPane.YES_OPTION) {
                     //todo: Debe llevar a la pantalla de Home
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(null, "Operacion cancelada, los datos no se han modificado", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
                 }
                 limpiarCampos();
+            }
+        });
+        buttonTelefonos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Obtener los telefonos del textfield asumiendo que estan separados por comas
+                String telefonos = telefono.getText();
+                List<String> listaTelefonos = Arrays.asList(telefonos.split(","));
+
+                ModificarTelefonos modificarTelefonos = new ModificarTelefonos(listaTelefonos);
+
+                modificarTelefonos.pack();
+
+                modificarTelefonos.setVisible(true);
+
+                //Obtener los telefonos ingresados
+                List<String> telefonosIngresados = modificarTelefonos.getTelefonos();
+
+                //Limpiar el textfield
+                telefono.setText("");
+
+                //Agregar los telefonos al textfield
+                if (!telefonosIngresados.isEmpty()) {
+                    for (String telefono : telefonosIngresados) {
+                        ModificarDatosPropiosGUI.this.telefono.setText(ModificarDatosPropiosGUI.this.telefono.getText() + telefono + ",");
+                    }
+                    //Eliminar la ultima coma
+                    telefono.setText(telefono.getText().substring(0, telefono.getText().length() - 1));
+                }
+
             }
         });
     }

@@ -1,7 +1,6 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.DTO.*;
-import codigocreativo.uy.servidorapp.entidades.UsuariosTelefonoId;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;
@@ -115,6 +114,36 @@ public class RegistroUsuarioNuevo extends JFrame {
             // Validar que la contraseña tenga al menos una letra y un número
             if (!Validator.validarContrasena(new String(clave.getPassword()))) {
                 JOptionPane.showMessageDialog(null, "La contraseña ingresada debe tener al menos una letra y un número y contener al menos 8 caracteres");
+            } else {
+                //Guardo los datos en la tabla
+                //Genero objeto usuario
+                InstitucionDto institucion = new InstitucionDto();
+                institucion.setId(1L);
+                UsuarioDto usuario = new UsuarioDto();
+                usuario.setIdInstitucion(institucion);
+                usuario.setNombre(nombreTextField.getText());
+                usuario.setApellido(apellidoTextField.getText());
+                usuario.setCedula(cedulaTextField.getText());
+                usuario.setNombreUsuario(userTextField.getText()); //El nombre de usuario está formado por el nombre.apellido en minúscula
+                usuario.setEmail(emailTextField.getText());
+
+                //hasheo la contraseña
+
+
+                usuario.setContrasenia(Utilidades.hashClave(clave.getText()));
+                usuario.setFechaNacimiento(selectorFecha.getDate());
+                PerfilDto perfil = (PerfilDto) comboBoxTipo.getSelectedItem();
+                usuario.setIdPerfil(perfil);
+                usuario.setEstado(Estados.SIN_VALIDAR);
+                List<String> tel = Arrays.asList(telefonoTextField.getText().split(","));
+                Set<UsuariosTelefonoDto> telefonosDto = new LinkedHashSet<>();
+                for (String telefono : tel) {
+                    UsuariosTelefonoDto telefonoDto = new UsuariosTelefonoDto();
+                    telefonoDto.setNumero(telefono);
+                    telefonoDto.setIdUsuario(usuario);
+                    telefonosDto.add(telefonoDto);
+                }
+                usuario.setUsuariosTelefonos(telefonosDto);
                 return;
             }
 
@@ -143,10 +172,8 @@ public class RegistroUsuarioNuevo extends JFrame {
             Set<UsuariosTelefonoDto> telefonosDto = new LinkedHashSet<>();
             for (String telefono : telefonos) {
                 UsuariosTelefonoDto telefonoDto = new UsuariosTelefonoDto();
-                UsuariosTelefonoIdDto id = new UsuariosTelefonoIdDto();
-                id.setNumero(telefono);
-                id.setIdUsuario(usuario.getId());
-                telefonoDto.setId(id);
+                telefonoDto.setNumero(telefono);
+                telefonoDto.setIdUsuario(usuario);
                 telefonosDto.add(telefonoDto);
             }
             usuario.setUsuariosTelefonos(telefonosDto);
@@ -164,7 +191,8 @@ public class RegistroUsuarioNuevo extends JFrame {
                 LoginForm loginForm = null;
                 try {
                     loginForm = new LoginForm();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                         UnsupportedLookAndFeelException ex) {
                     throw new RuntimeException(ex);
                 }
                 loginForm.setVisible(true);
