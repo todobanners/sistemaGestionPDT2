@@ -1,6 +1,7 @@
 package codigocreativo.uy.servidorapp.DTO;
 
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,17 +17,19 @@ public class UbicacionDto implements Serializable {
     private Long numero;
     private Long cama;
     private InstitucionDto idInstitucion;
+    private Estados estado;
 
     public UbicacionDto() {
     }
 
-    public UbicacionDto(Long id, String nombre, String sector, Long piso, Long numero, Long cama) {
+    public UbicacionDto(Long id, String nombre, String sector, Long piso, Long numero, Long cama, Estados estado) {
         this.id = id;
         this.nombre = nombre;
         this.sector = sector;
         this.piso = piso;
         this.numero = numero;
         this.cama = cama;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -83,6 +86,15 @@ public class UbicacionDto implements Serializable {
         return this;
     }
 
+    public Estados getEstado() {
+        return estado;
+    }
+
+    public Estados setEstado(Estados estado) {
+        this.estado = estado;
+        return this.estado;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,12 +105,13 @@ public class UbicacionDto implements Serializable {
                 Objects.equals(this.sector, entity.sector) &&
                 Objects.equals(this.piso, entity.piso) &&
                 Objects.equals(this.numero, entity.numero) &&
-                Objects.equals(this.cama, entity.cama);
+                Objects.equals(this.cama, entity.cama) &&
+                Objects.equals(this.estado, entity.estado);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, sector, piso, numero, cama);
+        return Objects.hash(id, nombre, sector, piso, numero, cama, estado);
     }
 
     @Override
