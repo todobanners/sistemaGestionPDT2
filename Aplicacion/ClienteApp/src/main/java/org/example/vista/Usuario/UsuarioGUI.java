@@ -18,14 +18,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
-/*
-    TODO:
-        * Faltan las validaciones y mensajes de error
-        * Falta el teléfono, tanto en registro como en visualización
-
-        Estas tareas están asignadas a Eduardo
-*/
-
 public class UsuarioGUI {
     private JPanel userGUI;
     private JPanel accContenedorFecha;

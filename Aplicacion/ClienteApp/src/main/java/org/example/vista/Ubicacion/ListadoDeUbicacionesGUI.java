@@ -87,16 +87,6 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                         // Llamar al servicio para eliminar la ubicación
                         BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada));
                         bajaUbicacionGUI.mostrarVentana();
-
-                        //TODO obtener informacion de si se borro o no la ubicacion
-                        //TODO si se borro, actualizar la tabla
-
-
-
-                            /*Conexion.obtenerUbicacionBean().borrarUbicacion(listaUbicaciones.get(ubicacionSeleccionada).getId());
-                            // Actualizar la lista después de la eliminación
-                            List<Ubicacion> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
-                            generarTabla(listaUbicaciones);*/
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona una ubicación para eliminar");
