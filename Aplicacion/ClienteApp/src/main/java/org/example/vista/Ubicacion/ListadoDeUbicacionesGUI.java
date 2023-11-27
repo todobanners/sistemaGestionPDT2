@@ -2,6 +2,7 @@ package org.example.vista.Ubicacion;
 
 import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.modelo.Conexion;
 import org.example.modelo.Validator;
@@ -124,6 +125,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 ubi.setNombre(Nombre.getText());
                 ubi.setNumero(Long.parseLong(Numero.getText()));
                 ubi.setPiso(Long.parseLong(Piso.getText()));
+                ubi.setEstado(Estados.ACTIVO);
                 //Permito que cama pueda ser null
                 String camaText = Cama.getText();
                 if (camaText != null && !camaText.isEmpty()) {
@@ -185,6 +187,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             ubicacionSeleccionada.setNombre(nombre);
             ubicacionSeleccionada.setNumero(Long.parseLong(numeroText));
             ubicacionSeleccionada.setPiso(Long.parseLong(pisoText));
+            ubicacionSeleccionada.setEstado(Estados.ACTIVO);
 
             // Validar si el campo Cama no está vacío
             /*if (!camaText.isEmpty()) {
