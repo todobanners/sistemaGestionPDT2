@@ -195,7 +195,7 @@ public class Utilidades {
                 JSONObject jsonResponse = (JSONObject) parser.parse(responseContent);
                 // Obtener la URL de la imagen
                 JSONObject data = (JSONObject) jsonResponse.get("data");
-                JSONObject medium = (JSONObject) data.get("medium");
+                JSONObject medium = (JSONObject) data.get("thumb");
                 String imageUrl = (String) medium.get("url");
 
                 return imageUrl;
