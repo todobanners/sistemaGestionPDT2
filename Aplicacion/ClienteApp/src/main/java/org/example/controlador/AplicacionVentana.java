@@ -97,6 +97,7 @@ public class AplicacionVentana extends JFrame {
             // Cerrar ventana y abrir login
             LoginForm loginForm = null;
             try {
+                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
                 loginForm = new LoginForm();
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                      UnsupportedLookAndFeelException ex) {
