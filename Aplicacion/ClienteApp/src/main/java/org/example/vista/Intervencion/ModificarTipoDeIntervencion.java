@@ -31,13 +31,19 @@ public class ModificarTipoDeIntervencion extends JDialog {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Seguro que deseas modificar y cerrar?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
 
-                estadoSel = (Estados) comboEstado.getSelectedItem();
-                nombreSel = textNombre.getText();
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    // Realiza la lógica de modificación aquí
+                    estadoSel = (Estados) comboEstado.getSelectedItem();
+                    nombreSel = textNombre.getText();
 
-                dispose();
+                    // Cierra la ventana
+                    dispose();
+                }
             }
         });
+
 
         cancelarButton.addActionListener(new ActionListener() {
             @Override

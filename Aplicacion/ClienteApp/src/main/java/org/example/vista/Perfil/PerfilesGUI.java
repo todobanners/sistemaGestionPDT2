@@ -1,5 +1,6 @@
 package org.example.vista.Perfil;
 
+import codigocreativo.uy.servidorapp.DTO.PerfilDto;
 import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.servicios.PerfilRemote;
@@ -64,7 +65,7 @@ public class PerfilesGUI {
         AbstractHyperlinkAction<Object> simpleAction = new AbstractHyperlinkAction<Object>(null) {
 
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
+                PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
                 PerfilPermisosGUI perfilPermisosGUI = new PerfilPermisosGUI(perfil);
 
             }
@@ -88,55 +89,79 @@ public class PerfilesGUI {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = new Perfil();
+                PerfilDto perfil = new PerfilDto();
                 if (!Validator.validarMaximoCaracteres(textNombre.getText(), 20)) {
-                    JOptionPane.showMessageDialog(null, "El nombre no debe tener mas de 20 caracteres");
-                }else if (!Validator.validarMinimoCaracteres(textNombre.getText(), 3)) {
+                    JOptionPane.showMessageDialog(null, "El nombre no debe tener más de 20 caracteres");
+                } else if (!Validator.validarMinimoCaracteres(textNombre.getText(), 3)) {
                     JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 3 caracteres");
                 } else if (Validator.contieneSoloLetras(textNombre.getText())) {
                     JOptionPane.showMessageDialog(null, "El nombre solo debe contener letras");
                 } else {
-                    perfil.setNombrePerfil(textNombre.getText());
-                    perfil.setEstado(Estados.valueOf(comboEstado.getSelectedItem().toString()));
-                    perfilesPermisoBean.crearPerfil(perfil);
-                    actualizarTabla();
+                    int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de guardar el perfil?", "Confirmar Guardar", JOptionPane.YES_NO_OPTION);
+
+                    if (confirmacion == JOptionPane.YES_OPTION) {
+                        perfil.setNombrePerfil(textNombre.getText());
+                        perfil.setEstado((Estados) comboEstado.getSelectedItem());
+                        perfilesPermisoBean.crearPerfil(perfil);
+                        JOptionPane.showMessageDialog(null, "Perfil guardado con éxito");
+                        actualizarTabla();
+                        limpiarCampos();
+                    }
                 }
             }
         });
+
         editarPerfilSeleccionadoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
-                /*if (Validator.validarMaximoCaracteres(textNombre.getText(), 20)) {
-                    JOptionPane.showMessageDialog(null, "El nombre no debe tener mas de 20 caracteres");
-                }else if (Validator.validarMinimoCaracteres(textNombre.getText(), 2)) {
-                    JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 3 caracteres");
-                } else if (Validator.contieneSoloLetras(textNombre.getText())) {
-                    JOptionPane.showMessageDialog(null, "El nombre solo debe contener letras");
-                } else{}*/
-                //perfil.setNombrePerfil(textNombre.getText());
-                    perfil.setEstado(Estados.valueOf(comboEstado.getSelectedItem().toString()));
+                int filaSeleccionada = tablaPerfiles.getSelectedRow();
+                if (filaSeleccionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Por favor, selecciona un perfil para editar.");
+                    return;
+                }
+
+                PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(filaSeleccionada, 0));
+
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el perfil?", "Confirmar Modificación", JOptionPane.YES_NO_OPTION);
+
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    perfil.setEstado((Estados) comboEstado.getSelectedItem());
                     perfilesPermisoBean.modificarPerfil(perfil);
-                    JOptionPane.showMessageDialog(null, "Perfil modificado");
+                    JOptionPane.showMessageDialog(null, "Perfil modificado con éxito");
                     actualizarTabla();
+                    limpiarCampos();
+                }
             }
         });
+
         borrarPerfilSeleccionadoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
-                perfilesPermisoBean.eliminarPerfil(perfil);
-                JOptionPane.showMessageDialog(null, "Perfil eliminado");
-                actualizarTabla();
+                int filaSeleccionada = tablaPerfiles.getSelectedRow();
+                if (filaSeleccionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Por favor, selecciona un perfil para dar de Baja.");
+                    return;
+                }
+
+                int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de dar de baja el perfil?", "Confirmar Baja", JOptionPane.YES_NO_OPTION);
+
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(filaSeleccionada, 0));
+                    perfilesPermisoBean.eliminarPerfil(perfil);
+                    JOptionPane.showMessageDialog(null, "Perfil eliminado con éxito");
+                    actualizarTabla();
+                    limpiarCampos();
+                }
             }
         });
+
         //Cuando se ahce click en una fila de la tabla
         tablaPerfiles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 //Cargar datos del perfil seleccionado
-                Perfil perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
+                PerfilDto perfil = perfilesPermisoBean.obtenerPerfil((Long) tablaPerfiles.getValueAt(tablaPerfiles.getSelectedRow(), 0));
                 textNombre.setText(perfil.getNombrePerfil());
                 comboEstado.setSelectedItem(perfil.getEstado());
 
@@ -147,9 +172,8 @@ public class PerfilesGUI {
             public void actionPerformed(ActionEvent e) {
                 //Cargar datos de la tabla filtrados por estado
                 model.setRowCount(0);
-                for (Perfil perfil : perfilesPermisoBean.listarPerfilesPorEstado((Estados) filtroEstadoCombo.getSelectedItem())) {
+                for (PerfilDto perfil : perfilesPermisoBean.listarPerfilesPorEstado((Estados) filtroEstadoCombo.getSelectedItem())) {
                     model.addRow(new Object[]{perfil.getId(), perfil.getNombrePerfil(), "Ver permisos", perfil.getEstado()});
-                    System.out.println(perfil.getNombrePerfil());
                 }
             }
         });
@@ -158,9 +182,8 @@ public class PerfilesGUI {
             public void actionPerformed(ActionEvent e) {
                 //Cargar datos de la tabla filtrados por nombre
                 model.setRowCount(0);
-                for (Perfil perfil : perfilesPermisoBean.listarPerfilesPorNombre(filtroNombreCampo.getText())) {
+                for (PerfilDto perfil : perfilesPermisoBean.listarPerfilesPorNombre(filtroNombreCampo.getText())) {
                     model.addRow(new Object[]{perfil.getId(), perfil.getNombrePerfil(), "Ver permisos", perfil.getEstado()});
-                    System.out.println(perfil.getNombrePerfil());
                 }
             }
         });
@@ -175,11 +198,14 @@ public class PerfilesGUI {
         });
     }
 
+    private void limpiarCampos() {
+        textNombre.setText("");
+    }
+
     private void actualizarTabla() {
         model.setRowCount(0);
-        for (Perfil perfil : perfilesPermisoBean.obtenerPerfiles()) {
+        for (PerfilDto perfil : perfilesPermisoBean.obtenerPerfiles()) {
             model.addRow(new Object[]{perfil.getId(), perfil.getNombrePerfil(), "Ver permisos", perfil.getEstado()});
-            System.out.println(perfil.getNombrePerfil());
         }
 
     }

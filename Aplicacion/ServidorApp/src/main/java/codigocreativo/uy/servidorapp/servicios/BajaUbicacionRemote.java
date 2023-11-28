@@ -1,5 +1,7 @@
 package codigocreativo.uy.servidorapp.servicios;
 
+import codigocreativo.uy.servidorapp.DTO.BajaUbicacionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.entidades.BajaUbicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Remote;
@@ -10,10 +12,11 @@ import java.util.List;
 @Remote
 public interface BajaUbicacionRemote {
     @Transactional
-    void crearBajaUbicacion(BajaUbicacion bajaUbicacion) throws ServiciosException;
+    void crearBajaUbicacion(BajaUbicacionDto bajaUbicacion) throws ServiciosException;
 
     void borrarUbicacion(Long id) throws ServiciosException;
 
-    public List<BajaUbicacion> listarBajaUbicaciones() throws ServiciosException;
+    public List<BajaUbicacionDto> listarBajaUbicaciones() throws ServiciosException;
+    public void bajaLogicaUbicacion(UbicacionDto ub) throws ServiciosException;
 
 }

@@ -1,14 +1,21 @@
 package org.example.vista.Equipo;
 
+import codigocreativo.uy.servidorapp.DTO.*;
 import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;
 import org.example.modelo.Utilidades;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 
 public class ModificarEquipo {
@@ -16,7 +23,6 @@ public class ModificarEquipo {
     private JPanel ModificarEquipoPanel;
     private JPanel accionesPanel;
     private JPanel formularioPanel;
-    private JPanel accionesTablaPanel;
     private JTextField idInternoText;
     private JComboBox ubicacionCombo;
     private JTextField nroSerieText;
@@ -30,11 +36,14 @@ public class ModificarEquipo {
     private JButton guardarButton;
     private JButton cancelarButton;
     private JComboBox estadoCombo;
+    private JButton imagenActual;
+    private JLabel filePathField;
+    private File imagenSubida;
     private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
 
-    private Equipo equipoSeleccionado;
+    private EquipoDto equipoSeleccionado;
 
-    public ModificarEquipo(Equipo equipo) throws Exception {
+    public ModificarEquipo(EquipoDto equipo) throws Exception {
         this.equipoSeleccionado = equipo;
         initComponents();
         if (equipoSeleccionado != null) {
@@ -47,37 +56,49 @@ public class ModificarEquipo {
     private void initComponents() throws Exception {
         fechaAdqContainer.add(fechaCompraDate);
 
-        for (Ubicacion ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
+
+
+        for (UbicacionDto ubicacion : Conexion.obtenerUbicacionBean().listarUbicaciones()) {
             ubicacionCombo.addItem(ubicacion);
         }
 
-        for (TiposEquipo tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
+        for (TiposEquipoDto tipo : Conexion.obtenerTipoBean().listarTiposEquipo()) {
             tipoCombo.addItem(tipo);
         }
 
-        for (ProveedoresEquipo proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
+        for (ProveedoresEquipoDto proveedor : Conexion.obtenerProveedoresEquipoBean().obtenerProveedoresEquipo()) {
             proveedorCombo.addItem(proveedor);
         }
 
-        for (Pais pais : Conexion.obtenerPaisBean().obtenerpais()) {
+        for (PaisDto pais : Conexion.obtenerPaisBean().obtenerpais()) {
             paisCombo.addItem(pais);
         }
 
-        for (ModelosEquipo modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
+        for (ModelosEquipoDto modelo : Conexion.obtenerModeloBean().listarModelosEquipo()) {
             modeloCombo.addItem(modelo);
         }
 
         for (Estados estado : Estados.values()) {
             estadoCombo.addItem(estado);
         }
-        // Configurar los componentes de la interfaz aquí...
+        imagenBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    imagenSubida = fileChooser.getSelectedFile();
+                    filePathField.setText(imagenSubida.getAbsolutePath());
+                }
+            }
+        });
 
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (camposValidos()) {
-                        Equipo equipoModificado = obtenerEquipoDesdeFormulario();
+                        EquipoDto equipoModificado = obtenerEquipoDesdeFormulario();
                         Conexion.obtenerEquipoBean().modificarEquipo(equipoModificado);
                         JOptionPane.showMessageDialog(null, "Equipo modificado exitosamente");
                         actualizarListaEquipos();
@@ -100,7 +121,7 @@ public class ModificarEquipo {
         });
     }
 
-    private void cargarDatosEquipo() {
+    private void cargarDatosEquipo() throws IOException {
         if (equipoSeleccionado != null) {
             idInternoText.setText(equipoSeleccionado.getIdInterno());
             ubicacionCombo.setSelectedItem(equipoSeleccionado.getIdUbicacion());
@@ -112,25 +133,53 @@ public class ModificarEquipo {
             modeloCombo.setSelectedItem(equipoSeleccionado.getIdModelo());
             estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
             fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+            // Cargar imagen y mostrarla en el botón, gestionando excepciones y falta de imagen
+            try {
+                URL url = new URL(equipoSeleccionado.getImagen());
+                Image image = ImageIO.read(url);
+                Image scaledImage = image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+                imagenActual.setIcon(new ImageIcon(scaledImage));
+                filePathField.setText(equipoSeleccionado.getImagen());
+            } catch (MalformedURLException e) {
+                JOptionPane.showMessageDialog(null, "Error: La URL de la imagen no es válida.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error: No se pudo cargar la imagen.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Error: No se ha seleccionado ningún equipo");
         }
     }
 
-    private Equipo obtenerEquipoDesdeFormulario() {
-        Equipo equipoModificado = new Equipo();
+    private EquipoDto obtenerEquipoDesdeFormulario() {
+        EquipoDto equipoModificado = new EquipoDto();
         equipoModificado.setId(equipoSeleccionado.getId());
         equipoModificado.setIdInterno(idInternoText.getText());
-        equipoModificado.setIdUbicacion(((Ubicacion) ubicacionCombo.getSelectedItem()));
+        equipoModificado.setIdUbicacion(((UbicacionDto) ubicacionCombo.getSelectedItem()));
         equipoModificado.setNroSerie(nroSerieText.getText());
         equipoModificado.setNombre(nombreText.getText());
-        equipoModificado.setIdTipo((TiposEquipo) tipoCombo.getSelectedItem());
-        equipoModificado.setIdProveedor(((ProveedoresEquipo) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
-        equipoModificado.setIdPais((Pais) paisCombo.getSelectedItem());
-        equipoModificado.setIdModelo((ModelosEquipo) modeloCombo.getSelectedItem());
+        equipoModificado.setIdTipo((TiposEquipoDto) tipoCombo.getSelectedItem());
+        equipoModificado.setIdProveedor(((ProveedoresEquipoDto) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
+        equipoModificado.setIdPais((PaisDto) paisCombo.getSelectedItem());
+        equipoModificado.setIdModelo((ModelosEquipoDto) modeloCombo.getSelectedItem());
         equipoModificado.setFechaAdquisicion(fechaCompraDate.getDate());
         equipoModificado.setEstado((Estados) estadoCombo.getSelectedItem());
+        if (imagenSubida != null) {
+            try {
+                guardarButton.setText("Subiendo imagen...");
+                String nuevaImagen = Utilidades.subirImagen(imagenSubida);
+                equipoModificado.setImagen(nuevaImagen);
+                guardarButton.setText("Guardar");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al subir la nueva imagen");
+            }
+        } else {
+            equipoModificado.setImagen(equipoSeleccionado.getImagen());
+        }
+
         return equipoModificado;
     }
 
@@ -152,7 +201,7 @@ public class ModificarEquipo {
         // Llama a la función de la clase EquiposGUI que actualiza la tabla
         EquiposGUI equiposGUI = new EquiposGUI();
         try {
-            equiposGUI.actualizarTabla();
+            equiposGUI.actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al actualizar la lista de equipos");

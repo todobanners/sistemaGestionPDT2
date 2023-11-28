@@ -9,13 +9,14 @@ import java.util.List;
 
 @Remote
 public interface UsuarioRemote {
-    public void crearUsuario(Usuario u);
-    public void modificarUsuario(Usuario u);
-    public void eliminarUsuario(Usuario u);
-    public Usuario obtenerUsuario(Long id);
-    public Usuario obtenerUsuarioPorCI(String ci);
-    public List<Usuario> obtenerUsuarios();
-    public List<Usuario> obtenerUsuariosFiltrado(String filtro, String valor);
-    public Usuario login(String usuario, String password);
-    public List<Usuario> obtenerUsuariosPorEstado(Estados estado);
+    public void crearUsuario(UsuarioDto u);
+    public void modificarUsuario(UsuarioDto u);
+    public void eliminarUsuario(UsuarioDto u);
+    public UsuarioDto obtenerUsuario(Long id);
+    public UsuarioDto obtenerUsuarioDto(Long id);
+    public UsuarioDto obtenerUsuarioPorCI(String ci);
+    public List<UsuarioDto> obtenerUsuarios();
+    public List<UsuarioDto> obtenerUsuariosFiltrado(String filtro, Object valor);
+    public UsuarioDto login(String usuario, String password);
+    public List<UsuarioDto> obtenerUsuariosPorEstado(Estados estado);
 }

@@ -1,7 +1,8 @@
 package org.example.vista.Ubicacion;
 
-import codigocreativo.uy.servidorapp.entidades.Institucion;
-import codigocreativo.uy.servidorapp.entidades.Ubicacion;
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.modelo.Conexion;
 import org.example.modelo.Validator;
@@ -20,12 +21,11 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     private JButton modificarButton;
     private JButton eliminarButton;
     private JPanel contenedorHerramientas;
-    private JPanel contenedorFiltro;
     private JTable table1;
 
     private JComboBox Sector;
     private JTextField Nombre;
-    private JTextField Número;
+    private JTextField Numero;
     private JTextField Piso;
     private JTextField Cama;
     private JComboBox institucion;
@@ -37,7 +37,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     }
 
     public ListadoDeUbicacionesGUI() throws NamingException, ServiciosException {
-        List<Ubicacion> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
+        List<UbicacionDto> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
         generarTabla(listaUbicaciones);
 
         //anadir sectores desde el enumerado sectores
@@ -45,7 +45,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             Sector.addItem(codigocreativo.uy.servidorapp.enumerados.Sectores.values()[i].getValor());
         }
 
-        List<Institucion> inst = Conexion.obtenerInstitucionBean().obtenerInstituciones();
+        List<InstitucionDto> inst = Conexion.obtenerInstitucionBean().obtenerInstituciones();
         for (int i = 0; i < inst.size(); i++) {
             institucion.addItem(inst.get(i));
         }
@@ -53,20 +53,22 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         modificarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el elemento seleccionado en la lista
-                int ubicacionSeleccionada = table1.getSelectedRow();
+                //Preguntar al usuario si desea modificar la ubicacion
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Seguro que deseas modificar esta ubicación?",
+                        "Confirmar modificación", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    // Obtener el elemento seleccionado en la lista
+                    int ubicacionSeleccionada = table1.getSelectedRow();
 
-                if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) {
-                    // Puedes abrir una nueva ventana para modificar la ubicación,
-                    // o realizar las acciones necesarias según tus requisitos.
-                    // Por ejemplo, podrías crear un nuevo formulario de modificación.
-                    confirmarAltaOModificar(listaUbicaciones.get(ubicacionSeleccionada), "modificar");
-                    // Ejemplo de cómo abrir un nuevo formulario para modificar la ubicación
-                    //ModificarUbicacionGUI modificarUbicacionGUI = new ModificarUbicacionGUI(ubicacionSeleccionada);
-                    //modificarUbicacionGUI.mostrarVentana();
+                    if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) {
+                        confirmarAltaOModificar(listaUbicaciones.get(ubicacionSeleccionada), "modificar");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecciona una ubicación para modificar");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Selecciona una ubicación para modificar");
+                    JOptionPane.showMessageDialog(null, "No se modificó la ubicación");
                 }
+
             }
         });
 
@@ -86,16 +88,6 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                         // Llamar al servicio para eliminar la ubicación
                         BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada));
                         bajaUbicacionGUI.mostrarVentana();
-
-                        //TODO obtener informacion de si se borro o no la ubicacion
-                        //TODO si se borro, actualizar la tabla
-
-
-
-                            /*Conexion.obtenerUbicacionBean().borrarUbicacion(listaUbicaciones.get(ubicacionSeleccionada).getId());
-                            // Actualizar la lista después de la eliminación
-                            List<Ubicacion> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
-                            generarTabla(listaUbicaciones);*/
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona una ubicación para eliminar");
@@ -109,10 +101,10 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 super.mouseClicked(e);
                 int ubicacionSeleccionada = table1.getSelectedRow();
                 if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) { // Si se seleccionó una ubicación
-                    Ubicacion ubi = listaUbicaciones.get(ubicacionSeleccionada);
+                    UbicacionDto ubi = listaUbicaciones.get(ubicacionSeleccionada);
                     Sector.setSelectedItem(ubi.getSector());
                     Nombre.setText(ubi.getNombre());
-                    Número.setText(String.valueOf(ubi.getNumero()));
+                    Numero.setText(String.valueOf(ubi.getNumero()));
                     Piso.setText(String.valueOf(ubi.getPiso()));
                     if (ubi.getCama() == null) {
                         Cama.setText("");
@@ -128,13 +120,20 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         agregarNuevoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ubicacion ubi = new Ubicacion();
+                UbicacionDto ubi = new UbicacionDto();
                 ubi.setSector((String) Sector.getSelectedItem());
                 ubi.setNombre(Nombre.getText());
-                ubi.setNumero(Long.parseLong(Número.getText()));
+                ubi.setNumero(Long.parseLong(Numero.getText()));
                 ubi.setPiso(Long.parseLong(Piso.getText()));
-                ubi.setCama(Long.parseLong(Cama.getText()));
-                Institucion institucion1 = (Institucion) institucion.getSelectedItem();
+                ubi.setEstado(Estados.ACTIVO);
+                //Permito que cama pueda ser null
+                String camaText = Cama.getText();
+                if (camaText != null && !camaText.isEmpty()) {
+                    ubi.setCama(Long.parseLong(camaText));
+                } else {
+                    ubi.setCama(null);
+                }
+                InstitucionDto institucion1 = (InstitucionDto) institucion.getSelectedItem();
                 ubi.setIdInstitucion(institucion1);
                 confirmarAltaOModificar(ubi, "alta");
 
@@ -153,23 +152,23 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.setColumnIdentifiers(columnas);
         table1.setModel(modelo);
-        for (int i = 0; i < lista.size(); i++) {
-            Ubicacion ubi = (Ubicacion) lista.get(i);
-            String[] fila = {ubi.getSector(), ubi.getNombre(), String.valueOf(ubi.getNumero()), String.valueOf(ubi.getPiso()), String.valueOf(ubi.getCama()), ubi.getIdInstitucion().getNombre()};
+        for (Object o : lista) {
+            UbicacionDto ubi = (UbicacionDto) o;
+            String[] fila = {ubi.getSector(), ubi.getNombre(), String.valueOf(ubi.getNumero()), String.valueOf(ubi.getPiso()), ubi.getCama() == null ? "" : String.valueOf(ubi.getCama()), ubi.getIdInstitucion().getNombre()};
             modelo.addRow(fila);
         }
 
     }
 
-    private void confirmarAltaOModificar(Ubicacion ubicacionSeleccionada, String accion) {
+    private void confirmarAltaOModificar(UbicacionDto ubicacionSeleccionada, String accion) {
         // Obtener los valores de los componentes y aplicar las modificaciones a la ubicación
         if (ubicacionSeleccionada != null) {
             String sector = (String) Sector.getSelectedItem();
             String nombre = Nombre.getText();
-            String numeroText = Número.getText();
+            String numeroText = Numero.getText();
             String pisoText = Piso.getText();
             String camaText = Cama.getText();
-            Institucion institucionSeleccionada = (Institucion) institucion.getSelectedItem();
+            InstitucionDto institucionSeleccionada = (InstitucionDto) institucion.getSelectedItem();
 
             // Validar campos obligatorios
             if (sector.isEmpty() || nombre.isEmpty() || numeroText.isEmpty() || pisoText.isEmpty()) {
@@ -177,8 +176,8 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 return;
             }
 
-            // Validar que los campos numericos solo contengan números
-            if (Validator.contieneSoloNumeros(numeroText) || Validator.contieneSoloNumeros(pisoText) || Validator.contieneSoloNumeros(camaText)) {
+            // Validar que los campos numéricos solo contengan números
+            if (Validator.contieneSoloNumeros(numeroText) || Validator.contieneSoloNumeros(pisoText) || (!camaText.isEmpty() && Validator.contieneSoloNumeros(camaText))) {
                 JOptionPane.showMessageDialog(null, "Los campos numéricos solo aceptan números", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -188,15 +187,16 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             ubicacionSeleccionada.setNombre(nombre);
             ubicacionSeleccionada.setNumero(Long.parseLong(numeroText));
             ubicacionSeleccionada.setPiso(Long.parseLong(pisoText));
+            ubicacionSeleccionada.setEstado(Estados.ACTIVO);
 
             // Validar si el campo Cama no está vacío
-            if (!camaText.isEmpty()) {
+            /*if (!camaText.isEmpty()) {
                 ubicacionSeleccionada.setCama(Long.parseLong(camaText));
-            }
+            }*/
 
             try {
                 // Obtener la institución
-                Institucion inst = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre(institucionSeleccionada.getNombre());
+                InstitucionDto inst = (InstitucionDto) institucion.getSelectedItem();
 
                 if (inst != null) {
                     // Asignar la institución a la ubicación

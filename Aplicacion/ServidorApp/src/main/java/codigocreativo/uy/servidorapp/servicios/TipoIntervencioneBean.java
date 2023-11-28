@@ -1,11 +1,12 @@
 package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.DTO.TiposIntervencioneDto;
+import codigocreativo.uy.servidorapp.DTOMappers.TiposIntervencioneMapper;
 import codigocreativo.uy.servidorapp.entidades.TiposIntervencione;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.PersistenceException;
 
 import java.util.List;
 
@@ -14,53 +15,36 @@ public class TipoIntervencioneBean implements TipoIntervencioneRemote {
     @PersistenceContext(unitName = "default")
     private EntityManager em;
 
+    @Inject
+    private TiposIntervencioneMapper tiposIntervencioneMapper;
+
     @Override
     public List<TiposIntervencioneDto> obtenerTiposIntervenciones() {
-        return em.createQuery("SELECT new codigocreativo.uy.servidorapp.DTO.TiposIntervencioneDto(t.id, t.nombreTipo, t.estado) FROM TiposIntervencione t", TiposIntervencioneDto.class).getResultList();
+        List<TiposIntervencione> tiposIntervenciones = em.createQuery("SELECT t FROM TiposIntervencione t", TiposIntervencione.class).getResultList();
+        return tiposIntervencioneMapper.toDto(tiposIntervenciones);
     }
 
     @Override
     public TiposIntervencioneDto obtenerTipoIntervencion(Long id) {
         TiposIntervencione tipoIntervencion = em.find(TiposIntervencione.class, id);
-        return new TiposIntervencioneDto(tipoIntervencion.getId(), tipoIntervencion.getNombreTipo(), tipoIntervencion.getEstado());
+        return tiposIntervencioneMapper.toDto(tipoIntervencion);
     }
 
     @Override
-    public boolean crearTipoIntervencion(TiposIntervencioneDto t) {
-        TiposIntervencione tipoIntervencion = new TiposIntervencione();
-        tipoIntervencion.setNombreTipo(t.getNombreTipo());
-        tipoIntervencion.setEstado(t.getEstado());
-        try {
-            em.persist(tipoIntervencion);
-            return true;
-        } catch (PersistenceException e) {
-            return false;
-        }
+    public void crearTipoIntervencion(TiposIntervencioneDto tipoIntervencion) {
+        TiposIntervencione tipoIntervencionEntity = tiposIntervencioneMapper.toEntity(tipoIntervencion);
+        em.persist(tipoIntervencionEntity);
     }
 
     @Override
-    public boolean modificarTipoIntervencion(TiposIntervencioneDto tipoIntervencion) {
-        TiposIntervencione tipoIntervencionMod = em.find(TiposIntervencione.class, tipoIntervencion.getId());
-
-        tipoIntervencionMod.setEstado(tipoIntervencion.getEstado());
-        try {
-            em.merge(tipoIntervencionMod);
-            return true;
-        } catch (PersistenceException e) {
-            return false;
-        }
+    public void modificarTipoIntervencion(TiposIntervencioneDto tipoIntervencion) {
+        TiposIntervencione tipoIntervencionEntity = tiposIntervencioneMapper.toEntity(tipoIntervencion);
+        em.merge(tipoIntervencionEntity);
     }
 
     @Override
-    public boolean eliminarTipoIntervencion(Long id) {
-        try {
-            //Change estado to inactivo
-            em.createQuery("UPDATE TiposIntervencione t SET t.estado = codigocreativo.uy.servidorapp.enumerados.Estados.INACTIVO WHERE t.id = :id")
-                    .setParameter("id", id)
-                    .executeUpdate();
-            return true;
-        } catch (PersistenceException e) {
-            return false;
-        }
+    public void eliminarTipoIntervencion(Long id) {
+        TiposIntervencione tipoIntervencion = em.find(TiposIntervencione.class, id);
+        em.remove(tipoIntervencion);
     }
 }

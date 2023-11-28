@@ -9,29 +9,34 @@ import java.util.Objects;
 public class ModelosEquipoDto implements Serializable {
     private Long id;
     private String nombre;
+    private MarcasModeloDto idMarca;
 
     public ModelosEquipoDto() {
     }
 
-    public ModelosEquipoDto(Long id, String nombre) {
+    public ModelosEquipoDto(Long id, String nombre,
+                            MarcasModeloDto idMarca) {
         this.id = id;
         this.nombre = nombre;
+        this.idMarca = idMarca;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public ModelosEquipoDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public ModelosEquipoDto setNombre(String nombre) {
         this.nombre = nombre;
+        return this;
     }
 
     @Override
@@ -50,8 +55,15 @@ public class ModelosEquipoDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombre = " + nombre + ")";
+        return nombre;
+    }
+
+    public MarcasModeloDto getIdMarca() {
+        return idMarca;
+    }
+
+    public ModelosEquipoDto setIdMarca(MarcasModeloDto idMarca) {
+        this.idMarca = idMarca;
+        return this;
     }
 }

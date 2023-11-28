@@ -10,29 +10,37 @@ import java.util.Objects;
 public class AuditoriaDto implements Serializable {
     private Long id;
     private LocalDate fechaHora;
+    private UsuarioDto idUsuario;
+    private OperacionDto idOperacion;
 
     public AuditoriaDto() {
     }
 
-    public AuditoriaDto(Long id, LocalDate fechaHora) {
+    public AuditoriaDto(Long id, LocalDate fechaHora,
+                        UsuarioDto idUsuario,
+                        OperacionDto idOperacion) {
         this.id = id;
         this.fechaHora = fechaHora;
+        this.idUsuario = idUsuario;
+        this.idOperacion = idOperacion;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public AuditoriaDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public LocalDate getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDate fechaHora) {
+    public AuditoriaDto setFechaHora(LocalDate fechaHora) {
         this.fechaHora = fechaHora;
+        return this;
     }
 
     @Override
@@ -54,5 +62,23 @@ public class AuditoriaDto implements Serializable {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
                 "fechaHora = " + fechaHora + ")";
+    }
+
+    public UsuarioDto getIdUsuario() {
+        return idUsuario;
+    }
+
+    public AuditoriaDto setIdUsuario(UsuarioDto idUsuario) {
+        this.idUsuario = idUsuario;
+        return this;
+    }
+
+    public OperacionDto getIdOperacion() {
+        return idOperacion;
+    }
+
+    public AuditoriaDto setIdOperacion(OperacionDto idOperacion) {
+        this.idOperacion = idOperacion;
+        return this;
     }
 }

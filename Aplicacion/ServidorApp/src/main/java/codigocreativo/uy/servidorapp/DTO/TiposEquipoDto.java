@@ -22,16 +22,18 @@ public class TiposEquipoDto implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public TiposEquipoDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombreTipo() {
         return nombreTipo;
     }
 
-    public void setNombreTipo(String nombreTipo) {
+    public TiposEquipoDto setNombreTipo(String nombreTipo) {
         this.nombreTipo = nombreTipo;
+        return this;
     }
 
     @Override
@@ -50,8 +52,6 @@ public class TiposEquipoDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombreTipo = " + nombreTipo + ")";
+        return nombreTipo;
     }
 }

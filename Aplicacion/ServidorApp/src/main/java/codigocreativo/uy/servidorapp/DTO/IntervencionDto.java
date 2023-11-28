@@ -1,58 +1,73 @@
 package codigocreativo.uy.servidorapp.DTO;
 
+import codigocreativo.uy.servidorapp.entidades.Intervencion;
+
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * DTO for {@link codigocreativo.uy.servidorapp.entidades.Intervencion}
+ * DTO for {@link Intervencion}
  */
 public class IntervencionDto implements Serializable {
     private Long id;
     private String motivo;
-    private LocalDate fechaHora;
+    private LocalDateTime fechaHora;
     private String comentarios;
+    private UsuarioDto idUsuario;
+    private TiposIntervencioneDto idTipo;
+    private EquipoDto idEquipo;
 
     public IntervencionDto() {
     }
 
-    public IntervencionDto(Long id, String motivo, LocalDate fechaHora, String comentarios) {
+    public IntervencionDto(Long id, String motivo, LocalDateTime fechaHora, String comentarios,
+                           UsuarioDto idUsuario,
+                           TiposIntervencioneDto idTipo,
+                           EquipoDto idEquipo) {
         this.id = id;
         this.motivo = motivo;
         this.fechaHora = fechaHora;
         this.comentarios = comentarios;
+        this.idUsuario = idUsuario;
+        this.idTipo = idTipo;
+        this.idEquipo = idEquipo;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public IntervencionDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getMotivo() {
         return motivo;
     }
 
-    public void setMotivo(String motivo) {
+    public IntervencionDto setMotivo(String motivo) {
         this.motivo = motivo;
+        return this;
     }
 
-    public LocalDate getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(LocalDate fechaHora) {
+    public IntervencionDto setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
+        return this;
     }
 
     public String getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(String comentarios) {
+    public IntervencionDto setComentarios(String comentarios) {
         this.comentarios = comentarios;
+        return this;
     }
 
     @Override
@@ -73,10 +88,33 @@ public class IntervencionDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "motivo = " + motivo + ", " +
-                "fechaHora = " + fechaHora + ", " +
-                "comentarios = " + comentarios + ")";
+        return motivo;
+    }
+
+    public UsuarioDto getIdUsuario() {
+        return idUsuario;
+    }
+
+    public IntervencionDto setIdUsuario(UsuarioDto idUsuario) {
+        this.idUsuario = idUsuario;
+        return this;
+    }
+
+    public TiposIntervencioneDto getIdTipo() {
+        return idTipo;
+    }
+
+    public IntervencionDto setIdTipo(TiposIntervencioneDto idTipo) {
+        this.idTipo = idTipo;
+        return this;
+    }
+
+    public EquipoDto getIdEquipo() {
+        return idEquipo;
+    }
+
+    public IntervencionDto setIdEquipo(EquipoDto idEquipo) {
+        this.idEquipo = idEquipo;
+        return this;
     }
 }

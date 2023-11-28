@@ -1,5 +1,6 @@
 package org.example.vista;
 
+import codigocreativo.uy.servidorapp.DTO.EquipoDto;
 import codigocreativo.uy.servidorapp.entidades.Equipo;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
@@ -28,6 +29,19 @@ public class HomeGUI {
     }
 
     public HomeGUI() throws NamingException, IOException {
+        FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT) {
+            @Override
+            public Dimension preferredLayoutSize(Container target) {
+                if (target.getWidth() > 0) {
+                    int w = target.getWidth();
+                    int h = super.preferredLayoutSize(target).height;
+                    return new Dimension(w, h);
+                } else {
+                    return super.preferredLayoutSize(target);
+                }
+            }
+        };
+        panel1.setLayout(flowLayout);
         executorService = Executors.newSingleThreadExecutor();
         progressBar = new JProgressBar();
         progressBar.setIndeterminate(true);
@@ -37,9 +51,9 @@ public class HomeGUI {
 
         executorService.execute(() -> {
             try {
-                List<Equipo> equipos = Conexion.obtenerEquipoBean().listarEquipos();
+                List<EquipoDto> equipos = Conexion.obtenerEquipoBean().listarEquipos();
                 titulo.setText("Bienvenido/a " + Sesion.getUsuario().getNombre() + " " + Sesion.getUsuario().getApellido() + "!");
-                for (Equipo equipo : equipos) {
+                for (EquipoDto equipo : equipos) {
                     String imageUrl = equipo.getImagen();
                     if (imageUrl != null && !imageUrl.isEmpty()) {
                         URL url = new URL(imageUrl);

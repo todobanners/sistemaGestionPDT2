@@ -10,7 +10,7 @@ import java.util.List;
 public interface TipoIntervencioneRemote {
     public List<TiposIntervencioneDto> obtenerTiposIntervenciones();
     public TiposIntervencioneDto obtenerTipoIntervencion(Long id);
-    public boolean crearTipoIntervencion(TiposIntervencioneDto tipoIntervencion);
-    public boolean modificarTipoIntervencion(TiposIntervencioneDto tipoIntervencion);
-    public boolean eliminarTipoIntervencion(Long id);
+    public void crearTipoIntervencion(TiposIntervencioneDto tipoIntervencion);
+    public void modificarTipoIntervencion(TiposIntervencioneDto tipoIntervencion);
+    public void eliminarTipoIntervencion(Long id);
 }

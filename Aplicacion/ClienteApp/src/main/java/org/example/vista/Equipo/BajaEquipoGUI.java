@@ -1,37 +1,45 @@
 package org.example.vista.Equipo;
 
-import codigocreativo.uy.servidorapp.entidades.BajaEquipo;
-import codigocreativo.uy.servidorapp.entidades.Equipo;
-import codigocreativo.uy.servidorapp.entidades.Usuario;
+import codigocreativo.uy.servidorapp.DTO.BajaEquipoDto;
+import codigocreativo.uy.servidorapp.DTO.EquipoDto;
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
+import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
 import org.example.modelo.Utilidades;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
 
 public class BajaEquipoGUI {
 
     private JPanel BajaEquipoPanel;
     private JPanel accionesPanel;
     private JPanel formularioPanel;
-    private JPanel accionesTablaPanel;
     private JTextField comentarioText;
     private JTextField razonText;
-    private JComboBox usuarioCombo;
-    private JComboBox equipoCombo;
-    private JComboBox estadoCombo;
+    //private JComboBox usuarioCombo;
+    //private JComboBox equipoCombo;
+    //private JComboBox estadoCombo;
     private JPanel fechaAdqContainer;
     private DatePicker fechaCompraDate = Utilidades.createCustomDatePicker();
     private JButton guardarButton;
     private JButton cancelarButton;
+    private JButton imagenActual;
+    private JLabel labelUserId;
 
 
-    private Equipo equipoSeleccionado;
+    private EquipoDto equipoSeleccionado;
 
-    public BajaEquipoGUI(Equipo equipo) throws Exception {
+    public BajaEquipoGUI(EquipoDto equipo) throws Exception {
         this.equipoSeleccionado = equipo;
         initComponents();
         if (equipoSeleccionado != null) {
@@ -43,25 +51,13 @@ public class BajaEquipoGUI {
 
     private void initComponents() throws Exception {
         fechaAdqContainer.add(fechaCompraDate);
-
-        for (Usuario usuario : Conexion.obtenerUsuarioBean().obtenerUsuarios()) {
-            usuarioCombo.addItem(usuario);
-        }
-
-        for (Equipo equipo : Conexion.obtenerEquipoBean().listarEquipos()) {
-            equipoCombo.addItem(equipo);
-        }
-
-        for (Estados estado : Estados.values()) {
-            estadoCombo.addItem(estado);
-        }
-
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (camposValidos()) {
-                        BajaEquipo bajaEquipo = obtenerBajaEquipoDesdeFormulario();
+                        BajaEquipoDto bajaEquipo = obtenerBajaEquipoDesdeFormulario();
+                        System.out.println(bajaEquipo.getIdUsuario());
                         Conexion.obtenerBajaEquipoBean().crearBajaEquipo(bajaEquipo);
                         JOptionPane.showMessageDialog(null, "Equipo dado de baja exitosamente");
                         actualizarListaEquipos();
@@ -88,28 +84,40 @@ public class BajaEquipoGUI {
         if (equipoSeleccionado != null) {
             comentarioText.setText("");
             razonText.setText("");
-            usuarioCombo.setSelectedItem(equipoSeleccionado);
-            equipoCombo.setSelectedItem(equipoSeleccionado.getNombre());
-            estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
-            // Asegúrate de cargar la fecha correctamente
-            fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
+            //usuarioCombo.setSelectedItem(equipoSeleccionado);
+            //equipoCombo.setSelectedItem(equipoSeleccionado.getNombre());
+            //estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
+            fechaCompraDate.setDate(LocalDate.now());
+            labelUserId.setText(String.valueOf(Sesion.getUsuario()) + "-" + Sesion.getUsuario().getId());
+            // Cargar imagen y mostrarla en el botón, gestionando excepciones y falta de imagen
+            try {
+                URL url = new URL(equipoSeleccionado.getImagen());
+                Image image = ImageIO.read(url);
+                Image scaledImage = image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+                imagenActual.setIcon(new ImageIcon(scaledImage));
+            } catch (MalformedURLException e) {
+                JOptionPane.showMessageDialog(null, "Error: La URL de la imagen no es válida.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error: No se pudo cargar la imagen.");
+                imagenActual.setIcon(null); // o establecer un icono predeterminado
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Error: No se ha seleccionado ningún equipo");
         }
     }
 
-    private BajaEquipo obtenerBajaEquipoDesdeFormulario() {
-        BajaEquipo bajaEquipo = new BajaEquipo();
+    private BajaEquipoDto obtenerBajaEquipoDesdeFormulario() {
+        BajaEquipoDto bajaEquipo = new BajaEquipoDto();
         bajaEquipo.setId(equipoSeleccionado.getId());
-        bajaEquipo.setIdUsuario((Usuario) usuarioCombo.getSelectedItem());
+        bajaEquipo.setIdUsuario(Sesion.getUsuario());
         bajaEquipo.setIdEquipo(equipoSeleccionado);
         bajaEquipo.setComentarios(comentarioText.getText());
         bajaEquipo.setRazon(razonText.getText());
-        /*Date fechaElegida = fechaCompraDate.getDate();
-        LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();*/
         bajaEquipo.setFecha(fechaCompraDate.getDate());
-        bajaEquipo.setEstado((Estados) estadoCombo.getSelectedItem());
+        bajaEquipo.setEstado(Estados.INACTIVO);
+
         return bajaEquipo;
     }
 
@@ -127,12 +135,12 @@ public class BajaEquipoGUI {
     private void actualizarListaEquipos() throws Exception {
         EquiposGUI equiposGUI = new EquiposGUI();
         try {
-            equiposGUI.actualizarTabla();
+            equiposGUI.actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
 
             // Cambia esta línea
             // BajaEquipo bajaEquipo = new BajaEquipo(equipoSeleccionado);
             // por
-            BajaEquipo bajaEquipo = new BajaEquipo();
+            BajaEquipoDto bajaEquipo = new BajaEquipoDto();
             bajaEquipo.setIdEquipo(equipoSeleccionado);
             // Resto del código...
         } catch (Exception ex) {

@@ -71,21 +71,37 @@ public class TiposDeIntervencionesGUI {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!Validator.validarMinimoCaracteres(textNombre.getText(), 1)) {
-                    JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 1 caracter");
-                } else if (!Validator.validarMaximoCaracteres(textNombre.getText(), 30)) {
-                    JOptionPane.showMessageDialog(null, "El nombre no puede tener más de 30 caracteres");
-                } else {
-                    TiposIntervencioneDto tipoIntervencioneDto = new TiposIntervencioneDto(null, textNombre.getText(), (Estados) comboEstado.getSelectedItem());
-                    if (tipoIntervencioneRemoteBean.crearTipoIntervencion(tipoIntervencioneDto)) {
-                        JOptionPane.showMessageDialog(null, "Se ha creado el tipo de intervención");
-                        actualizarTabla();
+                int confirmacion = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Estás seguro de guardar el tipo de intervención?",
+                        "Confirmar Guardado",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                    if (!Validator.validarMinimoCaracteres(textNombre.getText(), 1)) {
+                        JOptionPane.showMessageDialog(null, "El nombre debe tener al menos 1 caracter");
+                    } else if (!Validator.validarMaximoCaracteres(textNombre.getText(), 30)) {
+                        JOptionPane.showMessageDialog(null, "El nombre no puede tener más de 30 caracteres");
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo crear el tipo de intervención");
+                        TiposIntervencioneDto tipoIntervencioneDto = new TiposIntervencioneDto(
+                                null,
+                                textNombre.getText(),
+                                (Estados) comboEstado.getSelectedItem()
+                        );
+
+                        tipoIntervencioneRemoteBean.crearTipoIntervencion(tipoIntervencioneDto);
+
+                        // Limpiar los campos después de guardar
+                        limpiarCampos();
+
+                        // Actualizar la lista después de guardar
+                        actualizarTabla();
                     }
                 }
             }
         });
+
         filtroEstadoCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,7 +124,7 @@ public class TiposDeIntervencionesGUI {
                         model.addRow(new Object[]{tipoIntervencione.getNombreTipo(), tipoIntervencione.getEstado()});
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "No se encontraron resultados para la búsqueda");
+                        //JOptionPane.showMessageDialog(null, "No se encontraron resultados para la búsqueda");
                     }
                 });
             }
@@ -136,12 +152,7 @@ public class TiposDeIntervencionesGUI {
                 ModificarTipoDeIntervencion modificarTipoDeIntervencion = new ModificarTipoDeIntervencion(nombre, estado);
                 if (modificarTipoDeIntervencion.getNombreSel() != null && modificarTipoDeIntervencion.getEstadoSel() != null) {
                     TiposIntervencioneDto tipoIntervencioneDto = new TiposIntervencioneDto(id, nombre, modificarTipoDeIntervencion.getEstadoSel());
-                    if (tipoIntervencioneRemoteBean.modificarTipoIntervencion(tipoIntervencioneDto)) {
-                        JOptionPane.showMessageDialog(null, "Se ha modificado el tipo de intervención");
-                        actualizarTabla();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo modificar el tipo de intervención");
-                    }
+                    tipoIntervencioneRemoteBean.modificarTipoIntervencion(tipoIntervencioneDto);
                 }
             }
         });
@@ -152,18 +163,20 @@ public class TiposDeIntervencionesGUI {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de intervención");
                     return;
                 }
-                long id = (long) model.getValueAt(tablaTiposDeIntervenciones.getSelectedRow(), 2);
+                //abrir ventana para editar el tipo de intervención de la fila seleccionada
+                String nombre = (String) model.getValueAt(tablaTiposDeIntervenciones.getSelectedRow(), 0);
                 Estados estado = (Estados) model.getValueAt(tablaTiposDeIntervenciones.getSelectedRow(), 1);
-                if (estado.equals(Estados.INACTIVO)) {
-                    JOptionPane.showMessageDialog(null, "El tipo de intervención ya está dado de baja");
-                } else if (tipoIntervencioneRemoteBean.eliminarTipoIntervencion(id)) {
-                    JOptionPane.showMessageDialog(null, "Se ha dado de baja el tipo de intervención");
-                    actualizarTabla();
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se pudo dar de baja el tipo de intervención");
+                Long id = (Long) model.getValueAt(tablaTiposDeIntervenciones.getSelectedRow(), 2);
+                ModificarTipoDeIntervencion modificarTipoDeIntervencion = new ModificarTipoDeIntervencion(nombre, estado);
+                if (modificarTipoDeIntervencion.getNombreSel() != null && modificarTipoDeIntervencion.getEstadoSel() != null) {
+                    TiposIntervencioneDto tipoIntervencioneDto = new TiposIntervencioneDto(id, nombre, modificarTipoDeIntervencion.getEstadoSel());
+                    tipoIntervencioneRemoteBean.modificarTipoIntervencion(tipoIntervencioneDto);
                 }
             }
         });
+    }
+    private void limpiarCampos() {
+        textNombre.setText("");
     }
 
     private void actualizarTabla() {
@@ -172,6 +185,4 @@ public class TiposDeIntervencionesGUI {
             model.addRow(new Object[]{tipoIntervencione.getNombreTipo(), tipoIntervencione.getEstado(), tipoIntervencione.getId()});
         });
     }
-
-
 }

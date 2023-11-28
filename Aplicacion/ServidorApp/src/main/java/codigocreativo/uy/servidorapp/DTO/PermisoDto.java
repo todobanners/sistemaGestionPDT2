@@ -22,16 +22,18 @@ public class PermisoDto implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public PermisoDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getTipoPermiso() {
         return tipoPermiso;
     }
 
-    public void setTipoPermiso(String tipoPermiso) {
+    public PermisoDto setTipoPermiso(String tipoPermiso) {
         this.tipoPermiso = tipoPermiso;
+        return this;
     }
 
     @Override
@@ -50,8 +52,6 @@ public class PermisoDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "tipoPermiso = " + tipoPermiso + ")";
+        return tipoPermiso;
     }
 }

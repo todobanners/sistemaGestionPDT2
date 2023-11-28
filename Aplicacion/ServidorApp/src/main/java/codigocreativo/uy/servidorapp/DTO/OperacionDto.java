@@ -22,16 +22,18 @@ public class OperacionDto implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public OperacionDto setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombreOperacion() {
         return nombreOperacion;
     }
 
-    public void setNombreOperacion(String nombreOperacion) {
+    public OperacionDto setNombreOperacion(String nombreOperacion) {
         this.nombreOperacion = nombreOperacion;
+        return this;
     }
 
     @Override
@@ -50,8 +52,6 @@ public class OperacionDto implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "nombreOperacion = " + nombreOperacion + ")";
+        return nombreOperacion;
     }
 }

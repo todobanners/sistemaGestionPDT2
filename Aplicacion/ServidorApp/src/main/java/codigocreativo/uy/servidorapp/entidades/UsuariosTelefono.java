@@ -1,28 +1,35 @@
 package codigocreativo.uy.servidorapp.entidades;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import java.io.Serializable;
 
 @Entity
-@Table(name = "USUARIOS_TELEFONOS")
-public class UsuariosTelefono implements Serializable {
-    @EmbeddedId
-    private UsuariosTelefonoId id;
+@Table(name = "USUARIOS_TELEFONOS", schema = "PROYECTO")
+public class UsuariosTelefono {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_TELEFONO", nullable = false)
+    private Long id;
 
-    @MapsId("idUsuario")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
-    @JoinColumn(name = "ID_USUARIO", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_USUARIO")
     private Usuario idUsuario;
 
-    public UsuariosTelefonoId getId() {
+    @Column(name = "NUMERO", nullable = false, length = 20)
+    private String numero;
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UsuariosTelefonoId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -34,4 +41,5 @@ public class UsuariosTelefono implements Serializable {
         this.idUsuario = idUsuario;
     }
 
+    //TODO [JPA Buddy] generate columns from DB
 }

@@ -1,5 +1,7 @@
 package org.example.vista.Ubicacion;
 
+import codigocreativo.uy.servidorapp.DTO.BajaUbicacionDto;
+import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
 import codigocreativo.uy.servidorapp.entidades.BajaUbicacion;
 import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
@@ -36,56 +38,20 @@ public class BajaUbicacionGUI {
     JDateChooser selectorFecha = new JDateChooser();
 
 
-    private Ubicacion ubicacionSeleccionada;
+    private UbicacionDto ubicacionSeleccionada;
     //private Usuario user;
     //private Sesion sesion;
 
-    private BajaUbicacion baja;
+    private BajaUbicacionDto baja;
 
-    public BajaUbicacionGUI(Ubicacion ubicacionSeleccionada) {
+    public BajaUbicacionGUI(UbicacionDto ubicacionSeleccionada) {
         this.ubicacionSeleccionada = ubicacionSeleccionada;
-        this.baja = new BajaUbicacion();
+        this.baja = new BajaUbicacionDto();
         initComponents();
         asignarValores();
     }
 
     private void initComponents() {
-
-        /*bajaUbicacion = new JPanel();
-        institucion = new JTextField();
-        usuario = new JTextField();
-        ubicacion = new JTextField();
-        razon = new JTextField();
-        comentario = new JTextField();
-        fecha = new JPanel();
-        confirmar = new JButton();
-        //cancelar = new JButton();
-        labelComentario = new JLabel("comentario");
-        labelFecha = new JLabel("fecha");
-        labelUbicacion = new JLabel("ubicacion");
-        labelRazon = new JLabel("razon");
-        labelInstitucion = new JLabel("institucion");
-        labelUsuario = new JLabel("usuario");*/
-
-        // Configurar el diseño del panel
-        //bajaUbicacion.setLayout(new GridLayout(8, 3));
-
-        //fecha.add(selectorFecha);
-
-        /*bajaUbicacion.add(labelInstitucion);
-        bajaUbicacion.add(institucion);
-        bajaUbicacion.add(labelUsuario);
-        bajaUbicacion.add(usuario);
-        bajaUbicacion.add(labelUbicacion);
-        bajaUbicacion.add(ubicacion);
-        bajaUbicacion.add(labelRazon);
-        bajaUbicacion.add(razon);
-        bajaUbicacion.add(labelComentario);
-        bajaUbicacion.add(comentario);
-        bajaUbicacion.add(labelFecha);
-        bajaUbicacion.add(fecha);
-        bajaUbicacion.add(confirmar);*/
-        //bajaUbicacion.add(cancelar);
 
         // Configurar eventos de botones
         confirmar.addActionListener(new ActionListener() {
@@ -106,20 +72,20 @@ public class BajaUbicacionGUI {
             razon.setText("");
             comentario.setText("");
             ubicacion.setText(ubicacionSeleccionada.getNombre());
-            usuario.setText(Sesion.getInstancia().getUsuario().getNombre());
+            usuario.setText(Sesion.getUsuario().getNombre());
 
         }
     }
 
     private void confirmarBaja() {
         // Obtener los valores de los componentes y aplicar las modificaciones a la ubicación
-        BajaUbicacion baja = new BajaUbicacion();
+        BajaUbicacionDto baja = new BajaUbicacionDto();
         baja.setRazon(razon.getText());
         baja.setComentario(comentario.getText());
         baja.setIdUbicacion(ubicacionSeleccionada);
-        baja.setIdUsuario(Sesion.getInstancia().getUsuario());
+        baja.setIdUsuario(Sesion.getUsuario());
 
-        Date fechaElegida = (Date) selectorFecha.getDate();
+        Date fechaElegida = selectorFecha.getDate();
         LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         baja.setFecha(localDate);
 
@@ -128,7 +94,7 @@ public class BajaUbicacionGUI {
             Conexion.obtenerBajaUbicacionBean().crearBajaUbicacion(baja);
 
             // Eliminar la ubicación de la lista
-            Conexion.obtenerUbicacionBean().borrarUbicacion(ubicacionSeleccionada.getId());
+            Conexion.obtenerUbicacionBean().bajaLogicaUbicacion(ubicacionSeleccionada);
 
             // Mostrar mensaje de éxito
             JOptionPane.showMessageDialog(null, "Ubicación eliminada correctamente");

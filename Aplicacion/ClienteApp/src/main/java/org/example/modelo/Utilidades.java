@@ -12,21 +12,100 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.jose4j.json.internal.json_simple.JSONObject;
 import org.jose4j.json.internal.json_simple.parser.JSONParser;
 import org.jose4j.json.internal.json_simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileAlreadyExistsException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.util.UUID;
+import java.util.Vector;
+
+import static java.lang.System.getProperty;
 
 public class Utilidades {
+    public static void exportarAExcel(Vector<String> cabezales, Vector<Vector<Object>> datos, String nombreHoja) {
+        JFileChooser fileChooser = new JFileChooser();
+
+        fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+
+        // Limitar la selección a archivos de Excel
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo Excel (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showSaveDialog(null);
+
+        File archivoAGuardar = null;
+        if (result == JFileChooser.APPROVE_OPTION) {
+            archivoAGuardar = fileChooser.getSelectedFile();
+            // Asegurarse de que el archivo tenga la extensión .xlsx
+            if (!archivoAGuardar.getName().toLowerCase().endsWith(".xlsx")) {
+                archivoAGuardar = new File(archivoAGuardar.getAbsolutePath() + ".xlsx");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No se seleccionó la ruta de guardado", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //Se crea el libro de trabajo
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        //Se crea una hoja dentro del libro
+        HSSFSheet sheet = workbook.createSheet(nombreHoja);
+        //Se crea la fila que contiene la cabecera
+        HSSFRow rowhead = sheet.createRow((short) 0);
+        for (int i = 0; i < cabezales.size(); i++) {
+            rowhead.createCell(i).setCellValue(cabezales.get(i));
+        }
+        //Se crean las filas que contienen los datos
+        for (int i = 0; i < datos.size(); i++) {
+            HSSFRow row = sheet.createRow((short) i + 1);
+            for (int j = 0; j < datos.get(i).size(); j++) {
+                row.createCell(j).setCellValue(datos.get(i).get(j).toString());
+            }
+        }
+        try {
+            //Se crea el archivo
+            FileOutputStream fileOut = new FileOutputStream(archivoAGuardar);
+            workbook.write(fileOut);
+            fileOut.close();
+            Boolean abrirArchivo = JOptionPane.showConfirmDialog(null, "Archivo guardado exitosamente. ¿Desea abrirlo?", "Abrir archivo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+            if (abrirArchivo) {
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().open(archivoAGuardar);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error al intentar abrir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No es posible abrir el archivo automáticamente", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch (FileAlreadyExistsException e) {
+            JOptionPane.showMessageDialog(null, "El archivo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al crear el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }
+
     public static String hashClave(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -116,7 +195,7 @@ public class Utilidades {
                 JSONObject jsonResponse = (JSONObject) parser.parse(responseContent);
                 // Obtener la URL de la imagen
                 JSONObject data = (JSONObject) jsonResponse.get("data");
-                JSONObject medium = (JSONObject) data.get("medium");
+                JSONObject medium = (JSONObject) data.get("thumb");
                 String imageUrl = (String) medium.get("url");
 
                 return imageUrl;
@@ -124,5 +203,10 @@ public class Utilidades {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public static LocalDate convertirStringADate(String s) {
+        String[] fecha = s.split("-");
+        return LocalDate.of(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
     }
 }
