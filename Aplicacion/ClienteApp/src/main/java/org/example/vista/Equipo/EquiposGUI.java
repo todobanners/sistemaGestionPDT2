@@ -1,14 +1,4 @@
 package org.example.vista.Equipo;
-/*
- * TODO: Agregar funcionalidad de los botones
- *  - Dar de baja seleccionado
- *  - Editar seleccionado
- *  - Registrar movimiento
- * TODO: Crear filtros para la tabla
- * TODO: Ver como hacer para que se muestre la imagen del equipo en la pantalla principal
- *  todo: arreglar tamano de botones
- *
- * */
 
 import codigocreativo.uy.servidorapp.DTO.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
@@ -77,9 +67,9 @@ public class EquiposGUI {
         //Cargar datos de la tabla
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
-        model.addColumn("idInterno");
+        model.addColumn("ID Interno");
         model.addColumn("Ubicación");
-        model.addColumn("nroSerie");
+        model.addColumn("Nro Serie");
         model.addColumn("Nombre");
         model.addColumn("Tipo");
         model.addColumn("Proveedor");
@@ -168,62 +158,27 @@ public class EquiposGUI {
         });
 
 
-        guardarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    EquipoDto equipo = new EquipoDto();
-                    equipo.setIdInterno(idInternoText.getText());
-                    equipo.setIdUbicacion(((UbicacionDto) ubicacionCombo.getSelectedItem()));
-                    equipo.setNroSerie(nroSerieText.getText());
-                    equipo.setNombre(nombreText.getText());
-                    equipo.setIdTipo((TiposEquipoDto) tipoCombo.getSelectedItem());
-                    equipo.setIdProveedor(((ProveedoresEquipoDto) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
-                    equipo.setIdPais((PaisDto) paisCombo.getSelectedItem());
-                    equipo.setIdModelo((ModelosEquipoDto) modeloCombo.getSelectedItem());
-                    equipo.setFechaAdquisicion(fechaCompraDate.getDate());
-                    equipo.setEstado((Estados) estadoCombo.getSelectedItem());
-                    equipo.setImagen(Utilidades.subirImagen(imagenSubida));
-                    agregarEquipo(equipo);
-                    limpiarCampos();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo " + ex.getMessage());
-                }
+        guardarButton.addActionListener(e -> {
+            try {
+                EquipoDto equipo = new EquipoDto();
+                equipo.setIdInterno(idInternoText.getText());
+                equipo.setIdUbicacion(((UbicacionDto) ubicacionCombo.getSelectedItem()));
+                equipo.setNroSerie(nroSerieText.getText());
+                equipo.setNombre(nombreText.getText());
+                equipo.setIdTipo((TiposEquipoDto) tipoCombo.getSelectedItem());
+                equipo.setIdProveedor(((ProveedoresEquipoDto) Objects.requireNonNull(proveedorCombo.getSelectedItem())));
+                equipo.setIdPais((PaisDto) paisCombo.getSelectedItem());
+                equipo.setIdModelo((ModelosEquipoDto) modeloCombo.getSelectedItem());
+                equipo.setFechaAdquisicion(fechaCompraDate.getDate());
+                equipo.setEstado((Estados) estadoCombo.getSelectedItem());
+                equipo.setImagen(Utilidades.subirImagen(imagenSubida));
+                agregarEquipo(equipo);
+                limpiarCampos();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "No se pudo registrar el equipo " + ex.getMessage());
             }
         });
-
-
-        /*equiposTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                int filaSeleccionada = equiposTable.getSelectedRow();
-                if (filaSeleccionada != -1) {
-                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
-
-                    Equipo equipoSeleccionado = null;
-                    try {
-                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
-                    } catch (NamingException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    idInternoText.setText(equipoSeleccionado.getIdInterno());
-                    ubicacionCombo.setSelectedItem(equipoSeleccionado.getIdUbicacion());
-                    nroSerieText.setText(equipoSeleccionado.getNroSerie());
-                    nombreText.setText(equipoSeleccionado.getNombre());
-                    tipoCombo.setSelectedItem(equipoSeleccionado.getIdTipo());
-                    proveedorCombo.setSelectedItem(equipoSeleccionado.getIdProveedor());
-                    paisCombo.setSelectedItem(equipoSeleccionado.getIdPais());
-                    modeloCombo.setSelectedItem(equipoSeleccionado.getIdModelo());
-                    fechaCompraDate.setDate(equipoSeleccionado.getFechaAdquisicion());
-                    estadoCombo.setSelectedItem(equipoSeleccionado.getEstado());
-                    filePathField.setText(equipoSeleccionado.getImagen());
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
-                }
-            }
-        });*/
 
         //Funcionalidades de los filtros
 
@@ -392,6 +347,7 @@ public class EquiposGUI {
                 }
             }
         });
+
         exportarAExcelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

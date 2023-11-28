@@ -64,8 +64,6 @@ public class ModificarDatosPropiosGUI {
         }
         telefono.setText(telefonosString);
 
-        //TODO: Falta verificacion de fecha
-
         confirmarButton.addActionListener(e -> {
             //Guardo los datos en la tabla
             //Valido los campos

@@ -2,6 +2,7 @@ package org.example.vista.Ubicacion;
 
 import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
 import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
+import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.modelo.Conexion;
 import org.example.modelo.Validator;
@@ -87,16 +88,6 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                         // Llamar al servicio para eliminar la ubicación
                         BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada));
                         bajaUbicacionGUI.mostrarVentana();
-
-                        //TODO obtener informacion de si se borro o no la ubicacion
-                        //TODO si se borro, actualizar la tabla
-
-
-
-                            /*Conexion.obtenerUbicacionBean().borrarUbicacion(listaUbicaciones.get(ubicacionSeleccionada).getId());
-                            // Actualizar la lista después de la eliminación
-                            List<Ubicacion> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
-                            generarTabla(listaUbicaciones);*/
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona una ubicación para eliminar");
@@ -134,6 +125,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 ubi.setNombre(Nombre.getText());
                 ubi.setNumero(Long.parseLong(Numero.getText()));
                 ubi.setPiso(Long.parseLong(Piso.getText()));
+                ubi.setEstado(Estados.ACTIVO);
                 //Permito que cama pueda ser null
                 String camaText = Cama.getText();
                 if (camaText != null && !camaText.isEmpty()) {
@@ -195,6 +187,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             ubicacionSeleccionada.setNombre(nombre);
             ubicacionSeleccionada.setNumero(Long.parseLong(numeroText));
             ubicacionSeleccionada.setPiso(Long.parseLong(pisoText));
+            ubicacionSeleccionada.setEstado(Estados.ACTIVO);
 
             // Validar si el campo Cama no está vacío
             /*if (!camaText.isEmpty()) {

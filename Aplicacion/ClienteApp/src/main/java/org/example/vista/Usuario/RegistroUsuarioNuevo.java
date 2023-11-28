@@ -14,10 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
-//todo: Validar nombre usuario existente, cedula existente, email existente
-//todo: Usar hasheo para password
-//todo: Quitar el generador de cedula
-
 
 public class RegistroUsuarioNuevo extends JFrame {
     private JPanel registroUsuario;
@@ -55,8 +51,6 @@ public class RegistroUsuarioNuevo extends JFrame {
 
         fechaNacimiento.add(selectorFecha);
         userTextField.setEnabled(false);
-        //Por razones de validación este campo es autogenerado con una CI válida
-        cedulaTextField.setText(Validator.generarCedulaUruguaya());
 
         //Obtención de valores del combobox
         for (PerfilDto p : Conexion.obtenerPerfilBean().obtenerPerfiles()) {
@@ -199,19 +193,13 @@ public class RegistroUsuarioNuevo extends JFrame {
                 //Obtener los telefonos del textfield asumiendo que estan separados por comas
                 String telefonos = telefonoTextField.getText();
                 List<String> listaTelefonos = Arrays.asList(telefonos.split(","));
-
                 ModificarTelefonos modificarTelefonos = new ModificarTelefonos(listaTelefonos);
-
                 modificarTelefonos.pack();
-
                 modificarTelefonos.setVisible(true);
-
                 //Obtener los telefonos ingresados
                 List<String> telefonosIngresados = modificarTelefonos.getTelefonos();
-
                 //Limpiar el textfield
                 telefonoTextField.setText("");
-
                 //Agregar los telefonos al textfield
                 if (!telefonosIngresados.isEmpty()) {
                     for (String telefono : telefonosIngresados) {

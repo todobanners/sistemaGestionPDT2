@@ -131,6 +131,7 @@ public class LoginForm extends JFrame {
                         ubicacion.setPiso(1L);
                         ubicacion.setNombre("CTI");
                         ubicacion.setSector("Sector");
+                        ubicacion.setEstado(Estados.ACTIVO);
                         Conexion.obtenerUbicacionBean().crearUbicacion(ubicacion);
                         //////////////////////////
                         ProveedoresEquipoDto proveedoresEquipo = new ProveedoresEquipoDto();
