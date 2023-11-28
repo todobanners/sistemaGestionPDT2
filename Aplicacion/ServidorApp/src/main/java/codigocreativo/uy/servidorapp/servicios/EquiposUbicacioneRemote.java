@@ -10,5 +10,5 @@ import java.util.List;
 public interface EquiposUbicacioneRemote {
     public void crearEquiposUbicacione(EquiposUbicacioneDto equiposUbicacione);
     public List<EquiposUbicacioneDto> obtenerEquiposUbicacione();
-
+    List<EquiposUbicacioneDto> obtenerEquiposUbicacionePorEquipo(Long id);
 }

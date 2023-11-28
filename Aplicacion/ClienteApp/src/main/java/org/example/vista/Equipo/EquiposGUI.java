@@ -3,6 +3,7 @@ package org.example.vista.Equipo;
 import codigocreativo.uy.servidorapp.DTO.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
+import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
 import org.example.modelo.Utilidades;
 
@@ -405,6 +406,59 @@ public class EquiposGUI {
                     }
                     listadoMovimientos.setVisible(true);
                     listadoMovimientos.pack();
+                } else {
+                    JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
+                }
+            }
+        });
+        registrarMovimientoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = equiposTable.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    long idEquipoSeleccionado = (long) equiposTable.getModel().getValueAt(filaSeleccionada, 0);
+
+                    EquipoDto equipoSeleccionado = null;
+                    try {
+                        equipoSeleccionado = Conexion.obtenerEquipoBean().obtenerEquipo(idEquipoSeleccionado);
+                    } catch (NamingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    MoverEquipo moverEquipo = null;
+                    try {
+                        moverEquipo = new MoverEquipo(equipoSeleccionado, Conexion.obtenerUbicacionBean().listarUbicaciones());
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    moverEquipo.setVisible(true);
+
+                    HashMap<String, Object> datos = moverEquipo.getDatos();
+                    if (datos != null && moverEquipo.getOk()) {
+                        EquiposUbicacioneDto equiposUbicacioneDto = new EquiposUbicacioneDto();
+                        equiposUbicacioneDto.setIdEquipo(equipoSeleccionado);
+                        equiposUbicacioneDto.setIdUbicacion((UbicacionDto) datos.get("ubicacion"));
+                        equiposUbicacioneDto.setFecha((LocalDate) datos.get("fecha"));
+                        equiposUbicacioneDto.setObservaciones((String) datos.get("observaciones"));
+
+                        equiposUbicacioneDto.setUsuario(Sesion.getUsuario());
+
+                        equipoSeleccionado.setIdUbicacion((UbicacionDto) datos.get("ubicacion"));
+                        try {
+                            Conexion.obtenerEquipoUbicacionBean().crearEquiposUbicacione(equiposUbicacioneDto);
+                            Conexion.obtenerEquipoBean().modificarEquipo(equipoSeleccionado);
+                            JOptionPane.showMessageDialog(null, "Movimiento registrado con exito");
+                            actualizarTabla(Conexion.obtenerEquipoBean().listarEquipos());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "No se pudo registrar el movimiento" + ex.getMessage());
+                        }
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Acción cancelada o datos incompletos");
+                    }
+
+
                 } else {
                     JOptionPane.showMessageDialog(null, "El valor seleccionado no es un equipo válido");
                 }

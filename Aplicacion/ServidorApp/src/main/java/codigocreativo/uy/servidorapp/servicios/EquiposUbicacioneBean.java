@@ -20,12 +20,19 @@ public class EquiposUbicacioneBean implements EquiposUbicacioneRemote {
 
     @Override
     public void crearEquiposUbicacione(EquiposUbicacioneDto equiposUbicacione) {
-        em.persist(equiposUbicacioneMapper.toEntity(equiposUbicacione));
+        em.persist(equiposUbicacioneMapper.toEntity(equiposUbicacione, new codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext()));
         em.flush();
     }
 
     @Override
     public List<EquiposUbicacioneDto> obtenerEquiposUbicacione() {
-        return equiposUbicacioneMapper.toDto(em.createQuery("SELECT equiposUbicacione FROM EquiposUbicacione equiposUbicacione", EquiposUbicacione.class).getResultList());
+        return equiposUbicacioneMapper.toDto(em.createQuery("SELECT equiposUbicacione FROM EquiposUbicacione equiposUbicacione", EquiposUbicacione.class).getResultList(), new codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext());
+    }
+
+    @Override
+    public List<EquiposUbicacioneDto> obtenerEquiposUbicacionePorEquipo(Long id) {
+        return equiposUbicacioneMapper.toDto(em.createQuery("SELECT equiposUbicacione FROM EquiposUbicacione equiposUbicacione WHERE equiposUbicacione.idEquipo.id = :id", EquiposUbicacione.class)
+                .setParameter("id", id)
+                .getResultList(), new codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext());
     }
 }

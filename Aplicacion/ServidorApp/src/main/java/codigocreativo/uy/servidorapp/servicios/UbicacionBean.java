@@ -62,7 +62,7 @@ public class UbicacionBean implements UbicacionRemote {
     public void moverEquipoDeUbicacion(EquipoDto equipo, UbicacionDto ubicacion) throws ServiciosException {
         try {
             equipo.setIdUbicacion(ubicacion);
-            em.merge(equipoMapper.toEntity(equipo));
+            em.merge(equipoMapper.toEntity(equipo, new codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext()));
             em.flush();
         } catch (Exception e) {
             throw new ServiciosException("No se pudo mover el equipo");
