@@ -50,10 +50,14 @@ public class AplicacionVentana extends JFrame {
         InicioPrincipal.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/workshop-icon.png",60,60));
         JMenu gestionUsuarios =         new JMenu("");
         gestionUsuarios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/usuarios.png",60,60));
-        JMenu gestionEquipos =          new JMenu("Gestión Equipos");
-        JMenu gestionUbicaciones =      new JMenu("Gestión de Ubicaciones");
-        JMenu gestionIntervenciones =   new JMenu("Gestión de Intervenciones");
-        JMenu gestionPerfiles =         new JMenu("Gestión de Perfiles");
+        JMenu gestionEquipos =          new JMenu("");
+        gestionEquipos.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/equipos.png",60,60));
+        JMenu gestionUbicaciones =      new JMenu("");
+        gestionUbicaciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/ubicaciones.png",60,60));
+        JMenu gestionIntervenciones =   new JMenu("");
+        gestionIntervenciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/intervenciones.png",60,60));
+        JMenu gestionPerfiles =         new JMenu("");
+        gestionPerfiles.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/perfiles.png",60,60));
         // Fin declaración barra de menú
 
         // Declaro los submenús de Inicio
