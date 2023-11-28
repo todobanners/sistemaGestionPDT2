@@ -12,17 +12,23 @@ public class EquiposUbicacioneDto implements Serializable {
     private EquipoDto idEquipo;
     private UbicacionDto idUbicacion;
     private LocalDate fecha;
+    private UsuarioDto usuario;
+    private String observaciones;
 
     public EquiposUbicacioneDto() {
     }
 
     public EquiposUbicacioneDto(Long id,
                                 EquipoDto idEquipo,
-                                UbicacionDto idUbicacion, LocalDate fecha) {
+                                UbicacionDto idUbicacion, LocalDate fecha,
+                                UsuarioDto usuario,
+                                String observaciones) {
         this.id = id;
         this.fecha = fecha;
         this.idEquipo = idEquipo;
         this.idUbicacion = idUbicacion;
+        this.usuario = usuario;
+        this.observaciones = observaciones;
     }
 
     public Long getId() {
@@ -79,6 +85,24 @@ public class EquiposUbicacioneDto implements Serializable {
 
     public EquiposUbicacioneDto setIdUbicacion(UbicacionDto idUbicacion) {
         this.idUbicacion = idUbicacion;
+        return this;
+    }
+
+    public UsuarioDto getUsuario() {
+        return usuario;
+    }
+
+    public EquiposUbicacioneDto setUsuario(UsuarioDto usuario) {
+        this.usuario = usuario;
+        return this;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public EquiposUbicacioneDto setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
         return this;
     }
 }

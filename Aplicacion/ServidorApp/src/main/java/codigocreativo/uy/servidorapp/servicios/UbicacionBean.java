@@ -62,7 +62,7 @@ public class UbicacionBean implements UbicacionRemote {
     public void moverEquipoDeUbicacion(EquipoDto equipo, UbicacionDto ubicacion) throws ServiciosException {
         try {
             equipo.setIdUbicacion(ubicacion);
-            em.merge(equipoMapper.toEntity(equipo));
+            em.merge(equipoMapper.toEntity(equipo, new codigocreativo.uy.servidorapp.DTOMappers.CycleAvoidingMappingContext()));
             em.flush();
         } catch (Exception e) {
             throw new ServiciosException("No se pudo mover el equipo");
@@ -71,7 +71,8 @@ public class UbicacionBean implements UbicacionRemote {
 
     @Override
     public List<UbicacionDto> listarUbicaciones() throws ServiciosException {
-        List<Ubicacion> ubicaciones = em.createQuery("SELECT u FROM Ubicacion u", Ubicacion.class).getResultList();
+        //mostrar la ubicacion solo si tiene estado activo
+        List<Ubicacion> ubicaciones = em.createQuery("SELECT u FROM Ubicacion u WHERE u.estado = 'ACTIVO'", Ubicacion.class).getResultList();
         return ubicacionMapper.toDto(ubicaciones);
     }
 

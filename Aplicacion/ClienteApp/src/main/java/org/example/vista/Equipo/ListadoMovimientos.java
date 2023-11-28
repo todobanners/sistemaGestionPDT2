@@ -22,7 +22,7 @@ public class ListadoMovimientos extends JDialog {
         setSize(500, 500);
 
         try {
-            List< EquiposUbicacioneDto > movimientos = Conexion.obtenerEquipoUbicacionBean().obtenerEquiposUbicacione();
+            List< EquiposUbicacioneDto > movimientos = Conexion.obtenerEquipoUbicacionBean().obtenerEquiposUbicacionePorEquipo(equipo.getId());
             //Los dos datos son Ubicacion y fecha
             DefaultListModel modelo = new DefaultListModel();
             for (EquiposUbicacioneDto mov : movimientos) {
@@ -31,6 +31,8 @@ public class ListadoMovimientos extends JDialog {
             if (modelo.isEmpty()) {
                 modelo.addElement("No hay movimientos");
             }
+            listaMovimientos.setModel(modelo);
+
         } catch (NamingException e) {
             throw new RuntimeException(e);
         }

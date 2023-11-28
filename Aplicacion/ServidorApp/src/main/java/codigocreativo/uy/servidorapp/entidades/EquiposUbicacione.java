@@ -27,6 +27,30 @@ public class EquiposUbicacione implements Serializable {
     @JoinColumn(name = "ID_UBICACION")
     private Ubicacion idUbicacion;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.RESTRICT)
+    @JoinColumn(name = "USUARIO")
+    private Usuario usuario;
+
+    @Column(name = "OBSERVACIONES", length = 1000)
+    private String observaciones;
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Ubicacion getIdUbicacion() {
         return idUbicacion;
     }

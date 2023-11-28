@@ -25,13 +25,13 @@ public class EquipoBean implements EquipoRemote {
 
     @Override
     public void crearEquipo(EquipoDto equipo) {
-        em.persist(equipoMapper.toEntity(equipo));
+        em.persist(equipoMapper.toEntity(equipo, new CycleAvoidingMappingContext()));
         em.flush();
     }
 
     @Override
     public void modificarEquipo(EquipoDto equipo) {
-        em.merge(equipoMapper.toEntity(equipo));
+        em.merge(equipoMapper.toEntity(equipo, new CycleAvoidingMappingContext()));
         em.flush();
     }
 
@@ -48,18 +48,18 @@ public class EquipoBean implements EquipoRemote {
     public List<EquipoDto> obtenerEquiposFiltrado(String filtro, String valor) {
         return equipoMapper.toDto(em.createQuery("SELECT e FROM Equipo e WHERE e." + filtro + " = :valor", Equipo.class)
                 .setParameter("valor", valor)
-                .getResultList());
+                .getResultList(), new CycleAvoidingMappingContext());
     }
 
     @Override
     public EquipoDto obtenerEquipo(Long id) {
-        return equipoMapper.toDto(em.find(Equipo.class, id));
+        return equipoMapper.toDto(em.find(Equipo.class, id), new CycleAvoidingMappingContext());
     }
 
 
 
     @Override
     public List<EquipoDto> listarEquipos() {
-        return equipoMapper.toDto(em.createQuery("SELECT equipo FROM Equipo equipo WHERE equipo.estado = 'ACTIVO'", Equipo.class).getResultList());
+        return equipoMapper.toDto(em.createQuery("SELECT equipo FROM Equipo equipo WHERE equipo.estado = 'ACTIVO'", Equipo.class).getResultList(), new CycleAvoidingMappingContext());
     }
 }

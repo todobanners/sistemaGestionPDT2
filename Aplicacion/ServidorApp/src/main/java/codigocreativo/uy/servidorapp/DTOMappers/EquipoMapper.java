@@ -8,14 +8,14 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.JAKARTA_CDI)
 public interface EquipoMapper {
-    Equipo toEntity(EquipoDto equipoDto);
+    Equipo toEntity(EquipoDto equipoDto, @Context CycleAvoidingMappingContext context);
 
-    EquipoDto toDto(Equipo equipo);
+    EquipoDto toDto(Equipo equipo, @Context CycleAvoidingMappingContext context);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Equipo partialUpdate(EquipoDto equipoDto, @MappingTarget Equipo equipo);
+    Equipo partialUpdate(EquipoDto equipoDto, @MappingTarget Equipo equipo, @Context CycleAvoidingMappingContext context);
 
-    List<Equipo> toEntity(List<EquipoDto> equipoDto);
+    List<Equipo> toEntity(List<EquipoDto> equipoDto, @Context CycleAvoidingMappingContext context);
 
-    List<EquipoDto> toDto(List<Equipo> equipo);
+    List<EquipoDto> toDto(List<Equipo> equipo, @Context CycleAvoidingMappingContext context);
 }
