@@ -1,7 +1,7 @@
 package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import org.example.vista.Equipo.EquiposGUI;
 import org.example.vista.HomeGUI;
 import org.example.vista.Intervencion.IntervencionGUI;
@@ -9,20 +9,25 @@ import org.example.vista.Intervencion.TiposDeIntervencionesGUI;
 import org.example.vista.Perfil.PerfilesGUI;
 import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
 import org.example.vista.Ubicacion.MovimientoEquiposGUI;
-import org.example.vista.Usuario.*;
+import org.example.vista.Usuario.LoginForm;
+import org.example.vista.Usuario.ModificarDatosPropiosGUI;
+import org.example.vista.Usuario.UsuarioGUI;
 
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
-
-import static javax.swing.UIManager.setLookAndFeel;
 
 public class AplicacionVentana extends JFrame {
 
     public AplicacionVentana(String s) throws Exception {
         super(s);
         //Agregar un LaF
-        setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        //setLookAndFeel(UIManager.getSystemLookAndFeelClassName
+        try {
+    UIManager.setLookAndFeel( new FlatIntelliJLaf());
+} catch( Exception ex ) {
+    System.err.println( "Failed to initialize LaF" );
+}
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         pack();
@@ -55,13 +60,14 @@ public class AplicacionVentana extends JFrame {
         JMenu gestionUbicaciones =      new JMenu("");
         gestionUbicaciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/ubicaciones.png",60,60));
         JMenu gestionIntervenciones =   new JMenu("");
-        gestionIntervenciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/intervenciones.png",60,60));
+        gestionIntervenciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/intervencion.png",60,60));
         JMenu gestionPerfiles =         new JMenu("");
         gestionPerfiles.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/perfiles.png",60,60));
         // Fin declaración barra de menú
 
         // Declaro los submenús de Inicio
         JMenuItem fotosEquipos =        new JMenuItem("Inicio");
+        fotosEquipos.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/home.png",30,30));
         JMenuItem modificarDatosPropios = new JMenuItem("Modificar mis datos");
         modificarDatosPropios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/editarMisDatos.png",30,30));
         JMenuItem cerrarSesion =          new JMenuItem("Cerrar Sesion");
