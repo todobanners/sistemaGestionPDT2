@@ -2,8 +2,6 @@ package codigocreativo.uy.servidorapp.servicios;
 
 import codigocreativo.uy.servidorapp.DTO.EquipoDto;
 import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
-import codigocreativo.uy.servidorapp.entidades.Equipo;
-import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import jakarta.ejb.Remote;
 
@@ -16,14 +14,8 @@ public interface UbicacionRemote {
 
     void modificarUbicacion(UbicacionDto ubi) throws ServiciosException;
 
-    /*void modificarUbicacionPorId(Long id) throws ServiciosException;
-
-    void modificarUbicacionPorNombre(String nombre) throws ServiciosException;*/
-
     void borrarUbicacion(Long id) throws ServiciosException;
 
-   /* void moverEquipoDeUbicacion(EquipoDto equipo, Long ubicacion) throws ServiciosException;
-    */
     void moverEquipoDeUbicacion(EquipoDto equipo, UbicacionDto ubicacion) throws ServiciosException;
 
     public List<UbicacionDto> listarUbicaciones() throws ServiciosException;

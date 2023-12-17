@@ -41,7 +41,6 @@ public class UbicacionBean implements UbicacionRemote {
             em.merge(ubicacionMapper.toEntity(ubi));
             em.flush();
         } catch (Exception e) {
-            e.printStackTrace();
             throw new ServiciosException("No se pudo modificar la ubicacion");
         }
     }
