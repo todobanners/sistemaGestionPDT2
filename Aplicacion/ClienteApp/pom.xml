@@ -21,11 +21,6 @@
             <version>3.2</version>
         </dependency>
         <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf-intellij-themes</artifactId>
-            <version>3.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20210307</version>
@@ -40,11 +35,6 @@
             <artifactId>httpmime</artifactId>
             <version>4.5.13</version>
         </dependency>
-        <dependency>
-            <groupId>com.toedter</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
-        </dependency>
 
         <dependency>
             <groupId>com.github.lgooddatepicker</groupId>
@@ -57,7 +47,6 @@
             <artifactId>poi</artifactId>
             <version>5.2.4</version>
         </dependency>
-
 
         <dependency>
             <groupId>junit</groupId>
@@ -84,7 +73,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.13.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.swinglabs</groupId>
