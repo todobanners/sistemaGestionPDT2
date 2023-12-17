@@ -1,9 +1,9 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.DTO.*;
-import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
 import org.example.controlador.AplicacionVentana;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
@@ -31,6 +31,11 @@ public class LoginForm extends JFrame {
     private JLabel claveText;
 
     public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+        try {
+    UIManager.setLookAndFeel( new FlatMaterialLighterIJTheme());
+} catch( Exception ex ) {
+    System.err.println( "Failed to initialize LaF" );
+}
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panel1);
 
@@ -45,6 +50,8 @@ public class LoginForm extends JFrame {
         Font f = new Font("Roboto", Font.PLAIN, 14);
         userText.setFont(f);
         claveText.setFont(f);
+        loginButton.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
+        cancelarButton.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.BLACK));
         textField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
         textField1.setFont(f);
         passwordField1.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
