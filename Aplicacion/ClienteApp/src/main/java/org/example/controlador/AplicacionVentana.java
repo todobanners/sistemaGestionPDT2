@@ -1,14 +1,12 @@
 package org.example.controlador;
 
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import com.formdev.flatlaf.FlatIntelliJLaf;
 import org.example.vista.Equipo.EquiposGUI;
 import org.example.vista.HomeGUI;
 import org.example.vista.Intervencion.IntervencionGUI;
 import org.example.vista.Intervencion.TiposDeIntervencionesGUI;
 import org.example.vista.Perfil.PerfilesGUI;
 import org.example.vista.Ubicacion.ListadoDeUbicacionesGUI;
-import org.example.vista.Ubicacion.MovimientoEquiposGUI;
 import org.example.vista.Usuario.LoginForm;
 import org.example.vista.Usuario.ModificarDatosPropiosGUI;
 import org.example.vista.Usuario.UsuarioGUI;
@@ -21,13 +19,7 @@ public class AplicacionVentana extends JFrame {
 
     public AplicacionVentana(String s) throws Exception {
         super(s);
-        //Agregar un LaF
-        //setLookAndFeel(UIManager.getSystemLookAndFeelClassName
-        try {
-    UIManager.setLookAndFeel( new FlatIntelliJLaf());
-} catch( Exception ex ) {
-    System.err.println( "Failed to initialize LaF" );
-}
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         pack();
@@ -51,18 +43,18 @@ public class AplicacionVentana extends JFrame {
 
         JMenuBar miMenuBar = new JMenuBar();
         // Declaro la barra de menu
-        JMenu InicioPrincipal =         new JMenu("");
-        InicioPrincipal.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/workshop-icon.png",60,60));
-        JMenu gestionUsuarios =         new JMenu("");
-        gestionUsuarios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/usuarios.png",60,60));
-        JMenu gestionEquipos =          new JMenu("");
-        gestionEquipos.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/equipos.png",60,60));
-        JMenu gestionUbicaciones =      new JMenu("");
-        gestionUbicaciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/ubicaciones.png",60,60));
-        JMenu gestionIntervenciones =   new JMenu("");
-        gestionIntervenciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/intervencion.png",60,60));
-        JMenu gestionPerfiles =         new JMenu("");
-        gestionPerfiles.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/perfiles.png",60,60));
+        JMenu InicioPrincipal =         new JMenu("Inicio");
+        InicioPrincipal.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/workshop-icon.png",30,30));
+        JMenu gestionUsuarios =         new JMenu("Usuarios");
+        gestionUsuarios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/usuarios.png",30,30));
+        JMenu gestionEquipos =          new JMenu("Equipos");
+        gestionEquipos.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/equipos.png",30,30));
+        JMenu gestionUbicaciones =      new JMenu("Ubicaciones");
+        gestionUbicaciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/ubicaciones.png",30,30));
+        JMenu gestionIntervenciones =   new JMenu("Intervenciones");
+        gestionIntervenciones.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/intervencion.png",30,30));
+        JMenu gestionPerfiles =         new JMenu("Perfiles");
+        gestionPerfiles.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/perfiles.png",30,30));
         // Fin declaración barra de menú
 
         // Declaro los submenús de Inicio
@@ -84,7 +76,7 @@ public class AplicacionVentana extends JFrame {
 
         // Declaro el submenú de Gestión de Ubicaciones
         JMenuItem listarUbicaciones =   new JMenuItem("Gestionar ubicaciones");
-        JMenuItem movimientoEquipos =   new JMenuItem("Movimiento de Equipos");
+        //JMenuItem movimientoEquipos =   new JMenuItem("Movimiento de Equipos");
         // Fin declaración submenú de Gestión de Ubicaciones
 
         JMenuItem gestionarIntervenciones =new JMenuItem("Gestionar intervenciones");
@@ -154,13 +146,13 @@ public class AplicacionVentana extends JFrame {
             }
         });
 
-        movimientoEquipos.addActionListener(e -> {
+        /*movimientoEquipos.addActionListener(e -> {
             try {
                 changePanel(new MovimientoEquiposGUI().getPanel(), "Movimiento de Equipos");
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-        });
+        });*/
 
         // Tipos de Intervenciones
 
@@ -207,7 +199,7 @@ public class AplicacionVentana extends JFrame {
 
         // Gestión de Ubicaciones
         gestionUbicaciones.add(listarUbicaciones);
-        gestionUbicaciones.add(movimientoEquipos);
+        //gestionUbicaciones.add(movimientoEquipos);
 
         // Gestión de Intervenciones
         gestionIntervenciones.add(gestionarIntervenciones);

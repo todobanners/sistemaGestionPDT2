@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class RegistroUsuarioNuevo extends JFrame {
 
     DatePicker selectorFecha = Utilidades.createCustomDatePicker();
 
+
     public RegistroUsuarioNuevo(String s) throws NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         super(s);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,6 +51,8 @@ public class RegistroUsuarioNuevo extends JFrame {
         ImageIcon imagenRedimensionada = new ImageIcon(imgRedimensionada);
         logo.setIcon(imagenRedimensionada);
         logo.setText("");
+        aceptarButton.setBackground(Color.decode("#2F9C95"));
+        cancelarButton.setBackground(Color.decode("#e06666"));
 
         fechaNacimiento.add(selectorFecha);
         userTextField.setEnabled(false);
@@ -208,6 +213,13 @@ public class RegistroUsuarioNuevo extends JFrame {
                     //Eliminar la ultima coma
                     telefonoTextField.setText(telefonoTextField.getText().substring(0, telefonoTextField.getText().length() - 1));
                 }
+            }
+        });
+        userTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "El usuario se genera automáticamente a partir del nombre y apellido");
             }
         });
     }
