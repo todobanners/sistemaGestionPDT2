@@ -1,7 +1,6 @@
 package org.example.vista.Equipo;
 
 import codigocreativo.uy.servidorapp.DTO.*;
-import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;

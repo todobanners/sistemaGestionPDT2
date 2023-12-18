@@ -1,7 +1,6 @@
 package org.example.vista.Perfil;
 
 import codigocreativo.uy.servidorapp.DTO.PerfilDto;
-import codigocreativo.uy.servidorapp.entidades.Perfil;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.servicios.PerfilRemote;
 import org.example.modelo.Conexion;

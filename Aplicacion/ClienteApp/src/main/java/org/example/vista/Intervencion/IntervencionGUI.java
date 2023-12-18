@@ -3,8 +3,6 @@ package org.example.vista.Intervencion;
 import codigocreativo.uy.servidorapp.DTO.EquipoDto;
 import codigocreativo.uy.servidorapp.DTO.IntervencionDto;
 import codigocreativo.uy.servidorapp.DTO.TiposIntervencioneDto;
-import codigocreativo.uy.servidorapp.entidades.*;
-import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import codigocreativo.uy.servidorapp.servicios.IntervencionRemote;
 import com.github.lgooddatepicker.components.DatePicker;
@@ -13,7 +11,6 @@ import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
 import org.example.modelo.Utilidades;
 
-
 import javax.naming.NamingException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Vector;
 

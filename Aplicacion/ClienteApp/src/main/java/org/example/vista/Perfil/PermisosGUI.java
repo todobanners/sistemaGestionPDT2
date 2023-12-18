@@ -1,7 +1,6 @@
 package org.example.vista.Perfil;
 
 import codigocreativo.uy.servidorapp.DTO.PermisoDto;
-import codigocreativo.uy.servidorapp.entidades.Permiso;
 import codigocreativo.uy.servidorapp.servicios.PermisoRemote;
 import org.example.modelo.Conexion;
 import org.jdesktop.swingx.JXTable;

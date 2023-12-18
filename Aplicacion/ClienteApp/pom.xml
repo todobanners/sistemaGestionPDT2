@@ -79,12 +79,6 @@
             <artifactId>swingx</artifactId>
             <version>1.6.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>3.2</version>
-        </dependency>
-
 
     </dependencies>
     <build>
