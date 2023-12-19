@@ -159,6 +159,14 @@
               <text value="Eliminar"/>
             </properties>
           </component>
+          <component id="db3cd" class="javax.swing.JButton" binding="actualizarTablaButton" default-binding="true">
+            <constraints>
+              <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Actualizar tabla"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <scrollpane id="5944d">

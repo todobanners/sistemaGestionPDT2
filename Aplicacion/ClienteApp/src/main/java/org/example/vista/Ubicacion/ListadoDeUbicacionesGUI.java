@@ -31,6 +31,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     private JComboBox institucion;
     private JButton agregarNuevoButton;
     private JButton limpiarSeleccionButton;
+    private JButton actualizarTablaButton;
     private ListadoDeUbicacionesGUI frame;
 
 
@@ -187,6 +188,15 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             }
         });
         frame = this;
+        actualizarTablaButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    generarTabla(Conexion.obtenerUbicacionBean().listarUbicaciones());
+                } catch (ServiciosException | NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     public void generarTabla(List<UbicacionDto> lista) {
