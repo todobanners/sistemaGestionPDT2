@@ -2,12 +2,11 @@ package org.example.vista.Ubicacion;
 
 import codigocreativo.uy.servidorapp.DTO.BajaUbicacionDto;
 import codigocreativo.uy.servidorapp.DTO.UbicacionDto;
-import codigocreativo.uy.servidorapp.entidades.BajaUbicacion;
-import codigocreativo.uy.servidorapp.entidades.Ubicacion;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
-import com.toedter.calendar.JDateChooser;
+import com.github.lgooddatepicker.components.DatePicker;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
+import org.example.modelo.Utilidades;
 
 import javax.naming.NamingException;
 import javax.swing.*;
@@ -15,8 +14,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class BajaUbicacionGUI {
     private JPanel bajaUbicacion;
@@ -35,8 +32,8 @@ public class BajaUbicacionGUI {
     private JLabel labelComentario;
     private JLabel labelFecha;
 
-    JDateChooser selectorFecha = new JDateChooser();
-
+    //JDateChooser selectorFecha = new JDateChooser();
+    DatePicker selectorFecha = Utilidades.createCustomDatePicker();
 
     private UbicacionDto ubicacionSeleccionada;
     //private Usuario user;
@@ -44,11 +41,16 @@ public class BajaUbicacionGUI {
 
     private BajaUbicacionDto baja;
 
-    public BajaUbicacionGUI(UbicacionDto ubicacionSeleccionada) {
+    public BajaUbicacionGUI(UbicacionDto ubicacionSeleccionada, ListadoDeUbicacionesGUI frame) {
         this.ubicacionSeleccionada = ubicacionSeleccionada;
         this.baja = new BajaUbicacionDto();
         initComponents();
         asignarValores();
+        try {
+            frame.generarTabla(Conexion.obtenerUbicacionBean().listarUbicaciones());
+        } catch (NamingException | ServiciosException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void initComponents() {
@@ -85,9 +87,8 @@ public class BajaUbicacionGUI {
         baja.setIdUbicacion(ubicacionSeleccionada);
         baja.setIdUsuario(Sesion.getUsuario());
 
-        Date fechaElegida = selectorFecha.getDate();
-        LocalDate localDate = fechaElegida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        baja.setFecha(localDate);
+        LocalDate fechaElegida = selectorFecha.getDate();
+        baja.setFecha(fechaElegida);
 
         try {
             // Modificar la ubicación
@@ -109,8 +110,6 @@ public class BajaUbicacionGUI {
         }
     }
 
-
-
     private void cerrarVentana() {
         // Cierra la ventana sin aplicar cambios
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(bajaUbicacion);
@@ -129,15 +128,5 @@ public class BajaUbicacionGUI {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
-
-    // Método para verificar si una cadena es un número
-    private boolean esNumero(String cadena) {
-        try {
-            Long.parseLong(cadena);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }

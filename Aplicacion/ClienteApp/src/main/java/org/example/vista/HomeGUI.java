@@ -1,7 +1,6 @@
 package org.example.vista;
 
 import codigocreativo.uy.servidorapp.DTO.EquipoDto;
-import codigocreativo.uy.servidorapp.entidades.Equipo;
 import org.example.controlador.Sesion;
 import org.example.modelo.Conexion;
 
@@ -9,8 +8,6 @@ import javax.imageio.ImageIO;
 import javax.naming.NamingException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;

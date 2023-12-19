@@ -1,7 +1,6 @@
 package org.example.vista.Usuario;
 
 import codigocreativo.uy.servidorapp.DTO.*;
-import codigocreativo.uy.servidorapp.entidades.*;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import codigocreativo.uy.servidorapp.excepciones.ServiciosException;
 import org.example.controlador.AplicacionVentana;
@@ -30,11 +29,11 @@ public class LoginForm extends JFrame {
     private JLabel userText;
     private JLabel claveText;
 
-    public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    public LoginForm() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panel1);
 
-        setSize(500, 700);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         setBackground(Color.WHITE);
         ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");
@@ -70,8 +69,7 @@ public class LoginForm extends JFrame {
                 super.mousePressed(e);
                 try {
                     new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
-                } catch (NamingException | UnsupportedLookAndFeelException | ClassNotFoundException |
-                         InstantiationException | IllegalAccessException ex) {
+                } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
                 setVisible(false);

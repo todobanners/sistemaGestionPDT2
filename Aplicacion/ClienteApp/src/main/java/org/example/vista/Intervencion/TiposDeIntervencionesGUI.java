@@ -154,6 +154,7 @@ public class TiposDeIntervencionesGUI {
                     TiposIntervencioneDto tipoIntervencioneDto = new TiposIntervencioneDto(id, nombre, modificarTipoDeIntervencion.getEstadoSel());
                     tipoIntervencioneRemoteBean.modificarTipoIntervencion(tipoIntervencioneDto);
                 }
+                actualizarTabla();
             }
         });
         darDeBajaElButton.addActionListener(new ActionListener() {

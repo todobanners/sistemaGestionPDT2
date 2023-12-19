@@ -43,7 +43,6 @@ public class EquiposGUI {
     private JButton imagenBtn;
     private JPanel fechaAdqContainer;
     private JButton guardarButton;
-    private JPanel accionesTablaPanel;
     private JButton darBajaSeleccionadoButton;
     private JButton editarSeleccionadoButton;
     private JButton registrarMovimientoButton;
@@ -470,8 +469,6 @@ public class EquiposGUI {
     public void actualizarTabla(List<EquipoDto> datos) throws Exception {
         DefaultTableModel model = (DefaultTableModel) equiposTable.getModel();
         model.setRowCount(0);
-        //Conexion.obtenerEquipoBean().listarEquipos()
-
         datos.forEach(equipo -> {
             model.addRow(new Object[]{
                     equipo.getId(),

@@ -30,6 +30,9 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     private JTextField Cama;
     private JComboBox institucion;
     private JButton agregarNuevoButton;
+    private JButton limpiarSeleccionButton;
+    private JButton actualizarTablaButton;
+    private ListadoDeUbicacionesGUI frame;
 
 
     public JPanel getPanel() {
@@ -37,8 +40,8 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     }
 
     public ListadoDeUbicacionesGUI() throws NamingException, ServiciosException {
-        List<UbicacionDto> listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
-        generarTabla(listaUbicaciones);
+
+        generarTabla(Conexion.obtenerUbicacionBean().listarUbicaciones());
 
         //anadir sectores desde el enumerado sectores
         for (int i = 0; i < codigocreativo.uy.servidorapp.enumerados.Sectores.values().length; i++) {
@@ -53,6 +56,12 @@ public class ListadoDeUbicacionesGUI extends JPanel {
         modificarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                List<UbicacionDto> listaUbicaciones = null;
+                try {
+                    listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
+                } catch (ServiciosException | NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
                 //Preguntar al usuario si desea modificar la ubicacion
                 int opcion = JOptionPane.showConfirmDialog(null, "¿Seguro que deseas modificar esta ubicación?",
                         "Confirmar modificación", JOptionPane.YES_NO_OPTION);
@@ -60,8 +69,20 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                     // Obtener el elemento seleccionado en la lista
                     int ubicacionSeleccionada = table1.getSelectedRow();
 
-                    if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) {
+                    if (ubicacionSeleccionada != -1) {
+                        //Permito que cama pueda ser null
+                        String camaText = Cama.getText();
+                        if (camaText != null && !camaText.isEmpty()) {
+                            listaUbicaciones.get(ubicacionSeleccionada).setCama(Long.parseLong(camaText));
+                        } else {
+                            listaUbicaciones.get(ubicacionSeleccionada).setCama(null);
+                        }
                         confirmarAltaOModificar(listaUbicaciones.get(ubicacionSeleccionada), "modificar");
+                        try {
+                            generarTabla(Conexion.obtenerUbicacionBean().listarUbicaciones());
+                        } catch (ServiciosException | NamingException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Selecciona una ubicación para modificar");
                     }
@@ -78,6 +99,12 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Obtener el elemento seleccionado en la lista
                 int ubicacionSeleccionada = table1.getSelectedRow();
+                List<UbicacionDto> listaUbicaciones = null;
+                try {
+                    listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
+                } catch (ServiciosException | NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) {
                     // Confirmar con el usuario antes de eliminar
@@ -86,7 +113,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
 
                     if (confirmacion == JOptionPane.YES_OPTION) {
                         // Llamar al servicio para eliminar la ubicación
-                        BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada));
+                        BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada), frame);
                         bajaUbicacionGUI.mostrarVentana();
                     }
                 } else {
@@ -100,6 +127,12 @@ public class ListadoDeUbicacionesGUI extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 int ubicacionSeleccionada = table1.getSelectedRow();
+                List<UbicacionDto> listaUbicaciones = null;
+                try {
+                    listaUbicaciones = Conexion.obtenerUbicacionBean().listarUbicaciones();
+                } catch (ServiciosException | NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
                 if (ubicacionSeleccionada != -1 && ubicacionSeleccionada < listaUbicaciones.size()) { // Si se seleccionó una ubicación
                     UbicacionDto ubi = listaUbicaciones.get(ubicacionSeleccionada);
                     Sector.setSelectedItem(ubi.getSector());
@@ -144,17 +177,36 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 }
             }
         });
+        limpiarSeleccionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Sector.setSelectedIndex(0);
+                Nombre.setText("");
+                Numero.setText("");
+                Piso.setText("");
+                Cama.setText("");
+                institucion.setSelectedIndex(0);
+            }
+        });
+        frame = this;
+        actualizarTablaButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    generarTabla(Conexion.obtenerUbicacionBean().listarUbicaciones());
+                } catch (ServiciosException | NamingException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
-    public void generarTabla(List lista) {
+    public void generarTabla(List<UbicacionDto> lista) {
         //Generamos la tabla con las ubicaciones
         String[] columnas = {"Sector", "Nombre", "Número", "Piso", "Cama", "Institución"};
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.setColumnIdentifiers(columnas);
         table1.setModel(modelo);
-        for (Object o : lista) {
-            UbicacionDto ubi = (UbicacionDto) o;
-            String[] fila = {ubi.getSector(), ubi.getNombre(), String.valueOf(ubi.getNumero()), String.valueOf(ubi.getPiso()), ubi.getCama() == null ? "" : String.valueOf(ubi.getCama()), ubi.getIdInstitucion().getNombre()};
+        for (UbicacionDto o : lista) {
+            String[] fila = {o.getSector(), o.getNombre(), String.valueOf(o.getNumero()), String.valueOf(o.getPiso()), o.getCama() == null ? "" : String.valueOf(o.getCama()), o.getIdInstitucion().getNombre()};
             modelo.addRow(fila);
         }
 

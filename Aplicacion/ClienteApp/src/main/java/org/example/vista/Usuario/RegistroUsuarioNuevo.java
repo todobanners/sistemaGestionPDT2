@@ -1,6 +1,9 @@
 package org.example.vista.Usuario;
 
-import codigocreativo.uy.servidorapp.DTO.*;
+import codigocreativo.uy.servidorapp.DTO.InstitucionDto;
+import codigocreativo.uy.servidorapp.DTO.PerfilDto;
+import codigocreativo.uy.servidorapp.DTO.UsuarioDto;
+import codigocreativo.uy.servidorapp.DTO.UsuariosTelefonoDto;
 import codigocreativo.uy.servidorapp.enumerados.Estados;
 import com.github.lgooddatepicker.components.DatePicker;
 import org.example.modelo.Conexion;
@@ -12,8 +15,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RegistroUsuarioNuevo extends JFrame {
     private JPanel registroUsuario;
@@ -35,12 +42,13 @@ public class RegistroUsuarioNuevo extends JFrame {
 
     DatePicker selectorFecha = Utilidades.createCustomDatePicker();
 
-    public RegistroUsuarioNuevo(String s) throws NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+    public RegistroUsuarioNuevo(String s) throws NamingException {
         super(s);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(registroUsuario);
         pack();
-        setSize(500, 900);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
         ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");
         Image img = imagen.getImage();
@@ -48,6 +56,8 @@ public class RegistroUsuarioNuevo extends JFrame {
         ImageIcon imagenRedimensionada = new ImageIcon(imgRedimensionada);
         logo.setIcon(imagenRedimensionada);
         logo.setText("");
+        aceptarButton.setBackground(Color.decode("#2F9C95"));
+        cancelarButton.setBackground(Color.decode("#e06666"));
 
         fechaNacimiento.add(selectorFecha);
         userTextField.setEnabled(false);
@@ -115,8 +125,12 @@ public class RegistroUsuarioNuevo extends JFrame {
             UsuarioDto usuario = new UsuarioDto();
 
             // Generar objeto InstitucionDto (asumiendo que tienes un método para obtener la institución)
-            InstitucionDto institucion = new InstitucionDto();
-            institucion.setId(1L);
+            InstitucionDto institucion = null;
+            try {
+                institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre("CodigoCreativo");
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
             usuario.setIdInstitucion(institucion);
 
             // Resto del código para completar el objeto usuario
@@ -153,12 +167,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 limpiarCampos();
                 setVisible(false);
                 LoginForm loginForm = null;
-                try {
-                    loginForm = new LoginForm();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                         UnsupportedLookAndFeelException ex) {
-                    throw new RuntimeException(ex);
-                }
+                loginForm = new LoginForm();
                 loginForm.setVisible(true);
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -176,12 +185,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 limpiarCampos();
                 setVisible(false);
                 LoginForm loginForm = null;
-                try {
-                    loginForm = new LoginForm();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                         UnsupportedLookAndFeelException ex) {
-                    throw new RuntimeException(ex);
-                }
+                loginForm = new LoginForm();
                 loginForm.setVisible(true);
             }
         });
@@ -208,6 +212,13 @@ public class RegistroUsuarioNuevo extends JFrame {
                     //Eliminar la ultima coma
                     telefonoTextField.setText(telefonoTextField.getText().substring(0, telefonoTextField.getText().length() - 1));
                 }
+            }
+        });
+        userTextField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "El usuario se genera automáticamente a partir del nombre y apellido");
             }
         });
     }

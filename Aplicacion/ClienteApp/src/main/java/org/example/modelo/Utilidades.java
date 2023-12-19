@@ -31,11 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileAlreadyExistsException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.util.UUID;
 import java.util.Vector;
-
-import static java.lang.System.getProperty;
 
 public class Utilidades {
     public static void exportarAExcel(Vector<String> cabezales, Vector<Vector<Object>> datos, String nombreHoja) {
@@ -75,7 +71,12 @@ public class Utilidades {
         for (int i = 0; i < datos.size(); i++) {
             HSSFRow row = sheet.createRow((short) i + 1);
             for (int j = 0; j < datos.get(i).size(); j++) {
-                row.createCell(j).setCellValue(datos.get(i).get(j).toString());
+                Object cellValue = datos.get(i).get(j);
+                if (cellValue != null) {
+                    row.createCell(j).setCellValue(cellValue.toString());
+                } else {
+                    row.createCell(j).setCellValue("");
+                }
             }
         }
         try {
@@ -194,19 +195,14 @@ public class Utilidades {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonResponse = (JSONObject) parser.parse(responseContent);
                 // Obtener la URL de la imagen
-                JSONObject data = (JSONObject) jsonResponse.get("data");
-                JSONObject medium = (JSONObject) data.get("thumb");
-                String imageUrl = (String) medium.get("url");
+                JSONObject data = (JSONObject) jsonResponse.get("data");//Accedo al objeto data del JSON
+                JSONObject medium = (JSONObject) data.get("thumb");//Accedo al objeto thumb del JSON
+                String imageUrl = (String) medium.get("url");//Accedo al valor de la clave url del objeto thumb
 
                 return imageUrl;
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    public static LocalDate convertirStringADate(String s) {
-        String[] fecha = s.split("-");
-        return LocalDate.of(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
     }
 }
