@@ -33,7 +33,7 @@ public class LoginForm extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panel1);
 
-        setSize(500, 700);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         setBackground(Color.WHITE);
         ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");

@@ -15,6 +15,7 @@ public class App
         }
 
         LoginForm loginForm = new LoginForm();
+        //mostramos la app en maximizado
         loginForm.setVisible(true);
     }
 }

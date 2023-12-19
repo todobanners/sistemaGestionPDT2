@@ -33,7 +33,7 @@ public class AplicacionVentana extends JFrame {
         setJMenuBar(menuBar);
 
         setVisible(true);
-        setBounds(10,10,800,800);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         // Panel de ventana inicio
         changePanel(new HomeGUI().getPanel(), "Inicio");
     }
@@ -226,7 +226,7 @@ public class AplicacionVentana extends JFrame {
         // Agregar el nuevo panel
         c.add(jPanel, BorderLayout.CENTER);
         // Setear el título de la ventana
-        setTitle(title + " - Gestión de mantenimiento- Código Creativo");
+        setTitle(title + " - Gestión de mantenimiento - MEPAM");
         // Redibujar
         c.revalidate();
         c.repaint();

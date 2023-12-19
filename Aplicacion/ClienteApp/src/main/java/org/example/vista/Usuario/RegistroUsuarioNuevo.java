@@ -48,7 +48,7 @@ public class RegistroUsuarioNuevo extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(registroUsuario);
         pack();
-        setSize(500, 900);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
         ImageIcon imagen = new ImageIcon("Aplicacion/ClienteApp/src/main/recursos/ccblanco.jpg");
         Image img = imagen.getImage();
@@ -125,8 +125,12 @@ public class RegistroUsuarioNuevo extends JFrame {
             UsuarioDto usuario = new UsuarioDto();
 
             // Generar objeto InstitucionDto (asumiendo que tienes un método para obtener la institución)
-            InstitucionDto institucion = new InstitucionDto();
-            institucion.setId(1L);
+            InstitucionDto institucion = null;
+            try {
+                institucion = Conexion.obtenerInstitucionBean().obtenerInstitucionPorNombre("CodigoCreativo");
+            } catch (NamingException ex) {
+                throw new RuntimeException(ex);
+            }
             usuario.setIdInstitucion(institucion);
 
             // Resto del código para completar el objeto usuario
