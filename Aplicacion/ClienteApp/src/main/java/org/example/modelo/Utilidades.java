@@ -71,7 +71,12 @@ public class Utilidades {
         for (int i = 0; i < datos.size(); i++) {
             HSSFRow row = sheet.createRow((short) i + 1);
             for (int j = 0; j < datos.get(i).size(); j++) {
-                row.createCell(j).setCellValue(datos.get(i).get(j).toString());
+                Object cellValue = datos.get(i).get(j);
+                if (cellValue != null) {
+                    row.createCell(j).setCellValue(cellValue.toString());
+                } else {
+                    row.createCell(j).setCellValue("");
+                }
             }
         }
         try {

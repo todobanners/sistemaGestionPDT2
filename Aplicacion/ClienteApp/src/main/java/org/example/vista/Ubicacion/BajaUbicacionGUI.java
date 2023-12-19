@@ -41,11 +41,16 @@ public class BajaUbicacionGUI {
 
     private BajaUbicacionDto baja;
 
-    public BajaUbicacionGUI(UbicacionDto ubicacionSeleccionada) {
+    public BajaUbicacionGUI(UbicacionDto ubicacionSeleccionada, ListadoDeUbicacionesGUI frame) {
         this.ubicacionSeleccionada = ubicacionSeleccionada;
         this.baja = new BajaUbicacionDto();
         initComponents();
         asignarValores();
+        try {
+            frame.generarTabla(Conexion.obtenerUbicacionBean().listarUbicaciones());
+        } catch (NamingException | ServiciosException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void initComponents() {

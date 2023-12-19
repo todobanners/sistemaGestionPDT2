@@ -31,6 +31,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
     private JComboBox institucion;
     private JButton agregarNuevoButton;
     private JButton limpiarSeleccionButton;
+    private ListadoDeUbicacionesGUI frame;
 
 
     public JPanel getPanel() {
@@ -111,7 +112,7 @@ public class ListadoDeUbicacionesGUI extends JPanel {
 
                     if (confirmacion == JOptionPane.YES_OPTION) {
                         // Llamar al servicio para eliminar la ubicación
-                        BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada));
+                        BajaUbicacionGUI bajaUbicacionGUI = new BajaUbicacionGUI(listaUbicaciones.get(ubicacionSeleccionada), frame);
                         bajaUbicacionGUI.mostrarVentana();
                     }
                 } else {
@@ -185,32 +186,10 @@ public class ListadoDeUbicacionesGUI extends JPanel {
                 institucion.setSelectedIndex(0);
             }
         });
+        frame = this;
     }
 
     public void generarTabla(List<UbicacionDto> lista) {
-        /*DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Id");
-        modelo.addColumn("Sector");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Número");
-        modelo.addColumn("Piso");
-        modelo.addColumn("Cama");
-        modelo.addColumn("Institución");
-        table1.setModel(modelo);
-        modelo.setRowCount(0);
-
-        for (UbicacionDto ubi : lista) {
-            Object[] fila = new Object[7];
-            fila[0] = ubi.getId();
-            fila[1] = ubi.getSector();
-            fila[2] = ubi.getNombre();
-            fila[3] = ubi.getNumero();
-            fila[4] = ubi.getPiso();
-            fila[5] = ubi.getCama();
-            fila[6] = ubi.getIdInstitucion().getNombre();
-            modelo.addRow(fila);
-        }
-        table1.removeColumn(table1.getColumnModel().getColumn(0));*/
         //Generamos la tabla con las ubicaciones
         String[] columnas = {"Sector", "Nombre", "Número", "Piso", "Cama", "Institución"};
         DefaultTableModel modelo = new DefaultTableModel();
