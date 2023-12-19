@@ -59,11 +59,11 @@ public class AplicacionVentana extends JFrame {
 
         // Declaro los submenús de Inicio
         JMenuItem fotosEquipos =        new JMenuItem("Inicio");
-        fotosEquipos.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/home.png",30,30));
+        fotosEquipos.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/home.png",20,20));
         JMenuItem modificarDatosPropios = new JMenuItem("Modificar mis datos");
-        modificarDatosPropios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/editarMisDatos.png",30,30));
+        modificarDatosPropios.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/editarMisDatos.png",20,20));
         JMenuItem cerrarSesion =          new JMenuItem("Cerrar Sesion");
-        cerrarSesion.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/logout.png",30,30));
+        cerrarSesion.setIcon(resizeIcon("Aplicacion/ClienteApp/src/main/recursos/menu/logout.png",20,20));
 
         // Declaro el submenú de Gestión de Usuarios
         JMenuItem listarUsuarios =      new JMenuItem("Gestionar usuarios");
@@ -102,13 +102,7 @@ public class AplicacionVentana extends JFrame {
             Sesion.getInstancia(null);
             // Cerrar ventana y abrir login
             LoginForm loginForm = null;
-            try {
-                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-                loginForm = new LoginForm();
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                     UnsupportedLookAndFeelException ex) {
-                throw new RuntimeException(ex);
-            }
+            loginForm = new LoginForm();
             loginForm.setVisible(true);
             setVisible(false);
 
@@ -158,11 +152,11 @@ public class AplicacionVentana extends JFrame {
 
         listarTiposDeIntervenciones.addActionListener(e -> {
             try {
-                 changePanel(new TiposDeIntervencionesGUI().getPanel(), "Gestión de Tipos de Intervenciones");
+                changePanel(new TiposDeIntervencionesGUI().getPanel(), "Gestión de Tipos de Intervenciones");
             } catch (NamingException ex) {
                 throw new RuntimeException(ex);
             }
-                });
+        });
 
         // Registrar Intervención
         gestionarIntervenciones.addActionListener(e -> {
@@ -221,28 +215,28 @@ public class AplicacionVentana extends JFrame {
     }
 
     public void changePanel(JPanel jPanel, String title){
-    Container c = getContentPane();
-    // Remover contenido actual
-    c.removeAll();
-    // Crear y agregar el título
-    JLabel titleLabel = new JLabel(title);
-    titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-    titleLabel.setHorizontalAlignment(JLabel.CENTER);
-    c.add(titleLabel, BorderLayout.NORTH);
-    // Agregar el nuevo panel
-    c.add(jPanel, BorderLayout.CENTER);
-    // Setear el título de la ventana
-    setTitle(title + " - Gestión de mantenimiento- Código Creativo");
-    // Redibujar
-    c.revalidate();
-    c.repaint();
-}
+        Container c = getContentPane();
+        // Remover contenido actual
+        c.removeAll();
+        // Crear y agregar el título
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setFont(new Font("Roboto", Font.BOLD, 24));
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        c.add(titleLabel, BorderLayout.NORTH);
+        // Agregar el nuevo panel
+        c.add(jPanel, BorderLayout.CENTER);
+        // Setear el título de la ventana
+        setTitle(title + " - Gestión de mantenimiento- Código Creativo");
+        // Redibujar
+        c.revalidate();
+        c.repaint();
+    }
 
     public ImageIcon resizeIcon(String imagePath, int width, int height) {
-    ImageIcon originalIcon = new ImageIcon(imagePath);
-    Image originalImage = originalIcon.getImage();
-    Image resizedImage = originalImage.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
-    return new ImageIcon(resizedImage);
-}
+        ImageIcon originalIcon = new ImageIcon(imagePath);
+        Image originalImage = originalIcon.getImage();
+        Image resizedImage = originalImage.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
+    }
 
 }

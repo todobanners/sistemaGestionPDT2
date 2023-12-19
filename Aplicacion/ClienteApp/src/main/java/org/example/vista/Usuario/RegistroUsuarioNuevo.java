@@ -43,7 +43,7 @@ public class RegistroUsuarioNuevo extends JFrame {
     DatePicker selectorFecha = Utilidades.createCustomDatePicker();
 
 
-    public RegistroUsuarioNuevo(String s) throws NamingException, UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public RegistroUsuarioNuevo(String s) throws NamingException {
         super(s);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(registroUsuario);
@@ -163,12 +163,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 limpiarCampos();
                 setVisible(false);
                 LoginForm loginForm = null;
-                try {
-                    loginForm = new LoginForm();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                         UnsupportedLookAndFeelException ex) {
-                    throw new RuntimeException(ex);
-                }
+                loginForm = new LoginForm();
                 loginForm.setVisible(true);
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -186,12 +181,7 @@ public class RegistroUsuarioNuevo extends JFrame {
                 limpiarCampos();
                 setVisible(false);
                 LoginForm loginForm = null;
-                try {
-                    loginForm = new LoginForm();
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
-                         UnsupportedLookAndFeelException ex) {
-                    throw new RuntimeException(ex);
-                }
+                loginForm = new LoginForm();
                 loginForm.setVisible(true);
             }
         });

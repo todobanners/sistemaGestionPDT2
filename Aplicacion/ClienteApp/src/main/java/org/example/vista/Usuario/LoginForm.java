@@ -29,7 +29,7 @@ public class LoginForm extends JFrame {
     private JLabel userText;
     private JLabel claveText;
 
-    public LoginForm() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    public LoginForm() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(panel1);
 
@@ -69,8 +69,7 @@ public class LoginForm extends JFrame {
                 super.mousePressed(e);
                 try {
                     new RegistroUsuarioNuevo("CodigoCreativo - Registro de Usuario");
-                } catch (NamingException | UnsupportedLookAndFeelException | ClassNotFoundException |
-                         InstantiationException | IllegalAccessException ex) {
+                } catch (NamingException ex) {
                     throw new RuntimeException(ex);
                 }
                 setVisible(false);
